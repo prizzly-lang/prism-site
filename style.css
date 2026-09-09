@@ -181,3 +181,40 @@ footer p {
   color: var(--ink-faint);
   font-size: 0.8125rem;
 }
+
+/*
+  App Store 버튼.
+
+  출시(2026-08-27) 후 3주 동안 이 페이지에 스토어 링크가 없었다. 읽고
+  사려는 사람이 살 방법이 없었다.
+
+  게임의 「다음」 버튼과 같은 절제 — 꽉 찬 색 대신 테두리와 옅은 바탕.
+  높이는 44px로 둔다. 앱이 지키는 최소 터치 타깃과 같은 약속이다.
+
+  가격은 적지 않는다. 환율에 따라 Apple이 조정하므로 적어두면 언젠가
+  거짓이 된다. 스토어가 그 시점의 값을 보여준다.
+*/
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 2rem;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid rgba(50, 255, 154, 0.45);
+  border-radius: 999px;
+  background: rgba(50, 255, 154, 0.06);
+  color: var(--accent);
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
+.cta:hover {
+  background: rgba(50, 255, 154, 0.12);
+  border-color: var(--accent);
+}
+
+/* 영어 섹션의 태그라인은 제목 바로 아래에 붙는다. */
+.en-tagline {
+  margin-top: 0;
+}
