@@ -1,11 +1,59 @@
-/* 게임과 같은 물성. 배경은 거의 검정, 강조는 빛의 색. */
+/*
+  PRISM 웹사이트 — 디자인 시스템.
+
+  게임과 같은 물성을 웹으로 옮긴다: 배경은 거의 검정, 조각은 어둡고 빛만 밝다.
+  색은 게임의 팔레트(src/render/palette.ts)에서 그대로 가져왔다. 두 곳이 다른
+  빨강을 쓰면 스토어에서 보고 온 사람이 다른 제품을 보게 된다.
+
+  이미지는 실제 게임 렌더러로 뽑았다. 손으로 그린 그림은 쓰지 않는다 — 1.0의
+  스토어 스크린샷 24장이 조용히 거짓이었던 적이 있고, 그 원인이 "실제로 도는
+  코드가 아닌 것을 그림으로 만들었다"였다.
+*/
+
 :root {
+  /* ── 색 ─────────────────────────────────────────────
+     --ink-* 은 글자에 쓴다. 배경(#06070c) 대비 4.5:1 이상인 값만 있다.
+     --hair 는 테두리·구분선 전용이다. 글자에 쓰지 않는다. */
   --bg: #06070c;
+  --bg-raise: #0b0d16;
   --ink: rgba(255, 255, 255, 0.9);
-  --ink-dim: rgba(255, 255, 255, 0.52);
-  --ink-faint: rgba(255, 255, 255, 0.3);
+  --ink-dim: rgba(255, 255, 255, 0.62);
+  --ink-faint: rgba(255, 255, 255, 0.42);
   --hair: rgba(255, 255, 255, 0.12);
-  --accent: #32ff9a;
+  --hair-soft: rgba(255, 255, 255, 0.06);
+
+  /* 게임 팔레트. 이 값들은 palette.ts의 HEX와 같아야 한다. */
+  --lit-r: #ff2d55;
+  --lit-g: #32ff9a;
+  --lit-b: #2d8cff;
+  --lit-y: #ffd426;
+  --accent: var(--lit-g);
+
+  /* ── 타입 스케일 ─────────────────────────────────────
+     clamp로 뷰포트에 따라 자란다. 노인·저시력 사용자가 브라우저에서
+     글자를 키울 수 있도록 전부 rem 기준이다 — 앱은 이걸 못 해서 1.1의
+     최우선 과제로 남아 있다. 웹에서는 지킨다. */
+  --t-hero: clamp(2.25rem, 9vw, 3.5rem);
+  --t-lead: clamp(1.0625rem, 2.4vw, 1.25rem);
+  --t-h2: 1.125rem;
+  --t-body: 1rem;
+  --t-small: 0.875rem;
+  --t-micro: 0.8125rem;
+
+  /* ── 여백 ───────────────────────────────────────── */
+  --s-1: 0.5rem;
+  --s-2: 0.875rem;
+  --s-3: 1.5rem;
+  --s-4: 2.5rem;
+  --s-5: clamp(3rem, 8vw, 5rem);
+  --s-6: clamp(4rem, 12vw, 7rem);
+
+  --r-md: 14px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+
+  /* 최소 터치 타깃. 앱이 판에 지키는 44pt와 같은 약속이다. */
+  --tap: 44px;
 }
 
 * {
@@ -16,6 +64,7 @@
 
 html {
   color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -24,11 +73,12 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', system-ui,
     sans-serif;
+  font-size: var(--t-body);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
-  /* 화면 중앙에서 은은하게 밝아지는 비네팅 — 게임 화면과 같은 처리 */
+  /* 화면 위쪽에서 은은하게 밝아지는 비네팅 — 게임 화면과 같은 처리 */
   background-image: radial-gradient(
-    ellipse at 50% 22%,
+    ellipse at 50% 18%,
     rgba(40, 52, 90, 0.34) 0%,
     rgba(6, 7, 12, 0) 62%
   );
@@ -36,24 +86,26 @@ body {
 }
 
 main {
-  max-width: 42rem;
+  max-width: 46rem;
   margin: 0 auto;
-  padding: clamp(3rem, 9vw, 6rem) 1.5rem 4rem;
+  padding: var(--s-5) var(--s-3) var(--s-4);
 }
+
+/* ── 히어로 ───────────────────────────────────────── */
 
 .hero {
   text-align: center;
-  margin-bottom: clamp(2.5rem, 7vw, 4rem);
+  margin-bottom: var(--s-5);
 }
 
 .mark {
   display: block;
-  margin: 0 auto 1.75rem;
-  border-radius: 24px;
+  margin: 0 auto var(--s-3);
+  border-radius: var(--r-lg);
 }
 
 h1 {
-  font-size: clamp(2rem, 8vw, 3rem);
+  font-size: var(--t-hero);
   font-weight: 200;
   letter-spacing: 0.3em;
   /* 자간이 마지막 글자 뒤에도 붙어 시각적 중심이 밀리는 것을 보정 */
@@ -62,48 +114,92 @@ h1 {
 }
 
 .tagline {
-  margin-top: 1rem;
+  margin-top: var(--s-2);
   color: var(--ink-dim);
-  font-size: 1rem;
+  font-size: var(--t-body);
   letter-spacing: 0.04em;
 }
 
+.en-tagline {
+  margin-top: 0;
+}
+
+/* ── 판 이미지 ─────────────────────────────────────
+   게임 화면이므로 배경과 이어 붙는다. 액자를 두르지 않는다. */
+
+/*
+  판은 액자를 두른다.
+
+  이미지의 배경(#06070C)과 페이지 배경이 같은 값인데, 페이지에는 비네팅
+  그라디에이션이 깔려 있어서 이미지 영역만 평평하게 어둡다. 그래서 테두리를
+  안 두면 "잘못 붙은 사각형"으로 읽힌다. 어차피 경계가 보이므로 의도한
+  경계로 만든다 — facts 목록의 헤어라인과 같은 언어다.
+*/
+.board {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 26rem;
+  margin: var(--s-4) auto;
+  border: 1px solid var(--hair-soft);
+  border-radius: var(--r-md);
+  background: var(--bg);
+}
+
+.board.hero-board {
+  margin-top: var(--s-4);
+  margin-bottom: 0;
+}
+
+figure {
+  margin: var(--s-4) 0;
+}
+
+figcaption {
+  color: var(--ink-faint);
+  font-size: var(--t-micro);
+  text-align: center;
+  margin-top: calc(var(--s-1) * -1);
+}
+
+/* ── 본문 ─────────────────────────────────────────── */
+
 section {
-  margin-bottom: 2.75rem;
+  margin-bottom: var(--s-5);
 }
 
 h2 {
-  font-size: 1.0625rem;
+  font-size: var(--t-h2);
   font-weight: 600;
   letter-spacing: 0.01em;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--s-2);
 }
 
 h3 {
-  font-size: 0.9375rem;
+  font-size: var(--t-small);
   font-weight: 600;
-  margin: 2rem 0 0.5rem;
+  margin: var(--s-4) 0 var(--s-1);
 }
 
 p,
 li {
   color: var(--ink-dim);
-  font-size: 0.9375rem;
 }
 
 .lead {
   color: var(--ink);
-  font-size: 1.0625rem;
+  font-size: var(--t-lead);
+  line-height: 1.65;
 }
 
 .facts {
   list-style: none;
-  margin-top: 1.75rem;
+  margin-top: var(--s-3);
   border-top: 1px solid var(--hair);
 }
 
 .facts li {
-  padding: 0.875rem 0;
+  padding: var(--s-2) 0;
   border-bottom: 1px solid var(--hair);
 }
 
@@ -112,33 +208,97 @@ li {
   font-weight: 600;
 }
 
-/* 본문 문서(개인정보 처리방침 등) */
+/* ── 도형 범례 ─────────────────────────────────────
+   색만으로 정보를 전달하지 않는다는 약속을 페이지에서도 지킨다.
+   글자로 "빨강은 삼각형"이라고만 쓰면 색약 방문자가 확인할 방법이 없다. */
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  font-size: var(--t-small);
+}
+
+.legend .glyph {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+}
+
+/* ── CTA ─────────────────────────────────────────── */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  margin-top: var(--s-4);
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid rgba(50, 255, 154, 0.45);
+  border-radius: var(--r-pill);
+  background: rgba(50, 255, 154, 0.06);
+  color: var(--accent);
+  font-size: var(--t-body);
+  letter-spacing: 0.02em;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.cta:hover {
+  background: rgba(50, 255, 154, 0.12);
+  border-color: var(--accent);
+}
+
+/* ── 언어 경계 ─────────────────────────────────────
+   한 페이지에 두 언어를 담는다. ASC의 마케팅 URL은 언어별 칸이지만 같은
+   URL을 양쪽에 넣을 수 있고, 영어 목록에 한국어만 있는 페이지를 걸어두면
+   영어권 구매자가 아무것도 읽지 못한다. */
+
+.lang-break {
+  margin: var(--s-6) 0 var(--s-5);
+  border: 0;
+  border-top: 1px solid var(--hair);
+}
+
+/* ── 문서 페이지(개인정보·지원) ─────────────────────── */
+
 .doc h2 {
-  margin-top: 2.5rem;
+  margin-top: var(--s-4);
 }
 
 .doc p,
 .doc li {
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--s-2);
 }
 
 .doc ul {
-  padding-left: 1.25rem;
-  margin-bottom: 1rem;
+  padding-left: var(--s-3);
+  margin-bottom: var(--s-3);
 }
 
 .doc .updated {
   color: var(--ink-faint);
-  font-size: 0.8125rem;
-  margin-bottom: 2rem;
+  font-size: var(--t-micro);
+  margin-bottom: var(--s-4);
 }
 
 .doc .summary {
   border-left: 2px solid var(--accent);
-  padding: 0.25rem 0 0.25rem 1rem;
+  padding: var(--s-1) 0 var(--s-1) var(--s-3);
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--t-body);
 }
+
+/* ── 링크 ─────────────────────────────────────────── */
 
 a {
   color: var(--accent);
@@ -151,20 +311,38 @@ a:hover {
   border-bottom-color: var(--accent);
 }
 
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cta,
+.back {
+  border-bottom-color: transparent;
+}
+
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem;
-  padding-top: 2rem;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
   border-top: 1px solid var(--hair);
 }
 
+.links a {
+  min-height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+}
+
 .back {
-  display: inline-block;
-  margin-bottom: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  margin-bottom: var(--s-3);
   color: var(--ink-dim);
-  border-bottom-color: transparent;
-  font-size: 0.875rem;
+  font-size: var(--t-small);
 }
 
 .back:hover {
@@ -172,49 +350,20 @@ a:hover {
 }
 
 footer {
-  margin-top: 3rem;
-  padding-top: 1.75rem;
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
   border-top: 1px solid var(--hair);
 }
 
 footer p {
   color: var(--ink-faint);
-  font-size: 0.8125rem;
+  font-size: var(--t-micro);
 }
 
-/*
-  App Store 버튼.
-
-  출시(2026-08-27) 후 3주 동안 이 페이지에 스토어 링크가 없었다. 읽고
-  사려는 사람이 살 방법이 없었다.
-
-  게임의 「다음」 버튼과 같은 절제 — 꽉 찬 색 대신 테두리와 옅은 바탕.
-  높이는 44px로 둔다. 앱이 지키는 최소 터치 타깃과 같은 약속이다.
-
-  가격은 적지 않는다. 환율에 따라 Apple이 조정하므로 적어두면 언젠가
-  거짓이 된다. 스토어가 그 시점의 값을 보여준다.
-*/
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  margin-top: 2rem;
-  padding: 0.75rem 1.75rem;
-  border: 1px solid rgba(50, 255, 154, 0.45);
-  border-radius: 999px;
-  background: rgba(50, 255, 154, 0.06);
-  color: var(--accent);
-  font-size: 0.9375rem;
-  letter-spacing: 0.02em;
-}
-
-.cta:hover {
-  background: rgba(50, 255, 154, 0.12);
-  border-color: var(--accent);
-}
-
-/* 영어 섹션의 태그라인은 제목 바로 아래에 붙는다. */
-.en-tagline {
-  margin-top: 0;
+/* 움직임을 줄이라고 설정한 방문자에게는 트랜지션을 걸지 않는다. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }

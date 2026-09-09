@@ -6,15 +6,22 @@
     <title>PRISM — 빛을 접어 결정을 밝힌다</title>
     <meta
       name="description"
-      content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 광고 없음, 인앱결제 없음, 완전 오프라인."
+      content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인."
     />
     <meta name="theme-color" content="#06070C" />
+    <link rel="canonical" href="https://prizzly-lang.github.io/prism-site/" />
     <meta property="og:title" content="PRISM — 빛을 접어 결정을 밝힌다" />
     <meta
       property="og:description"
       content="탭하면 빛이 꺾입니다. 240개의 퍼즐, 모든 정답은 하나뿐. 광고·인앱결제 없음."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://prizzly-lang.github.io/prism-site/" />
+    <meta
+      property="og:image"
+      content="https://prizzly-lang.github.io/prism-site/img/board-prism.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
   </head>
@@ -24,42 +31,106 @@
         <img class="mark" src="icon.svg" alt="PRISM 아이콘" width="112" height="112" />
         <h1>PRISM</h1>
         <p class="tagline">빛을 접어 결정을 밝힌다</p>
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903"
+          >App Store에서 받기</a
+        >
+        <!--
+          히어로 이미지. 흰 빛이 프리즘에서 빨강·초록·파랑으로 갈라져 각각의
+          결정을 켜는 실제 판(레벨 47)이다. 이 한 장에 게임의 거의 전부가 있다 —
+          광원, 프리즘, 거울, 반투명 거울, 색이 다른 결정, 접근성 도형.
+        -->
+        <img
+          class="board hero-board"
+          src="img/board-prism.png"
+          alt="흰 빛이 프리즘을 지나 빨강·초록·파랑으로 갈라지고, 거울을 거쳐 빨간 결정과 초록 결정을 각각 켠 판"
+          width="720"
+          height="720"
+        />
       </header>
 
       <section>
+        <h2>규칙은 하나입니다</h2>
         <p class="lead">
           탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에
-          정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 규칙은 그것뿐이고,
-          설명서는 없습니다 — 레벨이 규칙을 가르칩니다.
+          정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는
+          없습니다 — 레벨이 규칙을 가르칩니다.
         </p>
+
+        <figure>
+          <img
+            class="board"
+            src="img/board-rule.png"
+            alt="광원에서 나온 파란 빛이 거울 두 개에 반사되어 파란 결정에 닿아 켜진 첫 번째 판"
+            width="720"
+            height="720"
+            loading="lazy"
+          />
+          <figcaption>첫 번째 레벨. 거울을 한 번 탭하면 풀립니다.</figcaption>
+        </figure>
 
         <ul class="facts">
           <li><strong>240개</strong> 퍼즐, 여섯 개의 챕터</li>
           <li>모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다</li>
+          <li>표시되는 최소 탭 수는 <strong>전수 탐색으로 증명한</strong> 실제 최솟값입니다</li>
           <li>광고 없음 · 인앱결제 없음 · 계정 없음</li>
           <li>네트워크를 쓰지 않습니다. 완전 오프라인</li>
-          <li>색을 구분하기 어려워도 끝까지 풀 수 있습니다</li>
         </ul>
       </section>
 
       <section>
-        <h2>색을 구분하기 어려운 분들을 위해</h2>
+        <h2>색을 구분하기 어려워도 끝까지 풀 수 있습니다</h2>
         <p>
-          모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다.
-          빨강은 삼각형, 초록은 사각형, 파랑은 원입니다. 노란 결정에는 삼각형과
-          사각형이 나란히 새겨져 있습니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를
-          풀 수 있습니다.
+          모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은
+          성분 도형이 나란히 놓입니다 — 노란 결정에는 삼각형과 사각형이 함께
+          새겨집니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를 풀 수 있습니다.
         </p>
+
+        <!--
+          범례를 글자로만 쓰면("빨강은 삼각형") 색약 방문자가 확인할 방법이 없다.
+          도형을 실제로 그려서, 색을 못 봐도 약속이 지켜지는지 눈으로 보게 한다.
+        -->
+        <ul class="legend">
+          <li>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
+              <polygon points="10,3 18,17 2,17" fill="#ff2d55" />
+            </svg>
+            빨강 = 삼각형
+          </li>
+          <li>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
+              <rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />
+            </svg>
+            초록 = 사각형
+          </li>
+          <li>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
+              <circle cx="10" cy="10" r="7.5" fill="#2d8cff" />
+            </svg>
+            파랑 = 원
+          </li>
+        </ul>
+
+        <figure>
+          <img
+            class="board"
+            src="img/board-mixing.png"
+            alt="빨간 빛과 초록 빛이 한 결정에 함께 도달해 노란 결정을 켠 판. 그 결정에는 삼각형과 사각형이 나란히 새겨져 있다"
+            width="720"
+            height="720"
+            loading="lazy"
+          />
+          <figcaption>
+            빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께
+            새겨진 이유입니다.
+          </figcaption>
+        </figure>
       </section>
 
-      <!--
-        영어 섹션. App Store Connect의 마케팅 URL은 언어별 칸이지만, 이 페이지가
-        두 언어를 담고 있으면 같은 URL을 양쪽에 넣을 수 있다. support.html이
-        이미 같은 방식이다.
+      <hr class="lang-break" />
 
-        영어 목록에 한국어만 있는 페이지를 걸어두면 영어권 구매자가 아무것도
-        읽을 수 없다. 유료 앱에서 그건 구매 직전에 이탈하는 이유가 된다.
+      <!--
+        영어 섹션. ASC의 마케팅 URL은 언어별 칸이지만 이 페이지가 두 언어를
+        담고 있으므로 같은 URL을 양쪽에 넣을 수 있다. support.html도 같은 방식이다.
       -->
       <section>
         <h2 id="en">PRISM (English)</h2>
@@ -74,18 +145,43 @@
         <ul class="facts">
           <li><strong>240</strong> puzzles across six chapters</li>
           <li>Every puzzle has <strong>exactly one solution</strong></li>
+          <li>The par shown is the <strong>true minimum</strong>, found by exhaustive search</li>
           <li>No ads · no in-app purchases · no account</li>
           <li>No networking at all. Fully offline</li>
-          <li>Completable without seeing color</li>
         </ul>
 
+        <h3>Playable without seeing color</h3>
         <p>
-          Every crystal also shows its required color as a shape: red is a triangle,
-          green a square, blue a circle. A yellow crystal shows a triangle and a square
-          side by side. All 240 puzzles can be finished without distinguishing color.
+          Every crystal also shows its required color as a shape, and mixed colors show
+          their component shapes side by side — a yellow crystal carries a triangle and
+          a square together. All 240 puzzles can be finished without distinguishing
+          color.
         </p>
 
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">Get it on the App Store</a>
+        <ul class="legend">
+          <li>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
+              <polygon points="10,3 18,17 2,17" fill="#ff2d55" />
+            </svg>
+            red = triangle
+          </li>
+          <li>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
+              <rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />
+            </svg>
+            green = square
+          </li>
+          <li>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
+              <circle cx="10" cy="10" r="7.5" fill="#2d8cff" />
+            </svg>
+            blue = circle
+          </li>
+        </ul>
+
+        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903"
+          >Get it on the App Store</a
+        >
       </section>
 
       <nav class="links">
