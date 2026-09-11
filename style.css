@@ -428,16 +428,28 @@ footer p {
   line-height: 1.75;
 }
 
-/* 언어 전환. 자기 언어를 자기 글자로 적는다 — 「일본어」라고 써두면 못 찾는다. */
+/*
+  언어 전환 — **맨 위에 둔다.**
+
+  자기 언어가 아닌 페이지에 떨어진 사람이 가장 먼저 찾는 것이고, 그 사람은
+  페이지를 읽지 못하므로 끝까지 스크롤하지 않는다. 아래에 두면 없는 것과 같다.
+
+  각 언어는 자기 글자로 적는다 — 「일본어」라고 써두면 일본어 사용자가
+  자기 줄을 못 찾는다.
+*/
 .langs {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 18px;
   align-items: baseline;
   justify-content: center;
-  margin: 36px 0 8px;
+  margin: 0 0 14px;
+  padding-top: 8px;
   font-size: 14px;
 }
-.langs span {
-  opacity: 0.45;
+.langs a {
+  opacity: 0.62;
+}
+.langs a:hover {
+  opacity: 1;
 }

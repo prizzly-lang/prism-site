@@ -386,6 +386,15 @@ ${JSON.stringify(ld, null, 2)}
   </head>
   <body>
     <main>
+      <!--
+        언어 전환은 **맨 위**에 둔다. 자기 언어가 아닌 페이지에 떨어진 사람이
+        가장 먼저 찾는 것이고, 그 사람은 페이지를 읽지 못하므로 끝까지
+        스크롤하지 않는다 — 아래에 두면 없는 것과 같다.
+      -->
+      <nav class="langs" aria-label="${esc(t.otherLangs)}">
+        ${otherLangLinks}
+      </nav>
+
       <header class="hero">
         <img class="mark" src="${up}icon.svg" alt="PRISM" width="112" height="112" />
         <h1>PRISM</h1>
@@ -489,13 +498,8 @@ ${t.faq.map(([q, a]) => `          <dt>${esc(q)}</dt>\n          <dd>${esc(a)}</
         <a href="${up}support.html">${esc(t.support)}</a>
       </nav>
 
-      <nav class="langs" aria-label="${esc(t.otherLangs)}">
-        <span>${esc(t.otherLangs)}</span>
-          ${otherLangLinks}
-      </nav>
-
       <footer>
-        <p>© 2026 A Driven Inc. <a href="mailto:jay@adriven.co">jay@adriven.co</a></p>
+        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
   </body>

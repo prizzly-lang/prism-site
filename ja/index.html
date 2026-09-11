@@ -155,6 +155,17 @@
   </head>
   <body>
     <main>
+      <!--
+        언어 전환은 **맨 위**에 둔다. 자기 언어가 아닌 페이지에 떨어진 사람이
+        가장 먼저 찾는 것이고, 그 사람은 페이지를 읽지 못하므로 끝까지
+        스크롤하지 않는다 — 아래에 두면 없는 것과 같다.
+      -->
+      <nav class="langs" aria-label="他の言語">
+        <a href="https://prizzly-lang.github.io/prism-site/" hreflang="ko" lang="ko">한국어</a>
+          <a href="https://prizzly-lang.github.io/prism-site/en/" hreflang="en" lang="en">English</a>
+          <a href="https://prizzly-lang.github.io/prism-site/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+      </nav>
+
       <header class="hero">
         <img class="mark" src="../icon.svg" alt="PRISM" width="112" height="112" />
         <h1>PRISM</h1>
@@ -284,15 +295,8 @@
         <a href="../support.html">サポート・お問い合わせ</a>
       </nav>
 
-      <nav class="langs" aria-label="他の言語">
-        <span>他の言語</span>
-          <a href="https://prizzly-lang.github.io/prism-site/" hreflang="ko" lang="ko">한국어</a>
-          <a href="https://prizzly-lang.github.io/prism-site/en/" hreflang="en" lang="en">English</a>
-          <a href="https://prizzly-lang.github.io/prism-site/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-      </nav>
-
       <footer>
-        <p>© 2026 A Driven Inc. <a href="mailto:jay@adriven.co">jay@adriven.co</a></p>
+        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
   </body>
