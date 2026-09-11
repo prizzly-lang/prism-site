@@ -1,4 +1,4 @@
-# PRISM — 전부 허용한다. 이유는 build.mjs의 주석에 있다.
+# PRISM. 전부 허용한다. 이유는 build.mjs의 주석에 있다.
 User-agent: *
 Allow: /
 

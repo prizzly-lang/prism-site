@@ -11,7 +11,7 @@
 - 개발사 / Publisher: A Driven Inc.
 - 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad). Android는 준비 중 / in preparation
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
-- 용량 / Size: 5MB 미만 — 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
+- 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
   no image files, everything drawn in code
 - 언어 / Languages: 한국어, English, 日本語, 简体中文
 - 접근성 / Accessibility: 색을 보지 못해도 전부 플레이 가능(결정마다 도형 표시),

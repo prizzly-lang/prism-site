@@ -44,13 +44,13 @@ const videoOf = (l) => (l === 'ko' ? 'ko' : 'en');
 const L = {
   ko: {
     dir: 'ltr',
-    title: 'PRISM — 빛을 접어 결정을 밝힌다',
+    title: 'PRISM: 빛을 접어 결정을 밝힌다',
     desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
     tagline: '빛을 접어 결정을 밝힌다',
     cta: 'App Store에서 받기',
     langName: '한국어',
     ruleH: '규칙은 하나입니다',
-    lead: '탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다 — 레벨이 규칙을 가르칩니다.',
+    lead: '탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다. 레벨이 규칙을 가르칩니다.',
     videoH: '30초면 무슨 게임인지 압니다',
     videoCap: '실제 플레이 화면입니다. 소리는 없습니다.',
     ruleCap: '첫 번째 레벨. 거울을 한 번 탭하면 풀립니다.',
@@ -74,7 +74,7 @@ const L = {
     opticsH: '진짜 광학입니다',
     opticsP: '거울의 반사각, 프리즘의 분산, 빛의 가산혼합은 실제 물리 그대로입니다. 챕터마다 원리 카드가 열리고, 탭하기 전과 후를 그림 두 장으로 나란히 보여줍니다. 초등학생이 읽을 수 있게 썼습니다. 게임이 실제 물리와 어디서 달라지는지도 함께 적어뒀습니다.',
     a11yH: '색을 구분하기 어려워도 끝까지 풀 수 있습니다',
-    a11yP: '모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은 성분 도형이 나란히 놓입니다 — 노란 결정에는 삼각형과 사각형이 함께 새겨집니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를 풀 수 있습니다.',
+    a11yP: '모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은 성분 도형이 나란히 놓입니다. 노란 결정에는 삼각형과 사각형이 함께 새겨집니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를 풀 수 있습니다.',
     a11yMore: [
       '글자 크기를 보통 · 크게 · 아주 크게 중에서 고를 수 있습니다',
       '기기의 「동작 줄이기」를 켜면 화면 연출이 줄어듭니다',
@@ -91,7 +91,7 @@ const L = {
       ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.'],
       ['몇 판이고 얼마나 어렵나요?', '여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
       ['안드로이드 버전이 있나요?', 'Google Play 출시를 준비하고 있습니다. 현재는 iOS에서만 받으실 수 있습니다.'],
-      ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다 — 화면의 빛과 도형은 전부 코드로 그립니다.'],
+      ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
     ],
     privacy: '개인정보 처리방침',
     support: '지원 · 문의',
@@ -100,13 +100,13 @@ const L = {
 
   en: {
     dir: 'ltr',
-    title: 'PRISM — Bend beams. Wake the crystals.',
+    title: 'PRISM: Bend beams. Wake the crystals.',
     desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 240 levels, one solution each. No ads, no in-app purchases, fully offline.',
     tagline: 'Bend beams. Wake the crystals.',
     cta: 'Get it on the App Store',
     langName: 'English',
     ruleH: 'There is only one rule',
-    lead: 'Tap a piece and it turns 90°; the light finds a new path instantly. Light every crystal with exactly the color it asks for, all at once, and the board is solved. That is the only rule, and there is no manual — the levels teach it.',
+    lead: 'Tap a piece and it turns 90°; the light finds a new path instantly. Light every crystal with exactly the color it asks for, all at once, and the board is solved. That is the only rule, and there is no manual. The levels teach it.',
     videoH: 'Thirty seconds and you know the game',
     videoCap: 'Real gameplay. No sound.',
     ruleCap: 'The first level. One tap on a mirror solves it.',
@@ -130,7 +130,7 @@ const L = {
     opticsH: 'Real optics',
     opticsP: 'The angle of reflection, dispersion through a prism, and additive color mixing are real physics. Each chapter opens a principle card that shows the board before and after a single tap, side by side, written so a child can follow it. Where the game simplifies real physics, we say so.',
     a11yH: 'Playable without seeing color',
-    a11yP: 'Every crystal also shows its required color as a shape, and mixed colors show their component shapes side by side — a yellow crystal carries a triangle and a square together. All 240 puzzles can be finished without distinguishing color.',
+    a11yP: 'Every crystal also shows its required color as a shape, and mixed colors show their component shapes side by side: a yellow crystal carries a triangle and a square together. All 240 puzzles can be finished without distinguishing color.',
     a11yMore: [
       'Text size can be set to normal, large or extra large',
       'Turning on Reduce Motion cuts down the effects',
@@ -143,11 +143,11 @@ const L = {
     faqH: 'Questions people ask',
     faq: [
       ['Are there really no ads?', 'None. No in-app purchases, no account, no sign-in either. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
-      ['Does it work without internet?', 'Yes. It does no networking at all — fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
+      ['Does it work without internet?', 'Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
       ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 240 puzzles can be finished without distinguishing color at all.'],
       ['How many levels, and how hard?', 'Six chapters, 240 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
       ['Is there an Android version?', 'A Google Play release is in preparation. For now it is available on iOS only.'],
-      ['How big is it?', 'Under 5 MB. There is not a single image file in the app — every beam and shape is drawn in code.'],
+      ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
     ],
     privacy: 'Privacy Policy',
     support: 'Support',
@@ -156,13 +156,13 @@ const L = {
 
   ja: {
     dir: 'ltr',
-    title: 'PRISM — 光を折り、結晶を灯す',
+    title: 'PRISM：光を折り、結晶を灯す',
     desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。240レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
     tagline: '光を折り、結晶を灯す',
     cta: 'App Store で入手',
     langName: '日本語',
     ruleH: 'ルールはひとつだけ',
-    lead: 'ピースをタップすると90°回り、光はその場で新しい道を見つけます。すべての結晶に求められた色をちょうど同時に当てると、その盤面はクリアです。ルールはそれだけで、説明書はありません — レベルが教えてくれます。',
+    lead: 'ピースをタップすると90°回り、光はその場で新しい道を見つけます。すべての結晶に求められた色をちょうど同時に当てると、その盤面はクリアです。ルールはそれだけで、説明書はありません。レベルが教えてくれます。',
     videoH: '30秒でどんなゲームかわかります',
     videoCap: '実際のプレイ画面です。音はありません。',
     ruleCap: '最初のレベル。鏡を一度タップすると解けます。',
@@ -186,7 +186,7 @@ const L = {
     opticsH: '本物の光学です',
     opticsP: '鏡の反射角、プリズムの分散、光の加法混色は実際の物理そのままです。チャプターごとに「しくみカード」が開き、タップの前と後を2枚の絵で並べて見せます。小学生が読めるように書きました。ゲームが実際の物理とどこで違うのかも一緒に書いてあります。',
     a11yH: '色が見分けにくくても最後まで解けます',
-    a11yP: 'すべての結晶には求める色が図形としても刻まれています。混ざった色は成分の図形が並びます — 黄色の結晶には三角と四角が一緒に刻まれます。色がまったく見えなくても240のパズルすべてを解けます。',
+    a11yP: 'すべての結晶には求める色が図形としても刻まれています。混ざった色は成分の図形が並びます。黄色の結晶には三角と四角が一緒に刻まれます。色がまったく見えなくても240のパズルすべてを解けます。',
     a11yMore: [
       '文字の大きさを 標準・大・特大 から選べます',
       '端末の「視差効果を減らす」をオンにすると演出が控えめになります',
@@ -203,7 +203,7 @@ const L = {
       ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても240面すべてを解けます。'],
       ['何面あって、どのくらい難しいですか？', '6チャプターに240面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
       ['Android版はありますか？', 'Google Play での配信を準備しています。現在は iOS のみです。'],
-      ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです — 画面の光も図形もすべてコードで描いています。'],
+      ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
     ],
     privacy: 'プライバシーポリシー',
     support: 'サポート・お問い合わせ',
@@ -212,7 +212,7 @@ const L = {
 
   'zh-Hans': {
     dir: 'ltr',
-    title: 'PRISM — 折转光线，点亮结晶',
+    title: 'PRISM：折转光线，点亮结晶',
     desc: '点一下，光就会拐弯。只有一条规则的极简解谜。240 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
     tagline: '折转光线，点亮结晶',
     cta: '在 App Store 获取',
@@ -296,7 +296,10 @@ function page(lang) {
       '@context': 'https://schema.org',
       '@type': 'MobileApplication',
       name: 'PRISM',
-      alternateName: t.title.split('—')[0].trim(),
+      // 제목을 잘라 'PRISM'을 다시 만들던 자리다. `name`과 같은 값이라 아무것도
+      // 보태지 않았고, 구분자를 바꾸면 조용히 깨지는 코드였다. 언어별 제목을
+      // 그대로 넣는다. 답변 엔진이 그 언어로 이 앱을 부르는 이름이 이것이다.
+      alternateName: t.title,
       description: t.desc,
       url: urlOf(lang),
       inLanguage: lang,
@@ -389,7 +392,7 @@ ${JSON.stringify(ld, null, 2)}
       <!--
         언어 전환은 **맨 위**에 둔다. 자기 언어가 아닌 페이지에 떨어진 사람이
         가장 먼저 찾는 것이고, 그 사람은 페이지를 읽지 못하므로 끝까지
-        스크롤하지 않는다 — 아래에 두면 없는 것과 같다.
+        스크롤하지 않는다. 아래에 두면 없는 것과 같다.
       -->
       <nav class="langs" aria-label="${esc(t.otherLangs)}">
         ${otherLangLinks}
@@ -416,7 +419,7 @@ ${JSON.stringify(ld, null, 2)}
           src="${up}media/preview-${vid}.mp4"
           poster="${up}media/preview-${vid}.jpg"
           width="540"
-          height="1170"
+          height="818"
           autoplay
           muted
           loop
@@ -445,7 +448,7 @@ ${t.facts.map((f) => `          <li>${f}</li>`).join('\n')}
         <h2>${esc(t.chaptersH)}</h2>
         <p>${esc(t.chaptersLead)}</p>
         <ol class="chapters">
-${t.chapters.map(([n, d]) => `          <li><strong>${esc(n)}</strong> — ${esc(d)}</li>`).join('\n')}
+${t.chapters.map(([n, d]) => `          <li><strong>${esc(n)}</strong>: ${esc(d)}</li>`).join('\n')}
         </ol>
       </section>
 
@@ -529,7 +532,7 @@ for (const lang of LANGS) {
 */
 writeFileSync(
   resolve(HERE, 'robots.txt'),
-  `# PRISM — 전부 허용한다. 이유는 build.mjs의 주석에 있다.
+  `# PRISM. 전부 허용한다. 이유는 build.mjs의 주석에 있다.
 User-agent: *
 Allow: /
 
@@ -582,7 +585,7 @@ writeFileSync(
 - 개발사 / Publisher: A Driven Inc.
 - 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad). Android는 준비 중 / in preparation
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
-- 용량 / Size: 5MB 미만 — 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
+- 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
   no image files, everything drawn in code
 - 언어 / Languages: 한국어, English, 日本語, 简体中文
 - 접근성 / Accessibility: 색을 보지 못해도 전부 플레이 가능(결정마다 도형 표시),
