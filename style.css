@@ -367,3 +367,77 @@ footer p {
     animation: none !important;
   }
 }
+
+/* ── AEO 개편에서 들어온 것들 ────────────────────────────────── */
+
+/*
+  미리보기 영상.
+
+  스토어용 원본은 29MB라 웹에 얹을 수 없어 540px·무음·CRF 30으로 다시
+  인코딩했다(141KB). 소리가 없으므로 자동재생이 허용되고, 컨트롤을 숨겨
+  "움직이는 스크린샷"처럼 읽히게 한다 — 재생 버튼을 누르게 만들면 대부분
+  누르지 않는다.
+*/
+.preview {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid var(--hair, rgba(255, 255, 255, 0.14));
+  background: #06070c;
+}
+
+.cap {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.55;
+}
+
+/* 챕터 목록 — 번호가 로마자 I~VI로 보이게 한다. 스토어 설명과 같은 표기다. */
+.chapters {
+  list-style: upper-roman;
+  padding-left: 1.4em;
+  line-height: 1.9;
+}
+.chapters li {
+  margin-bottom: 4px;
+}
+.chapters strong {
+  font-weight: 600;
+}
+
+/*
+  자주 묻는 것.
+
+  `<dl>`을 쓰는 이유: 질문과 답의 관계가 마크업 자체에 있어야 답변 엔진이
+  쌍으로 읽는다. `<h3>` + `<p>`로 쓰면 그 관계는 사람 눈에만 있다.
+*/
+.faq {
+  margin: 0;
+}
+.faq dt {
+  font-weight: 600;
+  margin-top: 22px;
+  line-height: 1.5;
+}
+.faq dd {
+  margin: 8px 0 0;
+  opacity: 0.78;
+  line-height: 1.75;
+}
+
+/* 언어 전환. 자기 언어를 자기 글자로 적는다 — 「일본어」라고 써두면 못 찾는다. */
+.langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: baseline;
+  justify-content: center;
+  margin: 36px 0 8px;
+  font-size: 14px;
+}
+.langs span {
+  opacity: 0.45;
+}

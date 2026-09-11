@@ -1,70 +1,198 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PRISM — 빛을 접어 결정을 밝힌다</title>
-    <meta
-      name="description"
-      content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인."
-    />
+    <meta name="description" content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인." />
     <meta name="theme-color" content="#06070C" />
     <link rel="canonical" href="https://prizzly-lang.github.io/prism-site/" />
+    <link rel="alternate" hreflang="ko" href="https://prizzly-lang.github.io/prism-site/" />
+    <link rel="alternate" hreflang="en" href="https://prizzly-lang.github.io/prism-site/en/" />
+    <link rel="alternate" hreflang="ja" href="https://prizzly-lang.github.io/prism-site/ja/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://prizzly-lang.github.io/prism-site/zh-Hans/" />
+    <link rel="alternate" hreflang="x-default" href="https://prizzly-lang.github.io/prism-site/en/" />
     <meta property="og:title" content="PRISM — 빛을 접어 결정을 밝힌다" />
-    <meta
-      property="og:description"
-      content="탭하면 빛이 꺾입니다. 240개의 퍼즐, 모든 정답은 하나뿐. 광고·인앱결제 없음."
-    />
+    <meta property="og:description" content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인." />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko" />
     <meta property="og:url" content="https://prizzly-lang.github.io/prism-site/" />
-    <meta
-      property="og:image"
-      content="https://prizzly-lang.github.io/prism-site/img/board-prism.png"
-    />
+    <meta property="og:image" content="https://prizzly-lang.github.io/prism-site/img/board-prism.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "PRISM",
+    "alternateName": "PRISM",
+    "description": "탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.",
+    "url": "https://prizzly-lang.github.io/prism-site/",
+    "inLanguage": "ko",
+    "applicationCategory": "GameApplication",
+    "applicationSubCategory": "PuzzleGame",
+    "operatingSystem": "iOS 15.0 or later",
+    "downloadUrl": "https://apps.apple.com/kr/app/id6803019903",
+    "installUrl": "https://apps.apple.com/kr/app/id6803019903",
+    "fileSize": "5MB",
+    "softwareVersion": "1.2",
+    "availableOnDevice": [
+      "iPhone",
+      "iPad"
+    ],
+    "countriesSupported": "Worldwide",
+    "offers": {
+      "@type": "Offer",
+      "price": "3900",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock",
+      "url": "https://apps.apple.com/kr/app/id6803019903"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "A Driven Inc.",
+      "url": "https://prizzly-lang.github.io/prism-site/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "A Driven Inc.",
+      "url": "https://prizzly-lang.github.io/prism-site/"
+    },
+    "screenshot": [
+      "https://prizzly-lang.github.io/prism-site/img/board-prism.png",
+      "https://prizzly-lang.github.io/prism-site/img/board-rule.png",
+      "https://prizzly-lang.github.io/prism-site/img/board-mixing.png"
+    ],
+    "featureList": [
+      "240개 퍼즐, 여섯 개의 챕터",
+      "모든 퍼즐의 정답은 하나뿐입니다",
+      "표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다",
+      "광고 없음 · 인앱결제 없음 · 계정 없음",
+      "네트워크를 쓰지 않습니다. 완전 오프라인"
+    ],
+    "isAccessibleForFree": false,
+    "accessibilityFeature": [
+      "highContrastDisplay",
+      "largePrint",
+      "reducedMotion"
+    ],
+    "accessibilityHazard": [
+      "noFlashingHazard",
+      "noMotionSimulationHazard",
+      "noSoundHazard"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "ko",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "광고가 정말 없나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "없습니다. 인앱결제도, 계정도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "인터넷 없이 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "색약인데 할 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "몇 판이고 얼마나 어렵나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "안드로이드 버전이 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google Play 출시를 준비하고 있습니다. 현재는 iOS에서만 받으실 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "용량이 얼마나 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다 — 화면의 빛과 도형은 전부 코드로 그립니다."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "30초면 무슨 게임인지 압니다",
+    "description": "실제 플레이 화면입니다. 소리는 없습니다.",
+    "thumbnailUrl": "https://prizzly-lang.github.io/prism-site/media/preview-ko.jpg",
+    "contentUrl": "https://prizzly-lang.github.io/prism-site/media/preview-ko.mp4",
+    "uploadDate": "2026-09-11",
+    "duration": "PT22S",
+    "inLanguage": "ko"
+  }
+]
+    </script>
   </head>
   <body>
     <main>
       <header class="hero">
-        <img class="mark" src="icon.svg" alt="PRISM 아이콘" width="112" height="112" />
+        <img class="mark" src="icon.svg" alt="PRISM" width="112" height="112" />
         <h1>PRISM</h1>
         <p class="tagline">빛을 접어 결정을 밝힌다</p>
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903"
-          >App Store에서 받기</a
-        >
-        <!--
-          히어로 이미지. 흰 빛이 프리즘에서 빨강·초록·파랑으로 갈라져 각각의
-          결정을 켜는 실제 판(레벨 47)이다. 이 한 장에 게임의 거의 전부가 있다 —
-          광원, 프리즘, 거울, 반투명 거울, 색이 다른 결정, 접근성 도형.
-        -->
+        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
         <img
           class="board hero-board"
           src="img/board-prism.png"
-          alt="흰 빛이 프리즘을 지나 빨강·초록·파랑으로 갈라지고, 거울을 거쳐 빨간 결정과 초록 결정을 각각 켠 판"
+          alt="프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다"
           width="720"
           height="720"
         />
       </header>
 
       <section>
+        <h2>30초면 무슨 게임인지 압니다</h2>
+        <video
+          class="preview"
+          src="media/preview-ko.mp4"
+          poster="media/preview-ko.jpg"
+          width="540"
+          height="1170"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        ></video>
+        <p class="cap">실제 플레이 화면입니다. 소리는 없습니다.</p>
+      </section>
+
+      <section>
         <h2>규칙은 하나입니다</h2>
-        <p class="lead">
-          탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에
-          정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는
-          없습니다 — 레벨이 규칙을 가르칩니다.
-        </p>
+        <p class="lead">탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다 — 레벨이 규칙을 가르칩니다.</p>
 
         <figure>
-          <img
-            class="board"
-            src="img/board-rule.png"
-            alt="광원에서 나온 파란 빛이 거울 두 개에 반사되어 파란 결정에 닿아 켜진 첫 번째 판"
-            width="720"
-            height="720"
-            loading="lazy"
-          />
+          <img class="board" src="img/board-rule.png" alt="첫 번째 레벨. 거울을 한 번 탭하면 풀립니다."
+               width="720" height="720" loading="lazy" />
           <figcaption>첫 번째 레벨. 거울을 한 번 탭하면 풀립니다.</figcaption>
         </figure>
 
@@ -78,119 +206,93 @@
       </section>
 
       <section>
-        <h2>색을 구분하기 어려워도 끝까지 풀 수 있습니다</h2>
-        <p>
-          모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은
-          성분 도형이 나란히 놓입니다 — 노란 결정에는 삼각형과 사각형이 함께
-          새겨집니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를 풀 수 있습니다.
-        </p>
+        <h2>여섯 개의 챕터</h2>
+        <p>레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.</p>
+        <ol class="chapters">
+          <li><strong>반사</strong> — 거울이 빛을 90도로 꺾습니다</li>
+          <li><strong>분열</strong> — 반투명 거울은 빛을 통과시키면서 동시에 반사합니다</li>
+          <li><strong>분산</strong> — 프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다</li>
+          <li><strong>혼합</strong> — 두 빛이 한 결정에서 겹치면 새로운 색이 됩니다</li>
+          <li><strong>정제</strong> — 필터는 원하는 성분만 남깁니다</li>
+          <li><strong>수렴</strong> — 배운 모든 것이 한 판에서 만납니다</li>
+        </ol>
+      </section>
 
-        <!--
-          범례를 글자로만 쓰면("빨강은 삼각형") 색약 방문자가 확인할 방법이 없다.
-          도형을 실제로 그려서, 색을 못 봐도 약속이 지켜지는지 눈으로 보게 한다.
-        -->
+      <section>
+        <h2>진짜 광학입니다</h2>
+        <p>거울의 반사각, 프리즘의 분산, 빛의 가산혼합은 실제 물리 그대로입니다. 챕터마다 원리 카드가 열리고, 탭하기 전과 후를 그림 두 장으로 나란히 보여줍니다. 초등학생이 읽을 수 있게 썼습니다. 게임이 실제 물리와 어디서 달라지는지도 함께 적어뒀습니다.</p>
+      </section>
+
+      <section>
+        <h2>색을 구분하기 어려워도 끝까지 풀 수 있습니다</h2>
+        <p>모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은 성분 도형이 나란히 놓입니다 — 노란 결정에는 삼각형과 사각형이 함께 새겨집니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를 풀 수 있습니다.</p>
+
         <ul class="legend">
           <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
-              <polygon points="10,3 18,17 2,17" fill="#ff2d55" />
-            </svg>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" fill="#ff2d55" /></svg>
             빨강 = 삼각형
           </li>
           <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
-              <rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />
-            </svg>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" /></svg>
             초록 = 사각형
           </li>
           <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
-              <circle cx="10" cy="10" r="7.5" fill="#2d8cff" />
-            </svg>
+            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" fill="#2d8cff" /></svg>
             파랑 = 원
           </li>
         </ul>
 
         <figure>
-          <img
-            class="board"
-            src="img/board-mixing.png"
-            alt="빨간 빛과 초록 빛이 한 결정에 함께 도달해 노란 결정을 켠 판. 그 결정에는 삼각형과 사각형이 나란히 새겨져 있다"
-            width="720"
-            height="720"
-            loading="lazy"
-          />
-          <figcaption>
-            빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께
-            새겨진 이유입니다.
-          </figcaption>
+          <img class="board" src="img/board-mixing.png" alt="빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께 새겨진 이유입니다."
+               width="720" height="720" loading="lazy" />
+          <figcaption>빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께 새겨진 이유입니다.</figcaption>
         </figure>
-      </section>
-
-      <hr class="lang-break" />
-
-      <!--
-        영어 섹션. ASC의 마케팅 URL은 언어별 칸이지만 이 페이지가 두 언어를
-        담고 있으므로 같은 URL을 양쪽에 넣을 수 있다. support.html도 같은 방식이다.
-      -->
-      <section>
-        <h2 id="en">PRISM (English)</h2>
-        <p class="tagline en-tagline">Bend beams. Wake the crystals.</p>
-        <p class="lead">
-          Tap a piece and it turns 90°; the light finds a new path instantly. Light
-          every crystal with exactly the color it asks for, all at once, and the board
-          is solved. That is the only rule, and there is no manual — the levels teach
-          it.
-        </p>
 
         <ul class="facts">
-          <li><strong>240</strong> puzzles across six chapters</li>
-          <li>Every puzzle has <strong>exactly one solution</strong></li>
-          <li>The par shown is the <strong>true minimum</strong>, found by exhaustive search</li>
-          <li>No ads · no in-app purchases · no account</li>
-          <li>No networking at all. Fully offline</li>
+          <li>글자 크기를 보통 · 크게 · 아주 크게 중에서 고를 수 있습니다</li>
+          <li>기기의 「동작 줄이기」를 켜면 화면 연출이 줄어듭니다</li>
+          <li>탭이 조금 빗나가도 가장 가까운 조각이 돌아갑니다</li>
         </ul>
+      </section>
 
-        <h3>Playable without seeing color</h3>
-        <p>
-          Every crystal also shows its required color as a shape, and mixed colors show
-          their component shapes side by side — a yellow crystal carries a triangle and
-          a square together. All 240 puzzles can be finished without distinguishing
-          color.
-        </p>
+      <section>
+        <h2>네 가지 언어</h2>
+        <p>한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.</p>
+      </section>
 
-        <ul class="legend">
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
-              <polygon points="10,3 18,17 2,17" fill="#ff2d55" />
-            </svg>
-            red = triangle
-          </li>
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
-              <rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />
-            </svg>
-            green = square
-          </li>
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">
-              <circle cx="10" cy="10" r="7.5" fill="#2d8cff" />
-            </svg>
-            blue = circle
-          </li>
-        </ul>
-
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903"
-          >Get it on the App Store</a
-        >
+      <section>
+        <h2>자주 묻는 것</h2>
+        <dl class="faq">
+          <dt>광고가 정말 없나요?</dt>
+          <dd>없습니다. 인앱결제도, 계정도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.</dd>
+          <dt>인터넷 없이 되나요?</dt>
+          <dd>됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.</dd>
+          <dt>색약인데 할 수 있나요?</dt>
+          <dd>할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.</dd>
+          <dt>몇 판이고 얼마나 어렵나요?</dt>
+          <dd>여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.</dd>
+          <dt>안드로이드 버전이 있나요?</dt>
+          <dd>Google Play 출시를 준비하고 있습니다. 현재는 iOS에서만 받으실 수 있습니다.</dd>
+          <dt>용량이 얼마나 되나요?</dt>
+          <dd>5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다 — 화면의 빛과 도형은 전부 코드로 그립니다.</dd>
+        </dl>
+        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
       </section>
 
       <nav class="links">
-        <a href="privacy.html">개인정보 처리방침 · Privacy Policy</a>
-        <a href="support.html">지원 · 문의 · Support</a>
+        <a href="privacy.html">개인정보 처리방침</a>
+        <a href="support.html">지원 · 문의</a>
+      </nav>
+
+      <nav class="langs" aria-label="다른 언어">
+        <span>다른 언어</span>
+          <a href="https://prizzly-lang.github.io/prism-site/en/" hreflang="en" lang="en">English</a>
+          <a href="https://prizzly-lang.github.io/prism-site/ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="https://prizzly-lang.github.io/prism-site/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
       </nav>
 
       <footer>
-        <p>© 2026 A Driven Inc. 문의: <a href="mailto:jay@adriven.co">jay@adriven.co</a></p>
+        <p>© 2026 A Driven Inc. <a href="mailto:jay@adriven.co">jay@adriven.co</a></p>
       </footer>
     </main>
   </body>
