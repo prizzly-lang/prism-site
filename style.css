@@ -46,7 +46,6 @@
   --s-3: 1.5rem;
   --s-4: 2.5rem;
   --s-5: clamp(3rem, 8vw, 5rem);
-  --s-6: clamp(4rem, 12vw, 7rem);
 
   --r-md: 14px;
   --r-lg: 24px;
@@ -98,10 +97,22 @@ main {
   margin-bottom: var(--s-5);
 }
 
-.mark {
+/*
+  히어로의 분광 그림.
+
+  여기 있던 112px 앱 아이콘을 대신한다. 아이콘은 App Store에서 이미 보고 오는
+  그림이고, 제품 이름의 뜻을 설명하지 않는다. 흰 빛이 프리즘을 지나 세 색으로
+  갈라지는 것이 PRISM이라는 이름이자 3챕터의 내용이다.
+
+  제목 뒤에 겹치지 않고 **위에 놓는다.** 글자 위에 빛을 깔면 대비가 무너지고,
+  이 사이트는 본문 대비 4.5:1을 지키기로 했다.
+*/
+.spectrum {
   display: block;
-  margin: 0 auto var(--s-3);
-  border-radius: var(--r-lg);
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  margin: 0 auto var(--s-2);
 }
 
 h1 {
@@ -118,10 +129,6 @@ h1 {
   color: var(--ink-dim);
   font-size: var(--t-body);
   letter-spacing: 0.04em;
-}
-
-.en-tagline {
-  margin-top: 0;
 }
 
 /* ── 판 이미지 ─────────────────────────────────────
@@ -144,11 +151,6 @@ h1 {
   border: 1px solid var(--hair-soft);
   border-radius: var(--r-md);
   background: var(--bg);
-}
-
-.board.hero-board {
-  margin-top: var(--s-4);
-  margin-bottom: 0;
 }
 
 figure {
@@ -256,17 +258,6 @@ li {
 .cta:hover {
   background: rgba(50, 255, 154, 0.12);
   border-color: var(--accent);
-}
-
-/* ── 언어 경계 ─────────────────────────────────────
-   한 페이지에 두 언어를 담는다. ASC의 마케팅 URL은 언어별 칸이지만 같은
-   URL을 양쪽에 넣을 수 있고, 영어 목록에 한국어만 있는 페이지를 걸어두면
-   영어권 구매자가 아무것도 읽지 못한다. */
-
-.lang-break {
-  margin: var(--s-6) 0 var(--s-5);
-  border: 0;
-  border-top: 1px solid var(--hair);
 }
 
 /* ── 문서 페이지(개인정보·지원) ─────────────────────── */
@@ -410,36 +401,165 @@ footer p {
   opacity: 0.55;
 }
 
-/* 챕터 목록 — 번호가 로마자 I~VI로 보이게 한다. 스토어 설명과 같은 표기다. */
+/*
+  챕터 카드.
+
+  로마자 목록 여섯 줄이었다. 여섯 챕터는 이 게임의 뼈대인데 줄글로 늘어놓으면
+  다른 문단과 구분되지 않는다. 카드로 세우고, **왼쪽 띠에 그 챕터가 가르치는
+  것을 그린다** — 반사는 흰 한 줄, 분산은 빨강·초록·파랑 세 칸, 혼합은
+  빨강에서 노랑을 지나 초록으로, 수렴은 전부. 띠가 장식이 아니라 목록의
+  내용을 한 번 더 말한다.
+
+  색맹 방문자에게도 로마 숫자와 챕터 이름이 그대로 있으므로 띠가 없어도
+  정보가 빠지지 않는다. 앱이 결정에 도형을 새기는 것과 같은 규칙이다.
+*/
 .chapters {
-  list-style: upper-roman;
-  padding-left: 1.4em;
-  line-height: 1.9;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+  counter-reset: none;
 }
-.chapters li {
-  margin-bottom: 4px;
+
+.chapter {
+  position: relative;
+  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-3);
+  border: 1px solid var(--hair-soft);
+  border-radius: var(--r-md);
+  background: var(--bg-raise);
+  line-height: 1.55;
 }
-.chapters strong {
+
+/* 왼쪽 띠. 각 챕터의 --beam 을 그대로 칠한다. */
+.chapter::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: var(--r-md) 0 0 var(--r-md);
+  background: var(--beam);
+}
+
+.chapter-1 {
+  --beam: rgba(255, 255, 255, 0.85);
+}
+.chapter-2 {
+  --beam: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85) 0 46%,
+    rgba(255, 255, 255, 0.3) 46% 54%,
+    rgba(255, 255, 255, 0.85) 54% 100%
+  );
+}
+.chapter-3 {
+  --beam: linear-gradient(
+    180deg,
+    var(--lit-r) 0 33%,
+    var(--lit-g) 33% 66%,
+    var(--lit-b) 66% 100%
+  );
+}
+.chapter-4 {
+  --beam: linear-gradient(180deg, var(--lit-r), var(--lit-y), var(--lit-g));
+}
+.chapter-5 {
+  --beam: linear-gradient(180deg, rgba(255, 255, 255, 0.85), var(--lit-r));
+}
+.chapter-6 {
+  --beam: linear-gradient(
+    180deg,
+    var(--lit-r),
+    var(--lit-y),
+    var(--lit-g),
+    var(--lit-b),
+    rgba(255, 255, 255, 0.85)
+  );
+}
+
+.ch-num {
+  display: block;
+  color: var(--ink-faint);
+  font-size: var(--t-micro);
+  letter-spacing: 0.18em;
+}
+
+.chapter strong {
+  display: block;
+  color: var(--ink);
   font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.ch-desc {
+  display: block;
+  color: var(--ink-dim);
+  font-size: var(--t-small);
 }
 
 /*
   자주 묻는 것.
 
-  `<dl>`을 쓰는 이유: 질문과 답의 관계가 마크업 자체에 있어야 답변 엔진이
-  쌍으로 읽는다. `<h3>` + `<p>`로 쓰면 그 관계는 사람 눈에만 있다.
+  `<dl>` 여섯 쌍이 펼쳐져 있었다. 여기까지 내려온 사람은 이미 살지 말지를
+  정한 뒤이고, 글 벽으로 끝나면 마지막 인상이 그것이 된다. `<details>`로
+  접되 첫 문답은 열어 둬서 무엇이 접혀 있는지 보이게 한다.
+
+  답은 접혀 있어도 DOM에 그대로 있다. FAQPage JSON-LD와 어긋나지 않고,
+  답변 엔진도 읽는다.
 */
 .faq {
-  margin: 0;
+  margin-top: var(--s-3);
+  border-top: 1px solid var(--hair);
 }
-.faq dt {
+
+.qa {
+  border-bottom: 1px solid var(--hair);
+}
+
+.qa summary {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding: var(--s-2) 0;
+  color: var(--ink);
   font-weight: 600;
-  margin-top: 22px;
   line-height: 1.5;
+  cursor: pointer;
+  list-style: none;
 }
-.faq dd {
-  margin: 8px 0 0;
-  opacity: 0.78;
+
+/* 사파리의 기본 삼각형. 아래에서 직접 그린다. */
+.qa summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 닫힘은 가로선, 열림은 세로로 세운 같은 선. 여는 동작이 눈에 보인다. */
+.qa summary::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.18s ease;
+}
+
+.qa[open] summary::before {
+  transform: rotate(-135deg) translate(-3px, -3px);
+}
+
+.qa summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.qa p {
+  padding: 0 0 var(--s-3) calc(10px + var(--s-2));
   line-height: 1.75;
 }
 
@@ -455,16 +575,192 @@ footer p {
 .langs {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
-  align-items: baseline;
+  gap: var(--s-1);
+  align-items: center;
   justify-content: center;
-  margin: 0 0 14px;
-  padding-top: 8px;
-  font-size: 14px;
+  margin: 0 0 var(--s-3);
+  font-size: var(--t-small);
 }
+
+/*
+  칩으로 만든다. 밑줄 친 링크 세 개가 페이지의 첫 요소로 떠 있으면 그게
+  본문의 일부처럼 읽힌다. 테두리를 둘러 "고르는 것"으로 만들고, 높이를
+  44px로 잡아 손가락으로도 눌린다.
+*/
 .langs a {
-  opacity: 0.62;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 var(--s-2);
+  border: 1px solid var(--hair-soft);
+  border-bottom-color: var(--hair-soft);
+  border-radius: var(--r-pill);
+  color: var(--ink-dim);
 }
+
 .langs a:hover {
+  border-color: var(--hair);
+  border-bottom-color: var(--hair);
+  color: var(--ink);
+}
+
+/* ── 개편: 숫자 스트립 · 구분선 · 마무리 ─────────────────── */
+
+/*
+  숫자 넷.
+
+  240판, 6챕터, 판마다 정답 하나, 그리고 0(광고·결제·가입). 문장 속에
+  흩어져 있던 사실을 한 줄로 모았다. 사람은 여기서 제품 전체를 읽고,
+  답변 엔진이 인용할 때 집는 것도 문장이 아니라 이 숫자들이다.
+
+  마지막 0은 초록으로 둔다. 유료 앱에서 구매를 막는 것은 가격이 아니라
+  "사고 나서 또 결제하라고 하면?"이고, 그 답이 이 자리다.
+*/
+.stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--hair-soft);
+}
+
+.stats li {
+  text-align: center;
+  line-height: 1.3;
+}
+
+.stats b {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 200;
+  letter-spacing: 0.02em;
+}
+
+.stats span {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-faint);
+  font-size: var(--t-micro);
+}
+
+.stats li:last-child b {
+  color: var(--accent);
+}
+
+/* 넷이 한 줄에 들어가지 않는 폭에서는 2×2로 접는다. */
+@media (max-width: 26rem) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-3) var(--s-2);
+  }
+}
+
+/*
+  섹션 구분선 — 빛이 지나가다 결정을 만난다.
+
+  가운데가 밝고 양끝으로 사라지는 선에 육각 결정 하나. 밑줄로 끊던 자리를
+  제품의 언어로 바꾼 것이고, 페이지를 읽는 동안 같은 사건이 네 번 반복된다.
+
+  `.js`가 붙은 뒤에만 어두워진다. 스크립트가 막힌 방문자에게는 처음부터
+  켜져 있고, 빈 선이 남지 않는다.
+*/
+.beam {
+  position: relative;
+  height: 1px;
+  margin: var(--s-5) 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hair) 22%,
+    var(--hair) 78%,
+    transparent
+  );
+}
+
+.beam i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 12px;
+  margin: -6px 0 0 -5.5px;
+  background: var(--accent);
+  /* 결정의 육각형. 앱이 결정을 그리는 모양과 같다. */
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  box-shadow: 0 0 14px rgba(50, 255, 154, 0.55);
+}
+
+.js .beam i {
+  opacity: 0.18;
+  background: var(--ink-faint);
+  box-shadow: none;
+  transition:
+    opacity 0.5s ease,
+    background-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.js .beam.lit i {
   opacity: 1;
+  background: var(--accent);
+  box-shadow: 0 0 14px rgba(50, 255, 154, 0.55);
+}
+
+/*
+  마무리.
+
+  CTA가 페이지 맨 위에 하나뿐이었다. 5,000px을 내려온 사람은 사겠다고
+  마음먹은 바로 그 자리에서 버튼을 찾지 못하고 위로 되돌아가야 했다.
+  여기서 태그라인을 한 번 더 말하고, 버튼을 주고, 약속 넷을 붙인다.
+*/
+.closer {
+  text-align: center;
+  margin-top: var(--s-5);
+  padding: var(--s-5) var(--s-3);
+  border: 1px solid var(--hair-soft);
+  border-radius: var(--r-lg);
+  background: var(--bg-raise);
+}
+
+.closer-line {
+  color: var(--ink);
+  font-size: var(--t-lead);
+  letter-spacing: 0.02em;
+}
+
+.cta-lg {
+  padding: var(--s-2) clamp(1.5rem, 6vw, 2.75rem);
+  font-size: var(--t-lead);
+}
+
+.badges {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-1) var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px var(--s-2);
+  border: 1px solid var(--hair-soft);
+  border-radius: var(--r-pill);
+  color: var(--ink-dim);
+  font-size: var(--t-micro);
+}
+
+/* 뱃지 앞의 작은 결정. 글자만으로도 읽히므로 aria에는 넣지 않는다. */
+.badges li::before {
+  content: '';
+  width: 7px;
+  height: 8px;
+  background: var(--accent);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }

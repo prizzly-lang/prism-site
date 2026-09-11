@@ -69,7 +69,7 @@
       "240 puzzles across six chapters",
       "Every puzzle has exactly one solution",
       "The par shown is the true minimum, found by exhaustive search",
-      "No ads · no in-app purchases · no account",
+      "No ads · no in-app purchases · no sign-up",
       "No networking at all. Fully offline"
     ],
     "isAccessibleForFree": false,
@@ -94,7 +94,7 @@
         "name": "Are there really no ads?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "None. No in-app purchases, no account, no sign-in either. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists."
+          "text": "None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists."
         }
       },
       {
@@ -167,18 +167,44 @@
       </nav>
 
       <header class="hero">
-        <img class="mark" src="../icon.svg" alt="PRISM" width="112" height="112" />
+        <svg class="spectrum" viewBox="0 0 640 280" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="7" />
+          </filter>
+        </defs>
+        <g filter="url(#glow)" opacity="0.55">
+          <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="7" fill="none" />
+        </g>
+        <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="2" fill="none" />
+        <path d="M266 136 L330 128" stroke="#ffffff" stroke-width="1.4" opacity="0.5" fill="none" />
+        <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="2" fill="none" />
+        <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="2" fill="none" />
+        <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="2" fill="none" />
+        <path d="M300 52 L358 196 L242 196 Z" stroke="rgba(255,255,255,0.5)" stroke-width="2"
+              stroke-linejoin="round" fill="rgba(255,255,255,0.03)" />
+      </svg>
         <h1>PRISM</h1>
         <p class="tagline">Bend beams. Wake the crystals.</p>
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">Get it on the App Store</a>
-        <img
-          class="board hero-board"
-          src="../img/board-prism.png"
-          alt="a prism splits white light into red, green and blue"
-          width="720"
-          height="720"
-        />
+        <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">Get it on the App Store</a>
+
+        <!--
+          숫자 넷으로 제품 전체를 말한다. 240판, 6챕터, 판마다 정답 하나,
+          그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
+          문장이 아니라 이 숫자들이다.
+        -->
+        <ul class="stats">
+          <li><b>240</b><span>puzzles</span></li>
+          <li><b>6</b><span>chapters</span></li>
+          <li><b>1</b><span>solution each</span></li>
+          <li><b>0</b><span>ads · IAP · sign-ups</span></li>
+        </ul>
       </header>
+
+      <div class="beam" aria-hidden="true"><i></i></div>
 
       <section>
         <h2>Thirty seconds and you know the game</h2>
@@ -211,23 +237,56 @@
           <li><strong>240</strong> puzzles across six chapters</li>
           <li>Every puzzle has <strong>exactly one solution</strong></li>
           <li>The par shown is the <strong>true minimum</strong>, found by exhaustive search</li>
-          <li>No ads · no in-app purchases · no account</li>
+          <li>No ads · no in-app purchases · no sign-up</li>
           <li>No networking at all. Fully offline</li>
         </ul>
       </section>
 
+      <div class="beam" aria-hidden="true"><i></i></div>
+
       <section>
         <h2>Six chapters</h2>
         <p>The levels teach optics in order. Each chapter introduces exactly one new piece.</p>
+        <!--
+          카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
+          분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
+          수렴은 전부. 장식이 아니라 목록의 내용을 한 번 더 말한다.
+        -->
         <ol class="chapters">
-          <li><strong>Reflect</strong>: a mirror turns light by 90 degrees</li>
-          <li><strong>Split</strong>: a half-silvered mirror passes light and reflects it at the same time</li>
-          <li><strong>Disperse</strong>: a prism splits white light into red, green and blue</li>
-          <li><strong>Mix</strong>: two beams meeting at one crystal make a new color</li>
-          <li><strong>Refine</strong>: a filter keeps only the component you want</li>
-          <li><strong>Converge</strong>: everything you have learned meets on one board</li>
+          <li class="chapter chapter-1">
+            <span class="ch-num">I</span>
+            <strong>Reflect</strong>
+            <span class="ch-desc">a mirror turns light by 90 degrees</span>
+          </li>
+          <li class="chapter chapter-2">
+            <span class="ch-num">II</span>
+            <strong>Split</strong>
+            <span class="ch-desc">a half-silvered mirror passes light and reflects it at the same time</span>
+          </li>
+          <li class="chapter chapter-3">
+            <span class="ch-num">III</span>
+            <strong>Disperse</strong>
+            <span class="ch-desc">a prism splits white light into red, green and blue</span>
+          </li>
+          <li class="chapter chapter-4">
+            <span class="ch-num">IV</span>
+            <strong>Mix</strong>
+            <span class="ch-desc">two beams meeting at one crystal make a new color</span>
+          </li>
+          <li class="chapter chapter-5">
+            <span class="ch-num">V</span>
+            <strong>Refine</strong>
+            <span class="ch-desc">a filter keeps only the component you want</span>
+          </li>
+          <li class="chapter chapter-6">
+            <span class="ch-num">VI</span>
+            <strong>Converge</strong>
+            <span class="ch-desc">everything you have learned meets on one board</span>
+          </li>
         </ol>
       </section>
+
+      <div class="beam" aria-hidden="true"><i></i></div>
 
       <section>
         <h2>Real optics</h2>
@@ -271,23 +330,53 @@
         <p>Korean, English, Japanese and Simplified Chinese. Follows your device language, or pick one in Settings.</p>
       </section>
 
+      <div class="beam" aria-hidden="true"><i></i></div>
+
       <section>
         <h2>Questions people ask</h2>
-        <dl class="faq">
-          <dt>Are there really no ads?</dt>
-          <dd>None. No in-app purchases, no account, no sign-in either. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.</dd>
-          <dt>Does it work without internet?</dt>
-          <dd>Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.</dd>
-          <dt>Can I play if I am colorblind?</dt>
-          <dd>Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 240 puzzles can be finished without distinguishing color at all.</dd>
-          <dt>How many levels, and how hard?</dt>
-          <dd>Six chapters, 240 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.</dd>
-          <dt>Is there an Android version?</dt>
-          <dd>A Google Play release is in preparation. For now it is available on iOS only.</dd>
-          <dt>How big is it?</dt>
-          <dd>Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.</dd>
-        </dl>
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">Get it on the App Store</a>
+        <!--
+          접어 둔다. 여섯 문답을 펼쳐 두면 페이지 끝이 글 벽이 되고, 여기까지
+          내려온 사람은 이미 살지 말지를 정한 뒤다. 답은 DOM에 그대로 있으므로
+          FAQPage JSON-LD와도, 답변 엔진과도 어긋나지 않는다. 첫 문답만 열어
+          둬서 무엇이 접혀 있는지 보이게 한다.
+        -->
+        <div class="faq">
+          <details class="qa" open>
+            <summary>Are there really no ads?</summary>
+            <p>None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.</p>
+          </details>
+          <details class="qa">
+            <summary>Does it work without internet?</summary>
+            <p>Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.</p>
+          </details>
+          <details class="qa">
+            <summary>Can I play if I am colorblind?</summary>
+            <p>Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 240 puzzles can be finished without distinguishing color at all.</p>
+          </details>
+          <details class="qa">
+            <summary>How many levels, and how hard?</summary>
+            <p>Six chapters, 240 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.</p>
+          </details>
+          <details class="qa">
+            <summary>Is there an Android version?</summary>
+            <p>A Google Play release is in preparation. For now it is available on iOS only.</p>
+          </details>
+          <details class="qa">
+            <summary>How big is it?</summary>
+            <p>Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="closer">
+        <p class="closer-line">Bend beams. Wake the crystals.</p>
+        <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">Get it on the App Store</a>
+        <ul class="badges">
+          <li>No ads</li>
+          <li>No in-app purchases</li>
+          <li>No sign-up</li>
+          <li>Fully offline</li>
+        </ul>
       </section>
 
       <nav class="links">
@@ -299,5 +388,38 @@
         <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
+    <!--
+      구분선의 결정을 스크롤에 맞춰 켠다.
+
+      먼저 <html>에 .js를 붙인다. 어둡게 두는 규칙이 .js 안에만 있으므로,
+      스크립트가 실행되지 않으면 결정은 처음부터 켜진 채다. 순서가 반대면
+      JS를 막아 둔 방문자에게 빈 선만 남는다.
+
+      IntersectionObserver가 없는 브라우저에서는 전부 켠다. 폴리필을 얹을
+      만한 일이 아니다.
+    -->
+    <script>
+      document.documentElement.classList.add('js');
+      (function () {
+        var beams = document.querySelectorAll('.beam');
+        if (!('IntersectionObserver' in window)) {
+          for (var i = 0; i < beams.length; i++) beams[i].classList.add('lit');
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('lit');
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: '0px 0px -18% 0px' },
+        );
+        beams.forEach(function (b) {
+          io.observe(b);
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PRISM: 빛을 접어 결정을 밝힌다</title>
+    <title>PRISM: 빛을 꺾어 결정을 밝힌다</title>
     <meta name="description" content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인." />
     <meta name="theme-color" content="#06070C" />
     <link rel="canonical" href="https://prizzly-lang.github.io/prism-site/" />
@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="ja" href="https://prizzly-lang.github.io/prism-site/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://prizzly-lang.github.io/prism-site/zh-Hans/" />
     <link rel="alternate" hreflang="x-default" href="https://prizzly-lang.github.io/prism-site/en/" />
-    <meta property="og:title" content="PRISM: 빛을 접어 결정을 밝힌다" />
+    <meta property="og:title" content="PRISM: 빛을 꺾어 결정을 밝힌다" />
     <meta property="og:description" content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko" />
@@ -27,7 +27,7 @@
     "@context": "https://schema.org",
     "@type": "MobileApplication",
     "name": "PRISM",
-    "alternateName": "PRISM: 빛을 접어 결정을 밝힌다",
+    "alternateName": "PRISM: 빛을 꺾어 결정을 밝힌다",
     "description": "탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.",
     "url": "https://prizzly-lang.github.io/prism-site/",
     "inLanguage": "ko",
@@ -69,7 +69,7 @@
       "240개 퍼즐, 여섯 개의 챕터",
       "모든 퍼즐의 정답은 하나뿐입니다",
       "표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다",
-      "광고 없음 · 인앱결제 없음 · 계정 없음",
+      "광고 없음 · 인앱결제 없음 · 회원가입 없음",
       "네트워크를 쓰지 않습니다. 완전 오프라인"
     ],
     "isAccessibleForFree": false,
@@ -94,7 +94,7 @@
         "name": "광고가 정말 없나요?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "없습니다. 인앱결제도, 계정도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다."
+          "text": "없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다."
         }
       },
       {
@@ -167,18 +167,44 @@
       </nav>
 
       <header class="hero">
-        <img class="mark" src="icon.svg" alt="PRISM" width="112" height="112" />
+        <svg class="spectrum" viewBox="0 0 640 280" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="7" />
+          </filter>
+        </defs>
+        <g filter="url(#glow)" opacity="0.55">
+          <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="7" fill="none" />
+        </g>
+        <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="2" fill="none" />
+        <path d="M266 136 L330 128" stroke="#ffffff" stroke-width="1.4" opacity="0.5" fill="none" />
+        <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="2" fill="none" />
+        <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="2" fill="none" />
+        <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="2" fill="none" />
+        <path d="M300 52 L358 196 L242 196 Z" stroke="rgba(255,255,255,0.5)" stroke-width="2"
+              stroke-linejoin="round" fill="rgba(255,255,255,0.03)" />
+      </svg>
         <h1>PRISM</h1>
-        <p class="tagline">빛을 접어 결정을 밝힌다</p>
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
-        <img
-          class="board hero-board"
-          src="img/board-prism.png"
-          alt="프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다"
-          width="720"
-          height="720"
-        />
+        <p class="tagline">빛을 꺾어 결정을 밝힌다</p>
+        <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+
+        <!--
+          숫자 넷으로 제품 전체를 말한다. 240판, 6챕터, 판마다 정답 하나,
+          그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
+          문장이 아니라 이 숫자들이다.
+        -->
+        <ul class="stats">
+          <li><b>240</b><span>퍼즐</span></li>
+          <li><b>6</b><span>챕터</span></li>
+          <li><b>1</b><span>판마다 정답</span></li>
+          <li><b>0</b><span>광고 · 결제 · 가입</span></li>
+        </ul>
       </header>
+
+      <div class="beam" aria-hidden="true"><i></i></div>
 
       <section>
         <h2>30초면 무슨 게임인지 압니다</h2>
@@ -211,23 +237,56 @@
           <li><strong>240개</strong> 퍼즐, 여섯 개의 챕터</li>
           <li>모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다</li>
           <li>표시되는 최소 탭 수는 <strong>전수 탐색으로 증명한</strong> 실제 최솟값입니다</li>
-          <li>광고 없음 · 인앱결제 없음 · 계정 없음</li>
+          <li>광고 없음 · 인앱결제 없음 · 회원가입 없음</li>
           <li>네트워크를 쓰지 않습니다. 완전 오프라인</li>
         </ul>
       </section>
 
+      <div class="beam" aria-hidden="true"><i></i></div>
+
       <section>
         <h2>여섯 개의 챕터</h2>
         <p>레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.</p>
+        <!--
+          카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
+          분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
+          수렴은 전부. 장식이 아니라 목록의 내용을 한 번 더 말한다.
+        -->
         <ol class="chapters">
-          <li><strong>반사</strong>: 거울이 빛을 90도로 꺾습니다</li>
-          <li><strong>분열</strong>: 반투명 거울은 빛을 통과시키면서 동시에 반사합니다</li>
-          <li><strong>분산</strong>: 프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다</li>
-          <li><strong>혼합</strong>: 두 빛이 한 결정에서 겹치면 새로운 색이 됩니다</li>
-          <li><strong>정제</strong>: 필터는 원하는 성분만 남깁니다</li>
-          <li><strong>수렴</strong>: 배운 모든 것이 한 판에서 만납니다</li>
+          <li class="chapter chapter-1">
+            <span class="ch-num">I</span>
+            <strong>반사</strong>
+            <span class="ch-desc">거울이 빛을 90도로 꺾습니다</span>
+          </li>
+          <li class="chapter chapter-2">
+            <span class="ch-num">II</span>
+            <strong>분열</strong>
+            <span class="ch-desc">반투명 거울은 빛을 통과시키면서 동시에 반사합니다</span>
+          </li>
+          <li class="chapter chapter-3">
+            <span class="ch-num">III</span>
+            <strong>분산</strong>
+            <span class="ch-desc">프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다</span>
+          </li>
+          <li class="chapter chapter-4">
+            <span class="ch-num">IV</span>
+            <strong>혼합</strong>
+            <span class="ch-desc">두 빛이 한 결정에서 겹치면 새로운 색이 됩니다</span>
+          </li>
+          <li class="chapter chapter-5">
+            <span class="ch-num">V</span>
+            <strong>정제</strong>
+            <span class="ch-desc">필터는 원하는 성분만 남깁니다</span>
+          </li>
+          <li class="chapter chapter-6">
+            <span class="ch-num">VI</span>
+            <strong>수렴</strong>
+            <span class="ch-desc">배운 모든 것이 한 판에서 만납니다</span>
+          </li>
         </ol>
       </section>
+
+      <div class="beam" aria-hidden="true"><i></i></div>
 
       <section>
         <h2>진짜 광학입니다</h2>
@@ -271,23 +330,53 @@
         <p>한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.</p>
       </section>
 
+      <div class="beam" aria-hidden="true"><i></i></div>
+
       <section>
         <h2>자주 묻는 것</h2>
-        <dl class="faq">
-          <dt>광고가 정말 없나요?</dt>
-          <dd>없습니다. 인앱결제도, 계정도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.</dd>
-          <dt>인터넷 없이 되나요?</dt>
-          <dd>됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.</dd>
-          <dt>색약인데 할 수 있나요?</dt>
-          <dd>할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.</dd>
-          <dt>몇 판이고 얼마나 어렵나요?</dt>
-          <dd>여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.</dd>
-          <dt>안드로이드 버전이 있나요?</dt>
-          <dd>Google Play 출시를 준비하고 있습니다. 현재는 iOS에서만 받으실 수 있습니다.</dd>
-          <dt>용량이 얼마나 되나요?</dt>
-          <dd>5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.</dd>
-        </dl>
-        <a class="cta" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+        <!--
+          접어 둔다. 여섯 문답을 펼쳐 두면 페이지 끝이 글 벽이 되고, 여기까지
+          내려온 사람은 이미 살지 말지를 정한 뒤다. 답은 DOM에 그대로 있으므로
+          FAQPage JSON-LD와도, 답변 엔진과도 어긋나지 않는다. 첫 문답만 열어
+          둬서 무엇이 접혀 있는지 보이게 한다.
+        -->
+        <div class="faq">
+          <details class="qa" open>
+            <summary>광고가 정말 없나요?</summary>
+            <p>없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.</p>
+          </details>
+          <details class="qa">
+            <summary>인터넷 없이 되나요?</summary>
+            <p>됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.</p>
+          </details>
+          <details class="qa">
+            <summary>색약인데 할 수 있나요?</summary>
+            <p>할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.</p>
+          </details>
+          <details class="qa">
+            <summary>몇 판이고 얼마나 어렵나요?</summary>
+            <p>여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.</p>
+          </details>
+          <details class="qa">
+            <summary>안드로이드 버전이 있나요?</summary>
+            <p>Google Play 출시를 준비하고 있습니다. 현재는 iOS에서만 받으실 수 있습니다.</p>
+          </details>
+          <details class="qa">
+            <summary>용량이 얼마나 되나요?</summary>
+            <p>5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="closer">
+        <p class="closer-line">빛을 꺾어 결정을 밝힌다</p>
+        <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+        <ul class="badges">
+          <li>광고 없음</li>
+          <li>인앱결제 없음</li>
+          <li>회원가입 없음</li>
+          <li>완전 오프라인</li>
+        </ul>
       </section>
 
       <nav class="links">
@@ -299,5 +388,38 @@
         <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
+    <!--
+      구분선의 결정을 스크롤에 맞춰 켠다.
+
+      먼저 <html>에 .js를 붙인다. 어둡게 두는 규칙이 .js 안에만 있으므로,
+      스크립트가 실행되지 않으면 결정은 처음부터 켜진 채다. 순서가 반대면
+      JS를 막아 둔 방문자에게 빈 선만 남는다.
+
+      IntersectionObserver가 없는 브라우저에서는 전부 켠다. 폴리필을 얹을
+      만한 일이 아니다.
+    -->
+    <script>
+      document.documentElement.classList.add('js');
+      (function () {
+        var beams = document.querySelectorAll('.beam');
+        if (!('IntersectionObserver' in window)) {
+          for (var i = 0; i < beams.length; i++) beams[i].classList.add('lit');
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('lit');
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: '0px 0px -18% 0px' },
+        );
+        beams.forEach(function (b) {
+          io.observe(b);
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -44,9 +44,9 @@ const videoOf = (l) => (l === 'ko' ? 'ko' : 'en');
 const L = {
   ko: {
     dir: 'ltr',
-    title: 'PRISM: 빛을 접어 결정을 밝힌다',
+    title: 'PRISM: 빛을 꺾어 결정을 밝힌다',
     desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
-    tagline: '빛을 접어 결정을 밝힌다',
+    tagline: '빛을 꺾어 결정을 밝힌다',
     cta: 'App Store에서 받기',
     langName: '한국어',
     ruleH: '규칙은 하나입니다',
@@ -58,9 +58,16 @@ const L = {
       '<strong>240개</strong> 퍼즐, 여섯 개의 챕터',
       '모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다',
       '표시되는 최소 탭 수는 <strong>전수 탐색으로 증명한</strong> 실제 최솟값입니다',
-      '광고 없음 · 인앱결제 없음 · 계정 없음',
+      '광고 없음 · 인앱결제 없음 · 회원가입 없음',
       '네트워크를 쓰지 않습니다. 완전 오프라인',
     ],
+    stats: [
+      ['240', '퍼즐'],
+      ['6', '챕터'],
+      ['1', '판마다 정답'],
+      ['0', '광고 · 결제 · 가입'],
+    ],
+    badges: ['광고 없음', '인앱결제 없음', '회원가입 없음', '완전 오프라인'],
     chaptersH: '여섯 개의 챕터',
     chaptersLead: '레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.',
     chapters: [
@@ -86,7 +93,7 @@ const L = {
     langsP: '한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.',
     faqH: '자주 묻는 것',
     faq: [
-      ['광고가 정말 없나요?', '없습니다. 인앱결제도, 계정도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.'],
+      ['광고가 정말 없나요?', '없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.'],
       ['인터넷 없이 되나요?', '됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.'],
       ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.'],
       ['몇 판이고 얼마나 어렵나요?', '여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
@@ -114,9 +121,16 @@ const L = {
       '<strong>240</strong> puzzles across six chapters',
       'Every puzzle has <strong>exactly one solution</strong>',
       'The par shown is the <strong>true minimum</strong>, found by exhaustive search',
-      'No ads · no in-app purchases · no account',
+      'No ads · no in-app purchases · no sign-up',
       'No networking at all. Fully offline',
     ],
+    stats: [
+      ['240', 'puzzles'],
+      ['6', 'chapters'],
+      ['1', 'solution each'],
+      ['0', 'ads · IAP · sign-ups'],
+    ],
+    badges: ['No ads', 'No in-app purchases', 'No sign-up', 'Fully offline'],
     chaptersH: 'Six chapters',
     chaptersLead: 'The levels teach optics in order. Each chapter introduces exactly one new piece.',
     chapters: [
@@ -142,7 +156,7 @@ const L = {
     langsP: 'Korean, English, Japanese and Simplified Chinese. Follows your device language, or pick one in Settings.',
     faqH: 'Questions people ask',
     faq: [
-      ['Are there really no ads?', 'None. No in-app purchases, no account, no sign-in either. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
+      ['Are there really no ads?', 'None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
       ['Does it work without internet?', 'Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
       ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 240 puzzles can be finished without distinguishing color at all.'],
       ['How many levels, and how hard?', 'Six chapters, 240 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
@@ -170,9 +184,16 @@ const L = {
       '<strong>240</strong>のパズル、6つのチャプター',
       'すべてのパズルに<strong>答えはひとつだけ</strong>',
       '表示される最小タップ数は<strong>全探索で証明した</strong>本当の最小値です',
-      '広告なし · アプリ内課金なし · アカウントなし',
+      '広告なし · アプリ内課金なし · 会員登録なし',
       'ネットワークを一切使いません。完全オフライン',
     ],
+    stats: [
+      ['240', 'パズル'],
+      ['6', 'チャプター'],
+      ['1', '盤面ごとの答え'],
+      ['0', '広告 · 課金 · 登録'],
+    ],
+    badges: ['広告なし', 'アプリ内課金なし', '会員登録なし', '完全オフライン'],
     chaptersH: '6つのチャプター',
     chaptersLead: 'レベルが順に光のしくみを教えます。新しいピースはチャプターごとにひとつずつ増えます。',
     chapters: [
@@ -198,7 +219,7 @@ const L = {
     langsP: '한국어、English、日本語、简体中文に対応しています。端末の言語に従うか、設定で直接選べます。',
     faqH: 'よくある質問',
     faq: [
-      ['本当に広告はありませんか？', 'ありません。アプリ内課金も、アカウントも、ログインもありません。一度購入すれば240のパズルすべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。'],
+      ['本当に広告はありませんか？', 'ありません。アプリ内課金も、会員登録も、ログインもありません。一度購入すれば240のパズルすべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。'],
       ['インターネットなしで遊べますか？', '遊べます。ネットワークを一切使わない完全オフラインのゲームです。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。'],
       ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても240面すべてを解けます。'],
       ['何面あって、どのくらい難しいですか？', '6チャプターに240面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
@@ -226,9 +247,16 @@ const L = {
       '<strong>240</strong> 个谜题，六个章节',
       '每个谜题<strong>只有一个答案</strong>',
       '显示的最少点击次数是<strong>穷举验证过</strong>的真实最小值',
-      '没有广告 · 没有内购 · 不需要账号',
+      '没有广告 · 没有内购 · 无需注册',
       '完全不联网。彻底离线',
     ],
+    stats: [
+      ['240', '谜题'],
+      ['6', '章节'],
+      ['1', '每关唯一解'],
+      ['0', '广告 · 内购 · 注册'],
+    ],
+    badges: ['没有广告', '没有内购', '无需注册', '完全离线'],
     chaptersH: '六个章节',
     chaptersLead: '关卡会按顺序教你光的原理。每个章节只引入一种新元件。',
     chapters: [
@@ -254,7 +282,7 @@ const L = {
     langsP: '支持 한국어、English、日本語、简体中文。跟随设备语言，也可以在设置里直接选择。',
     faqH: '常见问题',
     faq: [
-      ['真的没有广告吗？', '没有。也没有内购、账号和登录。一次购买，240 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。'],
+      ['真的没有广告吗？', '没有。也没有内购、注册和登录。一次购买，240 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。'],
       ['没有网络能玩吗？', '能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。'],
       ['我有色觉障碍，能玩吗？', '能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，240 关也都能解开。'],
       ['一共多少关？难吗？', '六个章节，240 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
@@ -278,6 +306,58 @@ const GLYPH_SVG = [
   '<rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />',
   '<circle cx="10" cy="10" r="7.5" fill="#2d8cff" />',
 ];
+
+/*
+  히어로의 분광 그림.
+
+  여기 있던 것은 112px짜리 앱 아이콘이었다. 아이콘은 App Store에서 이미 보고
+  오는 그림이라 페이지에서 한 번 더 보여줄 이유가 없고, 무엇보다 **제품 이름의
+  뜻을 설명하지 않는다.** 흰 빛 하나가 프리즘을 지나 빨강·초록·파랑으로
+  갈라지는 것이 PRISM이라는 이름이자 3챕터의 내용이다. 그걸 그린다.
+
+  이미지 파일이 아니라 인라인 SVG인 이유: 앱이 "이미지 파일이 한 장도 없다"를
+  주장하는데 사이트가 PNG로 빛을 그리면 말과 물건이 어긋난다. 여기도 코드로
+  그린다. 요청도 한 번 줄어든다.
+
+  색은 palette.ts와 같은 값이다.
+*/
+/*
+  섹션 구분선.
+
+  가운데가 밝고 양끝으로 사라지는 1px 선에 결정 하나를 얹었다. 밑줄 하나로
+  끊던 자리를 "빛이 지나가다 결정을 만난다"로 바꾼 것이고, 페이지를 위에서
+  아래로 읽는 동안 같은 사건이 여섯 번 반복된다.
+
+  스크롤해서 화면에 들어올 때 켜진다. **JS가 없으면 처음부터 켜져 있다** —
+  `.js`가 붙은 뒤에만 어두워지므로, 스크립트가 막힌 방문자에게 빈 선이
+  남지 않는다. 움직임을 줄이라고 설정한 방문자에게는 트랜지션이 통째로
+  꺼진다(파일 아래 prefers-reduced-motion 규칙).
+*/
+const BEAM = '<div class="beam" aria-hidden="true"><i></i></div>';
+
+/** 챕터 번호. 스토어 설명도 로마자를 쓴다. */
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+
+const SPECTRUM_SVG = `<svg class="spectrum" viewBox="0 0 640 280" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="7" />
+          </filter>
+        </defs>
+        <g filter="url(#glow)" opacity="0.55">
+          <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="7" fill="none" />
+          <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="7" fill="none" />
+        </g>
+        <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="2" fill="none" />
+        <path d="M266 136 L330 128" stroke="#ffffff" stroke-width="1.4" opacity="0.5" fill="none" />
+        <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="2" fill="none" />
+        <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="2" fill="none" />
+        <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="2" fill="none" />
+        <path d="M300 52 L358 196 L242 196 Z" stroke="rgba(255,255,255,0.5)" stroke-width="2"
+              stroke-linejoin="round" fill="rgba(255,255,255,0.03)" />
+      </svg>`;
 
 function page(lang) {
   const t = L[lang];
@@ -399,18 +479,22 @@ ${JSON.stringify(ld, null, 2)}
       </nav>
 
       <header class="hero">
-        <img class="mark" src="${up}icon.svg" alt="PRISM" width="112" height="112" />
+        ${SPECTRUM_SVG}
         <h1>PRISM</h1>
         <p class="tagline">${esc(t.tagline)}</p>
-        <a class="cta" href="${APPSTORE}">${esc(t.cta)}</a>
-        <img
-          class="board hero-board"
-          src="${up}img/board-prism.png"
-          alt="${esc(t.chapters[2][1])}"
-          width="720"
-          height="720"
-        />
+        <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
+
+        <!--
+          숫자 넷으로 제품 전체를 말한다. 240판, 6챕터, 판마다 정답 하나,
+          그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
+          문장이 아니라 이 숫자들이다.
+        -->
+        <ul class="stats">
+${t.stats.map(([v, k]) => `          <li><b>${esc(v)}</b><span>${esc(k)}</span></li>`).join('\n')}
+        </ul>
       </header>
+
+      ${BEAM}
 
       <section>
         <h2>${esc(t.videoH)}</h2>
@@ -444,13 +528,30 @@ ${t.facts.map((f) => `          <li>${f}</li>`).join('\n')}
         </ul>
       </section>
 
+      ${BEAM}
+
       <section>
         <h2>${esc(t.chaptersH)}</h2>
         <p>${esc(t.chaptersLead)}</p>
+        <!--
+          카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
+          분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
+          수렴은 전부. 장식이 아니라 목록의 내용을 한 번 더 말한다.
+        -->
         <ol class="chapters">
-${t.chapters.map(([n, d]) => `          <li><strong>${esc(n)}</strong>: ${esc(d)}</li>`).join('\n')}
+${t.chapters
+  .map(
+    ([n, d], i) => `          <li class="chapter chapter-${i + 1}">
+            <span class="ch-num">${ROMAN[i]}</span>
+            <strong>${esc(n)}</strong>
+            <span class="ch-desc">${esc(d)}</span>
+          </li>`,
+  )
+  .join('\n')}
         </ol>
       </section>
+
+      ${BEAM}
 
       <section>
         <h2>${esc(t.opticsH)}</h2>
@@ -488,12 +589,34 @@ ${t.a11yMore.map((f) => `          <li>${esc(f)}</li>`).join('\n')}
         <p>${esc(t.langsP)}</p>
       </section>
 
+      ${BEAM}
+
       <section>
         <h2>${esc(t.faqH)}</h2>
-        <dl class="faq">
-${t.faq.map(([q, a]) => `          <dt>${esc(q)}</dt>\n          <dd>${esc(a)}</dd>`).join('\n')}
-        </dl>
-        <a class="cta" href="${APPSTORE}">${esc(t.cta)}</a>
+        <!--
+          접어 둔다. 여섯 문답을 펼쳐 두면 페이지 끝이 글 벽이 되고, 여기까지
+          내려온 사람은 이미 살지 말지를 정한 뒤다. 답은 DOM에 그대로 있으므로
+          FAQPage JSON-LD와도, 답변 엔진과도 어긋나지 않는다. 첫 문답만 열어
+          둬서 무엇이 접혀 있는지 보이게 한다.
+        -->
+        <div class="faq">
+${t.faq
+  .map(
+    ([q, a], i) => `          <details class="qa"${i === 0 ? ' open' : ''}>
+            <summary>${esc(q)}</summary>
+            <p>${esc(a)}</p>
+          </details>`,
+  )
+  .join('\n')}
+        </div>
+      </section>
+
+      <section class="closer">
+        <p class="closer-line">${esc(t.tagline)}</p>
+        <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
+        <ul class="badges">
+${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
+        </ul>
       </section>
 
       <nav class="links">
@@ -505,6 +628,39 @@ ${t.faq.map(([q, a]) => `          <dt>${esc(q)}</dt>\n          <dd>${esc(a)}</
         <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
+    <!--
+      구분선의 결정을 스크롤에 맞춰 켠다.
+
+      먼저 <html>에 .js를 붙인다. 어둡게 두는 규칙이 .js 안에만 있으므로,
+      스크립트가 실행되지 않으면 결정은 처음부터 켜진 채다. 순서가 반대면
+      JS를 막아 둔 방문자에게 빈 선만 남는다.
+
+      IntersectionObserver가 없는 브라우저에서는 전부 켠다. 폴리필을 얹을
+      만한 일이 아니다.
+    -->
+    <script>
+      document.documentElement.classList.add('js');
+      (function () {
+        var beams = document.querySelectorAll('.beam');
+        if (!('IntersectionObserver' in window)) {
+          for (var i = 0; i < beams.length; i++) beams[i].classList.add('lit');
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('lit');
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: '0px 0px -18% 0px' },
+        );
+        beams.forEach(function (b) {
+          io.observe(b);
+        });
+      })();
+    </script>
   </body>
 </html>
 `;
