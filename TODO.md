@@ -45,8 +45,13 @@ Encrypt 자동 발급을 기다리면 될 것으로 보인다(보통 몇 분~몇
 - **네이버 서치어드바이저**: 이 도메인 자체가 세션의 브라우저 자동화에서
   전부 막혀 있다(`navigate`/`read`/`click` 전부 "This site is blocked").
   로그인 문제가 아니라 접근 자체가 차단된 것으로 보인다. **사용자가
-  직접 진행하기로 했다** — 소유확인(HTML 파일 업로드 또는 메타 태그) →
-  사이트맵(`https://prism.adriven.co/sitemap.xml`) 제출까지.
+  직접 진행하기로 했다.** 소유확인은 메타 태그 방식으로 — 사용자가 준 태그
+  (`naver-site-verification` / `f0f291...`)를 `build.mjs`의 head 템플릿에
+  `lang === 'ko'` 조건으로 추가해(루트 홈페이지에만 들어가야 해서) 커밋
+  `c0fc46d`로 푸시, GitHub Pages 빌드 확인 후 `curl http://prism.adriven.co/`로
+  태그가 실제 반영된 것까지 확인했다. **사용자가 Naver 화면에서 「소유확인」
+  누르면 된다.** 그 다음 남은 건 사이트맵(`https://prism.adriven.co/sitemap.xml`)
+  제출.
 
 | | |
 |---|---|
