@@ -49,9 +49,10 @@ Encrypt 자동 발급을 기다리면 될 것으로 보인다(보통 몇 분~몇
   (`naver-site-verification` / `f0f291...`)를 `build.mjs`의 head 템플릿에
   `lang === 'ko'` 조건으로 추가해(루트 홈페이지에만 들어가야 해서) 커밋
   `c0fc46d`로 푸시, GitHub Pages 빌드 확인 후 `curl http://prism.adriven.co/`로
-  태그가 실제 반영된 것까지 확인했다. **사용자가 Naver 화면에서 「소유확인」
-  누르면 된다.** 그 다음 남은 건 사이트맵(`https://prism.adriven.co/sitemap.xml`)
-  제출.
+  태그가 실제 반영된 것까지 확인했다. **2026-09-16 — 사용자가 소유확인 완료.** 남은 건 「요청 → 사이트맵 제출」에
+  `sitemap.xml` 등록뿐이다(파일 자체는 `http://prism.adriven.co/sitemap.xml`에
+  이미 있고, 내용의 `<loc>`은 `https://`로 적혀 있다 — 인증서 발급되면
+  자동으로 맞는다).
 
 | | |
 |---|---|
