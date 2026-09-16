@@ -24,7 +24,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const ORIGIN = 'https://prizzly-lang.github.io/prism-site';
+const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */

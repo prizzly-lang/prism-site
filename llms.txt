@@ -19,9 +19,9 @@
 
 ## 페이지 / Pages
 
-- [한국어](https://prizzly-lang.github.io/prism-site/): 탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.
-- [English](https://prizzly-lang.github.io/prism-site/en/): Tap and the light bends. A minimal puzzle with exactly one rule. 240 levels, one solution each. No ads, no in-app purchases, fully offline.
-- [日本語](https://prizzly-lang.github.io/prism-site/ja/): タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。240レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。
-- [简体中文](https://prizzly-lang.github.io/prism-site/zh-Hans/): 点一下，光就会拐弯。只有一条规则的极简解谜。240 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。
-- [개인정보 처리방침 / Privacy](https://prizzly-lang.github.io/prism-site/privacy.html)
-- [지원 / Support](https://prizzly-lang.github.io/prism-site/support.html)
+- [한국어](https://prism.adriven.co/): 탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.
+- [English](https://prism.adriven.co/en/): Tap and the light bends. A minimal puzzle with exactly one rule. 240 levels, one solution each. No ads, no in-app purchases, fully offline.
+- [日本語](https://prism.adriven.co/ja/): タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。240レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。
+- [简体中文](https://prism.adriven.co/zh-Hans/): 点一下，光就会拐弯。只有一条规则的极简解谜。240 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。
+- [개인정보 처리방침 / Privacy](https://prism.adriven.co/privacy.html)
+- [지원 / Support](https://prism.adriven.co/support.html)

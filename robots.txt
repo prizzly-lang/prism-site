@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://prizzly-lang.github.io/prism-site/sitemap.xml
+Sitemap: https://prism.adriven.co/sitemap.xml

@@ -2,41 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://prizzly-lang.github.io/prism-site/</loc>
-    <lastmod>2026-09-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://prizzly-lang.github.io/prism-site/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://prizzly-lang.github.io/prism-site/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://prizzly-lang.github.io/prism-site/ja/" />
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prizzly-lang.github.io/prism-site/zh-Hans/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://prizzly-lang.github.io/prism-site/en/" />
+    <loc>https://prism.adriven.co/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://prism.adriven.co/ja/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
   </url>
   <url>
-    <loc>https://prizzly-lang.github.io/prism-site/en/</loc>
-    <lastmod>2026-09-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://prizzly-lang.github.io/prism-site/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://prizzly-lang.github.io/prism-site/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://prizzly-lang.github.io/prism-site/ja/" />
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prizzly-lang.github.io/prism-site/zh-Hans/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://prizzly-lang.github.io/prism-site/en/" />
+    <loc>https://prism.adriven.co/en/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://prism.adriven.co/ja/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
   </url>
   <url>
-    <loc>https://prizzly-lang.github.io/prism-site/ja/</loc>
-    <lastmod>2026-09-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://prizzly-lang.github.io/prism-site/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://prizzly-lang.github.io/prism-site/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://prizzly-lang.github.io/prism-site/ja/" />
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prizzly-lang.github.io/prism-site/zh-Hans/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://prizzly-lang.github.io/prism-site/en/" />
+    <loc>https://prism.adriven.co/ja/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://prism.adriven.co/ja/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
   </url>
   <url>
-    <loc>https://prizzly-lang.github.io/prism-site/zh-Hans/</loc>
-    <lastmod>2026-09-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://prizzly-lang.github.io/prism-site/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://prizzly-lang.github.io/prism-site/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://prizzly-lang.github.io/prism-site/ja/" />
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prizzly-lang.github.io/prism-site/zh-Hans/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://prizzly-lang.github.io/prism-site/en/" />
+    <loc>https://prism.adriven.co/zh-Hans/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://prism.adriven.co/ja/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
   </url>
-  <url><loc>https://prizzly-lang.github.io/prism-site/privacy.html</loc><lastmod>2026-09-15</lastmod></url>
-  <url><loc>https://prizzly-lang.github.io/prism-site/support.html</loc><lastmod>2026-09-15</lastmod></url>
+  <url><loc>https://prism.adriven.co/privacy.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://prism.adriven.co/support.html</loc><lastmod>2026-09-16</lastmod></url>
 </urlset>
