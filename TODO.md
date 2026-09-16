@@ -7,39 +7,20 @@
 
 ## 사람이 직접 해야 하는 것 (지금은 대부분 커스텀 도메인 이후로 미룸)
 
-### 네이버 서치어드바이저 · 다음 검색등록
+### ~~네이버 서치어드바이저 · 다음 검색등록~~ — 완료 (2026-09-16)
 
-**2026-09-16 배경**: 원래 `prizzly-lang.github.io`가 우리가 관리하는
-저장소 없는 빈 루트라 호스트 단위 소유확인을 할 자리가 없어서 막혔던
-문제였는데, `prism.adriven.co`로 도메인을 옮기면서(DNS는 Google Cloud
-DNS `adriven-1a8d7` 프로젝트, `CNAME` 파일, `build.mjs`의 `ORIGIN` 교체,
-Play 콘솔 웹사이트 URL까지 전부 완료) 자연스럽게 풀렸다.
+`prism.adriven.co` 도메인 이전(DNS·`CNAME`·`build.mjs` `ORIGIN` 교체·
+Play 콘솔 웹사이트 URL) 후 둘 다 신청까지 끝났다: 네이버는 소유확인 +
+`sitemap.xml` 제출 완료, 다음은 신규등록 신청 완료("등록신청완료" 확인).
+등록했다고 바로 노출되는 건 아니고 검토·수집에 시간이 걸린다(네이버
+기준 약 14~16일). 결과는 각각 사이트로 통보된다.
 
-`http://prism.adriven.co/`는 200으로 정상 응답한다. **HTTPS 인증서는
-아직 발급 대기 중**이다 — `gh api repos/prizzly-lang/prism-site/pages`가
-`"https_enforced": false`를 반환하고 `curl https://...`는 인증서
-오류로 실패한다. DNS를 옮긴 지 얼마 안 됐으니 GitHub의 Let's Encrypt
-자동 발급을 기다리면 될 것으로 보인다.
-
-**네이버 — 완료.** 사용자가 준 메타 태그(`naver-site-verification`)를
-`build.mjs`의 head 템플릿에 `lang === 'ko'` 조건으로 추가해(루트
-홈페이지에만 들어가야 해서) 커밋·푸시, `curl http://prism.adriven.co/`로
-반영 확인 → 사용자가 소유확인 완료 → 사용자가 사이트맵도 제출 완료
-(`http://prism.adriven.co/sitemap.xml`, 2026-09-16 11:18:30 등록 확인).
-등록했다고 바로 노출되는 건 아니고 수집에 약 14~16일 걸린다.
-
-**다음(Daum) — 진행 중.** 세션이 신규등록 양식을 대부분 채웠다(제목
-`PRISM: 빛의 퍼즐`, URL `https://prism.adriven.co/`, 설명·설명-품목,
-신청자 이름/이메일 `prism@adriven.co`). **디렉토리(카테고리) 선택만
-사용자가 직접 해야 한다** — 이 필드는 팝업 창으로만 고를 수 있는데
-Chrome 팝업 차단이 자동화가 연 팝업을 조용히 막는다(네트워크 요청조차
-안 뜬다). 「검색」 버튼으로 게임 쪽 카테고리를 고르고 「확인」으로
-제출하면 끝.
-
-두 서비스 다 이 세션의 브라우저 자동화로는 로그인된 도메인이라도
-직접 다루기 까다로웠다 — 네이버는 도메인 자체가 자동화 도구에서
-전부 차단됐고("This site is blocked"), 다음은 카테고리 팝업만 막혔다.
-둘 다 사용자가 화면에서 직접 마무리했다/해야 한다.
+`http://prism.adriven.co/`는 200으로 정상 응답하지만 **HTTPS 인증서는
+아직 발급 대기 중**이다(`gh api repos/prizzly-lang/prism-site/pages`의
+`"https_enforced": false`, `curl https://...`는 인증서 오류). DNS를
+옮긴 지 얼마 안 됐으니 GitHub의 Let's Encrypt 자동 발급을 기다리면
+될 것으로 보인다 — 발급되면 GitHub Pages 설정에서 "Enforce HTTPS"를
+켜는 것만 남는다.
 
 ### `prism@adriven.co` 메일함이 실제로 살아있는지 확인
 
