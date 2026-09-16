@@ -25,6 +25,29 @@
 새로 만드는 방법도 있지만, 인증 하나만을 위해 저장소를 만드는 건 과하다고
 판단해 하지 않기로 했다.)
 
+**2026-09-16 갱신 — 막혔던 이유가 풀렸다.** `prism.adriven.co` DNS(Google
+Cloud DNS, `adriven-1a8d7` 프로젝트) + `CNAME` 파일 + `build.mjs`
+`ORIGIN` 교체 + Play 콘솔 웹사이트 URL까지 전부 끝났다. `http://prism.adriven.co/`는
+200으로 정상 응답한다(`curl` 확인 완료). **다만 HTTPS 인증서는 아직
+발급 대기 중**이다 — GitHub Pages API(`gh api repos/prizzly-lang/prism-site/pages`)가
+`"https_enforced": false`를 반환하고, `curl https://prism.adriven.co/`는
+인증서 오류로 실패한다. DNS를 옮긴 지 얼마 안 됐으니 GitHub의 Let's
+Encrypt 자동 발급을 기다리면 될 것으로 보인다(보통 몇 분~몇 시간).
+**2026-09-16 진행 상황**:
+
+- **다음(Daum) 검색등록**: 사용자가 로그인, 세션이 신규등록 양식을
+  대부분 채웠다(제목 `PRISM: 빛의 퍼즐`, URL `https://prism.adriven.co/`,
+  설명·설명-품목, 신청자 이름/이메일 `prism@adriven.co`). **디렉토리
+  (카테고리) 선택만 못 채웠다** — 이 필드는 팝업 창으로만 고를 수 있는데,
+  Chrome 팝업 차단이 자동화가 연 팝업을 조용히 막는다(네트워크 요청조차
+  안 뜬다). 사용자가 직접 「검색」 버튼을 눌러 게임 쪽 카테고리를 고르고
+  「확인」으로 제출해야 한다.
+- **네이버 서치어드바이저**: 이 도메인 자체가 세션의 브라우저 자동화에서
+  전부 막혀 있다(`navigate`/`read`/`click` 전부 "This site is blocked").
+  로그인 문제가 아니라 접근 자체가 차단된 것으로 보인다. **사용자가
+  직접 진행하기로 했다** — 소유확인(HTML 파일 업로드 또는 메타 태그) →
+  사이트맵(`https://prism.adriven.co/sitemap.xml`) 제출까지.
+
 | | |
 |---|---|
 | 네이버 | <https://searchadvisor.naver.com> → 사이트 등록(호스트 단위, 경로 없이) → 소유 확인 → **sitemap 제출** |
@@ -40,6 +63,12 @@ IndexNow가 열린다. 수집에 약 14~16일 걸리고 노출은 보장되지 �
 사이트(`privacy.html`, `support.html`)와 App Store 연락처로 이 주소를
 쓰고 있는데, 여러 세션째 실제 수신 확인이 안 됐다. 메일 관리자 쪽에서
 확인해야 하는 일이라 이 저장소 작업으로는 못 닫는다.
+
+**2026-09-16 발견**: Play Console의 「스토어 등록정보 연락처 세부정보」
+이메일 주소는 `prism@adriven.co`가 아니라 `prizzly@adriven.co`로 등록돼
+있었다(도메인 이전 작업 중 우연히 확인). 두 스토어(App Store/Play)와
+사이트가 서로 다른 주소를 쓰고 있을 가능성이 있으니, 메일함 생존 확인과
+함께 "실제로 어떤 주소를 쓰기로 했는지"부터 먼저 정리할 필요가 있다.
 
 ---
 

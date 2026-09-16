@@ -458,7 +458,7 @@ function page(lang) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${esc(t.title)}</title>
     <meta name="description" content="${esc(t.desc)}" />
-    <meta name="theme-color" content="#06070C" />
+    <meta name="theme-color" content="#06070C" />${lang === 'ko' ? '\n    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />' : ''}
     <link rel="canonical" href="${urlOf(lang)}" />
 ${alternates}
     <link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
