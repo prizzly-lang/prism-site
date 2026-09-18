@@ -15,12 +15,20 @@ Play 콘솔 웹사이트 URL) 후 둘 다 신청까지 끝났다: 네이버는 �
 등록했다고 바로 노출되는 건 아니고 검토·수집에 시간이 걸린다(네이버
 기준 약 14~16일). 결과는 각각 사이트로 통보된다.
 
-`http://prism.adriven.co/`는 200으로 정상 응답하지만 **HTTPS 인증서는
-아직 발급 대기 중**이다(`gh api repos/prizzly-lang/prism-site/pages`의
-`"https_enforced": false`, `curl https://...`는 인증서 오류). DNS를
-옮긴 지 얼마 안 됐으니 GitHub의 Let's Encrypt 자동 발급을 기다리면
-될 것으로 보인다 — 발급되면 GitHub Pages 설정에서 "Enforce HTTPS"를
-켜는 것만 남는다.
+**2026-09-18 — HTTPS도 끝났다.** 이틀이 지나도 인증서가 발급되지
+않아(`gh api repos/prizzly-lang/prism-site/pages`가 계속
+`"https_enforced": false`) DNS·CAA를 다시 확인했지만 문제가 없었다 —
+`openssl s_client`로 직접 떠보니 서버가 `prism.adriven.co` 전용
+인증서가 아니라 GitHub 공용 `*.github.io` 인증서를 내보내고 있었다
+(SNI 불일치, `curl`의 schannel 오류가 정확히 이걸 가리킨 것이었다).
+`gh api -X PUT repos/.../pages -f cname=''`로 커스텀 도메인을 껐다가
+`-f cname='prism.adriven.co'`로 다시 켜서 도메인 재검증을 강제로
+트리거하니 곧바로 전용 인증서가 발급됐다(`https_certificate.state:
+"approved"`, 만료 2026-12-17). 이어서 `-F https_enforced=true`로
+Enforce HTTPS도 켰다. `curl https://prism.adriven.co/`가 정상 응답하는
+것까지 확인 완료 — **도메인 이전 작업 전부 종료.** (`http://` →
+`https://` 자동 리다이렉트는 아직 반영 전이지만, 사이트가 쓰는 모든
+링크가 이미 `https://`라 실질적 영향 없음.)
 
 ### `prism@adriven.co` 메일함이 실제로 살아있는지 확인
 
