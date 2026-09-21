@@ -13,16 +13,22 @@
   통일, 메일함 생존 확인
 - 안드로이드 1.3 출시 후 사이트 반영 (FAQ·CTA 버튼·JSON-LD) +
   JSON-LD `softwareVersion` 고정값 버그 수정
+- Google Search Console — `adriven.co`가 이미 **도메인 속성**으로
+  인증돼 있어서(회사 본 사이트 등록 당시 설정) 별도 속성을 새로 만들
+  필요가 없었다. 도메인 속성은 모든 서브도메인·프로토콜을 자동으로
+  포함하므로 `prism.adriven.co`도 이미 그 안에 있다. 「Sitemaps」에
+  `https://prism.adriven.co/sitemap.xml`만 제출했다(2026-09-21,
+  「제출된 사이트맵」 목록에서 확인됨). 제출 직후라 상태는 아직 "가져올
+  수 없음"으로 뜬다 — 사이트 자체는 http/https 둘 다 정상 응답하니
+  첫 크롤링 전 placeholder일 가능성이 높다. **며칠 뒤 상태가
+  "성공"으로 바뀌는지 다시 확인할 것.**
 
 ---
 
-## 1. 측정 체계 — 언제든 가능
+## 1. 측정 체계 — 나머지
 
-지금은 아무 측정도 안 한다 — 답변 엔진에 실제로 인용되는지 확인할
-방법이 없다는 뜻이다. 최소한:
+Search Console 등록은 끝났다. 남은 건:
 
-- Google Search Console 등록 (색인 여부·검색어 확인) — `prism.adriven.co`로
-  도메인이 정리됐으니 이제 등록해도 헛수고가 아니다
 - 주기적으로 ChatGPT·Perplexity에 「광고 없는 오프라인 퍼즐 게임」류로
   물어보고 PRISM이 나오는지 사람이 직접 확인
 
