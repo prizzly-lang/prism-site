@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
+const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriven.prism';
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */
 const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
@@ -56,6 +57,7 @@ const L = {
     */
     tagline: '빛을 접어 결정을 밝힌다',
     cta: 'App Store에서 받기',
+    ctaAndroid: 'Google Play에서 받기',
     langName: '한국어',
     ruleH: '규칙은 하나입니다',
     lead: '탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다. 레벨이 규칙을 가르칩니다.',
@@ -105,7 +107,7 @@ const L = {
       ['인터넷 없이 되나요?', '됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.'],
       ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.'],
       ['몇 판이고 얼마나 어렵나요?', '여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
-      ['안드로이드 버전이 있나요?', 'Google Play 출시를 준비하고 있습니다. 현재는 iOS에서만 받으실 수 있습니다.'],
+      ['안드로이드 버전이 있나요?', '있습니다. iOS와 Android 모두에서 같은 가격, 같은 240판으로 받으실 수 있습니다.'],
       ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
     ],
     privacy: '개인정보 처리방침',
@@ -119,6 +121,7 @@ const L = {
     desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 240 levels, one solution each. No ads, no in-app purchases, fully offline.',
     tagline: 'Bend beams. Wake the crystals.',
     cta: 'Get it on the App Store',
+    ctaAndroid: 'Get it on Google Play',
     langName: 'English',
     ruleH: 'There is only one rule',
     lead: 'Tap a piece and it turns 90°; the light finds a new path instantly. Light every crystal with exactly the color it asks for, all at once, and the board is solved. That is the only rule, and there is no manual. The levels teach it.',
@@ -168,7 +171,7 @@ const L = {
       ['Does it work without internet?', 'Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
       ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 240 puzzles can be finished without distinguishing color at all.'],
       ['How many levels, and how hard?', 'Six chapters, 240 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
-      ['Is there an Android version?', 'A Google Play release is in preparation. For now it is available on iOS only.'],
+      ['Is there an Android version?', 'Yes. It is available on both iOS and Android, same price, same 240 puzzles.'],
       ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
     ],
     privacy: 'Privacy Policy',
@@ -182,6 +185,7 @@ const L = {
     desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。240レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
     tagline: '光を折り、結晶を灯す',
     cta: 'App Store で入手',
+    ctaAndroid: 'Google Play で入手',
     langName: '日本語',
     ruleH: 'ルールはひとつだけ',
     lead: 'ピースをタップすると90°回り、光はその場で新しい道を見つけます。すべての結晶に求められた色をちょうど同時に当てると、その盤面はクリアです。ルールはそれだけで、説明書はありません。レベルが教えてくれます。',
@@ -231,7 +235,7 @@ const L = {
       ['インターネットなしで遊べますか？', '遊べます。ネットワークを一切使わない完全オフラインのゲームです。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。'],
       ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても240面すべてを解けます。'],
       ['何面あって、どのくらい難しいですか？', '6チャプターに240面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
-      ['Android版はありますか？', 'Google Play での配信を準備しています。現在は iOS のみです。'],
+      ['Android版はありますか？', 'あります。iOS・Android どちらでも同じ価格、同じ240面で遊べます。'],
       ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
     ],
     privacy: 'プライバシーポリシー',
@@ -245,6 +249,7 @@ const L = {
     desc: '点一下，光就会拐弯。只有一条规则的极简解谜。240 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
     tagline: '折转光线，点亮结晶',
     cta: '在 App Store 获取',
+    ctaAndroid: '在 Google Play 获取',
     langName: '简体中文',
     ruleH: '只有一条规则',
     lead: '点击元件，它会转 90 度，光立刻找到新的路径。让每个结晶都恰好收到它要求的颜色，同时点亮，这一关就解开了。规则只有这一条，也没有说明书——关卡自己会教你。',
@@ -294,7 +299,7 @@ const L = {
       ['没有网络能玩吗？', '能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。'],
       ['我有色觉障碍，能玩吗？', '能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，240 关也都能解开。'],
       ['一共多少关？难吗？', '六个章节，240 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
-      ['有 Android 版本吗？', '正在准备上架 Google Play。目前只能在 iOS 上获取。'],
+      ['有 Android 版本吗？', '有。iOS 和 Android 上都能获取，价格相同，同样 240 关。'],
       ['占多大空间？', '不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。'],
     ],
     privacy: '隐私政策',
@@ -393,9 +398,9 @@ function page(lang) {
       inLanguage: lang,
       applicationCategory: 'GameApplication',
       applicationSubCategory: 'PuzzleGame',
-      operatingSystem: 'iOS 15.0 or later',
-      downloadUrl: APPSTORE,
-      installUrl: APPSTORE,
+      operatingSystem: 'iOS 15.0 or later, Android 7.0 or later',
+      downloadUrl: [APPSTORE, PLAYSTORE],
+      installUrl: [APPSTORE, PLAYSTORE],
       fileSize: '5MB',
       softwareVersion: '1.2',
       availableOnDevice: ['iPhone', 'iPad'],
@@ -490,7 +495,10 @@ ${JSON.stringify(ld, null, 2)}
         ${SPECTRUM_SVG}
         <h1>PRISM</h1>
         <p class="tagline">${esc(t.tagline)}</p>
-        <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
+        <div class="cta-row">
+          <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
+          <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
+        </div>
 
         <!--
           숫자 넷으로 제품 전체를 말한다. 240판, 6챕터, 판마다 정답 하나,
@@ -621,7 +629,10 @@ ${t.faq
 
       <section class="closer">
         <p class="closer-line">${esc(t.tagline)}</p>
-        <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
+        <div class="cta-row">
+          <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
+          <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
+        </div>
         <ul class="badges">
 ${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
         </ul>
@@ -738,16 +749,17 @@ writeFileSync(
   resolve(HERE, 'llms.txt'),
   `# PRISM
 
-> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS 퍼즐 게임. 240판, 모든 판의 정답은
-> 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
-> A tap-to-rotate light puzzle for iOS. 240 boards, each with exactly one
-> solution. No ads, no in-app purchases, no sign-up, no networking.
-> Paid once, ₩3,900.
+> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 240판, 모든 판의
+> 정답은 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
+> A tap-to-rotate light puzzle for iOS and Android. 240 boards, each with
+> exactly one solution. No ads, no in-app purchases, no sign-up, no
+> networking. Paid once, ₩3,900.
 
 ## 사실 / Facts
 
 - 개발사 / Publisher: A Driven Inc.
-- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad). Android는 준비 중 / in preparation
+- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
+- 스토어 / Stores: [App Store](${APPSTORE}), [Google Play](${PLAYSTORE})
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
 - 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
   no image files, everything drawn in code

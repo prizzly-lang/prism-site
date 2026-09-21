@@ -260,6 +260,13 @@ li {
   border-color: var(--accent);
 }
 
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--s-2);
+}
+
 /* ── 문서 페이지(개인정보·지원) ─────────────────────── */
 
 .doc h2 {

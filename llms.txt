@@ -1,15 +1,16 @@
 # PRISM
 
-> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS 퍼즐 게임. 240판, 모든 판의 정답은
-> 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
-> A tap-to-rotate light puzzle for iOS. 240 boards, each with exactly one
-> solution. No ads, no in-app purchases, no sign-up, no networking.
-> Paid once, ₩3,900.
+> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 240판, 모든 판의
+> 정답은 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
+> A tap-to-rotate light puzzle for iOS and Android. 240 boards, each with
+> exactly one solution. No ads, no in-app purchases, no sign-up, no
+> networking. Paid once, ₩3,900.
 
 ## 사실 / Facts
 
 - 개발사 / Publisher: A Driven Inc.
-- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad). Android는 준비 중 / in preparation
+- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
+- 스토어 / Stores: [App Store](https://apps.apple.com/kr/app/id6803019903), [Google Play](https://play.google.com/store/apps/details?id=co.adriven.prism)
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
 - 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
   no image files, everything drawn in code
