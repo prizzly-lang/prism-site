@@ -27,6 +27,8 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
 const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriven.prism';
+/** 스토어에 실제로 올라간 버전. JSON-LD가 이 값을 그대로 쓴다 — 버전을 올릴 때 잊지 않도록 한 곳에 둔다. */
+const VERSION = '1.3';
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */
 const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
@@ -402,7 +404,7 @@ function page(lang) {
       downloadUrl: [APPSTORE, PLAYSTORE],
       installUrl: [APPSTORE, PLAYSTORE],
       fileSize: '5MB',
-      softwareVersion: '1.2',
+      softwareVersion: VERSION,
       availableOnDevice: ['iPhone', 'iPad'],
       countriesSupported: 'Worldwide',
       offers: {
