@@ -38,11 +38,13 @@ const pathOf = (l) => (l === 'ko' ? '/' : `/${l}/`);
 const urlOf = (l) => ORIGIN + pathOf(l);
 
 /*
-  영상은 앱 UI가 그대로 찍혀 있어 **언어별**이다. 일본어·중국어 영상은 아직
-  없으므로 영어 영상을 쓴다 — 앱이 실제로 영어를 지원하므로 거짓은 아니지만,
-  그 언어 영상을 만드는 것이 다음 개선이다.
+  영상은 앱 UI가 그대로 찍혀 있어 **언어별**이다. 네 언어 모두 실제
+  기기(Android, adb screenrecord)로 녹화했다 — 자동화·헤드리스 브라우저는
+  쓰지 않는다. `requestAnimationFrame`이 그런 환경에서 제대로 안 돌아
+  애니메이션이 얼어붙은 채로 찍히기 때문이다(자세한 경위는
+  `prism-site/TODO.md` 참고).
 */
-const videoOf = (l) => (l === 'ko' ? 'ko' : 'en');
+const videoOf = (l) => l;
 
 const L = {
   ko: {
