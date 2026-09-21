@@ -1,30 +1,18 @@
 # 남은 것
 
-2026-09-18 기준, 우선순위 순. AEO/GEO 작업의 배경과 이유는 `AEO.md`에
-있다 — 여기는 지금 무엇이 안 끝났는지만 모아둔 목록이다.
+2026-09-21 기준, 우선순위 순. AEO/GEO 작업의 배경과 이유는 `AEO.md`에
+있다 — 여기는 지금 무엇이 안 끝났는지만 모아둔 목록이다. 끝난 일의
+자세한 경위는 git 히스토리와 커밋 메시지에 있으므로 여기 다시 옮기지
+않는다.
 
-커스텀 도메인 이전(`prism.adriven.co`)과 네이버·다음 검색등록은
-2026-09-16~18에 전부 끝났다. 자세한 기록은 `prism/docs/ROADMAP-1.4.md`①번과
-git 히스토리에 있다 — 끝난 일이라 여기 다시 적지 않는다.
+**최근에 끝난 것** (자세한 기록은 각 커밋 참고):
 
-**연락처 이메일 정리도 2026-09-18에 끝났다.** Play는 `prizzly@adriven.co`로
-잘못 등록돼 있던 걸 `prism@adriven.co`로 고쳤고, App Store Connect의
-「연락처 정보」(`jay@adriven.co`)는 Apple 심사팀 전용 비공개 필드라
-구매자에게 노출되지 않는다는 것도 확인했다 — 사용자에게 보이는 유일한
-경로인 「지원 URL」(`support.html`)은 처음부터 `prism@adriven.co`로
-일관되어 있었다. `prism@adriven.co` 메일함도 사용자가 생존 확인함.
-
-**안드로이드 출시 후 세 곳 수정도 2026-09-21에 끝났다.** Play Console에서
-Android 1.3(빌드 3)이 9월 15일에 이미 게시 완료된 것을 확인하고 바로
-착수했다: FAQ 네 언어 전부 "안드로이드 버전이 있습니다"로 교체, 히어로·
-클로저 두 곳에 Google Play 버튼을 App Store 버튼 옆에 추가(`.cta-row`
-플렉스 줄), JSON-LD의 `operatingSystem`/`downloadUrl`/`installUrl`을
-두 플랫폼 다 반영하도록 갱신, `llms.txt`의 같은 문구도 고쳤다. 로컬
-서버로 렌더링까지 확인 완료.
-
-**발견했던 `softwareVersion` 고정값도 같이 고쳤다** — `"1.2"`에 박혀
-있던 것을 `build.mjs` 상단의 `VERSION` 상수 하나로 빼서 `"1.3"`이
-되게 했다. 다음 버전부터는 이 상수 하나만 바꾸면 된다.
+- 커스텀 도메인 이전(`prism.adriven.co`) + 네이버·다음 검색등록 —
+  `prism/docs/ROADMAP-1.4.md`①번
+- 연락처 이메일을 세 곳(사이트·Play·App Store) 다 `prism@adriven.co`로
+  통일, 메일함 생존 확인
+- 안드로이드 1.3 출시 후 사이트 반영 (FAQ·CTA 버튼·JSON-LD) +
+  JSON-LD `softwareVersion` 고정값 버그 수정
 
 ---
 
