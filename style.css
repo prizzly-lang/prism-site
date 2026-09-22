@@ -771,3 +771,119 @@ footer p {
   background: var(--accent);
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
+
+/* ── 기술 글 ───────────────────────────────────────
+   랜딩 페이지가 아니라 읽는 페이지다. h1이 히어로 자간(0.3em)을 쓰면
+   제목이 문장이 아니라 로고로 읽히므로 여기서만 되돌린다. */
+
+.article {
+  margin-bottom: var(--s-5);
+  text-align: left;
+}
+
+.article h1 {
+  font-size: clamp(1.75rem, 5.5vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-indent: 0;
+  line-height: 1.25;
+}
+
+.article-back {
+  margin-bottom: var(--s-3);
+  font-size: var(--t-small);
+}
+
+.article-back a {
+  color: var(--ink-faint);
+  text-decoration: none;
+}
+
+.article-back a:hover {
+  color: var(--ink);
+}
+
+.article-date {
+  margin-top: var(--s-1);
+  color: var(--ink-faint);
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
+}
+
+.article-lead {
+  margin-top: var(--s-3);
+  color: var(--ink);
+  font-size: var(--t-lead);
+  line-height: 1.65;
+}
+
+.article h2 {
+  margin-top: var(--s-4);
+  margin-bottom: var(--s-2);
+}
+
+.article p,
+.article li {
+  line-height: 1.75;
+}
+
+.article p + p {
+  margin-top: var(--s-2);
+}
+
+.article ol {
+  margin: var(--s-2) 0 0;
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+
+.article li + li {
+  margin-top: var(--s-1);
+}
+
+.article strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* 코드는 가로로 넘칠 수 있다. 줄바꿈하지 않고 그 블록만 스크롤시킨다 —
+   들여쓰기가 의미를 갖는 글이라 접으면 읽을 수 없다. */
+.article pre {
+  margin-top: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  overflow-x: auto;
+  background: var(--bg-raise);
+  border-radius: 6px;
+  color: var(--ink-dim);
+  font-size: var(--t-micro);
+  line-height: 1.6;
+  -webkit-overflow-scrolling: touch;
+}
+
+.article pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.article table {
+  width: 100%;
+  margin-top: var(--s-3);
+  border-collapse: collapse;
+  font-size: var(--t-small);
+}
+
+.article th,
+.article td {
+  padding: 0.5em 0.75em 0.5em 0;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.article th {
+  color: var(--ink-faint);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.article td {
+  color: var(--ink-dim);
+}

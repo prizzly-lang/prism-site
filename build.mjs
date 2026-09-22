@@ -23,6 +23,15 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { ARTICLE } from './article.mjs';
+import {
+  ARTICLE_LANGS,
+  articlePathOf,
+  articlePage,
+  articleSitemapEntries,
+  articleLlmsSection,
+} from './article-page.mjs';
+
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
@@ -643,7 +652,8 @@ ${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
       </section>
 
       <nav class="links">
-        <a href="${up}privacy.html">${esc(t.privacy)}</a>
+${ARTICLE_LANGS.includes(lang) ? `        <a href="${articlePathOf(lang)}">${esc(ARTICLE[lang].title)}</a>
+` : ''}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
         <a href="${up}support.html">${esc(t.support)}</a>
       </nav>
 
@@ -697,6 +707,16 @@ for (const lang of LANGS) {
   writeFileSync(resolve(dir, 'index.html'), page(lang), 'utf8');
 }
 
+for (const lang of ARTICLE_LANGS) {
+  const dir = resolve(HERE, articlePathOf(lang).slice(1));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(
+    resolve(dir, 'index.html'),
+    articlePage(lang, { esc, L, ORIGIN, urlOf }),
+    'utf8',
+  );
+}
+
 /*
   robots.txt — **전부 허용한다.**
 
@@ -735,6 +755,7 @@ writeFileSync(
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${LANGS.map(urlEntry).join('\n')}
+${articleSitemapEntries({ ORIGIN, now })}
   <url><loc>${ORIGIN}/privacy.html</loc><lastmod>${now}</lastmod></url>
   <url><loc>${ORIGIN}/support.html</loc><lastmod>${now}</lastmod></url>
 </urlset>
@@ -776,10 +797,15 @@ writeFileSync(
 ${LANGS.map((l) => `- [${L[l].langName}](${urlOf(l)}): ${L[l].desc}`).join('\n')}
 - [개인정보 처리방침 / Privacy](${ORIGIN}/privacy.html)
 - [지원 / Support](${ORIGIN}/support.html)
+
+## 글 / Writing
+
+${articleLlmsSection({ ORIGIN })}
 `,
   'utf8',
 );
 
 console.log(`생성 완료`);
 console.log(`  페이지 ${LANGS.length}개: ${LANGS.map(pathOf).join(', ')}`);
+console.log(`  글 ${ARTICLE_LANGS.length}개: ${ARTICLE_LANGS.map(articlePathOf).join(', ')}`);
 console.log(`  robots.txt · sitemap.xml · llms.txt`);

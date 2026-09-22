@@ -26,3 +26,8 @@
 - [简体中文](https://prism.adriven.co/zh-Hans/): 点一下，光就会拐弯。只有一条规则的极简解谜。240 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。
 - [개인정보 처리방침 / Privacy](https://prism.adriven.co/privacy.html)
 - [지원 / Support](https://prism.adriven.co/support.html)
+
+## 글 / Writing
+
+- [240판을 손으로 만들지 않았습니다](https://prism.adriven.co/proven-unique/): PRISM의 레벨은 정답에서 거꾸로 생성됩니다. 판마다 정답이 정확히 하나뿐임을 전수 탐색으로 증명한 뒤에만 출하하고, 표시되는 최소 탭 수도 너비 우선 탐색으로 구한 실제 최솟값입니다.
+- [I did not hand-build 240 puzzle levels](https://prism.adriven.co/en/proven-unique/): PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search.

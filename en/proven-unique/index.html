@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>I did not hand-build 240 puzzle levels | PRISM</title>
+    <meta name="description" content="PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search." />
+    <meta name="theme-color" content="#06070C" />
+    <link rel="canonical" href="https://prism.adriven.co/en/proven-unique/" />
+    <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/proven-unique/" />
+    <link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/proven-unique/" />
+    <link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/proven-unique/" />
+    <meta property="og:title" content="I did not hand-build 240 puzzle levels" />
+    <meta property="og:description" content="PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search." />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://prism.adriven.co/en/proven-unique/" />
+    <meta property="og:image" content="https://prism.adriven.co/img/board-prism.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="icon" href="../../icon.svg" type="image/svg+xml" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "I did not hand-build 240 puzzle levels",
+  "description": "PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search.",
+  "inLanguage": "en",
+  "url": "https://prism.adriven.co/en/proven-unique/",
+  "datePublished": "2026-09-22",
+  "author": {
+    "@type": "Organization",
+    "name": "A Driven Inc.",
+    "url": "https://prism.adriven.co/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "A Driven Inc.",
+    "url": "https://prism.adriven.co/"
+  },
+  "about": {
+    "@type": "MobileApplication",
+    "name": "PRISM",
+    "url": "https://prism.adriven.co/en/"
+  },
+  "isAccessibleForFree": true
+}
+    </script>
+  </head>
+  <body>
+    <main>
+      <nav class="langs" aria-label="Other languages">
+        <a href="https://prism.adriven.co/proven-unique/" hreflang="ko" lang="ko">한국어</a>
+      </nav>
+
+      <article class="article">
+        <p class="article-back"><a href="/en/">← Back to PRISM</a></p>
+        <h1>I did not hand-build 240 puzzle levels</h1>
+        <p class="article-date"><time datetime="2026-09-22">22 September 2026</time></p>
+        <p class="article-lead">The expensive part of making a puzzle game is not laying out the board. It is <strong>proving the board can be solved at all</strong>. At 240 levels that is not something a person can do. So I reversed the order.</p>
+        <h2>The problem: a hand-built board cannot be checked</h2>
+        <p>PRISM has one rule. Tap a piece and it rotates 90°, and the light instantly finds a new path. Light every crystal with exactly the color it asks for, all at once, and the board is solved.</p>
+        <p>A simple rule does not make boards easy to author. To check a hand-placed board you have to solve it yourself, and when you fail there is no way to tell a <em>hard</em> board from an <em>impossible</em> one. You cannot build 240 levels that way.</p>
+        <h2>Reversing it: start from the answer</h2>
+        <p>This is the standard approach for rotation puzzle generators. Instead of building a board and searching for its solution, <strong>build the solution and then break it.</strong></p>
+        <ol>
+          <li>Place emitters and pieces, then trace the light.</li>
+          <li>Put a crystal of the matching color <strong>wherever the light actually lands</strong>. The solved state is now complete by construction.</li>
+          <li>Rotate pieces backwards by the target number of taps to scramble it.</li>
+        </ol>
+        <p>With this order an <strong>unsolvable level cannot exist</strong>, because the board started from a solution. Undoing the scramble is the solution.</p>
+        <h2>&quot;Solvable&quot; is not good enough</h2>
+        <p>Stopping there produces a lot of bad puzzles, because some boards have <strong>more than one</strong> solution. When two arrangements both work, the board cannot be narrowed down by logic and players stumble into the answer by spinning pieces.</p>
+        <p>So every candidate is brute-forced. The generator enumerates <strong>every combination</strong> of the rotatable pieces and counts how many of them are solved states. Anything other than exactly one is thrown away.</p>
+        <pre><code>let total = 1;
+for (let i = 0; i &lt; n; i++) {
+  total *= radix[i];          // multiply each piece's rotation count
+  if (total &gt; maxStates) return null;
+}
+for (let state = 0; state &lt; total; state++) {
+  // unpack state into per-piece rotations, then
+  if (tracer.isSolved(scratch)) count++;
+}</code></pre>
+        <p>If the state space exceeds 200,000 the count is abandoned and <strong>the candidate is discarded too</strong>. Nothing ships on "it is probably unique". A board that could not be proven does not go in.</p>
+        <p>The check turned out to have a second effect I did not plan for. It <strong>eliminates dead pieces automatically.</strong> A piece the light never reaches gives the same result at every rotation, which multiplies the number of solved states by that piece's rotation count, pushes the total above one, and fails the board. Every rotatable piece on screen is load-bearing.</p>
+        <h2>Par is not an estimate</h2>
+        <p>Each level displays a minimum tap count. Solve within it and you earn Perfect. That number is not a designer's guess, it is the <strong>true minimum</strong>.</p>
+        <p>Uniqueness does the work again here. When exactly one solution exists, the minimum tap count is simply the sum of how many more turns each piece needs to reach it. That means the generator does not have to <em>estimate</em> par, it can <strong>choose</strong> it: pick a target and rotate backwards by exactly that much.</p>
+        <p>Then it <strong>verifies the choice independently.</strong> The scrambled board is solved from scratch with breadth-first search, and if the shortest path found does not match the intended par, the candidate is dropped. Generator bugs surface right here.</p>
+        <h2>Most candidates are thrown away</h2>
+        <p>Passing the proof is not enough to be worth playing, so more gates follow. Boards that are too easy, boards that arrive already solved, boards with too few crystals, boards where the light never bends, and boards where the phenomenon the chapter is meant to teach (dispersion, color mixing) never actually happens are all rejected.</p>
+        <p>The pass rate is low. In later chapters there are more pieces, empty cells for the light to travel through get scarce, and crystal placement eats most attempts. <strong>Filling the 45 levels of chapter VI takes on the order of a million tries.</strong> This script runs once while preparing a release, so the result matters more than the runtime.</p>
+        <p>The generator tallies which gate rejected how many candidates and prints it, because that tally is the only evidence available for tuning a chapter's settings.</p>
+        <h2>Proving it again on the shipped data</h2>
+        <p>"The generator ran correctly" and <strong>"the file that shipped is correct"</strong> are two different facts. So the same checks run against the final level data on every commit, across all 240 levels: is it solvable, does tapping the solver's path actually clear the board, and is there exactly one solution.</p>
+        <p>Not having that test cost me once. A <em>rendering</em> change that stops beams slightly short of absorbing pieces made beam segment endpoints non-integral, and the generator gate was deciding "did the light reach here" by testing whether the endpoint was an integer. From that moment every level containing a wall was rejected. The tests stayed green the whole time, <strong>because they validated the committed output and never the generation rules.</strong></p>
+        <p>Reachability is now decided by <strong>position and travel direction</strong> instead of endpoint coordinates, so it no longer matters how short the renderer draws a beam.</p>
+        <h2>The result</h2>
+        <p>240 levels across six chapters, with average par rising monotonically.</p>
+        <table>
+          <thead><tr><th>Chapter</th><th>Levels</th><th>Par</th><th>Average</th></tr></thead>
+          <tbody>
+            <tr><td>I Reflection</td><td>14</td><td>1–4</td><td>2.6</td></tr>
+            <tr><td>II Splitting</td><td>32</td><td>1–6</td><td>3.7</td></tr>
+            <tr><td>III Dispersion</td><td>44</td><td>1–8</td><td>5.1</td></tr>
+            <tr><td>IV Mixing</td><td>52</td><td>1–8</td><td>5.7</td></tr>
+            <tr><td>V Filtering</td><td>53</td><td>1–11</td><td>7.2</td></tr>
+            <tr><td>VI Convergence</td><td>45</td><td>2–11</td><td>8.3</td></tr>
+          </tbody>
+        </table>
+        <p>For a player all of this reduces to one promise. <strong>If you are stuck, there is a reason.</strong> No board yields to luck, and the tap count on screen is genuinely reachable. A level you cannot solve is not a bug, it is logic you have not seen yet.</p>
+      </article>
+
+      <nav class="links">
+        <a href="/en/">PRISM</a>
+        <a href="../../privacy.html">Privacy Policy</a>
+        <a href="../../support.html">Support</a>
+      </nav>
+
+      <footer>
+        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
+      </footer>
+    </main>
+  </body>
+</html>
