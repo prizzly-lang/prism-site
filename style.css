@@ -887,3 +887,20 @@ footer p {
 .article td {
   color: var(--ink-dim);
 }
+
+/* 체험판 링크. 스토어 버튼보다 조용해야 한다. */
+.cta-demo {
+  margin-top: var(--s-2);
+  font-size: var(--t-small);
+}
+
+.cta-demo a {
+  color: var(--ink-dim);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: 2px;
+}
+
+.cta-demo a:hover {
+  color: var(--ink);
+}

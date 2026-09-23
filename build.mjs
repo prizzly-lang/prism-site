@@ -71,6 +71,7 @@ const L = {
     tagline: '빛을 접어 결정을 밝힌다',
     cta: 'App Store에서 받기',
     ctaAndroid: 'Google Play에서 받기',
+    ctaDemo: '먼저 14판 해보기',
     langName: '한국어',
     ruleH: '규칙은 하나입니다',
     lead: '탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다. 레벨이 규칙을 가르칩니다.',
@@ -135,6 +136,7 @@ const L = {
     tagline: 'Bend beams. Wake the crystals.',
     cta: 'Get it on the App Store',
     ctaAndroid: 'Get it on Google Play',
+    ctaDemo: 'Try 14 levels first',
     langName: 'English',
     ruleH: 'There is only one rule',
     lead: 'Tap a piece and it turns 90°; the light finds a new path instantly. Light every crystal with exactly the color it asks for, all at once, and the board is solved. That is the only rule, and there is no manual. The levels teach it.',
@@ -199,6 +201,7 @@ const L = {
     tagline: '光を折り、結晶を灯す',
     cta: 'App Store で入手',
     ctaAndroid: 'Google Play で入手',
+    ctaDemo: 'まず14面を試す',
     langName: '日本語',
     ruleH: 'ルールはひとつだけ',
     lead: 'ピースをタップすると90°回り、光はその場で新しい道を見つけます。すべての結晶に求められた色をちょうど同時に当てると、その盤面はクリアです。ルールはそれだけで、説明書はありません。レベルが教えてくれます。',
@@ -263,6 +266,7 @@ const L = {
     tagline: '折转光线，点亮结晶',
     cta: '在 App Store 获取',
     ctaAndroid: '在 Google Play 获取',
+    ctaDemo: '先试玩 14 关',
     langName: '简体中文',
     ruleH: '只有一条规则',
     lead: '点击元件，它会转 90 度，光立刻找到新的路径。让每个结晶都恰好收到它要求的颜色，同时点亮，这一关就解开了。规则只有这一条，也没有说明书——关卡自己会教你。',
@@ -512,6 +516,15 @@ ${JSON.stringify(ld, null, 2)}
           <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
           <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
         </div>
+        <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
+        <!--
+          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
+
+          **스토어 버튼 아래**에 둔다. 두 자리 모두 그렇다. 살 사람의 길이
+          언제나 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만
+          필요하다. 글씨도 버튼이 아니라 밑줄 링크다.
+        -->
+        <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
 
         <!--
           숫자 넷으로 제품 전체를 말한다. 240판, 6챕터, 판마다 정답 하나,
@@ -797,6 +810,7 @@ writeFileSync(
 ${LANGS.map((l) => `- [${L[l].langName}](${urlOf(l)}): ${L[l].desc}`).join('\n')}
 - [개인정보 처리방침 / Privacy](${ORIGIN}/privacy.html)
 - [지원 / Support](${ORIGIN}/support.html)
+- [체험판 / Playable demo](${ORIGIN}/play/): 1챕터 14판을 설치 없이 브라우저에서 / chapter 1, 14 levels, playable in the browser
 
 ## 글 / Writing
 
