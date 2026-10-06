@@ -762,6 +762,15 @@ ${LANGS.map((a) => `    <xhtml:link rel="alternate" hreflang="${a}" href="${urlO
     <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
   </url>`;
 
+/*
+  `/play/`는 이 스크립트가 만들지 않는다. prism 저장소의 `npm run demo` 결과를
+  통째로 복사해 둔 폴더다. 그래도 사이트맵에는 **반드시 넣는다** — 13일 동안
+  빠져 있었고 그동안 구글 색인에도 없었다. 사이트에서 전환을 만드는 유일한
+  페이지가 검색에 없는 상태였다.
+
+  언어 대체(hreflang)를 달지 않는 이유: 체험판은 경로가 하나이고 앱이 기기
+  언어를 따라간다. privacy·support와 같은 처지다.
+*/
 writeFileSync(
   resolve(HERE, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
@@ -769,6 +778,7 @@ writeFileSync(
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${LANGS.map(urlEntry).join('\n')}
 ${articleSitemapEntries({ ORIGIN, now })}
+  <url><loc>${ORIGIN}/play/</loc><lastmod>${now}</lastmod></url>
   <url><loc>${ORIGIN}/privacy.html</loc><lastmod>${now}</lastmod></url>
   <url><loc>${ORIGIN}/support.html</loc><lastmod>${now}</lastmod></url>
 </urlset>
