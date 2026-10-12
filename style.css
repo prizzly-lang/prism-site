@@ -818,6 +818,16 @@ footer p {
   letter-spacing: 0.04em;
 }
 
+/* 나중에 덧붙인 사실. 본문과 섞이지 않게 왼쪽 선과 흐린 글씨로 뺀다. */
+.article-update {
+  margin-top: var(--s-2);
+  padding-left: var(--s-2);
+  border-left: 2px solid var(--hair);
+  color: var(--ink-dim);
+  font-size: var(--t-small);
+  line-height: 1.6;
+}
+
 .article-lead {
   margin-top: var(--s-3);
   color: var(--ink);

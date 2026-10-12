@@ -12,7 +12,7 @@
  * 두 파일에 적히면 한쪽만 고치는 날이 온다.
  */
 
-import { ARTICLE, ARTICLE_SLUG, ARTICLE_DATE } from './article.mjs';
+import { ARTICLE, ARTICLE_SLUG, ARTICLE_DATE, ARTICLE_UPDATED } from './article.mjs';
 
 /** 한국어와 영어만. 이유는 `article.mjs` 첫 주석에 있다. */
 export const ARTICLE_LANGS = ['ko', 'en'];
@@ -60,6 +60,7 @@ export function articlePage(lang, deps) {
     inLanguage: lang,
     url: articleUrlOf(lang),
     datePublished: ARTICLE_DATE,
+    dateModified: ARTICLE_UPDATED,
     author: { '@type': 'Organization', name: 'A Driven Inc.', url: `${ORIGIN}/` },
     publisher: { '@type': 'Organization', name: 'A Driven Inc.', url: `${ORIGIN}/` },
     about: { '@type': 'MobileApplication', name: 'PRISM', url: urlOf(lang) },
@@ -114,6 +115,7 @@ ${JSON.stringify(ld, null, 2)}
         <p class="article-back"><a href="${home}">${esc(a.backHome)}</a></p>
         <h1>${esc(a.title)}</h1>
         <p class="article-date"><time datetime="${ARTICLE_DATE}">${esc(a.dateLabel)}</time></p>
+        <p class="article-update">${esc(a.update)}</p>
         <p class="article-lead">${a.lead}</p>
 ${body}
       </article>
