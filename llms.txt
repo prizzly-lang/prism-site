@@ -1,17 +1,19 @@
 # PRISM
 
 > 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 300판, 모든 판의
-> 정답은 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
+> 정답은 하나뿐. 광고·구독·회원가입이 없고, 한 번 결제로 전부 열린다. iOS는 무료로
+> 받아 1챕터 14판을 해 보고 앱 안에서 열고, Android는 받을 때 결제한다.
 > A tap-to-rotate light puzzle for iOS and Android. 300 boards, each with
-> exactly one solution. No ads, no in-app purchases, no sign-up, no
-> networking. Paid once, ₩3,900.
+> exactly one solution. No ads, no subscription, no sign-up; one purchase
+> opens everything. Free to download on iOS with chapter 1 (14 levels)
+> free and a one-time unlock in the app; a one-time purchase on Android.
 
 ## 사실 / Facts
 
 - 개발사 / Publisher: A Driven Inc.
-- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
+- 플랫폼 / Platform: iOS 16.0+ (iPhone, iPad), Android 7.0+ / iOS 16.0+ and Android 7.0+
 - 스토어 / Stores: [App Store](https://apps.apple.com/kr/app/id6803019903), [Google Play](https://play.google.com/store/apps/details?id=co.adriven.prism)
-- 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
+- 가격 / Price: iOS 무료 다운로드 + 잠금해제 ₩3,900, Android ₩3,900(대한민국 기준, 지역별 파생) / iOS free download with a KRW 3,900 unlock, Android KRW 3,900
 - 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
   no image files, everything drawn in code
 - 언어 / Languages: 한국어, English, 日本語, 简体中文
@@ -20,10 +22,10 @@
 
 ## 페이지 / Pages
 
-- [한국어](https://prism.adriven.co/): 탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.
-- [English](https://prism.adriven.co/en/): Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.
-- [日本語](https://prism.adriven.co/ja/): タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。
-- [简体中文](https://prism.adriven.co/zh-Hans/): 点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。
+- [한국어](https://prism.adriven.co/): 탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고도 구독도 없이 한 번 결제로 전부.
+- [English](https://prism.adriven.co/en/): Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything.
+- [日本語](https://prism.adriven.co/ja/): タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告もサブスクもなく、一度の購入ですべて。
+- [简体中文](https://prism.adriven.co/zh-Hans/): 点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有订阅，一次购买解锁全部。
 - [개인정보 처리방침 / Privacy](https://prism.adriven.co/privacy.html)
 - [지원 / Support](https://prism.adriven.co/support.html)
 - [체험판 / Playable demo](https://prism.adriven.co/play/): 1챕터 14판을 설치 없이 브라우저에서 / chapter 1, 14 levels, playable in the browser

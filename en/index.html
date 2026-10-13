@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PRISM: Bend beams. Wake the crystals.</title>
-    <meta name="description" content="Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline." />
+    <meta name="description" content="Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything." />
     <meta name="theme-color" content="#06070C" />
     <link rel="canonical" href="https://prism.adriven.co/en/" />
     <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
@@ -13,7 +13,7 @@
     <link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
     <link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
     <meta property="og:title" content="PRISM: Bend beams. Wake the crystals." />
-    <meta property="og:description" content="Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline." />
+    <meta property="og:description" content="Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en" />
     <meta property="og:url" content="https://prism.adriven.co/en/" />
@@ -28,12 +28,12 @@
     "@type": "MobileApplication",
     "name": "PRISM",
     "alternateName": "PRISM: Bend beams. Wake the crystals.",
-    "description": "Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.",
+    "description": "Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything.",
     "url": "https://prism.adriven.co/en/",
     "inLanguage": "en",
     "applicationCategory": "GameApplication",
     "applicationSubCategory": "PuzzleGame",
-    "operatingSystem": "iOS 15.0 or later, Android 7.0 or later",
+    "operatingSystem": "iOS 16.0 or later, Android 7.0 or later",
     "downloadUrl": [
       "https://apps.apple.com/kr/app/id6803019903",
       "https://play.google.com/store/apps/details?id=co.adriven.prism"
@@ -43,19 +43,28 @@
       "https://play.google.com/store/apps/details?id=co.adriven.prism"
     ],
     "fileSize": "5MB",
-    "softwareVersion": "1.3",
+    "softwareVersion": "1.6",
     "availableOnDevice": [
       "iPhone",
       "iPad"
     ],
     "countriesSupported": "Worldwide",
-    "offers": {
-      "@type": "Offer",
-      "price": "3900",
-      "priceCurrency": "KRW",
-      "availability": "https://schema.org/InStock",
-      "url": "https://apps.apple.com/kr/app/id6803019903"
-    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW",
+        "availability": "https://schema.org/InStock",
+        "url": "https://apps.apple.com/kr/app/id6803019903"
+      },
+      {
+        "@type": "Offer",
+        "price": "3900",
+        "priceCurrency": "KRW",
+        "availability": "https://schema.org/InStock",
+        "url": "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      }
+    ],
     "author": {
       "@type": "Organization",
       "name": "A Driven Inc.",
@@ -75,10 +84,9 @@
       "300 puzzles across seven chapters",
       "Every puzzle has exactly one solution",
       "The par shown is the true minimum, found by exhaustive search",
-      "No ads · no in-app purchases · no sign-up",
-      "No networking at all. Fully offline"
+      "No ads · no subscription · no sign-up",
+      "No networking except to make a purchase"
     ],
-    "isAccessibleForFree": false,
     "accessibilityFeature": [
       "highContrastDisplay",
       "largePrint",
@@ -100,7 +108,7 @@
         "name": "Are there really no ads?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists."
+          "text": "None. No subscription, no sign-up, no sign-in. On iPhone and iPad it is free to download: play chapter 1 (14 levels), and one purchase opens the other 286. On Android you pay once when you get it, and all 300 are open from the start. If you were looking for a puzzle game with no ads, that is why this one exists."
         }
       },
       {
@@ -108,7 +116,7 @@
         "name": "Does it work without internet?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere."
+          "text": "Yes. It only goes online to make a purchase. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere."
         }
       },
       {
@@ -132,7 +140,7 @@
         "name": "Is there an Android version?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. It is available on both iOS and Android, same price, same 300 puzzles."
+          "text": "Yes. Same 300 puzzles, and either way you pay only once: on iOS it is free to download and unlocked in the app, on Android you pay when you get it."
         }
       },
       {
@@ -218,7 +226,7 @@
           <li><b>300</b><span>puzzles</span></li>
           <li><b>7</b><span>chapters</span></li>
           <li><b>1</b><span>solution each</span></li>
-          <li><b>0</b><span>ads · IAP · sign-ups</span></li>
+          <li><b>0</b><span>ads · subscriptions · sign-ups</span></li>
         </ul>
       </header>
 
@@ -255,8 +263,8 @@
           <li><strong>300</strong> puzzles across seven chapters</li>
           <li>Every puzzle has <strong>exactly one solution</strong></li>
           <li>The par shown is the <strong>true minimum</strong>, found by exhaustive search</li>
-          <li>No ads · no in-app purchases · no sign-up</li>
-          <li>No networking at all. Fully offline</li>
+          <li>No ads · no subscription · no sign-up</li>
+          <li>No networking except to make a purchase</li>
         </ul>
       </section>
 
@@ -366,11 +374,11 @@
         <div class="faq">
           <details class="qa" open>
             <summary>Are there really no ads?</summary>
-            <p>None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.</p>
+            <p>None. No subscription, no sign-up, no sign-in. On iPhone and iPad it is free to download: play chapter 1 (14 levels), and one purchase opens the other 286. On Android you pay once when you get it, and all 300 are open from the start. If you were looking for a puzzle game with no ads, that is why this one exists.</p>
           </details>
           <details class="qa">
             <summary>Does it work without internet?</summary>
-            <p>Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.</p>
+            <p>Yes. It only goes online to make a purchase. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.</p>
           </details>
           <details class="qa">
             <summary>Can I play if I am colorblind?</summary>
@@ -382,7 +390,7 @@
           </details>
           <details class="qa">
             <summary>Is there an Android version?</summary>
-            <p>Yes. It is available on both iOS and Android, same price, same 300 puzzles.</p>
+            <p>Yes. Same 300 puzzles, and either way you pay only once: on iOS it is free to download and unlocked in the app, on Android you pay when you get it.</p>
           </details>
           <details class="qa">
             <summary>How big is it?</summary>
@@ -399,9 +407,9 @@
         </div>
         <ul class="badges">
           <li>No ads</li>
-          <li>No in-app purchases</li>
+          <li>No subscription</li>
           <li>No sign-up</li>
-          <li>Fully offline</li>
+          <li>Pay once for all</li>
         </ul>
       </section>
 

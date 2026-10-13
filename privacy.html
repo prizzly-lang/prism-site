@@ -16,7 +16,7 @@
       <h1 style="font-size: 1.5rem; letter-spacing: 0; text-indent: 0; font-weight: 600">
         개인정보 처리방침
       </h1>
-      <p class="updated">최종 수정일: 2026년 8월 11일</p>
+      <p class="updated">최종 수정일: 2026년 11월 26일</p>
 
       <p class="summary">PRISM은 어떤 개인정보도 수집하지 않습니다.</p>
 
@@ -34,15 +34,17 @@
 
       <h2>네트워크 통신</h2>
       <p>
-        PRISM은 어떤 서버와도 통신하지 않습니다. 앱 전체가 오프라인으로 동작하며,
-        인터넷 연결이 전혀 없는 상태에서도 모든 기능이 완전하게 작동합니다.
+        PRISM은 결제할 때 말고는 어떤 서버와도 통신하지 않습니다. 결제는 기기의
+        App Store(Apple StoreKit)를 통해 이루어집니다. 게임은 인터넷 연결이 없는
+        상태에서도 모든 기능이 그대로 작동합니다.
       </p>
 
       <h2>기기에 저장되는 것</h2>
       <p>앱은 아래 정보를 <strong>이용자의 기기 안에만</strong> 저장합니다:</p>
       <ul>
         <li>각 레벨을 클리어한 최소 탭 수</li>
-        <li>소리·진동 설정 값</li>
+        <li>소리·진동·언어·글자 크기 설정 값</li>
+        <li>잠금해제 여부(한 번 결제했거나, 유료로 팔리던 시절에 받았는지)</li>
       </ul>
       <p>
         이 정보는 iOS의 표준 앱 저장 공간(UserDefaults)에 보관되며, 어디로도
@@ -54,14 +56,19 @@
       <h2>제3자 제공</h2>
       <p>
         제공할 정보가 없으므로, 제3자에게 제공하는 정보도 없습니다. PRISM에는
-        제3자 SDK가 포함되어 있지 않습니다.
+        데이터를 수집하는 제3자 SDK가 없습니다. 결제를 위해 Apple StoreKit을 부르는
+        오픈소스 플러그인(@capgo/native-purchases)을 쓰며, 이 플러그인은 따로
+        네트워크 통신을 하지 않습니다.
       </p>
 
       <h2>결제</h2>
       <p>
-        PRISM은 유료 단품 앱입니다. 구매는 App Store를 통해 이루어지며 Apple이
-        처리합니다. PRISM은 결제 정보에 접근하지 않고, 구매 사실 자체도 기록하지
-        않습니다. 인앱결제는 존재하지 않습니다.
+        PRISM은 무료로 받을 수 있고, 1챕터 이후는 한 번 결제(비소모성 인앱 구매)로
+        열립니다. 구매는 App Store를 통해 이루어지며 Apple이 처리합니다. PRISM은 카드
+        번호, 이름, Apple ID 같은 결제 정보에 접근하지 않습니다. 앱은 잠금해제 여부만
+        기기 안에 기록합니다. 1.5까지 유료로 받은 분은 Apple이 기기에 주는 앱 거래
+        정보(처음 받은 버전)로 기기 안에서 알아보고 자동으로 엽니다. 이 정보도
+        어디로도 보내지 않습니다.
       </p>
 
       <h2>아동의 개인정보</h2>
@@ -101,20 +108,25 @@
         or camera, and uses no cookies or similar tracking technologies.
       </p>
       <p>
-        <strong>No networking.</strong> The app never contacts any server. It works
-        completely offline; every feature functions with no internet connection at all.
+        <strong>Networking only to purchase.</strong> The app contacts no server except
+        the App Store (Apple StoreKit) when you make a purchase. The game itself works
+        with no internet connection at all.
       </p>
       <p>
         <strong>Stored on your device only.</strong> The app saves your best tap count
-        per level and your sound/haptics settings in the standard iOS app storage
+        per level, your settings, and whether the game is unlocked, in the standard iOS app storage
         (UserDefaults) on your device. Nothing is transmitted anywhere. Deleting the
         app deletes this data.
       </p>
       <p>
         <strong>No third parties.</strong> There is no data to share, and the app
-        bundles no third-party SDKs. PRISM is a one-time paid app with no in-app
-        purchases; purchases are handled entirely by Apple and PRISM never sees
-        payment information.
+        bundles no third-party SDK that collects data. It uses an open-source plugin
+        (@capgo/native-purchases) that calls Apple StoreKit and makes no network
+        requests of its own. PRISM is free to download; chapter 1 is free and one
+        non-consumable in-app purchase opens the rest. Purchases are handled entirely
+        by Apple and PRISM never sees payment information. People who bought the paid
+        app (through version 1.5) are recognised on the device from the app transaction
+        Apple provides, and that is not sent anywhere either.
       </p>
       <p>
         Because no personal data is collected or stored, there is no data to access,

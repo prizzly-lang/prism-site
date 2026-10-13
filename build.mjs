@@ -37,7 +37,7 @@ const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
 const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriven.prism';
 /** 스토어에 실제로 올라간 버전. JSON-LD가 이 값을 그대로 쓴다 — 버전을 올릴 때 잊지 않도록 한 곳에 둔다. */
-const VERSION = '1.3';
+const VERSION = '1.6';
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */
 const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
@@ -59,7 +59,7 @@ const L = {
   ko: {
     dir: 'ltr',
     title: 'PRISM: 빛을 접어 결정을 밝힌다',
-    desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
+    desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고도 구독도 없이 한 번 결제로 전부.',
     /*
       「접어」다. 「꺾어」가 아니다.
 
@@ -82,16 +82,16 @@ const L = {
       '<strong>300개</strong> 퍼즐, 일곱 개의 챕터',
       '모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다',
       '표시되는 최소 탭 수는 <strong>전수 탐색으로 증명한</strong> 실제 최솟값입니다',
-      '광고 없음 · 인앱결제 없음 · 회원가입 없음',
-      '네트워크를 쓰지 않습니다. 완전 오프라인',
+      '광고 없음 · 구독 없음 · 회원가입 없음',
+      '결제할 때 말고는 네트워크를 쓰지 않습니다',
     ],
     stats: [
       ['300', '퍼즐'],
       ['7', '챕터'],
       ['1', '판마다 정답'],
-      ['0', '광고 · 결제 · 가입'],
+      ['0', '광고 · 구독 · 가입'],
     ],
-    badges: ['광고 없음', '인앱결제 없음', '회원가입 없음', '완전 오프라인'],
+    badges: ['광고 없음', '구독 없음', '회원가입 없음', '한 번 결제로 전부'],
     chaptersH: '일곱 개의 챕터',
     chaptersLead: '레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.',
     chapters: [
@@ -118,11 +118,11 @@ const L = {
     langsP: '한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.',
     faqH: '자주 묻는 것',
     faq: [
-      ['광고가 정말 없나요?', '없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 300개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.'],
-      ['인터넷 없이 되나요?', '됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.'],
+      ["광고가 정말 없나요?", "없습니다. 구독도, 회원가입도, 로그인도 없습니다. iPhone·iPad에서는 무료로 받아 1챕터 14판을 해 보고, 한 번 결제하면 나머지 286판이 전부 열립니다. Android에서는 한 번 결제로 받으면 300판이 처음부터 전부 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다."],
+      ["인터넷 없이 되나요?", "됩니다. 결제할 때 말고는 네트워크를 쓰지 않습니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다."],
       ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 300판 전부를 풀 수 있습니다.'],
       ['몇 판이고 얼마나 어렵나요?', '일곱 챕터에 300판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
-      ['안드로이드 버전이 있나요?', '있습니다. iOS와 Android 모두에서 같은 가격, 같은 300판으로 받으실 수 있습니다.'],
+      ["안드로이드 버전이 있나요?", "있습니다. 같은 300판이고, 어느 쪽이든 한 번만 결제하면 됩니다. iOS는 무료로 받아 앱 안에서 열고, Android는 받을 때 결제합니다."],
       ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
     ],
     privacy: '개인정보 처리방침',
@@ -133,7 +133,7 @@ const L = {
   en: {
     dir: 'ltr',
     title: 'PRISM: Bend beams. Wake the crystals.',
-    desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.',
+    desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything.',
     tagline: 'Bend beams. Wake the crystals.',
     cta: 'Get it on the App Store',
     ctaAndroid: 'Get it on Google Play',
@@ -148,16 +148,16 @@ const L = {
       '<strong>300</strong> puzzles across seven chapters',
       'Every puzzle has <strong>exactly one solution</strong>',
       'The par shown is the <strong>true minimum</strong>, found by exhaustive search',
-      'No ads · no in-app purchases · no sign-up',
-      'No networking at all. Fully offline',
+      'No ads · no subscription · no sign-up',
+      'No networking except to make a purchase',
     ],
     stats: [
       ['300', 'puzzles'],
       ['7', 'chapters'],
       ['1', 'solution each'],
-      ['0', 'ads · IAP · sign-ups'],
+      ['0', 'ads · subscriptions · sign-ups'],
     ],
-    badges: ['No ads', 'No in-app purchases', 'No sign-up', 'Fully offline'],
+    badges: ['No ads', 'No subscription', 'No sign-up', 'Pay once for all'],
     chaptersH: 'Seven chapters',
     chaptersLead: 'The levels teach optics in order. Each chapter introduces exactly one new piece.',
     chapters: [
@@ -184,11 +184,11 @@ const L = {
     langsP: 'Korean, English, Japanese and Simplified Chinese. Follows your device language, or pick one in Settings.',
     faqH: 'Questions people ask',
     faq: [
-      ['Are there really no ads?', 'None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
-      ['Does it work without internet?', 'Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
+      ["Are there really no ads?", "None. No subscription, no sign-up, no sign-in. On iPhone and iPad it is free to download: play chapter 1 (14 levels), and one purchase opens the other 286. On Android you pay once when you get it, and all 300 are open from the start. If you were looking for a puzzle game with no ads, that is why this one exists."],
+      ["Does it work without internet?", "Yes. It only goes online to make a purchase. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere."],
       ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 300 puzzles can be finished without distinguishing color at all.'],
       ['How many levels, and how hard?', 'Seven chapters, 300 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
-      ['Is there an Android version?', 'Yes. It is available on both iOS and Android, same price, same 300 puzzles.'],
+      ["Is there an Android version?", "Yes. Same 300 puzzles, and either way you pay only once: on iOS it is free to download and unlocked in the app, on Android you pay when you get it."],
       ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
     ],
     privacy: 'Privacy Policy',
@@ -199,7 +199,7 @@ const L = {
   ja: {
     dir: 'ltr',
     title: 'PRISM：光を折り、結晶を灯す',
-    desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
+    desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告もサブスクもなく、一度の購入ですべて。',
     tagline: '光を折り、結晶を灯す',
     cta: 'App Store で入手',
     ctaAndroid: 'Google Play で入手',
@@ -214,8 +214,8 @@ const L = {
       '<strong>300</strong>のパズル、7つのチャプター',
       'すべてのパズルに<strong>答えはひとつだけ</strong>',
       '表示される最小タップ数は<strong>全探索で証明した</strong>本当の最小値です',
-      '広告なし · アプリ内課金なし · 会員登録なし',
-      'ネットワークを一切使いません。完全オフライン',
+      '広告なし · サブスクなし · 会員登録なし',
+      '購入するとき以外はネットワークを使いません',
     ],
     stats: [
       ['300', 'パズル'],
@@ -223,7 +223,7 @@ const L = {
       ['1', '盤面ごとの答え'],
       ['0', '広告 · 課金 · 登録'],
     ],
-    badges: ['広告なし', 'アプリ内課金なし', '会員登録なし', '完全オフライン'],
+    badges: ['広告なし', 'サブスクなし', '会員登録なし', '一度の購入ですべて'],
     chaptersH: '7つのチャプター',
     chaptersLead: 'レベルが順に光のしくみを教えます。新しいピースはチャプターごとにひとつずつ増えます。',
     chapters: [
@@ -250,11 +250,11 @@ const L = {
     langsP: '한국어、English、日本語、简体中文に対応しています。端末の言語に従うか、設定で直接選べます。',
     faqH: 'よくある質問',
     faq: [
-      ['本当に広告はありませんか？', 'ありません。アプリ内課金も、会員登録も、ログインもありません。一度購入すれば300のパズルすべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。'],
-      ['インターネットなしで遊べますか？', '遊べます。ネットワークを一切使わない完全オフラインのゲームです。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。'],
+      ["本当に広告はありませんか？", "ありません。サブスクも、会員登録も、ログインもありません。iPhone・iPadでは無料でダウンロードしてチャプター1の14面を遊べ、一度購入すれば残りの286面がすべて開きます。Androidでは一度購入してダウンロードすれば、300面すべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。"],
+      ["インターネットなしで遊べますか？", "遊べます。購入するとき以外はネットワークを使いません。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。"],
       ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても300面すべてを解けます。'],
       ['何面あって、どのくらい難しいですか？', '7チャプターに300面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
-      ['Android版はありますか？', 'あります。iOS・Android どちらでも同じ価格、同じ300面で遊べます。'],
+      ["Android版はありますか？", "あります。同じ300面で、どちらも購入は一度だけです。iOSは無料でダウンロードしてアプリ内で開き、Androidはダウンロードするときに購入します。"],
       ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
     ],
     privacy: 'プライバシーポリシー',
@@ -265,7 +265,7 @@ const L = {
   'zh-Hans': {
     dir: 'ltr',
     title: 'PRISM：折转光线，点亮结晶',
-    desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
+    desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有订阅，一次购买解锁全部。',
     tagline: '折转光线，点亮结晶',
     cta: '在 App Store 获取',
     ctaAndroid: '在 Google Play 获取',
@@ -280,16 +280,16 @@ const L = {
       '<strong>300</strong> 个谜题，七个章节',
       '每个谜题<strong>只有一个答案</strong>',
       '显示的最少点击次数是<strong>穷举验证过</strong>的真实最小值',
-      '没有广告 · 没有内购 · 无需注册',
-      '完全不联网。彻底离线',
+      '没有广告 · 没有订阅 · 无需注册',
+      '除了购买时，不使用网络',
     ],
     stats: [
       ['300', '谜题'],
       ['7', '章节'],
       ['1', '每关唯一解'],
-      ['0', '广告 · 内购 · 注册'],
+      ['0', '广告 · 订阅 · 注册'],
     ],
-    badges: ['没有广告', '没有内购', '无需注册', '完全离线'],
+    badges: ['没有广告', '没有订阅', '无需注册', '一次购买解锁全部'],
     chaptersH: '七个章节',
     chaptersLead: '关卡会按顺序教你光的原理。每个章节只引入一种新元件。',
     chapters: [
@@ -316,11 +316,11 @@ const L = {
     langsP: '支持 한국어、English、日本語、简体中文。跟随设备语言，也可以在设置里直接选择。',
     faqH: '常见问题',
     faq: [
-      ['真的没有广告吗？', '没有。也没有内购、注册和登录。一次购买，300 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。'],
-      ['没有网络能玩吗？', '能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。'],
+      ["真的没有广告吗？", "没有。也没有订阅、注册和登录。在 iPhone 和 iPad 上可以免费下载，先玩第 1 章的 14 关，一次购买即可解锁其余 286 关。在 Android 上下载时付费一次，300 关从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。"],
+      ["没有网络能玩吗？", "能。除了购买时，它不使用网络。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。"],
       ['我有色觉障碍，能玩吗？', '能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。'],
       ['一共多少关？难吗？', '七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
-      ['有 Android 版本吗？', '有。iOS 和 Android 上都能获取，价格相同，同样 300 关。'],
+      ["有 Android 版本吗？", "有。同样的 300 关，两边都只需付费一次：iOS 免费下载、在应用内解锁，Android 在下载时付费。"],
       ['占多大空间？', '不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。'],
     ],
     privacy: '隐私政策',
@@ -419,20 +419,22 @@ function page(lang) {
       inLanguage: lang,
       applicationCategory: 'GameApplication',
       applicationSubCategory: 'PuzzleGame',
-      operatingSystem: 'iOS 15.0 or later, Android 7.0 or later',
+      operatingSystem: 'iOS 16.0 or later, Android 7.0 or later',
       downloadUrl: [APPSTORE, PLAYSTORE],
       installUrl: [APPSTORE, PLAYSTORE],
       fileSize: '5MB',
       softwareVersion: VERSION,
       availableOnDevice: ['iPhone', 'iPad'],
       countriesSupported: 'Worldwide',
-      offers: {
-        '@type': 'Offer',
-        price: '3900',
-        priceCurrency: 'KRW',
-        availability: 'https://schema.org/InStock',
-        url: APPSTORE,
-      },
+      /*
+        1.6부터 두 스토어의 값이 다르다. iOS는 무료로 받고 앱 안에서 한 번 결제하고,
+        Android는 받을 때 한 번 결제한다(Android가 유료에 머무는 이유는 prism 저장소
+        docs/ROADMAP-1.6.md). 하나로 뭉치면 어느 쪽에는 거짓이 된다.
+      */
+      offers: [
+        { '@type': 'Offer', price: '0', priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: APPSTORE },
+        { '@type': 'Offer', price: '3900', priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: PLAYSTORE },
+      ],
       author: { '@type': 'Organization', name: 'A Driven Inc.', url: ORIGIN + '/' },
       publisher: { '@type': 'Organization', name: 'A Driven Inc.', url: ORIGIN + '/' },
       screenshot: [
@@ -441,8 +443,6 @@ function page(lang) {
         `${ORIGIN}/img/board-mixing.png`,
       ],
       featureList: t.facts.map(plain),
-      // 이 앱이 팔리는 이유 자체다. 구조화해두면 "광고 없는 유료 퍼즐" 질의에 걸린다.
-      isAccessibleForFree: false,
       accessibilityFeature: ['highContrastDisplay', 'largePrint', 'reducedMotion'],
       accessibilityHazard: ['noFlashingHazard', 'noMotionSimulationHazard', 'noSoundHazard'],
     },
@@ -802,17 +802,19 @@ writeFileSync(
   `# PRISM
 
 > 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 300판, 모든 판의
-> 정답은 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
+> 정답은 하나뿐. 광고·구독·회원가입이 없고, 한 번 결제로 전부 열린다. iOS는 무료로
+> 받아 1챕터 14판을 해 보고 앱 안에서 열고, Android는 받을 때 결제한다.
 > A tap-to-rotate light puzzle for iOS and Android. 300 boards, each with
-> exactly one solution. No ads, no in-app purchases, no sign-up, no
-> networking. Paid once, ₩3,900.
+> exactly one solution. No ads, no subscription, no sign-up; one purchase
+> opens everything. Free to download on iOS with chapter 1 (14 levels)
+> free and a one-time unlock in the app; a one-time purchase on Android.
 
 ## 사실 / Facts
 
 - 개발사 / Publisher: A Driven Inc.
-- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
+- 플랫폼 / Platform: iOS 16.0+ (iPhone, iPad), Android 7.0+ / iOS 16.0+ and Android 7.0+
 - 스토어 / Stores: [App Store](${APPSTORE}), [Google Play](${PLAYSTORE})
-- 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
+- 가격 / Price: iOS 무료 다운로드 + 잠금해제 ₩3,900, Android ₩3,900(대한민국 기준, 지역별 파생) / iOS free download with a KRW 3,900 unlock, Android KRW 3,900
 - 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
   no image files, everything drawn in code
 - 언어 / Languages: 한국어, English, 日本語, 简体中文
