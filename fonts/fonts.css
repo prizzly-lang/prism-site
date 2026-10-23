@@ -1,0 +1,31 @@
+/*
+  1.6 글꼴. woff2 파일은 `tools/build-fonts.ts`가 만든다(직접 고치지 않는다). 이 파일은 손으로 쓴다.
+
+  역할이 둘이고 언어마다 한 벌씩이다.
+  - Serif: 제목. 라틴은 Newsreader, 한글은 마루부리를 잘라 이름을 바꾼 것
+  - Sans: 본문·버튼·숫자. 라틴은 Instrument Sans, 한글은 SUIT를 잘라 이름을 바꾼 것
+
+  쓰는 쪽은 라틴 → 한글 → 시스템 순으로 나열한다(`styles.css`의 --serif, --sans).
+  브라우저가 글자마다 앞에서부터 찾으므로, 라틴 글꼴에 없는 한글은 한글 글꼴에서,
+  한글 글꼴에도 없는 글자(일본어·중국어, 잘라낸 뒤 새로 생긴 한글)는 시스템
+  글꼴에서 나온다. 마지막 경우는 `tests/fonts.test.ts`가 막는다.
+
+  font-display: block. 첫 화면은 네이티브 응답을 기다리지 않고 바로 그린다
+  (`main.ts`의 start()). 글꼴은 앱 안에 있어 수 ms면 오므로, 시스템 글꼴로 한 번
+  그렸다가 바뀌는 깜빡임보다 아주 잠깐 비우는 편이 낫다.
+*/
+
+@font-face { font-family: 'Prism Serif'; src: url('./serif-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: 'Prism Serif'; src: url('./serif-400-italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: block; }
+@font-face { font-family: 'Prism Serif'; src: url('./serif-500.woff2') format('woff2'); font-weight: 500 700; font-style: normal; font-display: block; }
+
+@font-face { font-family: 'Prism Serif KR'; src: url('./serif-kr-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Prism Serif KR'; src: url('./serif-kr-600.woff2') format('woff2'); font-weight: 500 700; font-display: block; }
+
+@font-face { font-family: 'Prism Sans'; src: url('./sans-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Prism Sans'; src: url('./sans-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+@font-face { font-family: 'Prism Sans'; src: url('./sans-600.woff2') format('woff2'); font-weight: 600 700; font-display: block; }
+
+@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-600.woff2') format('woff2'); font-weight: 600 700; font-display: block; }

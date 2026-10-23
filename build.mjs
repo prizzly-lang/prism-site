@@ -69,6 +69,7 @@ const L = {
       한다. 한때 여기만 「꺾어」로 바꿨다가 되돌렸다.
     */
     tagline: '빛을 접어 결정을 밝힌다',
+    heroAlt: '흰 빛이 프리즘을 지나 빨강과 초록으로 갈라져 결정 두 개를 켠 판',
     cta: 'App Store에서 받기',
     ctaAndroid: 'Google Play에서 받기',
     ctaDemo: '먼저 14판 해보기',
@@ -91,7 +92,6 @@ const L = {
       ['1', '판마다 정답'],
       ['0', '광고 · 구독 · 가입'],
     ],
-    badges: ['광고 없음', '구독 없음', '회원가입 없음', '한 번 결제로 전부'],
     chaptersH: '일곱 개의 챕터',
     chaptersLead: '레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.',
     chapters: [
@@ -135,6 +135,7 @@ const L = {
     title: 'PRISM: Bend beams. Wake the crystals.',
     desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything.',
     tagline: 'Bend beams. Wake the crystals.',
+    heroAlt: 'A solved board: white light splits in a prism into red and green and lights two crystals',
     cta: 'Get it on the App Store',
     ctaAndroid: 'Get it on Google Play',
     ctaDemo: 'Try 14 levels first',
@@ -157,7 +158,6 @@ const L = {
       ['1', 'solution each'],
       ['0', 'ads · subscriptions · sign-ups'],
     ],
-    badges: ['No ads', 'No subscription', 'No sign-up', 'Pay once for all'],
     chaptersH: 'Seven chapters',
     chaptersLead: 'The levels teach optics in order. Each chapter introduces exactly one new piece.',
     chapters: [
@@ -201,6 +201,7 @@ const L = {
     title: 'PRISM：光を折り、結晶を灯す',
     desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告もサブスクもなく、一度の購入ですべて。',
     tagline: '光を折り、結晶を灯す',
+    heroAlt: '白い光がプリズムで赤と緑に分かれ、二つの結晶を灯した盤面',
     cta: 'App Store で入手',
     ctaAndroid: 'Google Play で入手',
     ctaDemo: 'まず14面を試す',
@@ -223,7 +224,6 @@ const L = {
       ['1', '盤面ごとの答え'],
       ['0', '広告 · 課金 · 登録'],
     ],
-    badges: ['広告なし', 'サブスクなし', '会員登録なし', '一度の購入ですべて'],
     chaptersH: '7つのチャプター',
     chaptersLead: 'レベルが順に光のしくみを教えます。新しいピースはチャプターごとにひとつずつ増えます。',
     chapters: [
@@ -267,6 +267,7 @@ const L = {
     title: 'PRISM：折转光线，点亮结晶',
     desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有订阅，一次购买解锁全部。',
     tagline: '折转光线，点亮结晶',
+    heroAlt: '白光经过棱镜分成红色和绿色，点亮两颗晶体的棋盘',
     cta: '在 App Store 获取',
     ctaAndroid: '在 Google Play 获取',
     ctaDemo: '先试玩 14 关',
@@ -289,7 +290,6 @@ const L = {
       ['1', '每关唯一解'],
       ['0', '广告 · 订阅 · 注册'],
     ],
-    badges: ['没有广告', '没有订阅', '无需注册', '一次购买解锁全部'],
     chaptersH: '七个章节',
     chaptersLead: '关卡会按顺序教你光的原理。每个章节只引入一种新元件。',
     chapters: [
@@ -335,63 +335,21 @@ const esc = (s) =>
 /** 태그가 들어 있는 문자열에서 JSON-LD에 넣을 평문을 뽑는다. */
 const plain = (s) => String(s).replace(/<[^>]+>/g, '');
 
+// 색은 앱의 palette.ts와 같다(1.6 「종이와 잉크」).
 const GLYPH_SVG = [
-  '<polygon points="10,3 18,17 2,17" fill="#ff2d55" />',
-  '<rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />',
-  '<circle cx="10" cy="10" r="7.5" fill="#2d8cff" />',
+  '<polygon points="10,3 18,17 2,17" fill="#c8321e" />',
+  '<rect x="3" y="3" width="14" height="14" rx="2" fill="#1e7f46" />',
+  '<circle cx="10" cy="10" r="7.5" fill="#2347c2" />',
 ];
 
 /*
-  히어로의 분광 그림.
-
-  여기 있던 것은 112px짜리 앱 아이콘이었다. 아이콘은 App Store에서 이미 보고
-  오는 그림이라 페이지에서 한 번 더 보여줄 이유가 없고, 무엇보다 **제품 이름의
-  뜻을 설명하지 않는다.** 흰 빛 하나가 프리즘을 지나 빨강·초록·파랑으로
-  갈라지는 것이 PRISM이라는 이름이자 3챕터의 내용이다. 그걸 그린다.
-
-  이미지 파일이 아니라 인라인 SVG인 이유: 앱이 "이미지 파일이 한 장도 없다"를
-  주장하는데 사이트가 PNG로 빛을 그리면 말과 물건이 어긋난다. 여기도 코드로
-  그린다. 요청도 한 번 줄어든다.
-
-  색은 palette.ts와 같은 값이다.
+  섹션 구분선. 1.5에는 가운데가 밝은 선에 스크롤하면 켜지는 결정을 얹었다(빛나는
+  초록 육각형). 진단에서 네온 장식으로 꼽혀 1.6에서 헤어라인 하나로 바꿨다.
 */
-/*
-  섹션 구분선.
-
-  가운데가 밝고 양끝으로 사라지는 1px 선에 결정 하나를 얹었다. 밑줄 하나로
-  끊던 자리를 "빛이 지나가다 결정을 만난다"로 바꾼 것이고, 페이지를 위에서
-  아래로 읽는 동안 같은 사건이 여섯 번 반복된다.
-
-  스크롤해서 화면에 들어올 때 켜진다. **JS가 없으면 처음부터 켜져 있다** —
-  `.js`가 붙은 뒤에만 어두워지므로, 스크립트가 막힌 방문자에게 빈 선이
-  남지 않는다. 움직임을 줄이라고 설정한 방문자에게는 트랜지션이 통째로
-  꺼진다(파일 아래 prefers-reduced-motion 규칙).
-*/
-const BEAM = '<div class="beam" aria-hidden="true"><i></i></div>';
+const RULE = '<hr class="rule" />';
 
 /** 챕터 번호. 스토어 설명도 로마자를 쓴다. */
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
-
-const SPECTRUM_SVG = `<svg class="spectrum" viewBox="0 0 640 280" aria-hidden="true" focusable="false">
-        <defs>
-          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="7" />
-          </filter>
-        </defs>
-        <g filter="url(#glow)" opacity="0.55">
-          <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="7" fill="none" />
-          <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="7" fill="none" />
-          <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="7" fill="none" />
-          <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="7" fill="none" />
-        </g>
-        <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="2" fill="none" />
-        <path d="M266 136 L330 128" stroke="#ffffff" stroke-width="1.4" opacity="0.5" fill="none" />
-        <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="2" fill="none" />
-        <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="2" fill="none" />
-        <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="2" fill="none" />
-        <path d="M300 52 L358 196 L242 196 Z" stroke="rgba(255,255,255,0.5)" stroke-width="2"
-              stroke-linejoin="round" fill="rgba(255,255,255,0.03)" />
-      </svg>`;
 
 function page(lang) {
   const t = L[lang];
@@ -484,7 +442,7 @@ function page(lang) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${esc(t.title)}</title>
     <meta name="description" content="${esc(t.desc)}" />
-    <meta name="theme-color" content="#06070C" />${lang === 'ko' ? '\n    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />' : ''}
+    <meta name="theme-color" content="#F3EFE6" />${lang === 'ko' ? '\n    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />' : ''}
     <link rel="canonical" href="${urlOf(lang)}" />
 ${alternates}
     <link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
@@ -513,20 +471,20 @@ ${JSON.stringify(ld, null, 2)}
       </nav>
 
       <header class="hero">
-        ${SPECTRUM_SVG}
+        <img class="hero-board" src="${up}img/board-prism.png" alt="${esc(t.heroAlt)}"
+             width="720" height="720" />
         <h1>PRISM</h1>
         <p class="tagline">${esc(t.tagline)}</p>
         <div class="cta-row">
           <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
           <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
         </div>
-        <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
         <!--
           체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
 
-          **스토어 버튼 아래**에 둔다. 두 자리 모두 그렇다. 살 사람의 길이
-          언제나 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만
-          필요하다. 글씨도 버튼이 아니라 밑줄 링크다.
+          **스토어 버튼 아래**에 둔다. 살 사람의 길이 언제나 먼저 보여야 하고,
+          체험판은 그 길을 지나친 사람에게만 필요하다. 글씨도 버튼이 아니라
+          밑줄 링크다. (1.5까지 같은 줄이 두 번 들어가 있었다.)
         -->
         <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
 
@@ -540,7 +498,7 @@ ${t.stats.map(([v, k]) => `          <li><b>${esc(v)}</b><span>${esc(k)}</span><
         </ul>
       </header>
 
-      ${BEAM}
+      ${RULE}
 
       <section>
         <h2>${esc(t.videoH)}</h2>
@@ -574,7 +532,7 @@ ${t.facts.map((f) => `          <li>${f}</li>`).join('\n')}
         </ul>
       </section>
 
-      ${BEAM}
+      ${RULE}
 
       <section>
         <h2>${esc(t.chaptersH)}</h2>
@@ -597,7 +555,7 @@ ${t.chapters
         </ol>
       </section>
 
-      ${BEAM}
+      ${RULE}
 
       <section>
         <h2>${esc(t.opticsH)}</h2>
@@ -635,7 +593,7 @@ ${t.a11yMore.map((f) => `          <li>${esc(f)}</li>`).join('\n')}
         <p>${esc(t.langsP)}</p>
       </section>
 
-      ${BEAM}
+      ${RULE}
 
       <section>
         <h2>${esc(t.faqH)}</h2>
@@ -663,9 +621,6 @@ ${t.faq
           <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
           <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
         </div>
-        <ul class="badges">
-${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
-        </ul>
       </section>
 
       <nav class="links">
@@ -678,39 +633,6 @@ ${ARTICLE_LANGS.includes(lang) ? `        <a href="${articlePathOf(lang)}">${esc
         <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
-    <!--
-      구분선의 결정을 스크롤에 맞춰 켠다.
-
-      먼저 <html>에 .js를 붙인다. 어둡게 두는 규칙이 .js 안에만 있으므로,
-      스크립트가 실행되지 않으면 결정은 처음부터 켜진 채다. 순서가 반대면
-      JS를 막아 둔 방문자에게 빈 선만 남는다.
-
-      IntersectionObserver가 없는 브라우저에서는 전부 켠다. 폴리필을 얹을
-      만한 일이 아니다.
-    -->
-    <script>
-      document.documentElement.classList.add('js');
-      (function () {
-        var beams = document.querySelectorAll('.beam');
-        if (!('IntersectionObserver' in window)) {
-          for (var i = 0; i < beams.length; i++) beams[i].classList.add('lit');
-          return;
-        }
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (!e.isIntersecting) return;
-              e.target.classList.add('lit');
-              io.unobserve(e.target);
-            });
-          },
-          { rootMargin: '0px 0px -18% 0px' },
-        );
-        beams.forEach(function (b) {
-          io.observe(b);
-        });
-      })();
-    </script>
   </body>
 </html>
 `;
@@ -839,3 +761,31 @@ console.log(`생성 완료`);
 console.log(`  페이지 ${LANGS.length}개: ${LANGS.map(pathOf).join(', ')}`);
 console.log(`  글 ${ARTICLE_LANGS.length}개: ${ARTICLE_LANGS.map(articlePathOf).join(', ')}`);
 console.log(`  robots.txt · sitemap.xml · llms.txt`);
+
+/*
+  한글 글꼴은 이 사이트에 나오는 글자만 잘라 넣었다(fonts/, prism 저장소의
+  `npm run fonts -- --site ../prism-site`). 문구를 고쳐 새 글자가 생겼는데 글꼴을 다시
+  만들지 않으면 그 글자만 시스템 글꼴로 섞여 나온다. 깨지지 않아서 눈으로는 잘 안
+  보인다. 여기서 막는다.
+*/
+{
+  const cov = JSON.parse(readFileSync(resolve(HERE, 'fonts/coverage.json'), 'utf8')).hangul;
+  const pages = [
+    ...LANGS.map((l) => resolve(l === 'ko' ? HERE : resolve(HERE, l), 'index.html')),
+    ...ARTICLE_LANGS.map((l) => resolve(HERE, articlePathOf(l).slice(1), 'index.html')),
+    resolve(HERE, 'privacy.html'),
+    resolve(HERE, 'support.html'),
+  ];
+  const missing = new Set();
+  for (const f of pages) {
+    const text = readFileSync(f, 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+    for (const ch of text) if (/[가-힣]/.test(ch) && !cov.includes(ch)) missing.add(ch);
+  }
+  if (missing.size > 0) {
+    console.error(
+      `\n글꼴에 없는 한글 ${missing.size}자: ${[...missing].join('')}\n` +
+        `prism 저장소에서 npm run fonts -- --site ../prism-site 를 돌려라.`,
+    );
+    process.exitCode = 1;
+  }
+}

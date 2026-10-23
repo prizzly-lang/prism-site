@@ -88,7 +88,7 @@ export function articlePage(lang, deps) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${esc(a.title)} | PRISM</title>
     <meta name="description" content="${esc(a.desc)}" />
-    <meta name="theme-color" content="#06070C" />
+    <meta name="theme-color" content="#F3EFE6" />
     <link rel="canonical" href="${articleUrlOf(lang)}" />
 ${alternates}
     <link rel="alternate" hreflang="x-default" href="${articleUrlOf('en')}" />
