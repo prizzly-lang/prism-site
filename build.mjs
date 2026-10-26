@@ -132,9 +132,9 @@ const L = {
 
   en: {
     dir: 'ltr',
-    title: 'PRISM: Bend beams. Wake the crystals.',
+    title: 'PRISM: Bend light. Wake the crystals.',
     desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything.',
-    tagline: 'Bend beams. Wake the crystals.',
+    tagline: 'Bend light. Wake the crystals.',
     heroAlt: 'A solved board: white light splits in a prism into red and green and lights two crystals',
     cta: 'Get it on the App Store',
     ctaAndroid: 'Get it on Google Play',
