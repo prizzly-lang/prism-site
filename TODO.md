@@ -54,7 +54,7 @@ Search Console 등록 + 답변 엔진 수동 확인까지 끝났다.
 언어를 中文/日本語로 바꿔가며 → 레벨 1을 초기화하고 `adb shell
 screenrecord`로 실제 풀이 과정을 녹화 → `adb pull`로 내려받아 ffmpeg로
 540×818 30fps로 크롭·인코딩 → `media/preview-{ja,zh-Hans}.mp4`·`.jpg`로
-저장(원본은 `media/orig/`에) → `build.mjs`의 `videoOf()`가 이제 언어별
+저장(원본은 `media/orig/`에 뒀다가 1.6에서 지웠다. 1.6 영상은 맥에서 새로 녹화했고 만드는 법은 prism 저장소 docs/PREVIEW.md) → `build.mjs`의 `videoOf()`가 이제 언어별
 파일을 그대로 쓰도록 수정(`l === 'ko' ? 'ko' : 'en'` → `l`). 로컬
 서버로 두 페이지 다 실제 재생까지 확인했다.
 
