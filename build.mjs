@@ -47,13 +47,15 @@ const pathOf = (l) => (l === 'ko' ? '/' : `/${l}/`);
 const urlOf = (l) => ORIGIN + pathOf(l);
 
 /*
-  영상은 앱 UI가 그대로 찍혀 있어 **언어별**이다. 네 언어 모두 실제
-  기기(Android, adb screenrecord)로 녹화했다 — 자동화·헤드리스 브라우저는
-  쓰지 않는다. `requestAnimationFrame`이 그런 환경에서 제대로 안 돌아
-  애니메이션이 얼어붙은 채로 찍히기 때문이다(자세한 경위는
-  `prism-site/TODO.md` 참고).
+  영상은 앱 UI가 그대로 찍혀 있어 **언어별**이다. 1.6(종이와 잉크)부터는 네 언어
+  모두 iOS 시뮬레이터에서 앱을 실제로 돌려 녹화한다(prism 저장소 docs/PREVIEW.md의
+  「사이트용 영상」). 자동화·헤드리스 브라우저로는 찍지 않는다.
+  `requestAnimationFrame`이 그런 환경에서 제대로 안 돌아 애니메이션이 얼어붙은
+  채로 찍히기 때문이다(자세한 경위는 `prism-site/TODO.md` 참고).
 */
 const videoOf = (l) => l;
+// 영상 길이(초, 반올림). 영상을 바꾸면 ffprobe로 다시 재서 고친다.
+const VIDEO_SEC = { ko: 27, en: 25, ja: 27, 'zh-Hans': 27 };
 
 const L = {
   ko: {
@@ -421,8 +423,8 @@ function page(lang) {
       description: t.videoCap,
       thumbnailUrl: `${ORIGIN}/media/preview-${vid}.jpg`,
       contentUrl: `${ORIGIN}/media/preview-${vid}.mp4`,
-      uploadDate: '2026-09-11',
-      duration: 'PT22S',
+      uploadDate: '2026-10-27',
+      duration: `PT${VIDEO_SEC[vid]}S`,
       inLanguage: vid,
     },
   ];
