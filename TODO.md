@@ -61,3 +61,53 @@ screenrecord`로 실제 풀이 과정을 녹화 → `adb pull`로 내려받아 f
 **되돌린 것**: 녹화 중 기기의 앱 설정(언어·진동)을 건드렸던 걸 원래
 값(简体中文, 진동 켜짐)으로 정확히 복원해뒀다 — 사용자의 실기기라서
 작업 전 상태 그대로 남겨야 했다.
+
+## 3. 답변 엔진 2차 측정 (2026-11-09)
+
+9/21 1차 측정 뒤 7주. **Perplexity는 이제 회원가입해야 답을 준다**(「가입한 뒤 요청을
+다시 보내주세요」)라서 빠졌고, Google AI 개요와 검색 상위 8개로 쟀다. 사용자의 Google
+계정으로 로그인된 Chrome이라 결과에 개인화가 섞였을 수 있다. ChatGPT는 사용자가 따로 확인.
+
+**일반 질문 13개: PRISM 0회.** AI 개요에도, 상위 8개에도 없다.
+
+| 언어 | 질문 | AI 개요가 든 앱 |
+|---|---|---|
+| ko | 광고 없는 오프라인 퍼즐 게임 추천 | (개요 없음) 스도쿠류, 레딧, 네이버 블로그 목록 |
+| ko | 빛 반사 퍼즐 게임 앱 | Lumina, Laser Mind |
+| ko | 색약도 할 수 있는 퍼즐 게임 | Colorcube, Colorzzle |
+| ko | 광원리 배우는 퍼즐 게임 학생 | God of Light |
+| en | light reflection puzzle game app | Lumina, Laser Puzzle: Mirror & Light, Light Ignite |
+| en | optics puzzle game for students | Scientific Project: Optic, physicsfundamentals |
+| en | ad-free offline puzzle game for iPhone | Puzzles - Offline & no Ads |
+| en | colorblind friendly color puzzle game mobile | Color Sort Challenge |
+| ja | 光 反射 パズルゲーム アプリ | Lazors, LASERBREAK |
+| ja | 広告なし オフライン パズルゲーム おすすめ | ジグソーパズル 등 |
+| zh | 光线反射 解谜游戏 app | Lazors, Lumina |
+| zh | 无广告 离线 解谜游戏 推荐 | The Room, Cats in Time |
+
+**이름으로 물으면 안다**(「PRISM + 빛 퍼즐」을 각 언어로):
+
+- ko: AI 개요가 규칙을 정확히 설명하고 App Store와 사이트를 인용. 상위 8개 중 4개가 우리
+- zh: 「PRISM (Adriven)」이라고 정확히 짚고 사이트로 안내. 사이트 3위
+- ja: 우리를 알지만 **다른 앱 「PRISM — 光を導くパズル」와 섞어서** 설명. 사이트 3위
+- en: AI 개요 없음. Play 페이지 1위, **사이트는 8위 안에 없다**
+
+**색인**: `site:` 검색에 8쪽이 다 잡힌다(`support.html`만 없음).
+
+### 읽은 것
+
+1. **일반 질문에서 인용되는 쪽은 앱 스토어 페이지와 「추천 목록」 글이다.** 일본어는
+   「おすすめランキング」, 한국어는 네이버 블로그와 레딧. 우리 사이트 한 곳의 주장으로는
+   부족하고 **제3자 목록에 올라야 한다.** Educational App Store의 「Puzzle Apps」 목록이
+   정확히 그 자리다(유료, 가격 문의 중. prism 저장소 docs/MARKETING.md)
+2. **이름이 겹친다.** 검색에 걸린 다른 앱만 Prism - Daily Light Puzzle, Prismlight,
+   Prism Out, Prismelle, PRISM 光を導くパズル, Prism Riddle. 「PRISM」만으로는 구별되지 않아
+   일본어 AI 개요가 실제로 섞었다. 글과 바깥 게시물에서 **PRISM을 쓸 때 A Driven과 함께**
+   쓴다
+3. **영어 사이트 제목에 「light puzzle」이 없다.** 한국어 제목은 「빛을 접어」, 영어는
+   「Bend beams/light. Wake the crystals.」뿐이라 영어로 「PRISM light puzzle」을 찾을 때
+   걸릴 말이 없다. Play 이름은 「PRISM: Light Puzzle」이다
+4. **「학생·광학」 질문은 비어 있다.** 영어·한국어 모두 PC 게임이나 웹 시뮬레이터가
+   나온다. 챕터를 광학 개념에 맞춘 교사용 글이 들어갈 자리다
+
+다음 측정은 글을 올리고 4주 뒤에 같은 질문으로 한다.
