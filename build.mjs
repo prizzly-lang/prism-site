@@ -23,9 +23,9 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { ARTICLE } from './article.mjs';
 import {
-  ARTICLE_LANGS,
+  ARTICLES,
+  articlesIn,
   articlePathOf,
   articlePage,
   articleSitemapEntries,
@@ -132,7 +132,7 @@ const L = {
 
   en: {
     dir: 'ltr',
-    title: 'PRISM: Bend beams. Wake the crystals.',
+    title: 'PRISM: Light Puzzle · Bend beams. Wake the crystals.',
     desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.',
     tagline: 'Bend beams. Wake the crystals.',
     cta: 'Get it on the App Store',
@@ -669,8 +669,8 @@ ${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
       </section>
 
       <nav class="links">
-${ARTICLE_LANGS.includes(lang) ? `        <a href="${articlePathOf(lang)}">${esc(ARTICLE[lang].title)}</a>
-` : ''}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
+${articlesIn(lang).map((a) => `        <a href="${articlePathOf(a, lang)}">${esc(a.text[lang].title)}</a>
+`).join('')}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
         <a href="${up}support.html">${esc(t.support)}</a>
       </nav>
 
@@ -724,14 +724,16 @@ for (const lang of LANGS) {
   writeFileSync(resolve(dir, 'index.html'), page(lang), 'utf8');
 }
 
-for (const lang of ARTICLE_LANGS) {
-  const dir = resolve(HERE, articlePathOf(lang).slice(1));
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(
-    resolve(dir, 'index.html'),
-    articlePage(lang, { esc, L, ORIGIN, urlOf }),
-    'utf8',
-  );
+for (const art of ARTICLES) {
+  for (const lang of art.langs) {
+    const dir = resolve(HERE, articlePathOf(art, lang).slice(1));
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(
+      resolve(dir, 'index.html'),
+      articlePage(art, lang, { esc, L, ORIGIN, urlOf }),
+      'utf8',
+    );
+  }
 }
 
 /*
@@ -835,5 +837,6 @@ ${articleLlmsSection({ ORIGIN })}
 
 console.log(`생성 완료`);
 console.log(`  페이지 ${LANGS.length}개: ${LANGS.map(pathOf).join(', ')}`);
-console.log(`  글 ${ARTICLE_LANGS.length}개: ${ARTICLE_LANGS.map(articlePathOf).join(', ')}`);
+const articlePaths = ARTICLES.flatMap((a) => a.langs.map((l) => articlePathOf(a, l)));
+console.log(`  글 ${articlePaths.length}개: ${articlePaths.join(', ')}`);
 console.log(`  robots.txt · sitemap.xml · llms.txt`);

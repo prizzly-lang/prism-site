@@ -15,10 +15,10 @@
  */
 
 /** 글이 사는 경로. 언어별 규칙은 랜딩 페이지와 같다(한국어는 루트). */
-export const ARTICLE_SLUG = 'proven-unique';
+const SLUG = 'proven-unique';
 
 /** 최초 게시일. JSON-LD의 `datePublished`가 이 값을 쓴다. */
-export const ARTICLE_DATE = '2026-09-22';
+const DATE = '2026-09-22';
 
 /**
  * 마지막으로 내용을 고친 날. JSON-LD의 `dateModified`가 이 값을 쓴다.
@@ -26,16 +26,16 @@ export const ARTICLE_DATE = '2026-09-22';
  * 1.5에서 판이 300개가 됐다. 본문은 처음 240판을 만든 기록이라 숫자를 고치지
  * 않고, 맨 앞 `update`에 지금 수를 적는다. 고치면 쓴 날의 사실과 어긋난다.
  */
-export const ARTICLE_UPDATED = '2026-11-12';
+const UPDATED = '2026-11-12';
 
 /** 이 글을 쓴 근거가 되는 소스. 내용을 고칠 때 같이 열어볼 파일들이다. */
-export const SOURCES = [
+const SOURCES = [
   'prism/tools/generate-levels.ts',
   'prism/src/engine/solver.ts',
   'prism/tests/levels.test.ts',
 ];
 
-export const ARTICLE = {
+const TEXT = {
   ko: {
     title: '240판을 손으로 만들지 않았습니다',
     desc: 'PRISM의 레벨은 정답에서 거꾸로 생성됩니다. 판마다 정답이 정확히 하나뿐임을 전수 탐색으로 증명한 뒤에만 출하하고, 표시되는 최소 탭 수도 너비 우선 탐색으로 구한 실제 최솟값입니다.',
@@ -296,4 +296,14 @@ for (let state = 0; state < total; state++) {
       ],
     ],
   },
+};
+
+export default {
+  slug: SLUG,
+  date: DATE,
+  updated: UPDATED,
+  langs: ['ko', 'en'],
+  type: 'TechArticle',
+  sources: SOURCES,
+  text: TEXT,
 };
