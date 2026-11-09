@@ -111,3 +111,17 @@ screenrecord`로 실제 풀이 과정을 녹화 → `adb pull`로 내려받아 f
    나온다. 챕터를 광학 개념에 맞춘 교사용 글이 들어갈 자리다
 
 다음 측정은 글을 올리고 4주 뒤에 같은 질문으로 한다.
+
+**ChatGPT (사용자가 로그인해서 확인, 2026-11-09)**
+
+- 「광고 없는 오프라인 퍼즐 게임 추천」: Mini Metro, Monument Valley 2, The Room Three,
+  Baba Is You, Hidden Folks, Simon Tatham's Puzzles. PRISM 없음(9월과 거의 같은 목록)
+- 「optics puzzle game for student」: 앱이 아니라 Laser Maze 보드게임, PhET 시뮬레이터,
+  일반 개념. PRISM 없음
+- 「PRISM light puzzle game by A Driven」: **안다.** A Driven Inc.(에이드리븐 주식회사),
+  ₩3,900, 광고 없음·오프라인, 6챕터를 개념별로(반사·분열·분산·혼합·필터·수렴) 정확히 나열하고
+  「학생에게 흥미로운 이유」까지 붙인다. 다만 **오래된 정보**(240판, iPhone만, iOS 15)이고,
+  「How the game works」 그림은 **우리 게임이 아닌 나무 상자 화면**이다
+
+Google과 같은 그림이다. 이름을 알면 정확히(교육적 가치까지) 설명하지만, 이름 없이는 떠올리지
+않는다. 교사용 글은 「학생·광학」 질문에서 이름 없이 걸리게 하려는 것이다.
