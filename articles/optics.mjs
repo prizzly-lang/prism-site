@@ -182,6 +182,7 @@ const TEXT = {
         'ul',
         [
           `1챕터 14판은 설치 없이 <a href="/play/">브라우저 체험판</a>으로 해 볼 수 있습니다. 수업 전에 미리 보기 좋습니다.`,
+          `1~4챕터의 판 네 개로 만든 <a href="/worksheet/">인쇄용 학습지 「빛의 길 찾기」</a>가 있습니다. 흑백으로 인쇄해도 풀리고, 정답지가 따로 있습니다.`,
           '광고와 회원가입이 없습니다. 플레이하는 동안 인터넷이 필요 없습니다.',
           '색을 구별하기 어려워도 전부 풀 수 있습니다. 결정마다 색을 나타내는 도형이 새겨져 있습니다(빨강은 삼각형, 초록은 사각형, 파랑은 원. 노란 결정에는 삼각형과 사각형이 함께).',
           '글자 크기를 세 단계로 바꿀 수 있고, 기기의 「동작 줄이기」 설정을 따릅니다.',
@@ -298,6 +299,7 @@ const TEXT = {
         'ul',
         [
           `Chapter 1 (14 levels) is playable in the browser with nothing to install: <a href="/play/">try the demo</a>. Handy for a look before class.`,
+          `A <a href="/en/worksheet/">printable worksheet, Path of Light</a>, uses four boards from chapters 1 to 4. It works in black and white and has a separate answer key.`,
           'No ads and no sign-up. No internet connection is needed while playing.',
           'Fully playable without telling colors apart. Every crystal carries a shape for each color it needs (red is a triangle, green a square, blue a circle; a yellow crystal shows a triangle and a square).',
           'Three text sizes, and the game follows the device\'s Reduce Motion setting.',

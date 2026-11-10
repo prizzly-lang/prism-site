@@ -87,6 +87,34 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/proven-unique/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/proven-unique/" />
   </url>
+  <url>
+    <loc>https://prism.adriven.co/worksheet/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/worksheet/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/worksheet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/worksheet/" />
+  </url>
+  <url>
+    <loc>https://prism.adriven.co/worksheet/answers/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/worksheet/answers/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/worksheet/answers/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/worksheet/answers/" />
+  </url>
+  <url>
+    <loc>https://prism.adriven.co/en/worksheet/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/worksheet/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/worksheet/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/worksheet/" />
+  </url>
+  <url>
+    <loc>https://prism.adriven.co/en/worksheet/answers/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://prism.adriven.co/worksheet/answers/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/worksheet/answers/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/worksheet/answers/" />
+  </url>
   <url><loc>https://prism.adriven.co/play/</loc></url>
   <url><loc>https://prism.adriven.co/privacy.html</loc></url>
   <url><loc>https://prism.adriven.co/support.html</loc></url>

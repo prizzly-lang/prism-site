@@ -19,7 +19,7 @@
  * 실행: `node build.mjs`
  */
 
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -31,6 +31,8 @@ import {
   articleSitemapEntries,
   articleLlmsSection,
 } from './article-page.mjs';
+import { WS_LANGS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
+import { WS } from './worksheet-content.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ORIGIN = 'https://prism.adriven.co';
@@ -660,7 +662,8 @@ ${t.faq
 
       <nav class="links">
 ${articlesIn(lang).map((a) => `        <a href="${articlePathOf(a, lang)}">${esc(a.text[lang].title)}</a>
-`).join('')}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
+`).join('')}${WS_LANGS.includes(lang) ? `        <a href="${wsPathOf(lang)}">${esc(WS[lang].navLabel)}</a>
+` : ''}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
         <a href="${up}support.html">${esc(t.support)}</a>
       </nav>
 
@@ -691,6 +694,32 @@ for (const art of ARTICLES) {
       'utf8',
     );
   }
+}
+
+/*
+  인쇄용 학습지(worksheet-page.mjs). 한국어·영어만: 판 그림의 문구와 정답 해설을 두 언어로
+  검수했다. 일본어·중국어는 교사 수요를 본 뒤 더한다.
+*/
+const WS_PAGES = worksheetPages({ HERE, esc, L, ORIGIN, ORG, APP_ID, existsSync });
+for (const { path, html } of WS_PAGES) {
+  const dir = resolve(HERE, path.slice(1));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(resolve(dir, 'index.html'), html, 'utf8');
+}
+
+/** 학습지 한 쪽의 sitemap 항목. 학습지와 정답지는 각자 두 언어끼리 hreflang으로 묶는다. */
+function wsUrlEntry(path) {
+  const answers = path.includes('/answers/');
+  return [
+    '  <url>',
+    `    <loc>${ORIGIN}${path}</loc>`,
+    `    <lastmod>${SITE_UPDATED}</lastmod>`,
+    ...WS_LANGS.map(
+      (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${ORIGIN}${wsPathOf(l, answers)}" />`,
+    ),
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${wsPathOf('en', answers)}" />`,
+    '  </url>',
+  ].join('\n');
 }
 
 /*
@@ -739,6 +768,7 @@ writeFileSync(
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${LANGS.map(urlEntry).join('\n')}
 ${articleSitemapEntries({ ORIGIN })}
+${WS_PAGES.map(({ path }) => wsUrlEntry(path)).join('\n')}
   <url><loc>${ORIGIN}/play/</loc></url>
   <url><loc>${ORIGIN}/privacy.html</loc></url>
   <url><loc>${ORIGIN}/support.html</loc></url>
@@ -788,6 +818,10 @@ ${LANGS.map((l) => `- [${L[l].langName}](${urlOf(l)}): ${L[l].desc}`).join('\n')
 ## 글 / Writing
 
 ${articleLlmsSection({ ORIGIN })}
+
+## 학습지 / Printable worksheet
+
+${WS_LANGS.map((l) => `- [${WS[l].pageTitle}](${ORIGIN}${wsPathOf(l)}): ${WS[l].desc}`).join('\n')}
 `,
   'utf8',
 );
@@ -809,6 +843,7 @@ console.log(`  robots.txt · sitemap.xml · llms.txt`);
   const pages = [
     ...LANGS.map((l) => resolve(l === 'ko' ? HERE : resolve(HERE, l), 'index.html')),
     ...ARTICLES.flatMap((a) => a.langs.map((l) => resolve(HERE, articlePathOf(a, l).slice(1), 'index.html'))),
+    ...WS_PAGES.map(({ path }) => resolve(HERE, path.slice(1), 'index.html')),
     resolve(HERE, 'privacy.html'),
     resolve(HERE, 'support.html'),
   ];

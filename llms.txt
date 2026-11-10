@@ -38,3 +38,8 @@
 - [用解谜游戏学光学：PRISM 的七个章节与真实的光](https://prism.adriven.co/zh-Hans/optics/): A Driven 出品的光线解谜游戏 PRISM，每章讲一个光学原理：反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振。本文按章节整理了原理、生活中的例子、可以提给学生的问题，以及游戏在哪些地方简化了真实的光学，供老师和家长参考。
 - [240판을 손으로 만들지 않았습니다](https://prism.adriven.co/proven-unique/): PRISM의 레벨은 정답에서 거꾸로 생성됩니다. 판마다 정답이 정확히 하나뿐임을 전수 탐색으로 증명한 뒤에만 출하하고, 표시되는 최소 탭 수도 너비 우선 탐색으로 구한 실제 최솟값입니다.
 - [I did not hand-build 240 puzzle levels](https://prism.adriven.co/en/proven-unique/): PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search.
+
+## 학습지 / Printable worksheet
+
+- [빛의 길 찾기: 인쇄용 광학 학습지 (반사·프리즘·빛의 합성)](https://prism.adriven.co/worksheet/): 광학 퍼즐 게임 PRISM의 판 네 개로 만든 무료 인쇄용 학습지입니다. 거울의 반사, 반투명 거울, 프리즘, 빛의 합성을 연필로 풀어 봅니다. 흑백 인쇄용이고 정답지가 따로 있습니다. 초등 5~6학년 「빛의 성질」, 중학교 「빛과 파동」 단원과 함께 쓸 수 있습니다.
+- [Path of Light: a printable optics worksheet (reflection, prisms, color mixing)](https://prism.adriven.co/en/worksheet/): A free printable worksheet built from four boards of the light puzzle game PRISM. Students solve reflection, beam splitter, prism and additive color mixing puzzles with a pencil. Prints in black and white, with a separate answer key. For ages about 10 to 14.
