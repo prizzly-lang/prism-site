@@ -16,7 +16,7 @@
       <h1 style="font-size: 1.5rem; letter-spacing: 0; text-indent: 0; font-weight: 600">
         개인정보 처리방침
       </h1>
-      <p class="updated">최종 수정일: 2026년 8월 11일</p>
+      <p class="updated">최종 수정일: 2026년 11월 12일</p>
 
       <p class="summary">PRISM은 어떤 개인정보도 수집하지 않습니다.</p>
 
@@ -25,7 +25,7 @@
       <ul>
         <li>이름, 이메일 주소, 전화번호 등 어떤 개인 식별 정보도 요구하거나 저장하지 않습니다</li>
         <li>회원가입이나 로그인을 요구하지 않습니다</li>
-        <li>광고 식별자(IDFA)를 읽지 않습니다</li>
+        <li>광고 식별자(iOS의 IDFA, Android의 광고 ID)를 읽지 않습니다</li>
         <li>사용 기록, 플레이 패턴, 이벤트를 수집하는 애널리틱스를 포함하지 않습니다</li>
         <li>크래시 리포팅 도구를 포함하지 않습니다</li>
         <li>위치 정보, 연락처, 사진, 마이크, 카메라에 접근하지 않습니다</li>
@@ -42,13 +42,29 @@
       <p>앱은 아래 정보를 <strong>이용자의 기기 안에만</strong> 저장합니다:</p>
       <ul>
         <li>각 레벨을 클리어한 최소 탭 수</li>
-        <li>소리·진동 설정 값</li>
+        <li>소리·진동·언어·글자 크기 설정 값</li>
+        <li>이미 본 안내(원리 카드 등)와, 스토어 평가 요청을 이미 띄웠는지 여부</li>
+        <li>(Android) 이 기기에 유료판을 설치해 실행했다는 표시</li>
       </ul>
       <p>
-        이 정보는 iOS의 표준 앱 저장 공간(UserDefaults)에 보관되며, 어디로도
-        전송되지 않습니다. 앱을 삭제하면 함께 삭제됩니다. 저장 위치가 iCloud
-        백업에 포함될 수 있으나, 그것은 Apple의 기기 백업 기능이며 PRISM이
+        이 정보는 iOS에서는 표준 앱 저장 공간(UserDefaults)에, Android에서는 앱 전용
+        저장 공간(SharedPreferences)에 보관되며, 어디로도 전송되지 않습니다. 앱을
+        삭제하면 함께 삭제됩니다. 이 정보가 iCloud 백업이나 Android 기기 백업에
+        포함될 수 있으나, 그것은 Apple과 Google의 기기 백업 기능이며 PRISM이
         데이터를 전송하는 것이 아닙니다.
+      </p>
+
+      <h2>웹 체험판과 이 웹사이트</h2>
+      <p>
+        브라우저 체험판(prism.adriven.co/play/)은 위와 같은 진행 상황과 설정을
+        브라우저 저장소(localStorage)에 그 브라우저 안에만 저장합니다. 서버로 보내지
+        않으며, 브라우저의 사이트 데이터를 지우면 함께 지워집니다.
+      </p>
+      <p>
+        이 웹사이트와 체험판에는 분석·광고 스크립트와 쿠키가 없습니다. 웹사이트는
+        GitHub Pages(GitHub, Inc.)로 제공되며, GitHub은 서비스 운영과 보안을 위해
+        접속한 IP 주소 같은 기술 기록을 처리할 수 있습니다(GitHub 개인정보 처리방침에
+        따름). PRISM과 에이드리븐은 이 기록을 받지 않습니다.
       </p>
 
       <h2>제3자 제공</h2>
@@ -59,8 +75,8 @@
 
       <h2>결제</h2>
       <p>
-        PRISM은 유료 단품 앱입니다. 구매는 App Store를 통해 이루어지며 Apple이
-        처리합니다. PRISM은 결제 정보에 접근하지 않고, 구매 사실 자체도 기록하지
+        PRISM은 유료 단품 앱입니다. 구매는 App Store(iOS) 또는 Google Play(Android)를
+        통해 이루어지며 Apple 또는 Google이 처리합니다. PRISM은 결제 정보에 접근하지 않고, 구매 사실 자체도 기록하지
         않습니다. 인앱결제는 존재하지 않습니다.
       </p>
 
@@ -96,7 +112,7 @@
       <p class="summary">PRISM does not collect any personal data.</p>
       <p>
         There is no data collection of any kind. PRISM requires no sign-up and no
-        sign-in, does not read the advertising identifier, contains no analytics or
+        sign-in, does not read the advertising identifier (IDFA on iOS, advertising ID on Android), contains no analytics or
         crash-reporting SDKs, does not access location, contacts, photos, microphone
         or camera, and uses no cookies or similar tracking technologies.
       </p>
@@ -106,14 +122,29 @@
       </p>
       <p>
         <strong>Stored on your device only.</strong> The app saves your best tap count
-        per level and your sound/haptics settings in the standard iOS app storage
-        (UserDefaults) on your device. Nothing is transmitted anywhere. Deleting the
-        app deletes this data.
+        per level; your sound, haptics, language and text size settings; which hints
+        you have already seen and whether the store rating prompt was already shown;
+        and, on Android, a marker that a paid copy was installed and run on this device.
+        This is kept in the standard app storage on your device (UserDefaults on iOS,
+        SharedPreferences on Android). Nothing is transmitted anywhere. Deleting the
+        app deletes this data. It may be included in iCloud or Android device backups,
+        which are Apple's and Google's backup features, not a transfer by PRISM.
+      </p>
+      <p>
+        <strong>Web demo and this website.</strong> The browser demo
+        (prism.adriven.co/play/) keeps the same progress and settings in your
+        browser's storage (localStorage), in that browser only. It is never sent to a
+        server, and clearing the browser's site data removes it. This website and the
+        demo have no analytics or advertising scripts and no cookies. The website is
+        served by GitHub Pages (GitHub, Inc.), which may process technical logs such
+        as visitors' IP addresses to operate and secure the service, under GitHub's
+        privacy statement. PRISM and A Driven do not receive these logs.
       </p>
       <p>
         <strong>No third parties.</strong> There is no data to share, and the app
         bundles no third-party SDKs. PRISM is a one-time paid app with no in-app
-        purchases; purchases are handled entirely by Apple and PRISM never sees
+        purchases; purchases are handled entirely by Apple (App Store) or Google
+        (Google Play) and PRISM never sees
         payment information.
       </p>
       <p>

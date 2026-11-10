@@ -553,7 +553,6 @@ ${JSON.stringify(ld, null, 2)}
           <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
           <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
         </div>
-        <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
         <!--
           체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
 
