@@ -7,7 +7,7 @@
  * 스크린 리더가 카드 글 전체를 링크 이름으로 읽는다).
  */
 
-import { ORIGIN, ORG, LANGS, UI, EMAIL, FAMILY, esc, homeOf, aboutPath, familyName, familyNameLang, familyHref } from '../site.mjs';
+import { ORIGIN, ORG, COMPANY, LANGS, UI, EMAIL, FAMILY, esc, homeOf, aboutPath, familyName, familyNameLang, familyHref } from '../site.mjs';
 import { page } from '../ui/page.mjs';
 
 export const ABOUT_UPDATED = '2026-11-26';
@@ -91,7 +91,35 @@ export function aboutPages() {
           name: `${t.title}: ${t.sub}`,
           inLanguage: lang,
           url: ORIGIN + path,
-          mainEntity: { ...ORG, email: EMAIL },
+          // 회사의 법적 표시와 인증. 바닥글과 같은 값(site.mjs COMPANY)이다.
+          mainEntity: {
+            ...ORG,
+            legalName: COMPANY.name.ko,
+            taxID: COMPANY.bizNo,
+            email: COMPANY.email,
+            telephone: COMPANY.phoneIntl,
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '봉은사로 125 리스트 빌딩 B218~219호',
+              addressLocality: '강남구',
+              addressRegion: '서울특별시',
+              postalCode: '06120',
+              addressCountry: 'KR',
+            },
+            hasCertification: COMPANY.certs.map((c) => ({
+              '@type': 'Certification',
+              name: c.en,
+              ...(c.id
+                ? {
+                    certificationIdentification: c.id,
+                    issuedBy: { '@type': 'Organization', name: c.issuer.en, alternateName: c.issuer.ko },
+                    validFrom: c.validFrom,
+                    expires: c.expires,
+                    description: c.scope.en,
+                  }
+                : {}),
+            })),
+          },
         }],
         main: `      <header class="page-head">
         <h1>${esc(t.title)}</h1>

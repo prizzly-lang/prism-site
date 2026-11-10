@@ -750,6 +750,61 @@
     font-size: var(--t-micro);
   }
 
+  /*
+    회사 정보와 인증. 한국 사이트 바닥글의 사업자 표시. 항목은 「이름 값」 쌍을 한 줄에 이어 쓰고
+    좁으면 줄을 바꾼다. 인증은 테두리만 있는 작은 표(로고 그림을 쓰지 않는다).
+  */
+  .company {
+    margin-top: var(--s-4);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--hair);
+  }
+  .company__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-3);
+    color: var(--ink-dim);
+    font-size: var(--t-micro);
+    line-height: 1.6;
+  }
+  .company__info div {
+    display: flex;
+    gap: 0.4em;
+    padding-block: 0.15em;
+  }
+  .company__info dt {
+    color: var(--ink-faint);
+  }
+  .company__info dd {
+    font-variant-numeric: tabular-nums;
+  }
+  /* 인라인 링크는 줄 높이를 지키되 손가락으로 누를 만큼 위아래를 넓힌다. */
+  .company__info a {
+    display: inline-block;
+    padding-block: 0.6em;
+    margin-block: -0.6em;
+  }
+  .company__certs {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1);
+    margin-top: var(--s-2);
+  }
+  .company__cert-detail {
+    margin-top: var(--s-1);
+    color: var(--ink-faint);
+    font-size: var(--t-micro);
+  }
+  .company__certs li {
+    padding: 0.25em 0.75em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: var(--t-micro);
+    font-weight: 600;
+  }
+
   /* ── 화면 전용 · 인쇄 전용 ─────────────────────────────────── */
   @media print {
     .skip-link,

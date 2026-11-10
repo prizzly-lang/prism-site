@@ -265,3 +265,76 @@ export const familyName = (f, l) => f.name[l] ?? f.name.ko;
 export const familyNameLang = (f, l) => (f.name[l] ? l : 'ko');
 export const familyHref = (f, l, content) =>
   `${f.url(l)}?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=${content}`;
+
+/*
+  회사 정보(바닥글). 한국 웹사이트가 바닥글에 사업자 정보를 적는 관례(전자상거래법의 표시 사항)를
+  따르고, 방문자가 「누가 만들었나」를 확인할 수 있게 한다(사용자 요청 2026-11-10: 회사 서비스
+  나라면(naramyeon.com) 바닥글을 참고해 사이트 신뢰도를 올린다). 값은 그 바닥글에서 옮겼다.
+  ISO 9001은 사용자가 보내 준 인증서 사진(2026-11-10)에서 옮겼다: KS Q ISO 9001:2015 / ISO 9001:2015,
+  인증등록번호 QSC6320, 한국국제규격인증원(KIC, 한국인정지원센터 KAB 인정 KAB-QC-36), 유효기간
+  2026-11-02 ~ 2029-11-01(만료 전에 갱신 여부를 확인해 고친다), 범위 「AI 솔루션 및 마케팅 애플리케이션
+  개발 및 서비스」. 영문 주소는 인증서의 영문 표기를 따른다.
+
+  다른 언어 페이지에서도 법적 표시는 한국어 원문 그대로 둔다(번역한 주소·이름은 공식 표기가 아니다).
+  항목 이름만 그 언어로 쓰고, 값에는 lang="ko"를 단다.
+*/
+export const COMPANY = {
+  name: { ko: '에이드리븐 주식회사', en: 'A Driven Inc.', ja: 'A Driven Inc.', 'zh-Hans': 'A Driven Inc.' },
+  ceo: '김완림',
+  bizNo: '150-87-01606',
+  mailOrderNo: '제2022-서울강남-06176호',
+  address: '(06120) 서울시 강남구 봉은사로 125 리스트 빌딩 B218~219호',
+  /** 인증서의 영문 주소. 한국어 아닌 페이지에서 쓴다. */
+  addressEn: 'Rm. B218, B219, 125 Bongeunsa-ro, Gangnam-gu, Seoul 06120, Republic of Korea',
+  phone: '02-6274-0420',
+  phoneIntl: '+82-2-6274-0420',
+  email: 'info@adriven.co',
+  /** 공정거래위원회 통신판매사업자 정보 공개 페이지(사업자정보 확인). 한국어 관례라 한국어에만 단다. */
+  ftc: 'https://www.ftc.go.kr/bizCommPop.do?wrkr_no=1508701606',
+  certs: [
+    {
+      key: 'mainbiz',
+      ko: '메인비즈 인증(경영혁신형 중소기업)',
+      en: 'Main-Biz certified (management innovation SME, Korea)',
+      ja: 'メインビズ認証（経営革新型中小企業、韓国）',
+      'zh-Hans': 'Main-Biz 认证（韩国经营创新型中小企业）',
+    },
+    {
+      key: 'innobiz',
+      ko: '이노비즈 인증(기술혁신형 중소기업)',
+      en: 'Inno-Biz certified (technology innovation SME, Korea)',
+      ja: 'イノビズ認証（技術革新型中小企業、韓国）',
+      'zh-Hans': 'Inno-Biz 认证（韩国技术创新型中小企业）',
+    },
+    {
+      key: 'iso9001',
+      ko: 'ISO 9001:2015 인증(품질경영시스템)',
+      en: 'ISO 9001:2015 certified (quality management system)',
+      ja: 'ISO 9001:2015認証（品質マネジメントシステム）',
+      'zh-Hans': 'ISO 9001:2015 认证（质量管理体系）',
+      /** 인증 세부. 바닥글에 작은 글씨로, JSON-LD Certification에 그대로. */
+      id: 'QSC6320',
+      issuer: { ko: '한국국제규격인증원(KIC)', en: 'Korea International Standards Certification (KIC)' },
+      validFrom: '2026-11-02',
+      expires: '2029-11-01',
+      scope: {
+        ko: 'AI 솔루션 및 마케팅 애플리케이션 개발 및 서비스',
+        en: 'Development and service of AI solutions and marketing applications',
+      },
+      detail: {
+        ko: 'ISO 9001:2015 인증번호 QSC6320 · 한국국제규격인증원(KIC) · 유효기간 2026.11.02~2029.11.01 · 범위: AI 솔루션 및 마케팅 애플리케이션 개발 및 서비스',
+        en: 'ISO 9001:2015 certificate no. QSC6320 · Korea International Standards Certification (KIC) · valid 2 November 2026 to 1 November 2029 · scope: development and service of AI solutions and marketing applications',
+        ja: 'ISO 9001:2015 認証番号 QSC6320・韓国国際規格認証院（KIC）・有効期間 2026年11月2日〜2029年11月1日・範囲：AIソリューションおよびマーケティングアプリケーションの開発とサービス',
+        'zh-Hans': 'ISO 9001:2015 证书编号 QSC6320 · 韩国国际规格认证院（KIC） · 有效期 2026年11月2日至2029年11月1日 · 范围：AI 解决方案及营销应用的开发与服务',
+      },
+    },
+  ],
+};
+
+/** 회사 정보 항목 이름. */
+export const COMPANY_UI = {
+  ko: { info: '회사 정보', ceo: '대표자', bizNo: '사업자등록번호', mailOrderNo: '통신판매업신고번호', address: '주소', phone: '전화', email: '고객문의', ftc: '사업자정보 확인', certs: '인증' },
+  en: { info: 'Company information', ceo: 'CEO', bizNo: 'Business registration no.', mailOrderNo: 'Mail-order business reg. no.', address: 'Address', phone: 'Phone', email: 'Contact', ftc: '', certs: 'Certifications' },
+  ja: { info: '会社情報', ceo: '代表者', bizNo: '事業者登録番号', mailOrderNo: '通信販売業申告番号', address: '所在地', phone: '電話', email: 'お問い合わせ', ftc: '', certs: '認証' },
+  'zh-Hans': { info: '公司信息', ceo: '代表', bizNo: '企业登记号', mailOrderNo: '通信销售业申报号', address: '地址', phone: '电话', email: '咨询', ftc: '', certs: '认证' },
+};

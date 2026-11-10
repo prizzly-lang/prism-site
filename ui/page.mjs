@@ -10,7 +10,7 @@
 
 import {
   ORIGIN, APPSTORE, PLAYSTORE, EMAIL, LANGS, LANG_NAME, UI, esc, homeOf, ogLocale,
-  navItems, docPath, aboutPath, FAMILY, familyName, familyNameLang, familyHref,
+  navItems, docPath, aboutPath, FAMILY, familyName, familyNameLang, familyHref, COMPANY, COMPANY_UI,
 } from '../site.mjs';
 import { articlesIn, articlePathOf } from '../articles/index.mjs';
 import { breadcrumbs } from './nav.mjs';
@@ -142,10 +142,38 @@ ${reading.length ? `          <nav aria-label="${esc(u.footerRead)}">
           </nav>
         </div>
 ${familySites(lang, 'footer')}
-        <p class="site-footer__legal">© 2026 A Driven Inc. · <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+${companyInfo(lang)}
+        <p class="site-footer__legal">© 2026 A Driven Inc. All rights reserved. · PRISM <a href="mailto:${EMAIL}">${EMAIL}</a></p>
       </div>
     </footer>
 `;
+}
+
+/**
+ * 회사 정보와 인증. 한국 웹사이트 바닥글의 사업자 표시 관례를 따른다(값은 site.mjs의 COMPANY).
+ * 다른 언어에서도 법적 표시 값은 한국어 원문 그대로(lang="ko"), 항목 이름만 그 언어로 쓴다.
+ * 인증은 로고 그림이 아니라 글자로 적는다: 종이와 잉크 디자인에 남의 색 로고를 섞지 않고,
+ * 스크린 리더와 검색이 그대로 읽는다.
+ */
+function companyInfo(lang) {
+  const c = COMPANY;
+  const u = COMPANY_UI[lang];
+  const ko = lang === 'ko';
+  const v = (s) => (ko ? esc(s) : `<span lang="ko">${esc(s)}</span>`);
+  const row = (k, val) => `<div><dt>${esc(k)}</dt><dd>${val}</dd></div>`;
+  return `        <section class="company" aria-label="${esc(u.info)}">
+          <h2>${esc(c.name[lang])}</h2>
+          <dl class="company__info">${[
+            row(u.ceo, v(c.ceo)),
+            row(u.bizNo, `${c.bizNo}${ko ? ` <a href="${c.ftc}">${esc(u.ftc)}</a>` : ''}`),
+            row(u.mailOrderNo, v(c.mailOrderNo)),
+            row(u.address, ko ? esc(c.address) : esc(c.addressEn)),
+            row(u.phone, `<a href="tel:${c.phoneIntl}">${ko ? c.phone : c.phoneIntl}</a>`),
+            row(u.email, `<a href="mailto:${c.email}">${c.email}</a>`),
+          ].join('')}</dl>
+          <ul class="company__certs" aria-label="${esc(u.certs)}">${c.certs.map((x) => `<li>${esc(x[lang])}</li>`).join('')}</ul>
+${c.certs.filter((x) => x.detail).map((x) => `          <p class="company__cert-detail">${esc(x.detail[lang])}</p>`).join('\n')}
+        </section>`;
 }
 
 /** 패밀리 사이트 목록. 바닥글과 `/about/`이 같이 쓴다(content는 UTM의 자리 이름). */
