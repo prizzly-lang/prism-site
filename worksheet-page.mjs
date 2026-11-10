@@ -35,6 +35,12 @@ export const WS_PDF = {
 /** 화면 머리말 이미지. 삽화가 없으면 그 자리를 비운다(빌드는 멈추지 않는다). */
 const ART = ['header', 'ch1', 'ch2', 'ch3', 'ch4'];
 const DIR = `/worksheets/${WS_SLUG}`;
+/*
+  이용 허락: CC BY-NC 4.0(사용자 결정 2026-11-10). 교사가 커뮤니티·클래스룸에 올려 나누는 것이
+  학습지가 퍼지는 길이라(인디스쿨은 업체 홍보 금지), 표준 라이선스로 공유·수정을 분명히 허락한다.
+*/
+const LICENSE = 'https://creativecommons.org/licenses/by-nc/4.0/';
+const licenseDeed = (l) => `${LICENSE}deed.${l === 'ko' ? 'ko' : 'en'}`;
 
 export function worksheetPages(HERE) {
   const A = resolve(HERE, 'worksheets', WS_SLUG, 'assets');
@@ -98,7 +104,8 @@ export function worksheetPages(HERE) {
     const w = WS[lang];
     out.push({ path: worksheetsPath(lang), html: listPage(lang), updated: WS_UPDATED });
     out.push({ path: wsPathOf(lang), html: sheetPage(lang, w, false), updated: WS_UPDATED });
-    out.push({ path: wsPathOf(lang, true), html: sheetPage(lang, w, true), updated: WS_UPDATED });
+    // 정답지는 검색에서 뺀다(사용자 결정 2026-11-10: 학생이 검색으로 답을 찾지 않게). 교사는 학습지의 링크로 들어간다.
+    out.push({ path: wsPathOf(lang, true), html: sheetPage(lang, w, true), updated: WS_UPDATED, noindex: true });
   }
   return out;
 
@@ -157,6 +164,7 @@ export function worksheetPages(HERE) {
       educationalLevel: lang === 'ko' ? '초등 5~6학년, 중학교' : 'Ages 10 to 14',
       teaches: w.concepts.map((c) => c.h),
       isAccessibleForFree: true,
+      license: LICENSE,
       audience: { '@type': 'EducationalAudience', educationalRole: answers ? 'teacher' : 'student' },
       author: ORG,
       publisher: ORG,
@@ -181,6 +189,7 @@ ${answers ? '' : `        <div class="prose">${w.intro.map((p) => `<p>${gl(p)}</
         <ul class="cluster">
           <li><a href="${wsPathOf(lang, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a></li>
           <li><a href="${prefix(lang)}/optics/">${esc(w.guideLink)}</a></li>
+          <li><a href="${licenseDeed(lang)}" rel="license">CC BY-NC 4.0</a></li>
         </ul>
 ${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습은 <a href="${harumathHref('worksheet')}">하루연산</a>에서 할 수 있습니다. 에이드리븐이 만든 초등 연산 문제지 서비스로, 종이로도 태블릿으로도 풉니다.</p>\n` : ''}      </header>`;
 
@@ -197,6 +206,7 @@ ${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습
       crumbs,
       ld: [ld],
       image: hasArt.header ? `${DIR}/assets/header.webp` : undefined,
+      noindex: answers,
       extraCss: ['sheet'],
       mainClass: 'sheets',
       main: `${screenHead}\n${body}`,

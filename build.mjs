@@ -546,7 +546,7 @@ const PAGES = [
   ...aboutPages().map((p) => ({ ...p, sitemap: 'core' })),
   ...docPages().map((p) => ({ ...p, sitemap: 'core' })),
   ...learnPages().map((p) => ({ ...p, sitemap: 'learn' })),
-  ...worksheetPages(HERE).map((p) => ({ ...p, sitemap: 'worksheets' })),
+  ...worksheetPages(HERE).map((p) => ({ ...p, sitemap: p.noindex ? undefined : 'worksheets' })),
   { path: '/404.html', html: notFoundPage() },
   { path: '/design/', html: designPage() },
 ];
