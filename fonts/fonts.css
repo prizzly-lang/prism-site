@@ -13,22 +13,23 @@
   라틴 글꼴은 가운뎃점(U+00B7)을 범위에서 뺀다. Instrument Sans의 ·은 양옆 여백이 없어서
   「보통 · 크게」가 한 단어처럼 붙는다. 빼 두면 한글 글꼴(SUIT·마루부리)의 ·이 받는다.
 
-  font-display: block. 첫 화면은 네이티브 응답을 기다리지 않고 바로 그린다
-  (`main.ts`의 start()). 글꼴은 앱 안에 있어 수 ms면 오므로, 시스템 글꼴로 한 번
-  그렸다가 바뀌는 깜빡임보다 아주 잠깐 비우는 편이 낫다.
+  font-display: swap. 앱과 다르다. 앱은 글꼴이 번들 안에 있어 수 ms면 오지만,
+  웹에서는 글꼴이 네트워크로 온다. 느린 회선에서 block이면 글자가 최대 3초 비므로,
+  시스템 글꼴로 먼저 보여 주고 글꼴이 오면 바꾼다. 이 사본은 `tools/build-fonts.ts --site`가
+  앱의 fonts.css에서 만든다(직접 고치지 않는다).
 */
 
-@font-face { font-family: 'Prism Serif'; src: url('./serif-400.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 400; font-style: normal; font-display: block; }
-@font-face { font-family: 'Prism Serif'; src: url('./serif-400-italic.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 400; font-style: italic; font-display: block; }
-@font-face { font-family: 'Prism Serif'; src: url('./serif-500.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 500 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'Prism Serif'; src: url('./serif-400.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Prism Serif'; src: url('./serif-400-italic.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Prism Serif'; src: url('./serif-500.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 500 700; font-style: normal; font-display: swap; }
 
-@font-face { font-family: 'Prism Serif KR'; src: url('./serif-kr-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
-@font-face { font-family: 'Prism Serif KR'; src: url('./serif-kr-600.woff2') format('woff2'); font-weight: 500 700; font-display: block; }
+@font-face { font-family: 'Prism Serif KR'; src: url('./serif-kr-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Prism Serif KR'; src: url('./serif-kr-600.woff2') format('woff2'); font-weight: 500 700; font-display: swap; }
 
-@font-face { font-family: 'Prism Sans'; src: url('./sans-400.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 400; font-display: block; }
-@font-face { font-family: 'Prism Sans'; src: url('./sans-500.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 500; font-display: block; }
-@font-face { font-family: 'Prism Sans'; src: url('./sans-600.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 600 700; font-display: block; }
+@font-face { font-family: 'Prism Sans'; src: url('./sans-400.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Prism Sans'; src: url('./sans-500.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Prism Sans'; src: url('./sans-600.woff2') format('woff2'); unicode-range: U+0000-00B6, U+00B8-FFFF; font-weight: 600 700; font-display: swap; }
 
-@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
-@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
-@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-600.woff2') format('woff2'); font-weight: 600 700; font-display: block; }
+@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-500.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Prism Sans KR'; src: url('./sans-kr-600.woff2') format('woff2'); font-weight: 600 700; font-display: swap; }

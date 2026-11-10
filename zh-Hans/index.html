@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hans" dir="ltr">
+<html lang="zh-Hans">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,14 +15,41 @@
     <meta property="og:title" content="PRISM：光线解谜｜折转光线，点亮结晶" />
     <meta property="og:description" content="点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有订阅，一次购买解锁全部。" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="zh_Hans" />
+    <meta property="og:locale" content="zh_CN" />
     <meta property="og:url" content="https://prism.adriven.co/zh-Hans/" />
     <meta property="og:image" content="https://prism.adriven.co/img/board-prism.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="icon" href="../icon.svg" type="image/svg+xml" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preload" href="/fonts/sans-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <script type="application/ld+json">
 [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://prism.adriven.co/#website",
+    "name": "PRISM",
+    "alternateName": "PRISM by A Driven",
+    "url": "https://prism.adriven.co/",
+    "inLanguage": [
+      "ko",
+      "en",
+      "ja",
+      "zh-Hans"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://adriven.co/#org",
+      "name": "A Driven Inc.",
+      "alternateName": [
+        "A Driven",
+        "Adriven",
+        "에이드리븐"
+      ],
+      "url": "https://adriven.co/"
+    }
+  },
   {
     "@context": "https://schema.org",
     "@type": "MobileApplication",
@@ -51,7 +78,8 @@
     "softwareVersion": "1.6",
     "availableOnDevice": [
       "iPhone",
-      "iPad"
+      "iPad",
+      "Android"
     ],
     "countriesSupported": "Worldwide",
     "offers": [
@@ -193,41 +221,36 @@
     </script>
   </head>
   <body>
-    <main>
-      <!--
-        언어 전환은 **맨 위**에 둔다. 자기 언어가 아닌 페이지에 떨어진 사람이
-        가장 먼저 찾는 것이고, 그 사람은 페이지를 읽지 못하므로 끝까지
-        스크롤하지 않는다. 아래에 두면 없는 것과 같다.
-      -->
-      <nav class="langs" aria-label="其他语言">
-        <a href="https://prism.adriven.co/" hreflang="ko" lang="ko">한국어</a>
-          <a href="https://prism.adriven.co/en/" hreflang="en" lang="en">English</a>
-          <a href="https://prism.adriven.co/ja/" hreflang="ja" lang="ja">日本語</a>
-      </nav>
-
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-logo" href="/zh-Hans/" aria-current="page">PRISM</a>
+        <nav class="site-nav" aria-label="主菜单">
+          <ul>
+          <li><a href="/zh-Hans/optics/">学习</a></li>
+          <li><a href="/play/">试玩</a></li>
+          <li><a href="/zh-Hans/" aria-current="page">应用</a></li>
+          </ul>
+        </nav>
+        <nav class="lang-switch" aria-label="语言"><ul><li><a href="/" hreflang="ko" lang="ko">한국어</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main" class="page" tabindex="-1">
       <header class="hero">
-        <img class="hero-board" src="../img/board-prism.png" alt="白光经过棱镜分成红色和绿色，点亮两颗晶体的棋盘"
-             width="720" height="720" />
+        <img class="hero__board" src="/img/board-prism.png" alt="白光经过棱镜分成红色和绿色，点亮两颗晶体的棋盘" width="720" height="720" />
         <h1>PRISM</h1>
         <p class="tagline">折转光线，点亮结晶</p>
-        <div class="cta-row">
-          <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">在 App Store 获取</a>
-          <a class="cta cta-lg" href="https://play.google.com/store/apps/details?id=co.adriven.prism">在 Google Play 获取</a>
-        </div>
+        <p class="hero__what">适用于 iPhone、iPad 和 Android 的光线解谜游戏。在 iPhone 和 iPad 上可免费下载并试玩第 1 章，一次购买即可解锁全部；在 Android 上下载时付费一次。</p>
+        <p class="store-links">
+          <a class="button" href="https://apps.apple.com/kr/app/id6803019903">在 App Store 获取</a>
+          <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism">在 Google Play 获取</a>
+        </p>
         <!--
-          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
-
-          **스토어 버튼 아래**에 둔다. 살 사람의 길이 언제나 먼저 보여야 하고,
-          체험판은 그 길을 지나친 사람에게만 필요하다. 글씨도 버튼이 아니라
-          밑줄 링크다. (1.5까지 같은 줄이 두 번 들어가 있었다.)
+          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다. 스토어 버튼 아래에
+          밑줄 링크로 둔다. 살 사람의 길이 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만 필요하다.
         -->
-        <p class="cta-demo"><a href="https://prism.adriven.co/play/">先试玩 14 关</a></p>
-
-        <!--
-          숫자 넷으로 제품 전체를 말한다. 300판, 7챕터, 판마다 정답 하나,
-          그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
-          문장이 아니라 이 숫자들이다.
-        -->
+        <p class="hero__demo"><a href="/play/">先试玩 14 关</a></p>
+        <!-- 숫자 넷으로 제품 전체를 말한다. 답변 엔진이 인용할 때 집는 것도 이 숫자들이다. -->
         <ul class="stats">
           <li><b>300</b><span>谜题</span></li>
           <li><b>7</b><span>章节</span></li>
@@ -238,33 +261,40 @@
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>三十秒就知道这是什么游戏</h2>
-        <video
-          class="preview"
-          src="../media/preview-zh-Hans.mp4"
-          poster="../media/preview-zh-Hans.jpg"
-          width="540"
-          height="818"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
-        <p class="cap">真实的游戏画面。没有声音。</p>
+        <!--
+          영상: 소리 없이 저절로 돌지만 멈출 수 있어야 한다(WCAG 2.2.2). 「동작 줄이기」를 켠
+          방문자에게는 저절로 틀지 않는다. 스크립트가 없으면 기본 컨트롤을 그대로 보인다.
+        -->
+        <figure class="video-preview">
+          <video src="/media/preview-zh-Hans.mp4" poster="/media/preview-zh-Hans.jpg" width="540" height="818" muted loop playsinline preload="metadata" controls></video>
+          <button class="video-preview__toggle" type="button" hidden data-play="播放视频" data-pause="暂停视频"></button>
+          <figcaption>真实的游戏画面。没有声音。</figcaption>
+        </figure>
+        <script>
+          (function () {
+            var f = document.currentScript.previousElementSibling;
+            var v = f.querySelector('video');
+            var b = f.querySelector('button');
+            var label = function () { b.textContent = v.paused ? b.dataset.play : b.dataset.pause; };
+            v.removeAttribute('controls');
+            b.hidden = false;
+            b.onclick = function () { v.paused ? v.play() : v.pause(); };
+            v.onplay = v.onpause = label;
+            label();
+            if (!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(label);
+          })();
+        </script>
       </section>
 
-      <section>
+      <section class="section">
         <h2>只有一条规则</h2>
         <p class="lead">点击元件，它会转 90 度，光立刻找到新的路径。让每个结晶都恰好收到它要求的颜色，同时点亮，这一关就解开了。规则只有这一条，也没有说明书——关卡自己会教你。</p>
-
-        <figure>
-          <img class="board" src="../img/board-rule.png" alt="第一关。点一次镜子就能解开。"
-               width="720" height="720" loading="lazy" />
+        <figure class="board-figure">
+          <img src="/img/board-rule.png" alt="第一关。点一次镜子就能解开。" width="720" height="720" loading="lazy" />
           <figcaption>第一关。点一次镜子就能解开。</figcaption>
         </figure>
-
         <ul class="facts">
           <li><strong>300</strong> 个谜题，七个章节</li>
           <li>每个谜题<strong>只有一个答案</strong></li>
@@ -276,85 +306,39 @@
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>七个章节</h2>
         <p>关卡会按顺序教你光的原理。每个章节只引入一种新元件。</p>
-        <!--
-          카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
-          분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
-          수렴은 전부, 편광은 편광판 살처럼 끊긴 줄무늬. 장식이 아니라 목록의 내용을 한 번 더 말한다.
-        -->
         <ol class="chapters">
-          <li class="chapter chapter-1">
-            <span class="ch-num">I</span>
-            <strong>反射</strong>
-            <span class="ch-desc">镜子把光转 90 度</span>
-          </li>
-          <li class="chapter chapter-2">
-            <span class="ch-num">II</span>
-            <strong>分束</strong>
-            <span class="ch-desc">半透镜让光通过的同时也把它反射</span>
-          </li>
-          <li class="chapter chapter-3">
-            <span class="ch-num">III</span>
-            <strong>色散</strong>
-            <span class="ch-desc">棱镜把白光分成红、绿、蓝</span>
-          </li>
-          <li class="chapter chapter-4">
-            <span class="ch-num">IV</span>
-            <strong>混色</strong>
-            <span class="ch-desc">两束光在同一个结晶上相遇会变成新的颜色</span>
-          </li>
-          <li class="chapter chapter-5">
-            <span class="ch-num">V</span>
-            <strong>滤光</strong>
-            <span class="ch-desc">滤光片只留下你需要的成分</span>
-          </li>
-          <li class="chapter chapter-6">
-            <span class="ch-num">VI</span>
-            <strong>汇聚</strong>
-            <span class="ch-desc">学过的一切在一个盘面上相遇</span>
-          </li>
-          <li class="chapter chapter-7">
-            <span class="ch-num">VII</span>
-            <strong>偏振</strong>
-            <span class="ch-desc">条纹交叉的偏振片会让光消失</span>
-          </li>
+          <li class="chapter chapter--1"><span class="chapter__num">I</span><strong class="chapter__name">反射</strong><span class="chapter__desc">镜子把光转 90 度</span></li>
+          <li class="chapter chapter--2"><span class="chapter__num">II</span><strong class="chapter__name">分束</strong><span class="chapter__desc">半透镜让光通过的同时也把它反射</span></li>
+          <li class="chapter chapter--3"><span class="chapter__num">III</span><strong class="chapter__name">色散</strong><span class="chapter__desc">棱镜把白光分成红、绿、蓝</span></li>
+          <li class="chapter chapter--4"><span class="chapter__num">IV</span><strong class="chapter__name">混色</strong><span class="chapter__desc">两束光在同一个结晶上相遇会变成新的颜色</span></li>
+          <li class="chapter chapter--5"><span class="chapter__num">V</span><strong class="chapter__name">滤光</strong><span class="chapter__desc">滤光片只留下你需要的成分</span></li>
+          <li class="chapter chapter--6"><span class="chapter__num">VI</span><strong class="chapter__name">汇聚</strong><span class="chapter__desc">学过的一切在一个盘面上相遇</span></li>
+          <li class="chapter chapter--7"><span class="chapter__num">VII</span><strong class="chapter__name">偏振</strong><span class="chapter__desc">条纹交叉的偏振片会让光消失</span></li>
         </ol>
       </section>
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>这是真实的光学</h2>
         <p>镜子的反射角、棱镜的色散、光的加法混色、交叉的偏振片挡住光线，都是真实的物理。每个章节会打开一张原理卡片，把点击前和点击后的两幅图并排放在一起，写得连小学生都能看懂。游戏在哪里简化了真实物理，我们也一并写出来。</p>
       </section>
 
-      <section>
+      <section class="section">
         <h2>分不清颜色也能通关</h2>
         <p>每个结晶都把它要求的颜色同时刻成了图形。混合色会把成分图形并排放着——黄色结晶上同时刻着三角形和方形。即使完全看不到颜色，300 个谜题也都能解开。</p>
-
-        <ul class="legend">
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" fill="#c8321e" /></svg>
-            红 = 三角形
-          </li>
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" fill="#1e7f46" /></svg>
-            绿 = 方形
-          </li>
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" fill="#2347c2" /></svg>
-            蓝 = 圆形
-          </li>
+        <ul class="shape-legend">
+          <li><svg class="glyph glyph--r" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" /></svg>红 = 三角形</li>
+          <li><svg class="glyph glyph--g" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" /></svg>绿 = 方形</li>
+          <li><svg class="glyph glyph--b" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" /></svg>蓝 = 圆形</li>
         </ul>
-
-        <figure>
-          <img class="board" src="../img/board-mixing.png" alt="把红和绿一起送到，就得到黄色。这就是结晶上同时刻着三角形和方形的原因。"
-               width="720" height="720" loading="lazy" />
+        <figure class="board-figure">
+          <img src="/img/board-mixing.png" alt="把红和绿一起送到，就得到黄色。这就是结晶上同时刻着三角形和方形的原因。" width="720" height="720" loading="lazy" />
           <figcaption>把红和绿一起送到，就得到黄色。这就是结晶上同时刻着三角形和方形的原因。</figcaption>
         </figure>
-
         <ul class="facts">
           <li>文字大小可以选择 标准 · 大 · 特大</li>
           <li>打开设备的「减弱动态效果」后，画面特效会减少</li>
@@ -362,70 +346,49 @@
         </ul>
       </section>
 
-      <section>
+      <section class="section">
         <h2>四种语言</h2>
         <p>支持 한국어、English、日本語、简体中文。跟随设备语言，也可以在设置里直接选择。</p>
       </section>
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>常见问题</h2>
-        <!--
-          접어 둔다. 여섯 문답을 펼쳐 두면 페이지 끝이 글 벽이 되고, 여기까지
-          내려온 사람은 이미 살지 말지를 정한 뒤다. 답은 DOM에 그대로 있으므로
-          FAQPage JSON-LD와도, 답변 엔진과도 어긋나지 않는다. 첫 문답만 열어
-          둬서 무엇이 접혀 있는지 보이게 한다.
-        -->
-        <div class="faq">
-          <details class="qa" open>
-            <summary>真的没有广告吗？</summary>
-            <p>没有。也没有订阅、注册和登录。在 iPhone 和 iPad 上可以免费下载，先玩第 1 章的 14 关，一次购买即可解锁其余 286 关。在 Android 上下载时付费一次，300 关从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。</p>
-          </details>
-          <details class="qa">
-            <summary>没有网络能玩吗？</summary>
-            <p>能。除了购买时，它不使用网络。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。</p>
-          </details>
-          <details class="qa">
-            <summary>我有色觉障碍，能玩吗？</summary>
-            <p>能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。</p>
-          </details>
-          <details class="qa">
-            <summary>一共多少关？难吗？</summary>
-            <p>七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。</p>
-          </details>
-          <details class="qa">
-            <summary>有 Android 版本吗？</summary>
-            <p>有。同样的 300 关，两边都只需付费一次：iOS 免费下载、在应用内解锁，Android 在下载时付费。</p>
-          </details>
-          <details class="qa">
-            <summary>占多大空间？</summary>
-            <p>不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。</p>
-          </details>
-          <details class="qa">
-            <summary>能用来上课吗？</summary>
-            <p>能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。</p>
-          </details>
-        </div>
+        <!-- 접어 둔다. 첫 문답만 열어 무엇이 접혀 있는지 보이게 한다. 답은 DOM에 그대로 있다. -->
+        <div><details class="disclosure" open><summary>真的没有广告吗？</summary><div class="disclosure__body"><p>没有。也没有订阅、注册和登录。在 iPhone 和 iPad 上可以免费下载，先玩第 1 章的 14 关，一次购买即可解锁其余 286 关。在 Android 上下载时付费一次，300 关从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。</p></div></details><details class="disclosure"><summary>没有网络能玩吗？</summary><div class="disclosure__body"><p>能。除了购买时，它不使用网络。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。</p></div></details><details class="disclosure"><summary>我有色觉障碍，能玩吗？</summary><div class="disclosure__body"><p>能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。</p></div></details><details class="disclosure"><summary>一共多少关？难吗？</summary><div class="disclosure__body"><p>七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。</p></div></details><details class="disclosure"><summary>有 Android 版本吗？</summary><div class="disclosure__body"><p>有。同样的 300 关，两边都只需付费一次：iOS 免费下载、在应用内解锁，Android 在下载时付费。</p></div></details><details class="disclosure"><summary>占多大空间？</summary><div class="disclosure__body"><p>不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。</p></div></details><details class="disclosure"><summary>能用来上课吗？</summary><div class="disclosure__body"><p>能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。</p></div></details></div>
       </section>
 
       <section class="closer">
-        <p class="closer-line">折转光线，点亮结晶</p>
-        <div class="cta-row">
-          <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">在 App Store 获取</a>
-          <a class="cta cta-lg" href="https://play.google.com/store/apps/details?id=co.adriven.prism">在 Google Play 获取</a>
-        </div>
+        <p class="closer__line">折转光线，点亮结晶</p>
+        <p class="store-links store-links--lg">
+          <a class="button" href="https://apps.apple.com/kr/app/id6803019903">在 App Store 获取</a>
+          <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism">在 Google Play 获取</a>
+        </p>
       </section>
-
-      <nav class="links">
-        <a href="/zh-Hans/optics/">用解谜游戏学光学：PRISM 的七个章节与真实的光</a>
-        <a href="../privacy.html">隐私政策</a>
-        <a href="../support.html">支持与联系</a>
-      </nav>
-
-      <footer>
-        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
-      </footer>
     </main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__map">
+          <nav aria-label="PRISM">
+            <h2>PRISM</h2>
+            <ul><li><a href="/zh-Hans/optics/">学习</a></li><li><a href="/play/">试玩</a></li><li><a href="https://apps.apple.com/kr/app/id6803019903">App Store</a> · <a href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play</a></li></ul>
+          </nav>
+          <nav aria-label="文章">
+            <h2>文章</h2>
+            <ul><li><a href="/zh-Hans/optics/">用解谜游戏学光学：PRISM 的七个章节与真实的光</a></li></ul>
+          </nav>
+          <nav aria-label="A Driven">
+            <h2>A Driven</h2>
+            <ul><li><a href="/zh-Hans/about/">关于 A Driven</a></li><li><a href="/zh-Hans/support.html">支持与联系</a></li><li><a href="/zh-Hans/privacy.html">隐私政策</a></li></ul>
+          </nav>
+        </div>
+        <nav class="family" aria-label="A Driven 旗下网站">
+          <h2>A Driven 旗下网站</h2>
+          <ul><li><a href="https://harumath.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer" lang="ko" hreflang="ko">하루연산</a> <span class="family__lang">(仅韩语)</span><span class="family__desc">每次为孩子新出一份计算练习的免费服务（小学 1 至 6 年级）</span><span class="family__host">harumath.kr</span></li><li><a href="https://habitly.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer" lang="ko" hreflang="ko">해빗리 Habitly</a> <span class="family__lang">(仅韩语)</span><span class="family__desc">无需注册即可使用的简单习惯打卡应用</span><span class="family__host">habitly.kr</span></li><li><a href="https://templo.kr/zh-CN?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">Templo</a><span class="family__desc">韩国寺院地图、打卡与巡礼</span><span class="family__host">templo.kr</span></li><li><a href="https://adriven.co/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">A Driven</a><span class="family__desc">公司网站：用用户主动提供的数据做营销</span><span class="family__host">adriven.co</span></li></ul>
+        </nav>
+        <p class="site-footer__legal">© 2026 A Driven Inc. · <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
+      </div>
+    </footer>
   </body>
 </html>

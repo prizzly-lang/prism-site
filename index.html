@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="ko" dir="ltr">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PRISM: 빛의 퍼즐 · 빛을 접어 결정을 밝힌다</title>
     <meta name="description" content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고도 구독도 없이 한 번 결제로 전부." />
     <meta name="theme-color" content="#F3EFE6" />
-    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />
     <link rel="canonical" href="https://prism.adriven.co/" />
     <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
     <link rel="alternate" hreflang="en" href="https://prism.adriven.co/en/" />
@@ -16,14 +15,42 @@
     <meta property="og:title" content="PRISM: 빛의 퍼즐 · 빛을 접어 결정을 밝힌다" />
     <meta property="og:description" content="탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고도 구독도 없이 한 번 결제로 전부." />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ko" />
+    <meta property="og:locale" content="ko_KR" />
     <meta property="og:url" content="https://prism.adriven.co/" />
     <meta property="og:image" content="https://prism.adriven.co/img/board-prism.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preload" href="/fonts/sans-kr-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />
     <script type="application/ld+json">
 [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://prism.adriven.co/#website",
+    "name": "PRISM",
+    "alternateName": "PRISM by A Driven",
+    "url": "https://prism.adriven.co/",
+    "inLanguage": [
+      "ko",
+      "en",
+      "ja",
+      "zh-Hans"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://adriven.co/#org",
+      "name": "A Driven Inc.",
+      "alternateName": [
+        "A Driven",
+        "Adriven",
+        "에이드리븐"
+      ],
+      "url": "https://adriven.co/"
+    }
+  },
   {
     "@context": "https://schema.org",
     "@type": "MobileApplication",
@@ -52,7 +79,8 @@
     "softwareVersion": "1.6",
     "availableOnDevice": [
       "iPhone",
-      "iPad"
+      "iPad",
+      "Android"
     ],
     "countriesSupported": "Worldwide",
     "offers": [
@@ -194,41 +222,37 @@
     </script>
   </head>
   <body>
-    <main>
-      <!--
-        언어 전환은 **맨 위**에 둔다. 자기 언어가 아닌 페이지에 떨어진 사람이
-        가장 먼저 찾는 것이고, 그 사람은 페이지를 읽지 못하므로 끝까지
-        스크롤하지 않는다. 아래에 두면 없는 것과 같다.
-      -->
-      <nav class="langs" aria-label="다른 언어">
-        <a href="https://prism.adriven.co/en/" hreflang="en" lang="en">English</a>
-          <a href="https://prism.adriven.co/ja/" hreflang="ja" lang="ja">日本語</a>
-          <a href="https://prism.adriven.co/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-      </nav>
-
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-logo" href="/" aria-current="page">PRISM</a>
+        <nav class="site-nav" aria-label="주 메뉴">
+          <ul>
+          <li><a href="/learn/">배우기</a></li>
+          <li><a href="/worksheets/">학습지</a></li>
+          <li><a href="/play/">해 보기</a></li>
+          <li><a href="/" aria-current="page">앱</a></li>
+          </ul>
+        </nav>
+        <nav class="lang-switch" aria-label="언어"><ul><li><a href="/" hreflang="ko" lang="ko" aria-current="true">한국어</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main" class="page" tabindex="-1">
       <header class="hero">
-        <img class="hero-board" src="img/board-prism.png" alt="흰 빛이 프리즘을 지나 빨강과 초록으로 갈라져 결정 두 개를 켠 판"
-             width="720" height="720" />
+        <img class="hero__board" src="/img/board-prism.png" alt="흰 빛이 프리즘을 지나 빨강과 초록으로 갈라져 결정 두 개를 켠 판" width="720" height="720" />
         <h1>PRISM</h1>
         <p class="tagline">빛을 접어 결정을 밝힌다</p>
-        <div class="cta-row">
-          <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
-          <a class="cta cta-lg" href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play에서 받기</a>
-        </div>
+        <p class="hero__what">iPhone·iPad·Android용 빛 퍼즐 게임입니다. iPhone·iPad에서는 무료로 받아 1챕터를 해 보고 한 번 결제로 전부 열고, Android에서는 한 번 결제로 받습니다.</p>
+        <p class="store-links">
+          <a class="button" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+          <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play에서 받기</a>
+        </p>
         <!--
-          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
-
-          **스토어 버튼 아래**에 둔다. 살 사람의 길이 언제나 먼저 보여야 하고,
-          체험판은 그 길을 지나친 사람에게만 필요하다. 글씨도 버튼이 아니라
-          밑줄 링크다. (1.5까지 같은 줄이 두 번 들어가 있었다.)
+          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다. 스토어 버튼 아래에
+          밑줄 링크로 둔다. 살 사람의 길이 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만 필요하다.
         -->
-        <p class="cta-demo"><a href="https://prism.adriven.co/play/">먼저 14판 해보기</a></p>
-
-        <!--
-          숫자 넷으로 제품 전체를 말한다. 300판, 7챕터, 판마다 정답 하나,
-          그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
-          문장이 아니라 이 숫자들이다.
-        -->
+        <p class="hero__demo"><a href="/play/">먼저 14판 해보기</a></p>
+        <!-- 숫자 넷으로 제품 전체를 말한다. 답변 엔진이 인용할 때 집는 것도 이 숫자들이다. -->
         <ul class="stats">
           <li><b>300</b><span>퍼즐</span></li>
           <li><b>7</b><span>챕터</span></li>
@@ -239,33 +263,40 @@
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>30초면 무슨 게임인지 압니다</h2>
-        <video
-          class="preview"
-          src="media/preview-ko.mp4"
-          poster="media/preview-ko.jpg"
-          width="540"
-          height="818"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
-        <p class="cap">실제 플레이 화면입니다. 소리는 없습니다.</p>
+        <!--
+          영상: 소리 없이 저절로 돌지만 멈출 수 있어야 한다(WCAG 2.2.2). 「동작 줄이기」를 켠
+          방문자에게는 저절로 틀지 않는다. 스크립트가 없으면 기본 컨트롤을 그대로 보인다.
+        -->
+        <figure class="video-preview">
+          <video src="/media/preview-ko.mp4" poster="/media/preview-ko.jpg" width="540" height="818" muted loop playsinline preload="metadata" controls></video>
+          <button class="video-preview__toggle" type="button" hidden data-play="영상 재생" data-pause="영상 일시정지"></button>
+          <figcaption>실제 플레이 화면입니다. 소리는 없습니다.</figcaption>
+        </figure>
+        <script>
+          (function () {
+            var f = document.currentScript.previousElementSibling;
+            var v = f.querySelector('video');
+            var b = f.querySelector('button');
+            var label = function () { b.textContent = v.paused ? b.dataset.play : b.dataset.pause; };
+            v.removeAttribute('controls');
+            b.hidden = false;
+            b.onclick = function () { v.paused ? v.play() : v.pause(); };
+            v.onplay = v.onpause = label;
+            label();
+            if (!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(label);
+          })();
+        </script>
       </section>
 
-      <section>
+      <section class="section">
         <h2>규칙은 하나입니다</h2>
         <p class="lead">탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다. 레벨이 규칙을 가르칩니다.</p>
-
-        <figure>
-          <img class="board" src="img/board-rule.png" alt="첫 번째 레벨. 거울을 한 번 탭하면 풀립니다."
-               width="720" height="720" loading="lazy" />
+        <figure class="board-figure">
+          <img src="/img/board-rule.png" alt="첫 번째 레벨. 거울을 한 번 탭하면 풀립니다." width="720" height="720" loading="lazy" />
           <figcaption>첫 번째 레벨. 거울을 한 번 탭하면 풀립니다.</figcaption>
         </figure>
-
         <ul class="facts">
           <li><strong>300개</strong> 퍼즐, 일곱 개의 챕터</li>
           <li>모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다</li>
@@ -277,85 +308,39 @@
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>일곱 개의 챕터</h2>
         <p>레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.</p>
-        <!--
-          카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
-          분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
-          수렴은 전부, 편광은 편광판 살처럼 끊긴 줄무늬. 장식이 아니라 목록의 내용을 한 번 더 말한다.
-        -->
         <ol class="chapters">
-          <li class="chapter chapter-1">
-            <span class="ch-num">I</span>
-            <strong>반사</strong>
-            <span class="ch-desc">거울이 빛을 90도로 꺾습니다</span>
-          </li>
-          <li class="chapter chapter-2">
-            <span class="ch-num">II</span>
-            <strong>분열</strong>
-            <span class="ch-desc">반투명 거울은 빛을 통과시키면서 동시에 반사합니다</span>
-          </li>
-          <li class="chapter chapter-3">
-            <span class="ch-num">III</span>
-            <strong>분산</strong>
-            <span class="ch-desc">프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다</span>
-          </li>
-          <li class="chapter chapter-4">
-            <span class="ch-num">IV</span>
-            <strong>혼합</strong>
-            <span class="ch-desc">두 빛이 한 결정에서 겹치면 새로운 색이 됩니다</span>
-          </li>
-          <li class="chapter chapter-5">
-            <span class="ch-num">V</span>
-            <strong>정제</strong>
-            <span class="ch-desc">필터는 원하는 성분만 남깁니다</span>
-          </li>
-          <li class="chapter chapter-6">
-            <span class="ch-num">VI</span>
-            <strong>수렴</strong>
-            <span class="ch-desc">배운 모든 것이 한 판에서 만납니다</span>
-          </li>
-          <li class="chapter chapter-7">
-            <span class="ch-num">VII</span>
-            <strong>편광</strong>
-            <span class="ch-desc">무늬가 엇갈린 편광판은 빛을 지웁니다</span>
-          </li>
+          <li class="chapter chapter--1"><span class="chapter__num">I</span><strong class="chapter__name">반사</strong><span class="chapter__desc">거울이 빛을 90도로 꺾습니다</span></li>
+          <li class="chapter chapter--2"><span class="chapter__num">II</span><strong class="chapter__name">분열</strong><span class="chapter__desc">반투명 거울은 빛을 통과시키면서 동시에 반사합니다</span></li>
+          <li class="chapter chapter--3"><span class="chapter__num">III</span><strong class="chapter__name">분산</strong><span class="chapter__desc">프리즘이 흰 빛을 빨강·초록·파랑으로 가릅니다</span></li>
+          <li class="chapter chapter--4"><span class="chapter__num">IV</span><strong class="chapter__name">혼합</strong><span class="chapter__desc">두 빛이 한 결정에서 겹치면 새로운 색이 됩니다</span></li>
+          <li class="chapter chapter--5"><span class="chapter__num">V</span><strong class="chapter__name">정제</strong><span class="chapter__desc">필터는 원하는 성분만 남깁니다</span></li>
+          <li class="chapter chapter--6"><span class="chapter__num">VI</span><strong class="chapter__name">수렴</strong><span class="chapter__desc">배운 모든 것이 한 판에서 만납니다</span></li>
+          <li class="chapter chapter--7"><span class="chapter__num">VII</span><strong class="chapter__name">편광</strong><span class="chapter__desc">무늬가 엇갈린 편광판은 빛을 지웁니다</span></li>
         </ol>
       </section>
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>진짜 광학입니다</h2>
         <p>거울의 반사각, 프리즘의 분산, 빛의 가산혼합, 엇갈린 편광판이 빛을 지우는 현상은 실제 물리 그대로입니다. 챕터마다 원리 카드가 열리고, 탭하기 전과 후를 그림 두 장으로 나란히 보여줍니다. 초등학생이 읽을 수 있게 썼습니다. 게임이 실제 물리와 어디서 달라지는지도 함께 적어뒀습니다.</p>
       </section>
 
-      <section>
+      <section class="section">
         <h2>색을 구분하기 어려워도 끝까지 풀 수 있습니다</h2>
         <p>모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은 성분 도형이 나란히 놓입니다. 노란 결정에는 삼각형과 사각형이 함께 새겨집니다. 색을 전혀 보지 못해도 300개 퍼즐 전부를 풀 수 있습니다.</p>
-
-        <ul class="legend">
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" fill="#c8321e" /></svg>
-            빨강 = 삼각형
-          </li>
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" fill="#1e7f46" /></svg>
-            초록 = 사각형
-          </li>
-          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" fill="#2347c2" /></svg>
-            파랑 = 원
-          </li>
+        <ul class="shape-legend">
+          <li><svg class="glyph glyph--r" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" /></svg>빨강 = 삼각형</li>
+          <li><svg class="glyph glyph--g" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" /></svg>초록 = 사각형</li>
+          <li><svg class="glyph glyph--b" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" /></svg>파랑 = 원</li>
         </ul>
-
-        <figure>
-          <img class="board" src="img/board-mixing.png" alt="빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께 새겨진 이유입니다."
-               width="720" height="720" loading="lazy" />
+        <figure class="board-figure">
+          <img src="/img/board-mixing.png" alt="빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께 새겨진 이유입니다." width="720" height="720" loading="lazy" />
           <figcaption>빨강과 초록을 함께 보내면 노랑이 됩니다. 결정에 삼각형과 사각형이 함께 새겨진 이유입니다.</figcaption>
         </figure>
-
         <ul class="facts">
           <li>글자 크기를 보통 · 크게 · 아주 크게 중에서 고를 수 있습니다</li>
           <li>기기의 「동작 줄이기」를 켜면 화면 연출이 줄어듭니다</li>
@@ -363,73 +348,49 @@
         </ul>
       </section>
 
-      <section>
+      <section class="section">
         <h2>네 가지 언어</h2>
         <p>한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.</p>
       </section>
 
       <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>자주 묻는 것</h2>
-        <!--
-          접어 둔다. 여섯 문답을 펼쳐 두면 페이지 끝이 글 벽이 되고, 여기까지
-          내려온 사람은 이미 살지 말지를 정한 뒤다. 답은 DOM에 그대로 있으므로
-          FAQPage JSON-LD와도, 답변 엔진과도 어긋나지 않는다. 첫 문답만 열어
-          둬서 무엇이 접혀 있는지 보이게 한다.
-        -->
-        <div class="faq">
-          <details class="qa" open>
-            <summary>광고가 정말 없나요?</summary>
-            <p>없습니다. 구독도, 회원가입도, 로그인도 없습니다. iPhone·iPad에서는 무료로 받아 1챕터 14판을 해 보고, 한 번 결제하면 나머지 286판이 전부 열립니다. Android에서는 한 번 결제로 받으면 300판이 처음부터 전부 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.</p>
-          </details>
-          <details class="qa">
-            <summary>인터넷 없이 되나요?</summary>
-            <p>됩니다. 결제할 때 말고는 네트워크를 쓰지 않습니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.</p>
-          </details>
-          <details class="qa">
-            <summary>색약인데 할 수 있나요?</summary>
-            <p>할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 300판 전부를 풀 수 있습니다.</p>
-          </details>
-          <details class="qa">
-            <summary>몇 판이고 얼마나 어렵나요?</summary>
-            <p>일곱 챕터에 300판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.</p>
-          </details>
-          <details class="qa">
-            <summary>안드로이드 버전이 있나요?</summary>
-            <p>있습니다. 같은 300판이고, 어느 쪽이든 한 번만 결제하면 됩니다. iOS는 무료로 받아 앱 안에서 열고, Android는 받을 때 결제합니다.</p>
-          </details>
-          <details class="qa">
-            <summary>용량이 얼마나 되나요?</summary>
-            <p>5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.</p>
-          </details>
-          <details class="qa">
-            <summary>수업에 쓸 수 있나요?</summary>
-            <p>쓸 수 있습니다. 일곱 챕터가 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 하나씩 다루고, 챕터를 시작할 때 실제 물리와 게임이 단순화한 점을 카드로 설명합니다. 챕터별 원리와 학생에게 던질 질문을 정리한 교사용 안내 글이 이 사이트에 있습니다.</p>
-          </details>
-        </div>
+        <!-- 접어 둔다. 첫 문답만 열어 무엇이 접혀 있는지 보이게 한다. 답은 DOM에 그대로 있다. -->
+        <div><details class="disclosure" open><summary>광고가 정말 없나요?</summary><div class="disclosure__body"><p>없습니다. 구독도, 회원가입도, 로그인도 없습니다. iPhone·iPad에서는 무료로 받아 1챕터 14판을 해 보고, 한 번 결제하면 나머지 286판이 전부 열립니다. Android에서는 한 번 결제로 받으면 300판이 처음부터 전부 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.</p></div></details><details class="disclosure"><summary>인터넷 없이 되나요?</summary><div class="disclosure__body"><p>됩니다. 결제할 때 말고는 네트워크를 쓰지 않습니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.</p></div></details><details class="disclosure"><summary>색약인데 할 수 있나요?</summary><div class="disclosure__body"><p>할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 300판 전부를 풀 수 있습니다.</p></div></details><details class="disclosure"><summary>몇 판이고 얼마나 어렵나요?</summary><div class="disclosure__body"><p>일곱 챕터에 300판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.</p></div></details><details class="disclosure"><summary>안드로이드 버전이 있나요?</summary><div class="disclosure__body"><p>있습니다. 같은 300판이고, 어느 쪽이든 한 번만 결제하면 됩니다. iOS는 무료로 받아 앱 안에서 열고, Android는 받을 때 결제합니다.</p></div></details><details class="disclosure"><summary>용량이 얼마나 되나요?</summary><div class="disclosure__body"><p>5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.</p></div></details><details class="disclosure"><summary>수업에 쓸 수 있나요?</summary><div class="disclosure__body"><p>쓸 수 있습니다. 일곱 챕터가 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 하나씩 다루고, 챕터를 시작할 때 실제 물리와 게임이 단순화한 점을 카드로 설명합니다. 챕터별 원리와 학생에게 던질 질문을 정리한 교사용 안내 글이 이 사이트에 있습니다.</p></div></details></div>
       </section>
 
       <section class="closer">
-        <p class="closer-line">빛을 접어 결정을 밝힌다</p>
-        <div class="cta-row">
-          <a class="cta cta-lg" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
-          <a class="cta cta-lg" href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play에서 받기</a>
-        </div>
+        <p class="closer__line">빛을 접어 결정을 밝힌다</p>
+        <p class="store-links store-links--lg">
+          <a class="button" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+          <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play에서 받기</a>
+        </p>
       </section>
-
-      <nav class="links">
-        <a href="/optics/">퍼즐로 배우는 빛: PRISM 일곱 챕터 수업 안내</a>
-        <a href="/proven-unique/">240판을 손으로 만들지 않았습니다</a>
-        <a href="/worksheet/">인쇄용 학습지: 빛의 길 찾기</a>
-        <a href="privacy.html">개인정보 처리방침</a>
-        <a href="support.html">지원 · 문의</a>
-      </nav>
-
-      <footer>
-        <p class="crosslink">매일 연산 연습은 <a href="https://harumath.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=crosslink&amp;utm_content=landing">하루연산</a>에서 · 에이드리븐이 만든 초등 연산 문제지 서비스</p>
-        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
-      </footer>
     </main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__map">
+          <nav aria-label="PRISM">
+            <h2>PRISM</h2>
+            <ul><li><a href="/learn/">배우기</a></li><li><a href="/worksheets/">학습지</a></li><li><a href="/play/">해 보기</a></li><li><a href="https://apps.apple.com/kr/app/id6803019903">App Store</a> · <a href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play</a></li></ul>
+          </nav>
+          <nav aria-label="읽을거리">
+            <h2>읽을거리</h2>
+            <ul><li><a href="/optics/">퍼즐로 배우는 빛: PRISM 일곱 챕터 수업 안내</a></li><li><a href="/proven-unique/">퍼즐 판을 손으로 만들지 않았습니다</a></li></ul>
+          </nav>
+          <nav aria-label="에이드리븐">
+            <h2>에이드리븐</h2>
+            <ul><li><a href="/about/">에이드리븐 소개</a></li><li><a href="/support.html">지원 · 문의</a></li><li><a href="/privacy.html">개인정보 처리방침</a></li></ul>
+          </nav>
+        </div>
+        <nav class="family" aria-label="에이드리븐 패밀리 사이트">
+          <h2>에이드리븐 패밀리 사이트</h2>
+          <ul><li><a href="https://harumath.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">하루연산</a><span class="family__desc">아이 맞춤 연산 문제지를 매번 새로 만들어 주는 무료 서비스. 초1~6</span><span class="family__host">harumath.kr</span></li><li><a href="https://habitly.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">해빗리 Habitly</a><span class="family__desc">가입 없이 바로 쓰는 쉬운 습관 도장 앱</span><span class="family__host">habitly.kr</span></li><li><a href="https://templo.kr/ko?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">템플로</a><span class="family__desc">한국 사찰 지도 · 체크인 · 순례</span><span class="family__host">templo.kr</span></li><li><a href="https://adriven.co/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">에이드리븐</a><span class="family__desc">이용자가 직접 제공한 데이터로 마케팅을 돕는 회사 사이트</span><span class="family__host">adriven.co</span></li></ul>
+        </nav>
+        <p class="site-footer__legal">© 2026 A Driven Inc. · <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
+      </div>
+    </footer>
   </body>
 </html>

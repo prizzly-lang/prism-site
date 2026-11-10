@@ -1,36 +1,43 @@
 /**
  * 인쇄용 학습지 페이지를 그린다. 문구는 `worksheet-content.mjs`, 판 그림은
- * `worksheet/assets/`(prism 저장소의 make-worksheet-boards.ts가 넘긴다).
+ * `worksheets/<slug>/assets/`(prism 저장소의 make-worksheet-boards.ts가 넘긴다).
  *
  * 한 페이지에 A4 「장」(.sheet)을 이어 붙인다. 화면에서는 종이 몇 장이 놓인 것처럼
- * 보이고, 인쇄하면 장마다 A4 한 쪽이 된다. PDF는 같은 HTML을 Chrome으로 인쇄해 만든다
- * (`print-worksheet.mjs`). 화면 전용 머리말(.screen-only)은 인쇄에서 빠진다.
+ * 보이고(A4보다 좁으면 한 줄로 흘러내린다, css/sheet.css), 인쇄하면 장마다 A4 한 쪽이 된다.
+ * PDF는 같은 HTML을 Chrome으로 인쇄해 만든다(`print-worksheet.mjs`). 화면 전용 머리말
+ * (.screen-only)과 사이트 머리말·바닥글은 인쇄에서 빠진다.
  *
- *   /worksheet/          학습지 2쪽 (한국어)    /en/worksheet/          (영어)
- *   /worksheet/answers/  정답지 1쪽             /en/worksheet/answers/
+ *   /worksheets/                       학습지 목록          /en/worksheets/
+ *   /worksheets/path-of-light/         학습지 2쪽           /en/worksheets/path-of-light/
+ *   /worksheets/path-of-light/answers/ 정답지 1쪽(교사용)
  *
  * 판 그림은 <img>가 아니라 SVG를 본문에 그대로 넣는다. 그래야 판 가장자리 글자가
  * 사이트 글꼴(Prism Sans)을 쓰고, 기호 설명의 아이콘을 같은 그림에서 잘라 쓸 수 있다.
+ * 스크린 리더에는 판마다 role="img"와 이름을 준다(그림 속 글자 대신 무엇을 하는 판인지).
  */
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { WS, BOARDS } from './worksheet-content.mjs';
 import { harumathHref } from './crosslinks.mjs';
+import { ORIGIN, ORG, APP_ID, UI, LEARN_LANGS, esc, plain, homeOf, worksheetsPath, prefix } from './site.mjs';
+import { page } from './ui/page.mjs';
 
-export const WS_LANGS = ['ko', 'en'];
-export const wsPathOf = (l, answers = false) =>
-  `${l === 'ko' ? '' : `/${l}`}/worksheet/${answers ? 'answers/' : ''}`;
+export const WS_LANGS = LEARN_LANGS;
+export const WS_SLUG = 'path-of-light';
+/** 학습지를 마지막으로 고친 날. sitemap lastmod와 JSON-LD dateModified. 문구·판을 고치면 같이 고친다. */
+export const WS_UPDATED = '2026-11-26';
+export const wsPathOf = (l, answers = false) => `${worksheetsPath(l, WS_SLUG)}${answers ? 'answers/' : ''}`;
 export const WS_PDF = {
   ko: { sheet: 'prism-worksheet-ko.pdf', answers: 'prism-worksheet-answers-ko.pdf' },
   en: { sheet: 'prism-worksheet-en.pdf', answers: 'prism-worksheet-answers-en.pdf' },
 };
 /** 화면 머리말 이미지. 삽화가 없으면 그 자리를 비운다(빌드는 멈추지 않는다). */
 const ART = ['header', 'ch1', 'ch2', 'ch3', 'ch4'];
+const DIR = `/worksheets/${WS_SLUG}`;
 
-export function worksheetPages(deps) {
-  const { HERE, esc, L, ORIGIN, ORG, APP_ID, existsSync } = deps;
-  const A = resolve(HERE, 'worksheet', 'assets');
+export function worksheetPages(HERE) {
+  const A = resolve(HERE, 'worksheets', WS_SLUG, 'assets');
   const board = JSON.parse(readFileSync(resolve(A, 'boards.json'), 'utf8'));
   checkAgainstEngine(board);
 
@@ -73,10 +80,12 @@ export function worksheetPages(deps) {
   const INLINE = { '△': GLYPH.r, '□': GLYPH.g, '○': GLYPH.b };
   const gl = (s) =>
     esc(s).replace(/[△□○]/g, (c) => INLINE[c].replace('class="glyph"', 'class="glyph inline"'));
+  /** 판 그림의 이름(스크린 리더). 도형 기호는 소리 내 읽을 것이 없으니 뺀다. */
+  const label = (s) => esc(plain(s).replace(/[△□○]/g, '').replace(/\s+/g, ' '));
 
   /* 정답 그림의 선 모양. make-worksheet-boards.ts의 BEAM_STYLE과 같은 값이다. */
   const beam = (dash, w, cap) =>
-    `<svg class="beam" viewBox="0 0 16 3" aria-hidden="true"><path d="M1 1.5H15" stroke="#000" stroke-width="${w}" stroke-linecap="${cap}"${dash ? ` stroke-dasharray="${dash}"` : ''}/></svg>`;
+    `<svg class="beam" viewBox="0 0 16 3" aria-hidden="true"><path d="M1 1.5H15" stroke="currentColor" stroke-width="${w}" stroke-linecap="${cap}"${dash ? ` stroke-dasharray="${dash}"` : ''}/></svg>`;
   const BEAM = {
     white: beam('', 0.6, 'round'),
     r: beam('3.4 1.3', 0.55, 'butt'),
@@ -87,18 +96,54 @@ export function worksheetPages(deps) {
   const out = [];
   for (const lang of WS_LANGS) {
     const w = WS[lang];
-    const t = L[lang];
-    out.push({ path: wsPathOf(lang), html: sheetPage(lang, w, t, false) });
-    out.push({ path: wsPathOf(lang, true), html: sheetPage(lang, w, t, true) });
+    out.push({ path: worksheetsPath(lang), html: listPage(lang), updated: WS_UPDATED });
+    out.push({ path: wsPathOf(lang), html: sheetPage(lang, w, false), updated: WS_UPDATED });
+    out.push({ path: wsPathOf(lang, true), html: sheetPage(lang, w, true), updated: WS_UPDATED });
   }
   return out;
 
-  function sheetPage(lang, w, t, answers) {
-    const up = '../'.repeat(wsPathOf(lang, answers).split('/').filter(Boolean).length);
-    const url = ORIGIN + wsPathOf(lang, answers);
-    const pdf = `${ORIGIN}/worksheet/${WS_PDF[lang].sheet}`;
-    const pdfA = `${ORIGIN}/worksheet/${WS_PDF[lang].answers}`;
-    const title = answers ? `${w.answersTitle} · ${w.title} | PRISM` : `${w.pageTitle} | PRISM`;
+  /** 학습지 목록. 학습지가 늘면 카드가 는다. 카드마다 대상·시간·준비물 한 줄. */
+  function listPage(lang) {
+    const w = WS[lang];
+    const L = w.list;
+    return page({
+      lang,
+      title: `${L.title} | PRISM`,
+      h1: L.title,
+      desc: L.desc,
+      path: worksheetsPath(lang),
+      alternates: Object.fromEntries(WS_LANGS.map((l) => [l, worksheetsPath(l)])),
+      section: 'worksheets',
+      crumbs: [[UI[lang].home, homeOf(lang)]],
+      ld: [{
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: L.title,
+        description: L.desc,
+        inLanguage: lang,
+        url: ORIGIN + worksheetsPath(lang),
+        publisher: ORG,
+        hasPart: [{ '@type': 'LearningResource', name: w.title, url: ORIGIN + wsPathOf(lang) }],
+      }],
+      main: `      <header class="page-head">
+        <h1>${esc(L.title)}</h1>
+        <p class="lead">${esc(L.lead)}</p>
+      </header>
+      <ul class="card-list stack">
+        <li class="card">
+          <h2><a href="${wsPathOf(lang)}">${esc(w.title)}</a></h2>
+          <p>${esc(w.subtitle)}</p>
+          <p class="card__meta">${esc(L.meta)}</p>
+        </li>
+      </ul>`,
+    });
+  }
+
+  function sheetPage(lang, w, answers) {
+    const path = wsPathOf(lang, answers);
+    const pdf = `${DIR}/${WS_PDF[lang].sheet}`;
+    const pdfA = `${DIR}/${WS_PDF[lang].answers}`;
+    const h1 = answers ? `${w.title}: ${w.answersTitle}` : w.pageTitle;
 
     const ld = {
       '@context': 'https://schema.org',
@@ -106,7 +151,8 @@ export function worksheetPages(deps) {
       name: answers ? `${w.title}: ${w.answersTitle}` : w.title,
       description: w.desc,
       inLanguage: lang,
-      url,
+      url: ORIGIN + path,
+      dateModified: WS_UPDATED,
       learningResourceType: answers ? 'answer key' : 'worksheet',
       educationalLevel: lang === 'ko' ? '초등 5~6학년, 중학교' : 'Ages 10 to 14',
       teaches: w.concepts.map((c) => c.h),
@@ -117,82 +163,44 @@ export function worksheetPages(deps) {
       about: { '@type': 'MobileApplication', '@id': APP_ID, name: 'PRISM' },
       encoding: {
         '@type': 'MediaObject',
-        contentUrl: answers ? pdfA : pdf,
+        contentUrl: ORIGIN + (answers ? pdfA : pdf),
         encodingFormat: 'application/pdf',
       },
-      ...(hasArt.header ? { image: `${ORIGIN}/worksheet/assets/header.webp` } : {}),
+      ...(hasArt.header ? { image: `${ORIGIN}${DIR}/assets/header.webp` } : {}),
     };
-    const alternates = WS_LANGS.map(
-      (l) => `    <link rel="alternate" hreflang="${l}" href="${ORIGIN}${wsPathOf(l, answers)}" />`,
-    ).join('\n');
-    const other = WS_LANGS.filter((l) => l !== lang)
-      .map((l) => `<a href="${ORIGIN}${wsPathOf(l, answers)}" hreflang="${l}" lang="${l}">${L[l].langName}</a>`)
-      .join(' ');
+    const crumbs = [[UI[lang].home, homeOf(lang)], [UI[lang].worksheets, worksheetsPath(lang)]];
+    if (answers) crumbs.push([w.title, wsPathOf(lang)]);
 
-    const screenHead = `
-    <header class="screen-only ws-intro">
-      <nav class="ws-top">
-        <a href="${up}${lang === 'ko' ? '' : `${lang}/`}">${esc(w.back)}</a>
-        <span class="ws-langs">${other}</span>
-      </nav>
-      <h1>${esc(answers ? `${w.title}: ${w.answersTitle}` : w.pageTitle)}</h1>
-${answers ? '' : w.intro.map((p) => `      <p>${gl(p)}</p>`).join('\n')}
-      <p class="ws-actions">
-        <a class="ws-btn" href="${up}worksheet/${WS_PDF[lang].sheet}" download>${esc(w.pdf)}</a>
-        <a class="ws-btn" href="${up}worksheet/${WS_PDF[lang].answers}" download>${esc(w.answersPdf)}</a>
-        <button class="ws-btn ws-btn-quiet" type="button" onclick="window.print()">${esc(w.print)}</button>
-      </p>
-${lang === 'ko' ? `      <p class="ws-cross">매일 연산 연습은 <a href="${harumathHref('worksheet')}">하루연산</a>에서 할 수 있습니다. 에이드리븐이 만든 초등 연산 문제지 서비스로, 종이로도 태블릿으로도 풉니다.</p>
-` : ''}      <p class="ws-links">
-        <a href="${wsPathOf(lang, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a>
-        <a href="${lang === 'ko' ? '/optics/' : `/${lang}/optics/`}">${esc(w.guideLink)}</a>
-      </p>
-    </header>`;
+    const screenHead = `      <header class="page page-head screen-only">
+        <h1>${esc(h1)}</h1>
+${answers ? '' : `        <div class="prose">${w.intro.map((p) => `<p>${gl(p)}</p>`).join('')}</div>\n`}        <p class="actions">
+          <a class="button" href="${pdf}" download>${esc(w.pdf)}</a>
+          <a class="button button--secondary" href="${pdfA}" download>${esc(w.answersPdf)}</a>
+          <button class="button button--secondary" type="button" onclick="window.print()">${esc(w.print)}</button>
+        </p>
+        <ul class="cluster">
+          <li><a href="${wsPathOf(lang, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a></li>
+          <li><a href="${prefix(lang)}/optics/">${esc(w.guideLink)}</a></li>
+        </ul>
+${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습은 <a href="${harumathHref('worksheet')}">하루연산</a>에서 할 수 있습니다. 에이드리븐이 만든 초등 연산 문제지 서비스로, 종이로도 태블릿으로도 풉니다.</p>\n` : ''}      </header>`;
 
     const body = answers ? answerSheet(w) : `${frontSheet(w)}\n${backSheet(w)}`;
 
-    return `<!doctype html>
-<html lang="${lang}" dir="${t.dir}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${esc(title)}</title>
-    <meta name="description" content="${esc(w.desc)}" />
-    <meta name="theme-color" content="#F3EFE6" />
-    <link rel="canonical" href="${url}" />
-${alternates}
-    <link rel="alternate" hreflang="x-default" href="${ORIGIN}${wsPathOf('en', answers)}" />
-    <meta property="og:title" content="${esc(answers ? `${w.title}: ${w.answersTitle}` : w.pageTitle)}" />
-    <meta property="og:description" content="${esc(w.desc)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${ORIGIN}/${hasArt.header ? 'worksheet/assets/header.webp' : 'img/board-prism.png'}" />
-    <link rel="stylesheet" href="${up}fonts/fonts.css" />
-    <link rel="stylesheet" href="${up}worksheet/worksheet.css" />
-    <link rel="icon" href="${up}icon.svg" type="image/svg+xml" />
-    <script type="application/ld+json">
-${JSON.stringify(ld, null, 2)}
-    </script>
-  </head>
-  <body>
-    <!-- 휴대폰에서 A4 장을 화면 폭에 맞춰 줄인다(worksheet.css의 --fit). 인쇄에는 쓰지 않는다. -->
-    <script>
-      (function () {
-        var fit = function () {
-          var a4 = 210 * 96 / 25.4;
-          document.documentElement.style.setProperty('--fit', String(Math.min(1, innerWidth / a4)));
-        };
-        fit();
-        addEventListener('resize', fit);
-      })();
-    </script>
-${screenHead}
-    <main class="ws">
-${body}
-    </main>
-  </body>
-</html>
-`;
+    return page({
+      lang,
+      title: `${h1} | PRISM`,
+      h1,
+      desc: w.desc,
+      path,
+      alternates: Object.fromEntries(WS_LANGS.map((l) => [l, wsPathOf(l, answers)])),
+      section: 'worksheets',
+      crumbs,
+      ld: [ld],
+      image: hasArt.header ? `${DIR}/assets/header.webp` : undefined,
+      extraCss: ['sheet'],
+      mainClass: 'sheets',
+      main: `${screenHead}\n${body}`,
+    });
   }
 
   function legend(w) {
@@ -213,7 +221,7 @@ ${body}
   function sheetHead(w, kicker, title, sub, withArt) {
     return `
         <header class="sheet-head">
-          ${withArt && hasArt.header ? `<img class="head-art" src="/worksheet/assets/header.webp" alt="" />` : ''}
+          ${withArt && hasArt.header ? `<img class="head-art" src="${DIR}/assets/header.webp" alt="" />` : ''}
           <div class="head-row">
             <div>
               <p class="kicker">${esc(kicker)}</p>
@@ -232,7 +240,7 @@ ${body}
           <article class="board-card">
             <h3><span class="num">${i + 1}</span>${esc(c.name)}${c.extra ? ` <span class="tag">${esc(w.extraTag)}</span>` : ''}</h3>
             <p class="goal">${gl(c.goal)} <strong>${esc(c.taps)}</strong></p>
-            <div class="board">${svgOf(`${b.id}-puzzle.svg`)}</div>
+            <div class="board" role="img" aria-label="${label(`${c.name}. ${c.goal}`)}">${svgOf(`${b.id}-puzzle.svg`)}</div>
             <p class="hint">${gl(c.hint)}</p>
             <p class="write"><span>${esc(w.answerLine)}</span><i></i></p>
           </article>`;
@@ -258,10 +266,10 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
 
   function backSheet(w) {
     const blocks = w.concepts.map((c, i) => {
-      const art = hasArt[`ch${i + 1}`] ? `<img class="c-art" src="/worksheet/assets/ch${i + 1}.webp" alt="" />` : '';
+      const art = hasArt[`ch${i + 1}`] ? `<img class="c-art" src="${DIR}/assets/ch${i + 1}.webp" alt="" />` : '';
       const lines = (n) => `<div class="lines">${'<i></i>'.repeat(n)}</div>`;
       const extra = c.preview
-        ? `<aside class="preview"><strong>${esc(c.preview.h)}</strong> ${esc(c.preview.body)}</aside>`
+        ? `<div class="preview"><strong>${esc(c.preview.h)}</strong> ${esc(c.preview.body)}</div>`
         : '';
       const blanks = c.blanks
         ? `<p class="blanks">${c.blanks.map((b) => `<span>${esc(b)} <i></i></span>`).join('')}</p>`
@@ -287,13 +295,13 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
         <section class="concepts">${blocks}
         </section>
         <footer class="back-foot">
-          <div class="qr">${qr}</div>
+          <div class="qr" role="img" aria-label="QR ${esc(w.qrUrl)}">${qr}</div>
           <div>
             <p><strong>${esc(w.qrH)}</strong> ${esc(w.qrBody)} <span class="url">${esc(w.qrUrl)}</span></p>
             <p class="small">${esc(w.curriculum)} ${esc(w.license)}</p>
             <p class="small">${esc(w.copyright)}</p>
           </div>
-          <span class="page">2</span>
+          <span class="page-no">2</span>
         </footer>
       </section>`;
   }
@@ -305,7 +313,7 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
       return `
           <article class="board-card answer">
             <h3><span class="num">${i + 1}</span>${esc(w.boards[i].name)}</h3>
-            <div class="board">${svgOf(`${b.id}-answer.svg`)}</div>
+            <div class="board" role="img" aria-label="${label(`${w.boards[i].name}. ${a.path}`)}">${svgOf(`${b.id}-answer.svg`)}</div>
             <p class="taps"><strong>${esc(a.taps)}</strong></p>
             <p class="path">${esc(a.path)}</p>
           </article>`;

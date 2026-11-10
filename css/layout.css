@@ -1,0 +1,65 @@
+/*
+  레이아웃 원시 요소(Every Layout). 무엇이 들어가든 같은 방식으로 배치만 맡는다. 색·글자는
+  여기서 정하지 않는다.
+*/
+
+@layer layout {
+  /* 가운데 정렬된 읽기 폭. 페이지 본문의 기본 틀이다. */
+  .page {
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding: var(--s-4) var(--s-3) var(--s-5);
+  }
+
+  .page--wide {
+    max-width: var(--wide);
+  }
+
+  /* 세로로 쌓고 사이만 띄운다. */
+  .stack > * + * {
+    margin-top: var(--stack-gap, var(--s-2));
+  }
+
+  /* 가로로 늘어놓고 넘치면 줄바꿈. */
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, var(--s-1) var(--s-3));
+  }
+
+  /*
+    사이드바 + 본문(개념 페이지). 50rem 미만에서는 한 줄로 쌓인다. 사이드바는 본문 위,
+    브레드크럼 아래에 접힌 채 온다(side-nav의 <details>).
+  */
+  .with-sidebar {
+    max-width: var(--wide);
+    margin-inline: auto;
+    padding: var(--s-4) var(--s-3) var(--s-5);
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .with-sidebar > :last-child {
+    min-width: 0;
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 50rem) {
+    .with-sidebar {
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      align-items: start;
+    }
+    .with-sidebar > :first-child {
+      position: sticky;
+      top: var(--s-3);
+    }
+  }
+
+  /* 같은 크기 칸을 화면 폭에 맞춰 몇 줄이든. */
+  .grid {
+    display: grid;
+    gap: var(--s-3);
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min, 16rem), 100%), 1fr));
+  }
+}

@@ -7,7 +7,7 @@
  * A4 한 쪽으로 나눈다). PDF를 따로 조판하지 않는 이유: 두 벌을 관리하면 한쪽만 고치는 날이
  * 온다. 학습지 문구를 고치면 PDF도 다시 만든다.
  *
- * 페이지가 사이트 루트 기준 경로(/worksheet/assets/...)를 쓰므로 file://로 열지 않고
+ * 페이지가 사이트 루트 기준 경로(/worksheets/<slug>/assets/...)를 쓰므로 file://로 열지 않고
  * 잠깐 로컬 서버를 띄운다. Chrome 위치는 CHROME 환경 변수로 바꿀 수 있다.
  */
 import { createServer } from 'node:http';
@@ -16,7 +16,7 @@ import { existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { WS_LANGS, wsPathOf, WS_PDF } from './worksheet-page.mjs';
+import { WS_LANGS, WS_SLUG, wsPathOf, WS_PDF } from './worksheet-page.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TYPES = {
@@ -62,7 +62,7 @@ const print = (url, out) =>
 
 for (const lang of WS_LANGS) {
   for (const answers of [false, true]) {
-    const out = resolve(HERE, 'worksheet', WS_PDF[lang][answers ? 'answers' : 'sheet']);
+    const out = resolve(HERE, 'worksheets', WS_SLUG, WS_PDF[lang][answers ? 'answers' : 'sheet']);
     await print(base + wsPathOf(lang, answers), out);
     console.log(`✅ ${out}`);
   }

@@ -37,10 +37,9 @@ const SOURCES = [
 
 const TEXT = {
   ko: {
-    title: '240판을 손으로 만들지 않았습니다',
+    title: '퍼즐 판을 손으로 만들지 않았습니다',
     desc: 'PRISM의 레벨은 정답에서 거꾸로 생성됩니다. 판마다 정답이 정확히 하나뿐임을 전수 탐색으로 증명한 뒤에만 출하하고, 표시되는 최소 탭 수도 너비 우선 탐색으로 구한 실제 최솟값입니다.',
     lead: '퍼즐 게임을 만들 때 가장 비싼 일은 판을 짜는 게 아니라 <strong>그 판이 정말 풀리는지 확인하는 일</strong>입니다. 240판이면 사람이 할 수 있는 규모가 아닙니다. 그래서 순서를 뒤집었습니다.',
-    backHome: '← PRISM 소개로',
     dateLabel: '2026년 9월 22일',
     update: '덧붙임(2026년 11월 12일): 1.5에서 일곱 번째 챕터 「편광」 60판이 더해져 지금은 300판입니다. 새 판도 같은 생성기와 같은 검사를 거쳤습니다. 아래는 처음 240판을 만들 때의 기록입니다.',
     body: [
@@ -169,10 +168,9 @@ for (let state = 0; state < total; state++) {
   },
 
   en: {
-    title: 'I did not hand-build 240 puzzle levels',
+    title: 'I did not hand-build the puzzle levels',
     desc: "PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search.",
     lead: 'The expensive part of making a puzzle game is not laying out the board. It is <strong>proving the board can be solved at all</strong>. At 240 levels that is not something a person can do. So I reversed the order.',
-    backHome: '← Back to PRISM',
     dateLabel: '22 September 2026',
     update: 'Update (12 November 2026): version 1.5 added a seventh chapter, Polarization, with 60 more levels, so there are now 300. They went through the same generator and the same checks. What follows is the record of building the first 240.',
     body: [

@@ -80,7 +80,6 @@ const TEXT = {
     title: '퍼즐로 배우는 빛: PRISM 일곱 챕터 수업 안내',
     desc: 'A Driven의 빛 퍼즐 게임 PRISM은 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 챕터마다 하나씩 다룹니다. 챕터별 원리와 실제 예, 생각해 볼 질문, 게임이 실제 광학을 어디서 단순화했는지를 교사와 부모를 위해 정리했습니다.',
     lead: `PRISM은 A Driven이 만든 iOS·Android 빛 퍼즐입니다. 조각을 탭해 돌려 빛의 길을 바꾸고, 모든 결정에 요구된 색을 정확히 비추면 판이 풀립니다. ${S('일곱 챕터는 각각 실제 광학 원리 하나를 들여오고,')} 챕터에 처음 들어갈 때 그 원리를 설명하는 카드가 뜹니다. 이 글은 그 카드 일곱 장을 한곳에 모으고, 수업에서 던져 볼 질문을 붙였습니다.`,
-    backHome: '← PRISM 소개로',
     dateLabel: '2026년 11월 12일',
     body: [
       ['h2', '한눈에 보기'],
@@ -182,7 +181,7 @@ const TEXT = {
         'ul',
         [
           `1챕터 14판은 설치 없이 <a href="/play/">브라우저 체험판</a>으로 해 볼 수 있습니다. 수업 전에 미리 보기 좋습니다.`,
-          `1~4챕터의 판 네 개로 만든 <a href="/worksheet/">인쇄용 학습지 「빛의 길 찾기」</a>가 있습니다. 흑백으로 인쇄해도 풀리고, 정답지가 따로 있습니다.`,
+          `1~4챕터의 판 네 개로 만든 <a href="/worksheets/path-of-light/">인쇄용 학습지 「빛의 길 찾기」</a>가 있습니다. 흑백으로 인쇄해도 풀리고, 정답지가 따로 있습니다.`,
           '광고와 회원가입이 없습니다. 플레이하는 동안 인터넷이 필요 없습니다.',
           '색을 구별하기 어려워도 전부 풀 수 있습니다. 결정마다 색을 나타내는 도형이 새겨져 있습니다(빨강은 삼각형, 초록은 사각형, 파랑은 원. 노란 결정에는 삼각형과 사각형이 함께).',
           '글자 크기를 세 단계로 바꿀 수 있고, 기기의 「동작 줄이기」 설정을 따릅니다.',
@@ -197,7 +196,6 @@ const TEXT = {
     title: 'Teaching light with a puzzle game: the seven chapters of PRISM',
     desc: 'PRISM, a light puzzle game by A Driven, introduces one optics principle per chapter: reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization. A chapter-by-chapter guide for teachers and parents, with real-world examples, questions to ask, and where the game simplifies real optics.',
     lead: `PRISM is a light puzzle for iOS and Android by A Driven. Tap a piece to turn it, change where the light goes, and a board is solved when every crystal receives exactly the color it asks for. ${S('Each of the seven chapters brings in one real optics principle,')} and a card explaining it appears the first time you enter that chapter. This page collects all seven cards in one place and adds a question to ask in class for each.`,
-    backHome: '← About PRISM',
     dateLabel: '12 November 2026',
     body: [
       ['h2', 'At a glance'],
@@ -299,7 +297,7 @@ const TEXT = {
         'ul',
         [
           `Chapter 1 (14 levels) is playable in the browser with nothing to install: <a href="/play/">try the demo</a>. Handy for a look before class.`,
-          `A <a href="/en/worksheet/">printable worksheet, Path of Light</a>, uses four boards from chapters 1 to 4. It works in black and white and has a separate answer key.`,
+          `A <a href="/en/worksheets/path-of-light/">printable worksheet, Path of Light</a>, uses four boards from chapters 1 to 4. It works in black and white and has a separate answer key.`,
           'No ads and no sign-up. No internet connection is needed while playing.',
           'Fully playable without telling colors apart. Every crystal carries a shape for each color it needs (red is a triangle, green a square, blue a circle; a yellow crystal shows a triangle and a square).',
           'Three text sizes, and the game follows the device\'s Reduce Motion setting.',
@@ -314,7 +312,6 @@ const TEXT = {
     title: 'パズルで学ぶ光のしくみ：PRISMの7つの章と本物の光学',
     desc: 'A Drivenの光のパズルゲームPRISMは、反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光を章ごとにひとつずつ扱います。章ごとの原理と身近な例、考えてみる問い、ゲームが本物の光学をどこで単純化したかを、先生と保護者向けにまとめました。',
     lead: `PRISMは、A Drivenが作ったiOS・Android向けの光のパズルです。ピースをタップして回し、光の道すじを変えて、すべての結晶に求められた色をぴったり当てると盤面クリアです。${S('7つの章はそれぞれ本物の光学の原理をひとつずつ取り入れていて、')}その章に初めて入るとき、原理を説明するカードが表示されます。このページはその7枚のカードを1か所に集め、授業で投げかけられる問いを添えました。`,
-    backHome: '← PRISMの紹介へ',
     dateLabel: '2026年11月12日',
     body: [
       ['h2', 'ひと目でわかる一覧'],
@@ -430,7 +427,6 @@ const TEXT = {
     title: '用解谜游戏学光学：PRISM 的七个章节与真实的光',
     desc: 'A Driven 出品的光线解谜游戏 PRISM，每章讲一个光学原理：反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振。本文按章节整理了原理、生活中的例子、可以提给学生的问题，以及游戏在哪些地方简化了真实的光学，供老师和家长参考。',
     lead: `PRISM 是 A Driven 为 iOS 和 Android 制作的光线解谜游戏。点一下元件让它旋转，改变光的路径；当每颗结晶都恰好收到它要求的颜色时，这一关就过了。${S('七个章节各引入一个真实的光学原理，')}第一次进入某一章时，会弹出一张讲解该原理的卡片。本文把这七张卡片集中到一起，并为每一章配了一个可以在课堂上提出的问题。`,
-    backHome: '← 返回 PRISM 介绍',
     dateLabel: '2026年11月12日',
     body: [
       ['h2', '一览'],

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>디자인 시스템 | PRISM</title>
+    <meta name="description" content="PRISM 사이트의 토큰과 컴포넌트 견본." />
+    <meta name="theme-color" content="#F3EFE6" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://prism.adriven.co/design/" />
+    <meta property="og:title" content="디자인 시스템 | PRISM" />
+    <meta property="og:description" content="PRISM 사이트의 토큰과 컴포넌트 견본." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:url" content="https://prism.adriven.co/design/" />
+    <meta property="og:image" content="https://prism.adriven.co/img/board-prism.png" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preload" href="/fonts/sans-kr-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-logo" href="/">PRISM</a>
+        <nav class="site-nav" aria-label="주 메뉴">
+          <ul>
+          <li><a href="/learn/">배우기</a></li>
+          <li><a href="/worksheets/">학습지</a></li>
+          <li><a href="/play/">해 보기</a></li>
+          <li><a href="/">앱</a></li>
+          </ul>
+        </nav>
+        <nav class="lang-switch" aria-label="언어"><ul><li><a href="/design/" hreflang="ko" lang="ko" aria-current="true">한국어</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="/zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li></ul></nav>
+      </div>
+    </header>
+    <main id="main" class="page" tabindex="-1">
+      <header class="page-head">
+        <p class="page-head__kicker">PRISM 사이트</p>
+        <h1>디자인 시스템</h1>
+        <p class="page-head__sub">종이와 잉크. 색은 빛에만.</p>
+        <p class="lead">토큰은 css/tokens.css, 컴포넌트는 css/components.css와 ui/*.mjs가 한 쌍입니다. 색 코드는 tokens.css에만 둡니다(다른 CSS에 나오면 빌드가 멈춥니다).</p>
+      </header>
+      <section class="section">
+        <h2>색</h2>
+        <ul class="facts"><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--paper)"></span><code>--paper</code> 바탕</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--paper-raised)"></span><code>--paper-raised</code> 올린 면(카드·바닥글)</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--ink)"></span><code>--ink</code> 글자·버튼·포커스 15.2:1</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--ink-dim)"></span><code>--ink-dim</code> 본문 7.6:1</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--ink-faint)"></span><code>--ink-faint</code> 보조 글 4.9:1</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--line)"></span><code>--line</code> 링크 밑줄·의미 있는 선 3.2:1</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--hair)"></span><code>--hair</code> 장식 구분선 (글자 금지)</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--lit-r)"></span><code>--lit-r</code> 빛: 빨강 △</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--lit-g)"></span><code>--lit-g</code> 빛: 초록 □</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--lit-b)"></span><code>--lit-b</code> 빛: 파랑 ○</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--lit-y)"></span><code>--lit-y</code> 빛: 노랑</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--lit-c)"></span><code>--lit-c</code> 빛: 시안</li><li class="cluster"><span style="display:inline-block;width:3rem;height:2rem;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--lit-m)"></span><code>--lit-m</code> 빛: 마젠타</li></ul>
+      </section>
+      <section class="section">
+        <h2>글자</h2>
+        <p style="font-family:var(--serif);font-size:var(--t-hero);line-height:1">PRISM</p>
+        <h1>H1 세리프 400</h1>
+        <h2>H2 세리프 400</h2>
+        <h3>H3 산세리프 600</h3>
+        <p class="lead">리드 문단. 페이지가 무엇인지 한 번에 말합니다.</p>
+        <p>본문. 빛은 곧게 나아가다 거울을 만나면 방향을 바꿉니다. <a href="#">본문 링크</a>는 밑줄로 알립니다.</p>
+        <p class="page-head__date">보조 글(날짜·설명)</p>
+      </section>
+      <section class="section">
+        <h2>버튼</h2>
+        <p class="actions"><a class="button" href="#">주 버튼</a><a class="button button--secondary" href="#">보조 버튼</a><button class="button button--secondary" type="button">버튼 요소</button></p>
+        <p class="store-links">
+          <a class="button" href="https://apps.apple.com/kr/app/id6803019903">App Store에서 받기</a>
+          <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play에서 받기</a>
+        </p>
+      </section>
+      <section class="section">
+        <h2>정의 · 메타 · 알림</h2>
+        <p class="definition">빛의 반사는 빛이 물체의 표면에 부딪혀 방향을 바꿔 되돌아 나오는 현상입니다.</p>
+        <dl class="meta"><dt>대상</dt><dd>초등 5~6학년</dd><dt>시간</dt><dd>10분</dd></dl>
+        <div class="callout"><p>알림 상자(기본).</p></div>
+        <div class="callout callout--note"><p>알림 상자(참고).</p></div>
+      </section>
+      <section class="section">
+        <h2>본문 블록</h2>
+        <div class="prose">
+        <p>문단과 <strong>강조</strong>.</p>
+        <ul><li>목록 하나</li><li>목록 둘</li></ul>
+        <ol><li>순서 하나</li><li>순서 둘</li></ol>
+        <div class="table-wrap" tabindex="0"><table>
+          <thead><tr><th scope="col">챕터</th><th scope="col">판 수</th></tr></thead>
+          <tbody><tr><td>반사</td><td>14</td></tr><tr><td>분열</td><td>32</td></tr></tbody>
+        </table></div>
+        <pre><code>solve(board) // 코드</code></pre>
+        </div>
+      </section>
+      <section class="section">
+        <h2>접기</h2>
+        <div><details class="disclosure" open><summary>질문은 이렇게 접힙니다</summary><div class="disclosure__body"><p>답은 접혀 있어도 문서 안에 있습니다.</p></div></details><details class="disclosure"><summary>두 번째 질문</summary><div class="disclosure__body"><p>답.</p></div></details></div>
+      </section>
+      <section class="section">
+        <h2>사실 · 숫자</h2>
+        <ul class="facts"><li><strong>300개</strong> 퍼즐</li><li>모든 퍼즐의 정답은 하나</li></ul>
+        <ul class="stats"><li><b>300</b><span>퍼즐</span></li><li><b>7</b><span>챕터</span></li><li><b>1</b><span>판마다 정답</span></li><li><b>0</b><span>광고</span></li></ul>
+      </section>
+      <section class="section">
+        <h2>도형 범례 · 챕터 띠</h2>
+        <ul class="shape-legend">
+          <li><svg class="glyph glyph--r" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" /></svg>빨강 = 삼각형</li>
+          <li><svg class="glyph glyph--g" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" /></svg>초록 = 사각형</li>
+          <li><svg class="glyph glyph--b" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" /></svg>파랑 = 원</li>
+        </ul>
+        <ol class="chapters"><li class="chapter chapter--1"><span class="chapter__num">1</span><strong class="chapter__name">챕터 1</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li><li class="chapter chapter--2"><span class="chapter__num">2</span><strong class="chapter__name">챕터 2</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li><li class="chapter chapter--3"><span class="chapter__num">3</span><strong class="chapter__name">챕터 3</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li><li class="chapter chapter--4"><span class="chapter__num">4</span><strong class="chapter__name">챕터 4</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li><li class="chapter chapter--5"><span class="chapter__num">5</span><strong class="chapter__name">챕터 5</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li><li class="chapter chapter--6"><span class="chapter__num">6</span><strong class="chapter__name">챕터 6</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li><li class="chapter chapter--7"><span class="chapter__num">7</span><strong class="chapter__name">챕터 7</strong><span class="chapter__desc">띠가 그 챕터의 빛을 그립니다</span></li></ol>
+      </section>
+      <section class="section">
+        <h2>길찾기</h2>
+            <nav class="crumbs" aria-label="현재 위치"><ol><li><a href="/">PRISM</a></li><li><a href="/learn/">배우기</a></li></ol></nav>
+
+        <div style="max-width:var(--sidebar)"><details class="side-nav" open>
+          <summary>개념 목록 · 1 / 7 빛의 반사</summary>
+          <nav aria-label="개념 목록"><ol><li><a href="/learn/reflection/" aria-current="page">빛의 반사</a></li><li><span class="side-nav__soon">반투명 거울</span></li><li><span class="side-nav__soon">빛의 분산</span></li><li><span class="side-nav__soon">빛의 합성</span></li><li><span class="side-nav__soon">색 필터</span></li><li><span class="side-nav__soon">분광</span></li><li><span class="side-nav__soon">편광</span></li></ol></nav>
+        </details></div>
+        
+        <p>머리말의 현재 섹션과 사이드바의 현재 항목은 <code>aria-current</code>로 표시하고, 색이 아니라 밑 막대·왼쪽 막대·굵기로 보입니다.</p>
+      </section>
+      <section class="section">
+        <h2>카드</h2>
+        <ul class="card-list grid"><li class="card"><h3><a href="#">카드 제목</a></h3><p>목록의 한 항목. 링크는 제목 하나만.</p><p class="card__meta">메타</p></li><li class="card card--muted"><h3>준비 중</h3><p class="card__meta">아직 없는 항목</p></li></ul>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__map">
+          <nav aria-label="PRISM">
+            <h2>PRISM</h2>
+            <ul><li><a href="/learn/">배우기</a></li><li><a href="/worksheets/">학습지</a></li><li><a href="/play/">해 보기</a></li><li><a href="https://apps.apple.com/kr/app/id6803019903">App Store</a> · <a href="https://play.google.com/store/apps/details?id=co.adriven.prism">Google Play</a></li></ul>
+          </nav>
+          <nav aria-label="읽을거리">
+            <h2>읽을거리</h2>
+            <ul><li><a href="/optics/">퍼즐로 배우는 빛: PRISM 일곱 챕터 수업 안내</a></li><li><a href="/proven-unique/">퍼즐 판을 손으로 만들지 않았습니다</a></li></ul>
+          </nav>
+          <nav aria-label="에이드리븐">
+            <h2>에이드리븐</h2>
+            <ul><li><a href="/about/">에이드리븐 소개</a></li><li><a href="/support.html">지원 · 문의</a></li><li><a href="/privacy.html">개인정보 처리방침</a></li></ul>
+          </nav>
+        </div>
+        <nav class="family" aria-label="에이드리븐 패밀리 사이트">
+          <h2>에이드리븐 패밀리 사이트</h2>
+          <ul><li><a href="https://harumath.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">하루연산</a><span class="family__desc">아이 맞춤 연산 문제지를 매번 새로 만들어 주는 무료 서비스. 초1~6</span><span class="family__host">harumath.kr</span></li><li><a href="https://habitly.kr/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">해빗리 Habitly</a><span class="family__desc">가입 없이 바로 쓰는 쉬운 습관 도장 앱</span><span class="family__host">habitly.kr</span></li><li><a href="https://templo.kr/ko?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">템플로</a><span class="family__desc">한국 사찰 지도 · 체크인 · 순례</span><span class="family__host">templo.kr</span></li><li><a href="https://adriven.co/?utm_source=prism&amp;utm_medium=referral&amp;utm_campaign=family&amp;utm_content=footer">에이드리븐</a><span class="family__desc">이용자가 직접 제공한 데이터로 마케팅을 돕는 회사 사이트</span><span class="family__host">adriven.co</span></li></ul>
+        </nav>
+        <p class="site-footer__legal">© 2026 A Driven Inc. · <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
