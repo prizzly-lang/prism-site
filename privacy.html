@@ -25,7 +25,7 @@
       <ul>
         <li>이름, 이메일 주소, 전화번호 등 어떤 개인 식별 정보도 요구하거나 저장하지 않습니다</li>
         <li>회원가입이나 로그인을 요구하지 않습니다</li>
-        <li>광고 식별자(IDFA)를 읽지 않습니다</li>
+        <li>광고 식별자(iOS의 IDFA, Android의 광고 ID)를 읽지 않습니다</li>
         <li>사용 기록, 플레이 패턴, 이벤트를 수집하는 애널리틱스를 포함하지 않습니다</li>
         <li>크래시 리포팅 도구를 포함하지 않습니다</li>
         <li>위치 정보, 연락처, 사진, 마이크, 카메라에 접근하지 않습니다</li>
@@ -34,9 +34,10 @@
 
       <h2>네트워크 통신</h2>
       <p>
-        PRISM은 결제할 때 말고는 어떤 서버와도 통신하지 않습니다. 결제는 기기의
-        App Store(Apple StoreKit)를 통해 이루어집니다. 게임은 인터넷 연결이 없는
-        상태에서도 모든 기능이 그대로 작동합니다.
+        PRISM은 iOS에서 결제할 때 말고는 어떤 서버와도 통신하지 않습니다. 결제는
+        기기의 App Store(Apple StoreKit)를 통해 이루어집니다. Android 앱은 어떤
+        서버와도 통신하지 않습니다. 게임은 인터넷 연결이 없는 상태에서도 모든 기능이
+        그대로 작동합니다.
       </p>
 
       <h2>기기에 저장되는 것</h2>
@@ -44,13 +45,29 @@
       <ul>
         <li>각 레벨을 클리어한 최소 탭 수</li>
         <li>소리·진동·언어·글자 크기 설정 값</li>
-        <li>잠금해제 여부(한 번 결제했거나, 유료로 팔리던 시절에 받았는지)</li>
+        <li>이미 본 안내(원리 카드 등)와, 스토어 평가 요청을 이미 띄웠는지 여부</li>
+        <li>(iOS) 잠금해제 여부(한 번 결제했거나, 유료로 팔리던 시절에 받았는지)</li>
+        <li>(Android) 이 기기에 유료판을 설치해 실행했다는 표시</li>
       </ul>
       <p>
-        이 정보는 iOS의 표준 앱 저장 공간(UserDefaults)에 보관되며, 어디로도
-        전송되지 않습니다. 앱을 삭제하면 함께 삭제됩니다. 저장 위치가 iCloud
-        백업에 포함될 수 있으나, 그것은 Apple의 기기 백업 기능이며 PRISM이
+        이 정보는 iOS에서는 표준 앱 저장 공간(UserDefaults)에, Android에서는 앱 전용
+        저장 공간(SharedPreferences)에 보관되며, 어디로도 전송되지 않습니다. 앱을
+        삭제하면 함께 삭제됩니다. 이 정보가 iCloud 백업이나 Android 기기 백업에
+        포함될 수 있으나, 그것은 Apple과 Google의 기기 백업 기능이며 PRISM이
         데이터를 전송하는 것이 아닙니다.
+      </p>
+
+      <h2>웹 체험판과 이 웹사이트</h2>
+      <p>
+        브라우저 체험판(prism.adriven.co/play/)은 위와 같은 진행 상황과 설정을
+        브라우저 저장소(localStorage)에 그 브라우저 안에만 저장합니다. 서버로 보내지
+        않으며, 브라우저의 사이트 데이터를 지우면 함께 지워집니다.
+      </p>
+      <p>
+        이 웹사이트와 체험판에는 분석·광고 스크립트와 쿠키가 없습니다. 웹사이트는
+        GitHub Pages(GitHub, Inc.)로 제공되며, GitHub은 서비스 운영과 보안을 위해
+        접속한 IP 주소 같은 기술 기록을 처리할 수 있습니다(GitHub 개인정보 처리방침에
+        따름). PRISM과 에이드리븐은 이 기록을 받지 않습니다.
       </p>
 
       <h2>제3자 제공</h2>
@@ -63,12 +80,14 @@
 
       <h2>결제</h2>
       <p>
-        PRISM은 무료로 받을 수 있고, 1챕터 이후는 한 번 결제(비소모성 인앱 구매)로
-        열립니다. 구매는 App Store를 통해 이루어지며 Apple이 처리합니다. PRISM은 카드
+        iOS에서 PRISM은 무료로 받을 수 있고, 1챕터 이후는 한 번 결제(비소모성 인앱
+        구매)로 열립니다. 구매는 App Store를 통해 이루어지며 Apple이 처리합니다. PRISM은 카드
         번호, 이름, Apple ID 같은 결제 정보에 접근하지 않습니다. 앱은 잠금해제 여부만
         기기 안에 기록합니다. 1.5까지 유료로 받은 분은 Apple이 기기에 주는 앱 거래
         정보(처음 받은 버전)로 기기 안에서 알아보고 자동으로 엽니다. 이 정보도
-        어디로도 보내지 않습니다.
+        어디로도 보내지 않습니다. Android에서 PRISM은 유료 단품 앱이며, 구매는
+        Google Play를 통해 이루어지고 Google이 처리합니다. Android 앱에는 인앱결제가
+        없습니다.
       </p>
 
       <h2>아동의 개인정보</h2>
@@ -103,30 +122,47 @@
       <p class="summary">PRISM does not collect any personal data.</p>
       <p>
         There is no data collection of any kind. PRISM requires no sign-up and no
-        sign-in, does not read the advertising identifier, contains no analytics or
+        sign-in, does not read the advertising identifier (IDFA on iOS, advertising ID on Android), contains no analytics or
         crash-reporting SDKs, does not access location, contacts, photos, microphone
         or camera, and uses no cookies or similar tracking technologies.
       </p>
       <p>
-        <strong>Networking only to purchase.</strong> The app contacts no server except
-        the App Store (Apple StoreKit) when you make a purchase. The game itself works
-        with no internet connection at all.
+        <strong>Networking only to purchase.</strong> On iOS the app contacts no server
+        except the App Store (Apple StoreKit) when you make a purchase. The Android app
+        contacts no server at all. The game itself works with no internet connection.
       </p>
       <p>
         <strong>Stored on your device only.</strong> The app saves your best tap count
-        per level, your settings, and whether the game is unlocked, in the standard iOS app storage
-        (UserDefaults) on your device. Nothing is transmitted anywhere. Deleting the
-        app deletes this data.
+        per level; your sound, haptics, language and text size settings; which hints
+        you have already seen and whether the store rating prompt was already shown;
+        on iOS, whether the game is unlocked; and on Android, a marker that a paid copy
+        was installed and run on this device. This is kept in the standard app storage
+        on your device (UserDefaults on iOS, SharedPreferences on Android). Nothing is
+        transmitted anywhere. Deleting the app deletes this data. It may be included in
+        iCloud or Android device backups, which are Apple's and Google's backup
+        features, not a transfer by PRISM.
+      </p>
+      <p>
+        <strong>Web demo and this website.</strong> The browser demo
+        (prism.adriven.co/play/) keeps the same progress and settings in your
+        browser's storage (localStorage), in that browser only. It is never sent to a
+        server, and clearing the browser's site data removes it. This website and the
+        demo have no analytics or advertising scripts and no cookies. The website is
+        served by GitHub Pages (GitHub, Inc.), which may process technical logs such
+        as visitors' IP addresses to operate and secure the service, under GitHub's
+        privacy statement. PRISM and A Driven do not receive these logs.
       </p>
       <p>
         <strong>No third parties.</strong> There is no data to share, and the app
         bundles no third-party SDK that collects data. It uses an open-source plugin
         (@capgo/native-purchases) that calls Apple StoreKit and makes no network
-        requests of its own. PRISM is free to download; chapter 1 is free and one
+        requests of its own. On iOS, PRISM is free to download; chapter 1 is free and one
         non-consumable in-app purchase opens the rest. Purchases are handled entirely
         by Apple and PRISM never sees payment information. People who bought the paid
         app (through version 1.5) are recognised on the device from the app transaction
-        Apple provides, and that is not sent anywhere either.
+        Apple provides, and that is not sent anywhere either. On Android, PRISM is a
+        one-time paid app sold through Google Play, which handles the purchase; the
+        Android app has no in-app purchases.
       </p>
       <p>
         Because no personal data is collected or stored, there is no data to access,
