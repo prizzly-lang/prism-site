@@ -45,6 +45,12 @@ const BLOCK = {
     ['        <ol>', ...items.map((i) => `          <li>${i}</li>`), '        </ol>'].join('\n'),
   ul: (items) =>
     ['        <ul>', ...items.map((i) => `          <li>${i}</li>`), '        </ul>'].join('\n'),
+  /*
+    사진 한 장. 폭·높이를 적어 두어 불러오는 동안 글이 밀리지 않게 한다. 화면에서는
+    CSS가 절반 폭(2배 밀도)으로 줄인다.
+  */
+  img: (v, esc) =>
+    `        <figure class="article-figure"><img src="${v.src}" alt="${esc(v.alt)}" width="${v.w}" height="${v.h}" loading="lazy" decoding="async" /></figure>`,
   pre: (v, esc) => `        <pre><code>${esc(v)}</code></pre>`,
   table: (rows, esc) => {
     const [head, ...body] = rows;
@@ -69,6 +75,8 @@ export function articlePage(art, lang, deps) {
   const up = lang === 'ko' ? '../' : '../../';
   const home = lang === 'ko' ? '/' : `/${lang}/`;
 
+  const images = a.body.filter(([k]) => k === 'img').map(([, v]) => ORIGIN + v.src);
+
   const ld = {
     '@context': 'https://schema.org',
     '@type': art.type,
@@ -84,6 +92,8 @@ export function articlePage(art, lang, deps) {
     about: { '@type': 'MobileApplication', '@id': APP_ID, name: 'PRISM', url: urlOf(lang) },
     // 글은 공짜로 읽는다. 앱은 유료다. 둘을 같은 값으로 두면 답변 엔진이 헷갈린다.
     isAccessibleForFree: true,
+    // 본문에 사진이 있으면 그 사진들이 이 글의 대표 이미지다(Article 형식이 기대하는 값).
+    ...(images.length ? { image: images } : {}),
     ...(art.ld ? art.ld(lang) : {}),
   };
 

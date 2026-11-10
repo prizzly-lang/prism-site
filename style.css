@@ -749,6 +749,20 @@ footer p {
   color: var(--ink-dim);
 }
 
+/* 원리 카드 사진. 680px로 찍은 2배 밀도 이미지라 340px로 보여 준다. */
+.article-figure {
+  margin: var(--s-3) auto;
+  max-width: 340px;
+}
+
+.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* 카드를 사각형으로 잘라 찍어 모서리에 뒷배경이 남는다. 앱 카드와 같은 반경으로 깎는다. */
+  border-radius: 16px;
+}
+
 /*
   한글·일본어·중국어 글꼴에는 이탤릭이 없다. 브라우저가 글자를 기울여 가짜 이탤릭을
   만들면 획이 찌그러진다. 강조는 굵기로 한다.

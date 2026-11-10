@@ -30,9 +30,13 @@ const S = (s) => `<strong>${s}</strong>`;
 /** 앱의 DIVERGENCE는 강조를 **로 적는다. 여기서는 <strong>으로 바꾼다. */
 const bold = (s) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-/** 한 챕터 = 제목 + 실제 + 게임 + (덧붙임) + 질문. 블록 순서를 네 언어가 공유한다. */
+/**
+ * 한 챕터 = 제목 + 원리 카드 사진 + 실제 + 게임 + (덧붙임) + 질문. 블록 순서를 네 언어가
+ * 공유한다. 사진 자리(`card`)는 아래 `withCards`가 그 언어·그 챕터의 이미지로 바꾼다.
+ */
 const chapter = (h, real, gameLabel, game, extra, qLabel, q, a) => [
   ['h2', h],
+  ['card', h],
   ['p', real],
   ['p', `${S(gameLabel)} ${game}`],
   ...(extra ? [['p', extra]] : []),
@@ -536,6 +540,43 @@ const TEXT = {
     ],
   },
 };
+
+/*
+  원리 카드 사진(img/optics/<언어>-ch<번호>.webp).
+
+  1.6 앱에서 카드만 잘라 찍었다: prism 저장소 v1.6을 vite dev로 띄워 `?capture=1`로 열고,
+  `/src/game/i18n.ts`의 setLang과 `/src/ui/screens.ts`의 opticsCard(챕터)를 브라우저에서
+  불러 #ui에 끼운 뒤 `.optics-card` 요소만 Playwright로 찍는다(2배 밀도, 680px 폭).
+  Windows에는 Hiragino·PingFang이 없어 일본어는 Yu Gothic·Yu Mincho, 중국어는 Microsoft
+  YaHei·SimSun으로 찍었다. 앱의 카드 문구(src/game/optics.ts)를 고치면 다시 찍는다.
+
+  사진을 넣는 이유: 「PRISM」이라는 이름을 단 우리 그림이 우리 도메인에 있어야 답변 엔진이
+  다른 「Prism」 게임의 그림을 붙이지 않는다(2026-11-09 ChatGPT가 다른 게임 화면을 붙였다).
+
+  치수는 위 파일들의 실제 크기다. 다시 찍으면 같이 고친다(레이아웃이 밀리지 않게 하는 값).
+*/
+const CARD_H = {
+  ko: [1084, 960, 1052, 1052, 1004, 1052, 1096],
+  en: [1084, 1052, 1052, 1144, 1052, 1188, 1144],
+  ja: [1188, 1060, 1108, 1060, 1108, 1152, 1152],
+  'zh-Hans': [1040, 960, 1008, 1008, 1008, 1052, 1008],
+};
+const CARD_ALT = {
+  ko: (h) => `PRISM 앱의 「${h}」 원리 카드. 탭 전과 탭 후의 판, 실제 물리와 게임 규칙 설명`,
+  en: (h) => `The PRISM app's ${h} principle card: the board before and after a tap, the real physics, and the game rule`,
+  ja: (h) => `PRISMアプリの「${h}」の原理カード。タップ前とタップ後の盤面、本物の物理とゲームのルール`,
+  'zh-Hans': (h) => `PRISM 应用的「${h}」原理卡片：点击前后的盘面、真实的物理和游戏规则`,
+};
+for (const [lang, t] of Object.entries(TEXT)) {
+  let n = 0;
+  t.body = t.body.map(([kind, v]) => {
+    if (kind !== 'card') return [kind, v];
+    n += 1;
+    // 제목은 「1장 반사」, 「Chapter 1: Reflection」 꼴이다. 알트에는 원리 이름만 쓴다.
+    const name = v.replace(/^(\d+장 |Chapter \d+: |\d+章 |第 \d+ 章 )/, '');
+    return ['img', { src: `/img/optics/${lang}-ch${n}.webp`, alt: CARD_ALT[lang](name), w: 680, h: CARD_H[lang][n - 1] }];
+  });
+}
 
 /** 질문 형태의 답변 엔진 질의(「학생용 광학 게임」)에 맞춰 교육 자료임을 밝힌다. */
 const TEACHES = {
