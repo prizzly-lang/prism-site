@@ -125,3 +125,16 @@ screenrecord`로 실제 풀이 과정을 녹화 → `adb pull`로 내려받아 f
 
 Google과 같은 그림이다. 이름을 알면 정확히(교육적 가치까지) 설명하지만, 이름 없이는 떠올리지
 않는다. 교사용 글은 「학생·광학」 질문에서 이름 없이 걸리게 하려는 것이다.
+
+## 4. 2차 측정 뒤 손본 것 (2026-11-10)
+
+- **Bing Webmaster Tools 등록**: 그전까지 Google·네이버·다음에만 있었다. ChatGPT 검색과
+  Copilot은 Bing 색인을 쓴다. `BingSiteAuth.xml`로 소유 확인, sitemap 제출(처리 중)
+- **IndexNow**: 키 파일 `a41d48cc0ad3257ff19bc6feedbe342a.txt`와 `indexnow.mjs`. 사실이 바뀌는
+  날(11/12 1.5, 1.6 출시) 사이트 반영 뒤 사용자 승인을 받고 돌린다
+- release-1.5(11/12 공개): JSON-LD에 앱 `@id`·`sameAs`(두 스토어)·회사 Organization(adriven.co,
+  에이드리븐), 한·일·중 제목에 「퍼즐」, FAQ에 수업 질문, sitemap lastmod를 실제 수정일로,
+  softwareVersion 1.3 → 1.5
+- release-1.6: 교사용 글에 앱 원리 카드 사진 28장(4개 언어 × 7)
+
+다음 측정은 교사용 글 공개(11/12) 4주 뒤. 같은 질문 13개 + 이름 질문 4개, Bing 결과도 함께 본다.
