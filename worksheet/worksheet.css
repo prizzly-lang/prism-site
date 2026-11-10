@@ -57,6 +57,8 @@ body { margin: 0; font-family: var(--sans); -webkit-print-color-adjust: exact; p
   cursor: pointer;
 }
 .ws-btn-quiet { background: transparent; color: var(--ink); }
+.ws-cross { font-size: 14px; }
+.ws-cross a { color: var(--ink); }
 .ws-links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
 
 /* ── 장(A4) ───────────────────────────────────────────────── */

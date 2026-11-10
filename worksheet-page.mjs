@@ -16,6 +16,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { WS, BOARDS } from './worksheet-content.mjs';
+import { harumathHref } from './crosslinks.mjs';
 
 export const WS_LANGS = ['ko', 'en'];
 export const wsPathOf = (l, answers = false) =>
@@ -141,7 +142,8 @@ ${answers ? '' : w.intro.map((p) => `      <p>${gl(p)}</p>`).join('\n')}
         <a class="ws-btn" href="${up}worksheet/${WS_PDF[lang].answers}" download>${esc(w.answersPdf)}</a>
         <button class="ws-btn ws-btn-quiet" type="button" onclick="window.print()">${esc(w.print)}</button>
       </p>
-      <p class="ws-links">
+${lang === 'ko' ? `      <p class="ws-cross">매일 연산 연습은 <a href="${harumathHref('worksheet')}">하루연산</a>에서 할 수 있습니다. 에이드리븐이 만든 초등 연산 문제지 서비스로, 종이로도 태블릿으로도 풉니다.</p>
+` : ''}      <p class="ws-links">
         <a href="${wsPathOf(lang, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a>
         <a href="${lang === 'ko' ? '/optics/' : `/${lang}/optics/`}">${esc(w.guideLink)}</a>
       </p>

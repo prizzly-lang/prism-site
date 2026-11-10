@@ -23,6 +23,7 @@
 
 import levels from './articles/proven-unique.mjs';
 import optics from './articles/optics.mjs';
+import { harumathFooter } from './crosslinks.mjs';
 
 /** 랜딩 페이지 아래 링크도 이 순서다. 처음 온 사람에게 먼저 보일 글이 앞이다. */
 export const ARTICLES = [optics, levels];
@@ -153,7 +154,7 @@ ${body}
       </nav>
 
       <footer>
-        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
+${harumathFooter(lang, 'article')}        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
   </body>

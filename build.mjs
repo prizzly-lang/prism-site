@@ -32,6 +32,7 @@ import {
   articleLlmsSection,
 } from './article-page.mjs';
 import { WS_LANGS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
+import { harumathFooter } from './crosslinks.mjs';
 import { WS } from './worksheet-content.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -668,7 +669,7 @@ ${articlesIn(lang).map((a) => `        <a href="${articlePathOf(a, lang)}">${esc
       </nav>
 
       <footer>
-        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
+${harumathFooter(lang, 'landing')}        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </footer>
     </main>
   </body>
