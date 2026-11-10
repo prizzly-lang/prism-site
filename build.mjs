@@ -37,7 +37,34 @@ const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
 const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriven.prism';
 /** 스토어에 실제로 올라간 버전. JSON-LD가 이 값을 그대로 쓴다 — 버전을 올릴 때 잊지 않도록 한 곳에 둔다. */
-const VERSION = '1.3';
+const VERSION = '1.5';
+
+/**
+ * 랜딩 페이지 내용을 마지막으로 고친 날. sitemap의 lastmod가 이 값을 쓴다.
+ *
+ * 예전에는 빌드한 날을 모든 주소에 찍었다. Bing은 lastmod를 재수집 신호로 쓰는데,
+ * 고치지 않은 페이지까지 매번 「오늘 바뀜」이라고 하면 그 값을 믿지 않게 된다.
+ * 문구를 고칠 때 이 날짜도 같이 고친다.
+ */
+const SITE_UPDATED = '2026-11-12';
+
+/*
+  이 앱과 회사를 가리키는 고유 식별자(@id).
+
+  「Prism」이라는 빛 퍼즐 앱이 여럿이라 답변 엔진이 섞는다(2026-11-09 측정에서 일본어
+  AI 개요가 실제로 다른 앱과 섞었다). 페이지마다 같은 @id를 쓰고 sameAs로 두 스토어
+  페이지를 묶으면 「이 PRISM = 이 App Store 앱 = 이 Play 앱」이 기계에 명시된다.
+  회사도 이름만 두지 않고 회사 사이트와 한국어 이름까지 적는다(ChatGPT는 「에이드리븐」으로
+  불렀다).
+*/
+const APP_ID = `${ORIGIN}/#app`;
+const ORG = {
+  '@type': 'Organization',
+  '@id': 'https://adriven.co/#org',
+  name: 'A Driven Inc.',
+  alternateName: ['A Driven', 'Adriven', '에이드리븐'],
+  url: 'https://adriven.co/',
+};
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */
 const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
@@ -58,7 +85,7 @@ const videoOf = (l) => l;
 const L = {
   ko: {
     dir: 'ltr',
-    title: 'PRISM: 빛을 접어 결정을 밝힌다',
+    title: 'PRISM: 빛의 퍼즐 · 빛을 접어 결정을 밝힌다',
     desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
     /*
       「접어」다. 「꺾어」가 아니다.
@@ -124,6 +151,7 @@ const L = {
       ['몇 판이고 얼마나 어렵나요?', '일곱 챕터에 300판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
       ['안드로이드 버전이 있나요?', '있습니다. iOS와 Android 모두에서 같은 가격, 같은 300판으로 받으실 수 있습니다.'],
       ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
+      ['수업에 쓸 수 있나요?', '쓸 수 있습니다. 일곱 챕터가 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 하나씩 다루고, 챕터를 시작할 때 실제 물리와 게임이 단순화한 점을 카드로 설명합니다. 챕터별 원리와 학생에게 던질 질문을 정리한 교사용 안내 글이 이 사이트에 있습니다.'],
     ],
     privacy: '개인정보 처리방침',
     support: '지원 · 문의',
@@ -190,6 +218,7 @@ const L = {
       ['How many levels, and how hard?', 'Seven chapters, 300 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
       ['Is there an Android version?', 'Yes. It is available on both iOS and Android, same price, same 300 puzzles.'],
       ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
+      ['Can I use it to teach?', 'Yes. The seven chapters cover reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization, and each opens with a card on the real physics and what the game simplifies. A teacher\'s guide on this site lists every chapter\'s principle with a question to ask students.'],
     ],
     privacy: 'Privacy Policy',
     support: 'Support',
@@ -198,7 +227,7 @@ const L = {
 
   ja: {
     dir: 'ltr',
-    title: 'PRISM：光を折り、結晶を灯す',
+    title: 'PRISM：光のパズル｜光を折り、結晶を灯す',
     desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
     tagline: '光を折り、結晶を灯す',
     cta: 'App Store で入手',
@@ -256,6 +285,7 @@ const L = {
       ['何面あって、どのくらい難しいですか？', '7チャプターに300面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
       ['Android版はありますか？', 'あります。iOS・Android どちらでも同じ価格、同じ300面で遊べます。'],
       ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
+      ['授業で使えますか？', '使えます。7つの章が反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光をひとつずつ扱い、章の始めに本物の物理とゲームが単純化した点をカードで説明します。章ごとの原理と生徒への問いをまとめた先生向けのガイドがこのサイトにあります。'],
     ],
     privacy: 'プライバシーポリシー',
     support: 'サポート・お問い合わせ',
@@ -264,7 +294,7 @@ const L = {
 
   'zh-Hans': {
     dir: 'ltr',
-    title: 'PRISM：折转光线，点亮结晶',
+    title: 'PRISM：光线解谜｜折转光线，点亮结晶',
     desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
     tagline: '折转光线，点亮结晶',
     cta: '在 App Store 获取',
@@ -322,6 +352,7 @@ const L = {
       ['一共多少关？难吗？', '七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
       ['有 Android 版本吗？', '有。iOS 和 Android 上都能获取，价格相同，同样 300 关。'],
       ['占多大空间？', '不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。'],
+      ['能用来上课吗？', '能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。'],
     ],
     privacy: '隐私政策',
     support: '支持与联系',
@@ -409,7 +440,9 @@ function page(lang) {
     {
       '@context': 'https://schema.org',
       '@type': 'MobileApplication',
+      '@id': APP_ID,
       name: 'PRISM',
+      sameAs: ['https://apps.apple.com/app/id6803019903', PLAYSTORE],
       // 제목을 잘라 'PRISM'을 다시 만들던 자리다. `name`과 같은 값이라 아무것도
       // 보태지 않았고, 구분자를 바꾸면 조용히 깨지는 코드였다. 언어별 제목을
       // 그대로 넣는다. 답변 엔진이 그 언어로 이 앱을 부르는 이름이 이것이다.
@@ -433,8 +466,8 @@ function page(lang) {
         availability: 'https://schema.org/InStock',
         url: APPSTORE,
       },
-      author: { '@type': 'Organization', name: 'A Driven Inc.', url: ORIGIN + '/' },
-      publisher: { '@type': 'Organization', name: 'A Driven Inc.', url: ORIGIN + '/' },
+      author: ORG,
+      publisher: ORG,
       screenshot: [
         `${ORIGIN}/img/board-prism.png`,
         `${ORIGIN}/img/board-rule.png`,
@@ -730,7 +763,7 @@ for (const art of ARTICLES) {
     mkdirSync(dir, { recursive: true });
     writeFileSync(
       resolve(dir, 'index.html'),
-      articlePage(art, lang, { esc, L, ORIGIN, urlOf }),
+      articlePage(art, lang, { esc, L, ORIGIN, urlOf, ORG, APP_ID }),
       'utf8',
     );
   }
@@ -759,11 +792,9 @@ Sitemap: ${ORIGIN}/sitemap.xml
   'utf8',
 );
 
-const now = new Date().toISOString().slice(0, 10);
-
 const urlEntry = (l) => `  <url>
     <loc>${urlOf(l)}</loc>
-    <lastmod>${now}</lastmod>
+    <lastmod>${SITE_UPDATED}</lastmod>
 ${LANGS.map((a) => `    <xhtml:link rel="alternate" hreflang="${a}" href="${urlOf(a)}" />`).join('\n')}
     <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
   </url>`;
@@ -783,10 +814,10 @@ writeFileSync(
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${LANGS.map(urlEntry).join('\n')}
-${articleSitemapEntries({ ORIGIN, now })}
-  <url><loc>${ORIGIN}/play/</loc><lastmod>${now}</lastmod></url>
-  <url><loc>${ORIGIN}/privacy.html</loc><lastmod>${now}</lastmod></url>
-  <url><loc>${ORIGIN}/support.html</loc><lastmod>${now}</lastmod></url>
+${articleSitemapEntries({ ORIGIN })}
+  <url><loc>${ORIGIN}/play/</loc></url>
+  <url><loc>${ORIGIN}/privacy.html</loc></url>
+  <url><loc>${ORIGIN}/support.html</loc></url>
 </urlset>
 `,
   'utf8',
@@ -811,7 +842,7 @@ writeFileSync(
 
 ## 사실 / Facts
 
-- 개발사 / Publisher: A Driven Inc.
+- 개발사 / Publisher: A Driven Inc. (에이드리븐, https://adriven.co/). 이름이 같은 다른 「Prism」 퍼즐 앱과 다른 앱이다 / not the same as other puzzle apps named Prism
 - 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
 - 스토어 / Stores: [App Store](${APPSTORE}), [Google Play](${PLAYSTORE})
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base

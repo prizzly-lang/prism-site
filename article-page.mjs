@@ -62,7 +62,7 @@ const BLOCK = {
 };
 
 export function articlePage(art, lang, deps) {
-  const { esc, L, ORIGIN, urlOf } = deps;
+  const { esc, L, ORIGIN, urlOf, ORG, APP_ID } = deps;
   const urlIn = (l) => ORIGIN + articlePathOf(art, l);
   const a = art.text[lang];
   const t = L[lang];
@@ -78,9 +78,10 @@ export function articlePage(art, lang, deps) {
     url: urlIn(lang),
     datePublished: art.date,
     dateModified: art.updated,
-    author: { '@type': 'Organization', name: 'A Driven Inc.', url: `${ORIGIN}/` },
-    publisher: { '@type': 'Organization', name: 'A Driven Inc.', url: `${ORIGIN}/` },
-    about: { '@type': 'MobileApplication', name: 'PRISM', url: urlOf(lang) },
+    author: ORG,
+    publisher: ORG,
+    // 랜딩 페이지의 앱과 같은 @id. 글이 어느 PRISM을 말하는지 기계에 묶는다.
+    about: { '@type': 'MobileApplication', '@id': APP_ID, name: 'PRISM', url: urlOf(lang) },
     // 글은 공짜로 읽는다. 앱은 유료다. 둘을 같은 값으로 두면 답변 엔진이 헷갈린다.
     isAccessibleForFree: true,
     ...(art.ld ? art.ld(lang) : {}),
@@ -151,14 +152,15 @@ ${body}
 }
 
 /** sitemap.xml에 끼워 넣을 <url> 항목들. 랜딩 페이지 쪽과 같은 모양이다. */
-export function articleSitemapEntries({ ORIGIN, now }) {
+/** lastmod는 글을 마지막으로 고친 날(art.updated)이다. 빌드한 날이 아니다. */
+export function articleSitemapEntries({ ORIGIN }) {
   return ARTICLES.flatMap((art) => {
     const urlIn = (l) => ORIGIN + articlePathOf(art, l);
     return art.langs.map((l) =>
       [
         '  <url>',
         `    <loc>${urlIn(l)}</loc>`,
-        `    <lastmod>${now}</lastmod>`,
+        `    <lastmod>${art.updated}</lastmod>`,
         ...art.langs.map(
           (a) => `    <xhtml:link rel="alternate" hreflang="${a}" href="${urlIn(a)}" />`,
         ),

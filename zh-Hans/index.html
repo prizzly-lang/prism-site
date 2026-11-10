@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PRISM：折转光线，点亮结晶</title>
+    <title>PRISM：光线解谜｜折转光线，点亮结晶</title>
     <meta name="description" content="点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。" />
     <meta name="theme-color" content="#06070C" />
     <link rel="canonical" href="https://prism.adriven.co/zh-Hans/" />
@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="ja" href="https://prism.adriven.co/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
     <link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
-    <meta property="og:title" content="PRISM：折转光线，点亮结晶" />
+    <meta property="og:title" content="PRISM：光线解谜｜折转光线，点亮结晶" />
     <meta property="og:description" content="点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_Hans" />
@@ -26,8 +26,13 @@
   {
     "@context": "https://schema.org",
     "@type": "MobileApplication",
+    "@id": "https://prism.adriven.co/#app",
     "name": "PRISM",
-    "alternateName": "PRISM：折转光线，点亮结晶",
+    "sameAs": [
+      "https://apps.apple.com/app/id6803019903",
+      "https://play.google.com/store/apps/details?id=co.adriven.prism"
+    ],
+    "alternateName": "PRISM：光线解谜｜折转光线，点亮结晶",
     "description": "点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。",
     "url": "https://prism.adriven.co/zh-Hans/",
     "inLanguage": "zh-Hans",
@@ -43,7 +48,7 @@
       "https://play.google.com/store/apps/details?id=co.adriven.prism"
     ],
     "fileSize": "5MB",
-    "softwareVersion": "1.3",
+    "softwareVersion": "1.5",
     "availableOnDevice": [
       "iPhone",
       "iPad"
@@ -58,13 +63,25 @@
     },
     "author": {
       "@type": "Organization",
+      "@id": "https://adriven.co/#org",
       "name": "A Driven Inc.",
-      "url": "https://prism.adriven.co/"
+      "alternateName": [
+        "A Driven",
+        "Adriven",
+        "에이드리븐"
+      ],
+      "url": "https://adriven.co/"
     },
     "publisher": {
       "@type": "Organization",
+      "@id": "https://adriven.co/#org",
       "name": "A Driven Inc.",
-      "url": "https://prism.adriven.co/"
+      "alternateName": [
+        "A Driven",
+        "Adriven",
+        "에이드리븐"
+      ],
+      "url": "https://adriven.co/"
     },
     "screenshot": [
       "https://prism.adriven.co/img/board-prism.png",
@@ -141,6 +158,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "能用来上课吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。"
         }
       }
     ]
@@ -387,6 +412,10 @@
           <details class="qa">
             <summary>占多大空间？</summary>
             <p>不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。</p>
+          </details>
+          <details class="qa">
+            <summary>能用来上课吗？</summary>
+            <p>能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。</p>
           </details>
         </div>
       </section>

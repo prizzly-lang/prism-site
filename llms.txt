@@ -8,7 +8,7 @@
 
 ## 사실 / Facts
 
-- 개발사 / Publisher: A Driven Inc.
+- 개발사 / Publisher: A Driven Inc. (에이드리븐, https://adriven.co/). 이름이 같은 다른 「Prism」 퍼즐 앱과 다른 앱이다 / not the same as other puzzle apps named Prism
 - 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
 - 스토어 / Stores: [App Store](https://apps.apple.com/kr/app/id6803019903), [Google Play](https://play.google.com/store/apps/details?id=co.adriven.prism)
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
