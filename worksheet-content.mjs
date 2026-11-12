@@ -157,12 +157,12 @@ export const WS = {
   },
 
   en: {
-    pageTitle: 'Path of Light: a printable optics worksheet (reflection, prisms, color mixing)',
+    pageTitle: 'Path of Light: a printable optics worksheet',
     navLabel: 'Printable worksheet: Path of Light',
-    desc: 'A free printable worksheet built from four boards of the light puzzle game PRISM. Students solve reflection, beam splitter, prism and additive color mixing puzzles with a pencil. Prints in black and white, with a separate answer key. For ages about 10 to 14.',
+    desc: 'A free printable optics worksheet built from four PRISM puzzle boards: reflection, beam splitters, prisms and color mixing. Black and white, for ages 10 to 14.',
     list: {
       title: 'Printable optics worksheets',
-      desc: 'Free printable worksheets built from the boards of PRISM, a light puzzle game. Solve reflection, half-silvered mirrors, prisms and color mixing with a pencil. Made for black-and-white printing, with a separate answer key.',
+      desc: 'Free printable worksheets built from PRISM puzzle boards: reflection, half-silvered mirrors, prisms and color mixing. Made for black-and-white printing.',
       lead: 'A4 worksheets to print for the classroom or at home. They work in black and white, and each has a separate answer key for teachers.',
       meta: 'Ages 10 to 14 · 2 A4 pages + 1-page answer key · You need: a pencil',
     },

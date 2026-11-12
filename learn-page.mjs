@@ -37,7 +37,7 @@ const T = {
   },
   en: {
     indexTitle: 'Learn about light',
-    indexDesc: 'From reflection to polarization: learn how light behaves through small experiments and the light puzzle game PRISM. Optics concept pages for ages 10 to 14 and their teachers.',
+    indexDesc: 'Learn how light behaves, from reflection to polarization, with small experiments and the light puzzle game PRISM. For ages 10 to 14 and their teachers.',
     indexLead: 'One property of light at a time, each with a small experiment you can try at home or in class. The order follows the seven chapters of the game PRISM.',
     soon: 'Coming soon',
     guide: 'All seven concepts at a glance: the teacher\'s guide',

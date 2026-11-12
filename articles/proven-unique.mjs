@@ -169,7 +169,7 @@ for (let state = 0; state < total; state++) {
 
   en: {
     title: 'I did not hand-build the puzzle levels',
-    desc: "PRISM's levels are generated backwards from their solved state. A board ships only after brute force proves it has exactly one solution, and the par shown is the true minimum from breadth-first search.",
+    desc: "PRISM's levels are generated backwards from the solved state. A board ships only after brute force proves it has exactly one solution.",
     lead: 'The expensive part of making a puzzle game is not laying out the board. It is <strong>proving the board can be solved at all</strong>. At 240 levels that is not something a person can do. So I reversed the order.',
     dateLabel: '22 September 2026',
     update: 'Update (12 November 2026): version 1.5 added a seventh chapter, Polarization, with 60 more levels, so there are now 300. They went through the same generator and the same checks. What follows is the record of building the first 240.',

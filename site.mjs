@@ -25,6 +25,8 @@ export const ORG = {
   name: 'A Driven Inc.',
   alternateName: ['A Driven', 'Adriven', '에이드리븐'],
   url: 'https://adriven.co/',
+  // 같은 회사를 가리키는 공개 페이지. 「Prism」 이름이 겹쳐도 개발사로 앱을 가려낼 수 있게 묶는다.
+  sameAs: ['https://apps.apple.com/developer/id1655290007', 'https://play.google.com/store/apps/developer?id=Adriven+Corp.'],
 };
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다**(AEO.md). */

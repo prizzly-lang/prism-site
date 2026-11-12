@@ -194,7 +194,7 @@ const TEXT = {
 
   en: {
     title: 'Teaching light with a puzzle game: the seven chapters of PRISM',
-    desc: 'PRISM, a light puzzle game by A Driven, introduces one optics principle per chapter: reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization. A chapter-by-chapter guide for teachers and parents, with real-world examples, questions to ask, and where the game simplifies real optics.',
+    desc: "A teacher's guide to PRISM, the light puzzle game by A Driven: reflection, beam splitting, dispersion, color mixing, filters, spectroscopy and polarization.",
     lead: `PRISM is a light puzzle for iOS and Android by A Driven. Tap a piece to turn it, change where the light goes, and a board is solved when every crystal receives exactly the color it asks for. ${S('Each of the seven chapters brings in one real optics principle,')} and a card explaining it appears the first time you enter that chapter. This page collects all seven cards in one place and adds a question to ask in class for each.`,
     dateLabel: '12 November 2026',
     body: [
