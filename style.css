@@ -485,6 +485,14 @@ footer p {
     rgba(255, 255, 255, 0.85)
   );
 }
+/* 편광판의 살. 게임 화면의 편광판이 이 줄무늬다. */
+.chapter-7 {
+  --beam: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85) 0 7px,
+    transparent 7px 12px
+  );
+}
 
 .ch-num {
   display: block;
@@ -808,6 +816,16 @@ footer p {
   color: var(--ink-faint);
   font-size: var(--t-micro);
   letter-spacing: 0.04em;
+}
+
+/* 나중에 덧붙인 사실. 본문과 섞이지 않게 왼쪽 선과 흐린 글씨로 뺀다. */
+.article-update {
+  margin-top: var(--s-2);
+  padding-left: var(--s-2);
+  border-left: 2px solid var(--hair);
+  color: var(--ink-dim);
+  font-size: var(--t-small);
+  line-height: 1.6;
 }
 
 .article-lead {

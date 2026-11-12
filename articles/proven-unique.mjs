@@ -15,25 +15,34 @@
  */
 
 /** 글이 사는 경로. 언어별 규칙은 랜딩 페이지와 같다(한국어는 루트). */
-export const ARTICLE_SLUG = 'proven-unique';
+const SLUG = 'proven-unique';
 
 /** 최초 게시일. JSON-LD의 `datePublished`가 이 값을 쓴다. */
-export const ARTICLE_DATE = '2026-09-22';
+const DATE = '2026-09-22';
+
+/**
+ * 마지막으로 내용을 고친 날. JSON-LD의 `dateModified`가 이 값을 쓴다.
+ *
+ * 1.5에서 판이 300개가 됐다. 본문은 처음 240판을 만든 기록이라 숫자를 고치지
+ * 않고, 맨 앞 `update`에 지금 수를 적는다. 고치면 쓴 날의 사실과 어긋난다.
+ */
+const UPDATED = '2026-11-12';
 
 /** 이 글을 쓴 근거가 되는 소스. 내용을 고칠 때 같이 열어볼 파일들이다. */
-export const SOURCES = [
+const SOURCES = [
   'prism/tools/generate-levels.ts',
   'prism/src/engine/solver.ts',
   'prism/tests/levels.test.ts',
 ];
 
-export const ARTICLE = {
+const TEXT = {
   ko: {
     title: '240판을 손으로 만들지 않았습니다',
     desc: 'PRISM의 레벨은 정답에서 거꾸로 생성됩니다. 판마다 정답이 정확히 하나뿐임을 전수 탐색으로 증명한 뒤에만 출하하고, 표시되는 최소 탭 수도 너비 우선 탐색으로 구한 실제 최솟값입니다.',
     lead: '퍼즐 게임을 만들 때 가장 비싼 일은 판을 짜는 게 아니라 <strong>그 판이 정말 풀리는지 확인하는 일</strong>입니다. 240판이면 사람이 할 수 있는 규모가 아닙니다. 그래서 순서를 뒤집었습니다.',
     backHome: '← PRISM 소개로',
     dateLabel: '2026년 9월 22일',
+    update: '덧붙임(2026년 11월 12일): 1.5에서 일곱 번째 챕터 「편광」 60판이 더해져 지금은 300판입니다. 새 판도 같은 생성기와 같은 검사를 거쳤습니다. 아래는 처음 240판을 만들 때의 기록입니다.',
     body: [
       ['h2', '문제: 손으로 만들면 검증할 수 없다'],
       [
@@ -165,6 +174,7 @@ for (let state = 0; state < total; state++) {
     lead: 'The expensive part of making a puzzle game is not laying out the board. It is <strong>proving the board can be solved at all</strong>. At 240 levels that is not something a person can do. So I reversed the order.',
     backHome: '← Back to PRISM',
     dateLabel: '22 September 2026',
+    update: 'Update (12 November 2026): version 1.5 added a seventh chapter, Polarization, with 60 more levels, so there are now 300. They went through the same generator and the same checks. What follows is the record of building the first 240.',
     body: [
       ['h2', 'The problem: a hand-built board cannot be checked'],
       [
@@ -286,4 +296,14 @@ for (let state = 0; state < total; state++) {
       ],
     ],
   },
+};
+
+export default {
+  slug: SLUG,
+  date: DATE,
+  updated: UPDATED,
+  langs: ['ko', 'en'],
+  type: 'TechArticle',
+  sources: SOURCES,
+  text: TEXT,
 };

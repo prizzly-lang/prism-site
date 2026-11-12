@@ -23,9 +23,9 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { ARTICLE } from './article.mjs';
 import {
-  ARTICLE_LANGS,
+  ARTICLES,
+  articlesIn,
   articlePathOf,
   articlePage,
   articleSitemapEntries,
@@ -37,7 +37,34 @@ const ORIGIN = 'https://prism.adriven.co';
 const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
 const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriven.prism';
 /** 스토어에 실제로 올라간 버전. JSON-LD가 이 값을 그대로 쓴다 — 버전을 올릴 때 잊지 않도록 한 곳에 둔다. */
-const VERSION = '1.3';
+const VERSION = '1.5';
+
+/**
+ * 랜딩 페이지 내용을 마지막으로 고친 날. sitemap의 lastmod가 이 값을 쓴다.
+ *
+ * 예전에는 빌드한 날을 모든 주소에 찍었다. Bing은 lastmod를 재수집 신호로 쓰는데,
+ * 고치지 않은 페이지까지 매번 「오늘 바뀜」이라고 하면 그 값을 믿지 않게 된다.
+ * 문구를 고칠 때 이 날짜도 같이 고친다.
+ */
+const SITE_UPDATED = '2026-11-12';
+
+/*
+  이 앱과 회사를 가리키는 고유 식별자(@id).
+
+  「Prism」이라는 빛 퍼즐 앱이 여럿이라 답변 엔진이 섞는다(2026-11-09 측정에서 일본어
+  AI 개요가 실제로 다른 앱과 섞었다). 페이지마다 같은 @id를 쓰고 sameAs로 두 스토어
+  페이지를 묶으면 「이 PRISM = 이 App Store 앱 = 이 Play 앱」이 기계에 명시된다.
+  회사도 이름만 두지 않고 회사 사이트와 한국어 이름까지 적는다(ChatGPT는 「에이드리븐」으로
+  불렀다).
+*/
+const APP_ID = `${ORIGIN}/#app`;
+const ORG = {
+  '@type': 'Organization',
+  '@id': 'https://adriven.co/#org',
+  name: 'A Driven Inc.',
+  alternateName: ['A Driven', 'Adriven', '에이드리븐'],
+  url: 'https://adriven.co/',
+};
 
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */
 const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
@@ -58,8 +85,8 @@ const videoOf = (l) => l;
 const L = {
   ko: {
     dir: 'ltr',
-    title: 'PRISM: 빛을 접어 결정을 밝힌다',
-    desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 240레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
+    title: 'PRISM: 빛의 퍼즐 · 빛을 접어 결정을 밝힌다',
+    desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
     /*
       「접어」다. 「꺾어」가 아니다.
 
@@ -79,20 +106,20 @@ const L = {
     videoCap: '실제 플레이 화면입니다. 소리는 없습니다.',
     ruleCap: '첫 번째 레벨. 거울을 한 번 탭하면 풀립니다.',
     facts: [
-      '<strong>240개</strong> 퍼즐, 여섯 개의 챕터',
+      '<strong>300개</strong> 퍼즐, 일곱 개의 챕터',
       '모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다',
       '표시되는 최소 탭 수는 <strong>전수 탐색으로 증명한</strong> 실제 최솟값입니다',
       '광고 없음 · 인앱결제 없음 · 회원가입 없음',
       '네트워크를 쓰지 않습니다. 완전 오프라인',
     ],
     stats: [
-      ['240', '퍼즐'],
-      ['6', '챕터'],
+      ['300', '퍼즐'],
+      ['7', '챕터'],
       ['1', '판마다 정답'],
       ['0', '광고 · 결제 · 가입'],
     ],
     badges: ['광고 없음', '인앱결제 없음', '회원가입 없음', '완전 오프라인'],
-    chaptersH: '여섯 개의 챕터',
+    chaptersH: '일곱 개의 챕터',
     chaptersLead: '레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.',
     chapters: [
       ['반사', '거울이 빛을 90도로 꺾습니다'],
@@ -101,11 +128,12 @@ const L = {
       ['혼합', '두 빛이 한 결정에서 겹치면 새로운 색이 됩니다'],
       ['정제', '필터는 원하는 성분만 남깁니다'],
       ['수렴', '배운 모든 것이 한 판에서 만납니다'],
+      ['편광', '무늬가 엇갈린 편광판은 빛을 지웁니다'],
     ],
     opticsH: '진짜 광학입니다',
-    opticsP: '거울의 반사각, 프리즘의 분산, 빛의 가산혼합은 실제 물리 그대로입니다. 챕터마다 원리 카드가 열리고, 탭하기 전과 후를 그림 두 장으로 나란히 보여줍니다. 초등학생이 읽을 수 있게 썼습니다. 게임이 실제 물리와 어디서 달라지는지도 함께 적어뒀습니다.',
+    opticsP: '거울의 반사각, 프리즘의 분산, 빛의 가산혼합, 엇갈린 편광판이 빛을 지우는 현상은 실제 물리 그대로입니다. 챕터마다 원리 카드가 열리고, 탭하기 전과 후를 그림 두 장으로 나란히 보여줍니다. 초등학생이 읽을 수 있게 썼습니다. 게임이 실제 물리와 어디서 달라지는지도 함께 적어뒀습니다.',
     a11yH: '색을 구분하기 어려워도 끝까지 풀 수 있습니다',
-    a11yP: '모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은 성분 도형이 나란히 놓입니다. 노란 결정에는 삼각형과 사각형이 함께 새겨집니다. 색을 전혀 보지 못해도 240개 퍼즐 전부를 풀 수 있습니다.',
+    a11yP: '모든 결정에는 요구하는 색이 도형으로 함께 각인되어 있습니다. 섞인 색은 성분 도형이 나란히 놓입니다. 노란 결정에는 삼각형과 사각형이 함께 새겨집니다. 색을 전혀 보지 못해도 300개 퍼즐 전부를 풀 수 있습니다.',
     a11yMore: [
       '글자 크기를 보통 · 크게 · 아주 크게 중에서 고를 수 있습니다',
       '기기의 「동작 줄이기」를 켜면 화면 연출이 줄어듭니다',
@@ -117,12 +145,13 @@ const L = {
     langsP: '한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.',
     faqH: '자주 묻는 것',
     faq: [
-      ['광고가 정말 없나요?', '없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 240개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.'],
+      ['광고가 정말 없나요?', '없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 300개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.'],
       ['인터넷 없이 되나요?', '됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.'],
-      ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 240판 전부를 풀 수 있습니다.'],
-      ['몇 판이고 얼마나 어렵나요?', '여섯 챕터에 240판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
-      ['안드로이드 버전이 있나요?', '있습니다. iOS와 Android 모두에서 같은 가격, 같은 240판으로 받으실 수 있습니다.'],
+      ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 300판 전부를 풀 수 있습니다.'],
+      ['몇 판이고 얼마나 어렵나요?', '일곱 챕터에 300판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
+      ['안드로이드 버전이 있나요?', '있습니다. iOS와 Android 모두에서 같은 가격, 같은 300판으로 받으실 수 있습니다.'],
       ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
+      ['수업에 쓸 수 있나요?', '쓸 수 있습니다. 일곱 챕터가 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 하나씩 다루고, 챕터를 시작할 때 실제 물리와 게임이 단순화한 점을 카드로 설명합니다. 챕터별 원리와 학생에게 던질 질문을 정리한 교사용 안내 글이 이 사이트에 있습니다.'],
     ],
     privacy: '개인정보 처리방침',
     support: '지원 · 문의',
@@ -131,8 +160,8 @@ const L = {
 
   en: {
     dir: 'ltr',
-    title: 'PRISM: Bend beams. Wake the crystals.',
-    desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 240 levels, one solution each. No ads, no in-app purchases, fully offline.',
+    title: 'PRISM: Light Puzzle · Bend beams. Wake the crystals.',
+    desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.',
     tagline: 'Bend beams. Wake the crystals.',
     cta: 'Get it on the App Store',
     ctaAndroid: 'Get it on Google Play',
@@ -144,20 +173,20 @@ const L = {
     videoCap: 'Real gameplay. No sound.',
     ruleCap: 'The first level. One tap on a mirror solves it.',
     facts: [
-      '<strong>240</strong> puzzles across six chapters',
+      '<strong>300</strong> puzzles across seven chapters',
       'Every puzzle has <strong>exactly one solution</strong>',
       'The par shown is the <strong>true minimum</strong>, found by exhaustive search',
       'No ads · no in-app purchases · no sign-up',
       'No networking at all. Fully offline',
     ],
     stats: [
-      ['240', 'puzzles'],
-      ['6', 'chapters'],
+      ['300', 'puzzles'],
+      ['7', 'chapters'],
       ['1', 'solution each'],
       ['0', 'ads · IAP · sign-ups'],
     ],
     badges: ['No ads', 'No in-app purchases', 'No sign-up', 'Fully offline'],
-    chaptersH: 'Six chapters',
+    chaptersH: 'Seven chapters',
     chaptersLead: 'The levels teach optics in order. Each chapter introduces exactly one new piece.',
     chapters: [
       ['Reflect', 'a mirror turns light by 90 degrees'],
@@ -166,11 +195,12 @@ const L = {
       ['Mix', 'two beams meeting at one crystal make a new color'],
       ['Refine', 'a filter keeps only the component you want'],
       ['Converge', 'everything you have learned meets on one board'],
+      ['Polarize', 'crossed polarizers make light disappear'],
     ],
     opticsH: 'Real optics',
-    opticsP: 'The angle of reflection, dispersion through a prism, and additive color mixing are real physics. Each chapter opens a principle card that shows the board before and after a single tap, side by side, written so a child can follow it. Where the game simplifies real physics, we say so.',
+    opticsP: 'The angle of reflection, dispersion through a prism, additive color mixing, and crossed polarizers blocking light are real physics. Each chapter opens a principle card that shows the board before and after a single tap, side by side, written so a child can follow it. Where the game simplifies real physics, we say so.',
     a11yH: 'Playable without seeing color',
-    a11yP: 'Every crystal also shows its required color as a shape, and mixed colors show their component shapes side by side: a yellow crystal carries a triangle and a square together. All 240 puzzles can be finished without distinguishing color.',
+    a11yP: 'Every crystal also shows its required color as a shape, and mixed colors show their component shapes side by side: a yellow crystal carries a triangle and a square together. All 300 puzzles can be finished without distinguishing color.',
     a11yMore: [
       'Text size can be set to normal, large or extra large',
       'Turning on Reduce Motion cuts down the effects',
@@ -182,12 +212,13 @@ const L = {
     langsP: 'Korean, English, Japanese and Simplified Chinese. Follows your device language, or pick one in Settings.',
     faqH: 'Questions people ask',
     faq: [
-      ['Are there really no ads?', 'None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 240 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
+      ['Are there really no ads?', 'None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
       ['Does it work without internet?', 'Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
-      ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 240 puzzles can be finished without distinguishing color at all.'],
-      ['How many levels, and how hard?', 'Six chapters, 240 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
-      ['Is there an Android version?', 'Yes. It is available on both iOS and Android, same price, same 240 puzzles.'],
+      ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 300 puzzles can be finished without distinguishing color at all.'],
+      ['How many levels, and how hard?', 'Seven chapters, 300 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
+      ['Is there an Android version?', 'Yes. It is available on both iOS and Android, same price, same 300 puzzles.'],
       ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
+      ['Can I use it to teach?', 'Yes. The seven chapters cover reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization, and each opens with a card on the real physics and what the game simplifies. A teacher\'s guide on this site lists every chapter\'s principle with a question to ask students.'],
     ],
     privacy: 'Privacy Policy',
     support: 'Support',
@@ -196,8 +227,8 @@ const L = {
 
   ja: {
     dir: 'ltr',
-    title: 'PRISM：光を折り、結晶を灯す',
-    desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。240レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
+    title: 'PRISM：光のパズル｜光を折り、結晶を灯す',
+    desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
     tagline: '光を折り、結晶を灯す',
     cta: 'App Store で入手',
     ctaAndroid: 'Google Play で入手',
@@ -209,20 +240,20 @@ const L = {
     videoCap: '実際のプレイ画面です。音はありません。',
     ruleCap: '最初のレベル。鏡を一度タップすると解けます。',
     facts: [
-      '<strong>240</strong>のパズル、6つのチャプター',
+      '<strong>300</strong>のパズル、7つのチャプター',
       'すべてのパズルに<strong>答えはひとつだけ</strong>',
       '表示される最小タップ数は<strong>全探索で証明した</strong>本当の最小値です',
       '広告なし · アプリ内課金なし · 会員登録なし',
       'ネットワークを一切使いません。完全オフライン',
     ],
     stats: [
-      ['240', 'パズル'],
-      ['6', 'チャプター'],
+      ['300', 'パズル'],
+      ['7', 'チャプター'],
       ['1', '盤面ごとの答え'],
       ['0', '広告 · 課金 · 登録'],
     ],
     badges: ['広告なし', 'アプリ内課金なし', '会員登録なし', '完全オフライン'],
-    chaptersH: '6つのチャプター',
+    chaptersH: '7つのチャプター',
     chaptersLead: 'レベルが順に光のしくみを教えます。新しいピースはチャプターごとにひとつずつ増えます。',
     chapters: [
       ['反射', '鏡が光を90度曲げます'],
@@ -231,11 +262,12 @@ const L = {
       ['混色', '2本の光が1つの結晶で重なると新しい色になります'],
       ['フィルター', 'フィルターは必要な成分だけを残します'],
       ['収束', '学んだすべてが1つの盤面で出会います'],
+      ['偏光', 'しまが交差した偏光板は光を消します'],
     ],
     opticsH: '本物の光学です',
-    opticsP: '鏡の反射角、プリズムの分散、光の加法混色は実際の物理そのままです。チャプターごとに「しくみカード」が開き、タップの前と後を2枚の絵で並べて見せます。小学生が読めるように書きました。ゲームが実際の物理とどこで違うのかも一緒に書いてあります。',
+    opticsP: '鏡の反射角、プリズムの分散、光の加法混色、交差した偏光板が光を消すしくみは実際の物理そのままです。チャプターごとに「しくみカード」が開き、タップの前と後を2枚の絵で並べて見せます。小学生が読めるように書きました。ゲームが実際の物理とどこで違うのかも一緒に書いてあります。',
     a11yH: '色が見分けにくくても最後まで解けます',
-    a11yP: 'すべての結晶には求める色が図形としても刻まれています。混ざった色は成分の図形が並びます。黄色の結晶には三角と四角が一緒に刻まれます。色がまったく見えなくても240のパズルすべてを解けます。',
+    a11yP: 'すべての結晶には求める色が図形としても刻まれています。混ざった色は成分の図形が並びます。黄色の結晶には三角と四角が一緒に刻まれます。色がまったく見えなくても300のパズルすべてを解けます。',
     a11yMore: [
       '文字の大きさを 標準・大・特大 から選べます',
       '端末の「視差効果を減らす」をオンにすると演出が控えめになります',
@@ -247,12 +279,13 @@ const L = {
     langsP: '한국어、English、日本語、简体中文に対応しています。端末の言語に従うか、設定で直接選べます。',
     faqH: 'よくある質問',
     faq: [
-      ['本当に広告はありませんか？', 'ありません。アプリ内課金も、会員登録も、ログインもありません。一度購入すれば240のパズルすべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。'],
+      ['本当に広告はありませんか？', 'ありません。アプリ内課金も、会員登録も、ログインもありません。一度購入すれば300のパズルすべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。'],
       ['インターネットなしで遊べますか？', '遊べます。ネットワークを一切使わない完全オフラインのゲームです。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。'],
-      ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても240面すべてを解けます。'],
-      ['何面あって、どのくらい難しいですか？', '6チャプターに240面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
-      ['Android版はありますか？', 'あります。iOS・Android どちらでも同じ価格、同じ240面で遊べます。'],
+      ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても300面すべてを解けます。'],
+      ['何面あって、どのくらい難しいですか？', '7チャプターに300面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
+      ['Android版はありますか？', 'あります。iOS・Android どちらでも同じ価格、同じ300面で遊べます。'],
       ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
+      ['授業で使えますか？', '使えます。7つの章が反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光をひとつずつ扱い、章の始めに本物の物理とゲームが単純化した点をカードで説明します。章ごとの原理と生徒への問いをまとめた先生向けのガイドがこのサイトにあります。'],
     ],
     privacy: 'プライバシーポリシー',
     support: 'サポート・お問い合わせ',
@@ -261,8 +294,8 @@ const L = {
 
   'zh-Hans': {
     dir: 'ltr',
-    title: 'PRISM：折转光线，点亮结晶',
-    desc: '点一下，光就会拐弯。只有一条规则的极简解谜。240 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
+    title: 'PRISM：光线解谜｜折转光线，点亮结晶',
+    desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
     tagline: '折转光线，点亮结晶',
     cta: '在 App Store 获取',
     ctaAndroid: '在 Google Play 获取',
@@ -274,20 +307,20 @@ const L = {
     videoCap: '真实的游戏画面。没有声音。',
     ruleCap: '第一关。点一次镜子就能解开。',
     facts: [
-      '<strong>240</strong> 个谜题，六个章节',
+      '<strong>300</strong> 个谜题，七个章节',
       '每个谜题<strong>只有一个答案</strong>',
       '显示的最少点击次数是<strong>穷举验证过</strong>的真实最小值',
       '没有广告 · 没有内购 · 无需注册',
       '完全不联网。彻底离线',
     ],
     stats: [
-      ['240', '谜题'],
-      ['6', '章节'],
+      ['300', '谜题'],
+      ['7', '章节'],
       ['1', '每关唯一解'],
       ['0', '广告 · 内购 · 注册'],
     ],
     badges: ['没有广告', '没有内购', '无需注册', '完全离线'],
-    chaptersH: '六个章节',
+    chaptersH: '七个章节',
     chaptersLead: '关卡会按顺序教你光的原理。每个章节只引入一种新元件。',
     chapters: [
       ['反射', '镜子把光转 90 度'],
@@ -296,11 +329,12 @@ const L = {
       ['混色', '两束光在同一个结晶上相遇会变成新的颜色'],
       ['滤光', '滤光片只留下你需要的成分'],
       ['汇聚', '学过的一切在一个盘面上相遇'],
+      ['偏振', '条纹交叉的偏振片会让光消失'],
     ],
     opticsH: '这是真实的光学',
-    opticsP: '镜子的反射角、棱镜的色散、光的加法混色，都是真实的物理。每个章节会打开一张原理卡片，把点击前和点击后的两幅图并排放在一起，写得连小学生都能看懂。游戏在哪里简化了真实物理，我们也一并写出来。',
+    opticsP: '镜子的反射角、棱镜的色散、光的加法混色、交叉的偏振片挡住光线，都是真实的物理。每个章节会打开一张原理卡片，把点击前和点击后的两幅图并排放在一起，写得连小学生都能看懂。游戏在哪里简化了真实物理，我们也一并写出来。',
     a11yH: '分不清颜色也能通关',
-    a11yP: '每个结晶都把它要求的颜色同时刻成了图形。混合色会把成分图形并排放着——黄色结晶上同时刻着三角形和方形。即使完全看不到颜色，240 个谜题也都能解开。',
+    a11yP: '每个结晶都把它要求的颜色同时刻成了图形。混合色会把成分图形并排放着——黄色结晶上同时刻着三角形和方形。即使完全看不到颜色，300 个谜题也都能解开。',
     a11yMore: [
       '文字大小可以选择 标准 · 大 · 特大',
       '打开设备的「减弱动态效果」后，画面特效会减少',
@@ -312,12 +346,13 @@ const L = {
     langsP: '支持 한국어、English、日本語、简体中文。跟随设备语言，也可以在设置里直接选择。',
     faqH: '常见问题',
     faq: [
-      ['真的没有广告吗？', '没有。也没有内购、注册和登录。一次购买，240 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。'],
+      ['真的没有广告吗？', '没有。也没有内购、注册和登录。一次购买，300 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。'],
       ['没有网络能玩吗？', '能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。'],
-      ['我有色觉障碍，能玩吗？', '能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，240 关也都能解开。'],
-      ['一共多少关？难吗？', '六个章节，240 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
-      ['有 Android 版本吗？', '有。iOS 和 Android 上都能获取，价格相同，同样 240 关。'],
+      ['我有色觉障碍，能玩吗？', '能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。'],
+      ['一共多少关？难吗？', '七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
+      ['有 Android 版本吗？', '有。iOS 和 Android 上都能获取，价格相同，同样 300 关。'],
       ['占多大空间？', '不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。'],
+      ['能用来上课吗？', '能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。'],
     ],
     privacy: '隐私政策',
     support: '支持与联系',
@@ -366,7 +401,7 @@ const GLYPH_SVG = [
 const BEAM = '<div class="beam" aria-hidden="true"><i></i></div>';
 
 /** 챕터 번호. 스토어 설명도 로마자를 쓴다. */
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 const SPECTRUM_SVG = `<svg class="spectrum" viewBox="0 0 640 280" aria-hidden="true" focusable="false">
         <defs>
@@ -405,7 +440,9 @@ function page(lang) {
     {
       '@context': 'https://schema.org',
       '@type': 'MobileApplication',
+      '@id': APP_ID,
       name: 'PRISM',
+      sameAs: ['https://apps.apple.com/app/id6803019903', PLAYSTORE],
       // 제목을 잘라 'PRISM'을 다시 만들던 자리다. `name`과 같은 값이라 아무것도
       // 보태지 않았고, 구분자를 바꾸면 조용히 깨지는 코드였다. 언어별 제목을
       // 그대로 넣는다. 답변 엔진이 그 언어로 이 앱을 부르는 이름이 이것이다.
@@ -429,8 +466,8 @@ function page(lang) {
         availability: 'https://schema.org/InStock',
         url: APPSTORE,
       },
-      author: { '@type': 'Organization', name: 'A Driven Inc.', url: ORIGIN + '/' },
-      publisher: { '@type': 'Organization', name: 'A Driven Inc.', url: ORIGIN + '/' },
+      author: ORG,
+      publisher: ORG,
       screenshot: [
         `${ORIGIN}/img/board-prism.png`,
         `${ORIGIN}/img/board-rule.png`,
@@ -516,7 +553,6 @@ ${JSON.stringify(ld, null, 2)}
           <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
           <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
         </div>
-        <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
         <!--
           체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
 
@@ -527,7 +563,7 @@ ${JSON.stringify(ld, null, 2)}
         <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
 
         <!--
-          숫자 넷으로 제품 전체를 말한다. 240판, 6챕터, 판마다 정답 하나,
+          숫자 넷으로 제품 전체를 말한다. 300판, 7챕터, 판마다 정답 하나,
           그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
           문장이 아니라 이 숫자들이다.
         -->
@@ -578,7 +614,7 @@ ${t.facts.map((f) => `          <li>${f}</li>`).join('\n')}
         <!--
           카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
           분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
-          수렴은 전부. 장식이 아니라 목록의 내용을 한 번 더 말한다.
+          수렴은 전부, 편광은 편광판 살처럼 끊긴 줄무늬. 장식이 아니라 목록의 내용을 한 번 더 말한다.
         -->
         <ol class="chapters">
 ${t.chapters
@@ -665,8 +701,8 @@ ${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
       </section>
 
       <nav class="links">
-${ARTICLE_LANGS.includes(lang) ? `        <a href="${articlePathOf(lang)}">${esc(ARTICLE[lang].title)}</a>
-` : ''}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
+${articlesIn(lang).map((a) => `        <a href="${articlePathOf(a, lang)}">${esc(a.text[lang].title)}</a>
+`).join('')}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
         <a href="${up}support.html">${esc(t.support)}</a>
       </nav>
 
@@ -720,14 +756,16 @@ for (const lang of LANGS) {
   writeFileSync(resolve(dir, 'index.html'), page(lang), 'utf8');
 }
 
-for (const lang of ARTICLE_LANGS) {
-  const dir = resolve(HERE, articlePathOf(lang).slice(1));
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(
-    resolve(dir, 'index.html'),
-    articlePage(lang, { esc, L, ORIGIN, urlOf }),
-    'utf8',
-  );
+for (const art of ARTICLES) {
+  for (const lang of art.langs) {
+    const dir = resolve(HERE, articlePathOf(art, lang).slice(1));
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(
+      resolve(dir, 'index.html'),
+      articlePage(art, lang, { esc, L, ORIGIN, urlOf, ORG, APP_ID }),
+      'utf8',
+    );
+  }
 }
 
 /*
@@ -753,11 +791,9 @@ Sitemap: ${ORIGIN}/sitemap.xml
   'utf8',
 );
 
-const now = new Date().toISOString().slice(0, 10);
-
 const urlEntry = (l) => `  <url>
     <loc>${urlOf(l)}</loc>
-    <lastmod>${now}</lastmod>
+    <lastmod>${SITE_UPDATED}</lastmod>
 ${LANGS.map((a) => `    <xhtml:link rel="alternate" hreflang="${a}" href="${urlOf(a)}" />`).join('\n')}
     <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
   </url>`;
@@ -777,10 +813,10 @@ writeFileSync(
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${LANGS.map(urlEntry).join('\n')}
-${articleSitemapEntries({ ORIGIN, now })}
-  <url><loc>${ORIGIN}/play/</loc><lastmod>${now}</lastmod></url>
-  <url><loc>${ORIGIN}/privacy.html</loc><lastmod>${now}</lastmod></url>
-  <url><loc>${ORIGIN}/support.html</loc><lastmod>${now}</lastmod></url>
+${articleSitemapEntries({ ORIGIN })}
+  <url><loc>${ORIGIN}/play/</loc></url>
+  <url><loc>${ORIGIN}/privacy.html</loc></url>
+  <url><loc>${ORIGIN}/support.html</loc></url>
 </urlset>
 `,
   'utf8',
@@ -797,15 +833,15 @@ writeFileSync(
   resolve(HERE, 'llms.txt'),
   `# PRISM
 
-> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 240판, 모든 판의
+> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 300판, 모든 판의
 > 정답은 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
-> A tap-to-rotate light puzzle for iOS and Android. 240 boards, each with
+> A tap-to-rotate light puzzle for iOS and Android. 300 boards, each with
 > exactly one solution. No ads, no in-app purchases, no sign-up, no
 > networking. Paid once, ₩3,900.
 
 ## 사실 / Facts
 
-- 개발사 / Publisher: A Driven Inc.
+- 개발사 / Publisher: A Driven Inc. (에이드리븐, https://adriven.co/). 이름이 같은 다른 「Prism」 퍼즐 앱과 다른 앱이다 / not the same as other puzzle apps named Prism
 - 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
 - 스토어 / Stores: [App Store](${APPSTORE}), [Google Play](${PLAYSTORE})
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
@@ -831,5 +867,6 @@ ${articleLlmsSection({ ORIGIN })}
 
 console.log(`생성 완료`);
 console.log(`  페이지 ${LANGS.length}개: ${LANGS.map(pathOf).join(', ')}`);
-console.log(`  글 ${ARTICLE_LANGS.length}개: ${ARTICLE_LANGS.map(articlePathOf).join(', ')}`);
+const articlePaths = ARTICLES.flatMap((a) => a.langs.map((l) => articlePathOf(a, l)));
+console.log(`  글 ${articlePaths.length}개: ${articlePaths.join(', ')}`);
 console.log(`  robots.txt · sitemap.xml · llms.txt`);
