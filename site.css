@@ -1150,6 +1150,131 @@
     font-weight: 600;
   }
 
+  /* ── 오늘의 빛 퍼즐(daily-page.mjs). 판은 학습지와 같은 흑백 그림이라 흰 종이 위에 둔다. ── */
+  .daily-legend {
+    max-width: var(--measure);
+    color: var(--ink-dim);
+    font-size: var(--t-small);
+  }
+  .daily-legend p + p {
+    margin-top: var(--s-1);
+  }
+  .daily-boards,
+  .daily-answers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+  .daily-board {
+    padding: var(--s-2);
+    border: 1px solid var(--hair);
+    border-radius: var(--r-md);
+    background: var(--paper-raised);
+  }
+  .daily-board h2 {
+    margin: 0;
+  }
+  .daily-board__meta,
+  .daily-board__stats {
+    color: var(--ink-faint);
+    font-size: var(--t-small);
+  }
+  .daily-board__stage {
+    position: relative;
+    margin-top: var(--s-2);
+    border-radius: var(--r-sm);
+    background: var(--sheet);
+  }
+  .daily-board__stage img,
+  .daily-board__svg svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .daily-board__cells {
+    position: absolute;
+    inset: 0;
+  }
+  .daily-board__cell {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    border-radius: var(--r-sm);
+    background: none;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .daily-board__cell:hover {
+    background: var(--hair-soft);
+  }
+  .daily-board__cell:disabled {
+    cursor: default;
+    background: none;
+  }
+  .daily-board__stats {
+    margin-top: var(--s-1);
+  }
+  .daily-board__status {
+    min-height: 1.75em;
+    font-weight: 600;
+  }
+  .daily-board.is-solved {
+    border-color: var(--ink);
+  }
+  .daily-board .actions {
+    margin-top: var(--s-1);
+  }
+  .daily-record__streak {
+    font: 600 var(--t-lead) / var(--leading-tight) var(--serif);
+  }
+  .daily-record__note {
+    max-width: var(--measure);
+    color: var(--ink-faint);
+    font-size: var(--t-small);
+  }
+  .daily-answer img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-sm);
+    background: var(--sheet);
+  }
+  .daily-answer figcaption {
+    margin-top: var(--s-1);
+    font-size: var(--t-small);
+  }
+  @media print {
+    .daily-legend {
+      max-width: none;
+      font-size: 8.5pt;
+      line-height: 1.45;
+    }
+    .daily-legend p + p {
+      margin-top: 1mm;
+    }
+      /* 격자는 쪽을 넘을 때 통째로 밀리므로 인쇄에서는 블록으로 놓는다. 세 판을 한 줄에 놓아야 설명이 길어지는 날(7챕터)에도 A4 한 장에 들어간다. */
+    .daily-boards {
+      display: block;
+      margin-top: 4mm;
+    }
+    .daily-board {
+      display: inline-block;
+      width: 31%;
+      margin: 0 2% 5mm 0;
+      padding: 0;
+      border: 0;
+      vertical-align: top;
+      break-inside: avoid;
+    }
+    .daily-board__paper {
+      display: block;
+      width: 100%;
+      max-width: none;
+      margin-top: 2mm;
+    }
+  }
+
   /* ── 화면 전용 · 인쇄 전용 ─────────────────────────────────── */
   @media print {
     .skip-link,

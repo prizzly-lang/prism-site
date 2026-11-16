@@ -14,7 +14,8 @@
  *   build.mjs             앱 소개 첫 화면(아래 L)과 모든 페이지 출력, sitemap·robots·llms, 검사
  *   article-page.mjs + articles/          글
  *   learn-page.mjs + learn/               개념(배우기)
- *   worksheet-page.mjs + worksheet-content.mjs   학습지
+ *   worksheet-page.mjs + worksheets/<slug>.mjs   학습지
+ *   daily-page.mjs + daily/  오늘의 빛 퍼즐(재료는 prism 저장소 tools/make-daily.ts·daily-site.ts)
  *   pages/                개인정보·지원(4개 언어), 에이드리븐 소개, 404, 디자인 견본
  *
  * AEO/GEO(자세한 근거는 AEO.md): 언어마다 독립된 문서, 실제로 있는 언어끼리만 hreflang,
@@ -29,9 +30,9 @@ import { fileURLToPath } from 'node:url';
 import { ORIGIN, APPSTORE, PLAYSTORE, APP_ID, ORG, LANGS, LANG_NAME, esc, plain, homeOf, learnPath, worksheetsPath, aboutPath } from './site.mjs';
 import { ARTICLES, articlesIn, articlePathOf } from './articles/index.mjs';
 import { articlePage, articleSitemap, articleLlmsSection } from './article-page.mjs';
-import { WS_LANGS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
-import { WS } from './worksheet-content.mjs';
+import { WS_LANGS, WORKSHEETS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
 import { learnPages, LEARN } from './learn-page.mjs';
+import { dailyPages } from './daily-page.mjs';
 import { docPages } from './pages/doc-page.mjs';
 import { aboutPages } from './pages/about.mjs';
 import { notFoundPage } from './pages/not-found.mjs';
@@ -547,6 +548,7 @@ const PAGES = [
   ...docPages().map((p) => ({ ...p, sitemap: 'core' })),
   ...learnPages().map((p) => ({ ...p, sitemap: 'learn' })),
   ...worksheetPages(HERE).map((p) => ({ ...p, sitemap: p.noindex ? undefined : 'worksheets' })),
+  ...dailyPages(HERE).map((p) => ({ ...p, sitemap: p.noindex ? undefined : 'daily' })),
   { path: '/404.html', html: notFoundPage() },
   { path: '/design/', html: designPage() },
 ];
@@ -594,6 +596,7 @@ const SITEMAPS = {
   core: [...PAGES.filter((p) => p.sitemap === 'core').map((p) => [p.path, p.updated]), ['/play/', SITE_UPDATED]],
   learn: PAGES.filter((p) => p.sitemap === 'learn').map((p) => [p.path, p.updated]),
   worksheets: PAGES.filter((p) => p.sitemap === 'worksheets').map((p) => [p.path, p.updated]),
+  daily: PAGES.filter((p) => p.sitemap === 'daily').map((p) => [p.path, p.updated]),
 };
 for (const [name, urls] of Object.entries(SITEMAPS)) {
   writeFileSync(
@@ -648,7 +651,7 @@ ${LEARN.flatMap((c) => WS_LANGS.map((l) => `- [${c.text[l].title}](${ORIGIN}${le
 
 ## 학습지 / Printable worksheets
 
-${WS_LANGS.map((l) => `- [${WS[l].pageTitle}](${ORIGIN}${wsPathOf(l)}): ${WS[l].desc}`).join('\n')}
+${WORKSHEETS.flatMap((s) => WS_LANGS.map((l) => `- [${s.text[l].pageTitle}](${ORIGIN}${wsPathOf(l, s.slug)}): ${s.text[l].desc}`)).join('\n')}
 
 ## 앱 소개 / The app
 
@@ -660,6 +663,7 @@ ${articleLlmsSection()}
 
 ## Optional
 
+- [오늘의 빛 퍼즐 / Daily light puzzle](${ORIGIN}/daily/): 매일 새 세 판, 다음 날 정답 / three new boards a day, answers the next day
 - [체험판 / Playable demo](${ORIGIN}/play/): 1챕터 14판을 설치 없이 브라우저에서 / chapter 1, 14 levels, playable in the browser
 - [에이드리븐 / About A Driven](${ORIGIN}${aboutPath('ko')})
 - [개인정보 처리방침 / Privacy](${ORIGIN}/privacy.html), [지원 / Support](${ORIGIN}/support.html)

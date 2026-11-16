@@ -15,7 +15,7 @@
  * - 원리 카드: `/img/optics/{ko,en}-ch1.webp`, 둘 다 680×1084(PIL로 잼). 체험판도 같은
  *   카드를 띄운다(`src/game/optics.ts`에 IS_DEMO 분기 없음).
  *
- * ## 교육과정 (prism-site `worksheet-content.mjs` 머리 주석, prism `docs/WORKSHEETS.md` 4절)
+ * ## 교육과정 (prism-site `worksheets/path-of-light.mjs` 머리 주석, prism `docs/WORKSHEETS.md` 4절)
  * - 초5~6: [6과02-01] 물체를 보려면 빛이 있어야 함, [6과02-02] 빛의 직진·반사·굴절 현상 관찰.
  *   각도 규칙은 다루지 않는다. 그래서 「무슨 일이 일어났나」는 현상으로만 쓰고, 입사각 = 반사각은
  *   「중학교」 절로 따로 뺐다.

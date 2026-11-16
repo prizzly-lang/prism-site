@@ -46,6 +46,7 @@
 
 ## Optional
 
+- [오늘의 빛 퍼즐 / Daily light puzzle](https://prism.adriven.co/daily/): 매일 새 세 판, 다음 날 정답 / three new boards a day, answers the next day
 - [체험판 / Playable demo](https://prism.adriven.co/play/): 1챕터 14판을 설치 없이 브라우저에서 / chapter 1, 14 levels, playable in the browser
 - [에이드리븐 / About A Driven](https://prism.adriven.co/about/)
 - [개인정보 처리방침 / Privacy](https://prism.adriven.co/privacy.html), [지원 / Support](https://prism.adriven.co/support.html)

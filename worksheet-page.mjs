@@ -1,15 +1,20 @@
 /**
- * 인쇄용 학습지 페이지를 그린다. 문구는 `worksheet-content.mjs`, 판 그림은
- * `worksheets/<slug>/assets/`(prism 저장소의 make-worksheet-boards.ts가 넘긴다).
+ * 인쇄용 학습지 목록과 학습지 페이지를 그린다. 학습지 하나 = 주제 하나 = 주소 하나
+ * (prism 저장소 docs/WORKSHEETS.md). 학습지마다 `worksheets/<slug>.mjs` 하나:
+ *   slug, updated, boards([{ id, chapter, taps: { 칸: 횟수 } }], 빌드가 엔진과 대조),
+ *   legendCells(기호 아이콘을 잘라 올 판 칸), text.{ko,en}(문구)
+ * 판 그림과 boards.json은 `worksheets/<slug>/assets/`(prism 저장소의
+ * `make-worksheet-boards.ts --sheet <slug> --site`가 넘긴다). 삽화(header, ch1…)는 같은 폴더의
+ * webp이고 없으면 그 자리를 비운다. 새 학습지는 아래 WORKSHEETS에 import 한 줄.
  *
  * 한 페이지에 A4 「장」(.sheet)을 이어 붙인다. 화면에서는 종이 몇 장이 놓인 것처럼
  * 보이고(A4보다 좁으면 한 줄로 흘러내린다, css/sheet.css), 인쇄하면 장마다 A4 한 쪽이 된다.
  * PDF는 같은 HTML을 Chrome으로 인쇄해 만든다(`print-worksheet.mjs`). 화면 전용 머리말
  * (.screen-only)과 사이트 머리말·바닥글은 인쇄에서 빠진다.
  *
- *   /worksheets/                       학습지 목록          /en/worksheets/
- *   /worksheets/path-of-light/         학습지 2쪽           /en/worksheets/path-of-light/
- *   /worksheets/path-of-light/answers/ 정답지 1쪽(교사용)
+ *   /worksheets/                학습지 목록          /en/worksheets/
+ *   /worksheets/<slug>/         학습지 2쪽           /en/worksheets/<slug>/
+ *   /worksheets/<slug>/answers/ 정답지 1쪽(교사용, 검색에서 뺀다)
  *
  * 판 그림은 <img>가 아니라 SVG를 본문에 그대로 넣는다. 그래야 판 가장자리 글자가
  * 사이트 글꼴(Prism Sans)을 쓰고, 기호 설명의 아이콘을 같은 그림에서 잘라 쓸 수 있다.
@@ -18,23 +23,32 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { WS, BOARDS } from './worksheet-content.mjs';
+import pathOfLight from './worksheets/path-of-light.mjs';
 import { harumathHref } from './crosslinks.mjs';
 import { ORIGIN, ORG, APP_ID, UI, LEARN_LANGS, esc, plain, homeOf, worksheetsPath, prefix } from './site.mjs';
 import { page } from './ui/page.mjs';
 
+/** 학습지. 목록 페이지가 이 순서로 카드를 늘어놓는다(새 것이 앞). */
+export const WORKSHEETS = [pathOfLight];
+export const worksheetOf = (slug) => WORKSHEETS.find((w) => w.slug === slug);
 export const WS_LANGS = LEARN_LANGS;
-export const WS_SLUG = 'path-of-light';
-/** 학습지를 마지막으로 고친 날. sitemap lastmod와 JSON-LD dateModified. 문구·판을 고치면 같이 고친다. */
-export const WS_UPDATED = '2026-11-26';
-export const wsPathOf = (l, answers = false) => `${worksheetsPath(l, WS_SLUG)}${answers ? 'answers/' : ''}`;
-export const WS_PDF = {
-  ko: { sheet: 'prism-worksheet-ko.pdf', answers: 'prism-worksheet-answers-ko.pdf' },
-  en: { sheet: 'prism-worksheet-en.pdf', answers: 'prism-worksheet-answers-en.pdf' },
+export const wsPathOf = (l, slug, answers = false) => `${worksheetsPath(l, slug)}${answers ? 'answers/' : ''}`;
+/** PDF 파일 이름. 내려받은 교사의 폴더에서도 무슨 학습지인지 보이게 slug를 넣는다. */
+export const wsPdf = (slug, l, answers = false) => `prism-${slug}${answers ? '-answers' : ''}-${l}.pdf`;
+
+/** 목록 페이지 문구. */
+const LIST = {
+  ko: {
+    title: '인쇄용 광학 학습지',
+    desc: '광학 퍼즐 게임 PRISM의 판으로 만든 무료 인쇄용 학습지 모음입니다. 반사, 반투명 거울, 프리즘, 빛의 합성을 연필로 풀어 봅니다. 흑백 인쇄용이고 정답지가 따로 있습니다.',
+    lead: '교실과 가정에서 바로 인쇄해 쓰는 A4 학습지입니다. 흑백으로 인쇄해도 풀 수 있고, 교사용 정답지가 따로 있습니다.',
+  },
+  en: {
+    title: 'Printable optics worksheets',
+    desc: 'Free printable worksheets built from PRISM puzzle boards: reflection, half-silvered mirrors, prisms and color mixing. Made for black-and-white printing.',
+    lead: 'A4 worksheets to print for the classroom or at home. They work in black and white, and each has a separate answer key for teachers.',
+  },
 };
-/** 화면 머리말 이미지. 삽화가 없으면 그 자리를 비운다(빌드는 멈추지 않는다). */
-const ART = ['header', 'ch1', 'ch2', 'ch3', 'ch4'];
-const DIR = `/worksheets/${WS_SLUG}`;
 /*
   이용 허락: CC BY-NC 4.0(사용자 결정 2026-11-10). 교사가 커뮤니티·클래스룸에 올려 나누는 것이
   학습지가 퍼지는 길이라(인디스쿨은 업체 홍보 금지), 표준 라이선스로 공유·수정을 분명히 허락한다.
@@ -43,16 +57,66 @@ const LICENSE = 'https://creativecommons.org/licenses/by-nc/4.0/';
 const licenseDeed = (l) => `${LICENSE}deed.${l === 'ko' ? 'ko' : 'en'}`;
 
 export function worksheetPages(HERE) {
-  const A = resolve(HERE, 'worksheets', WS_SLUG, 'assets');
+  const out = [];
+  const listUpdated = WORKSHEETS.map((w) => w.updated).sort().at(-1);
+  for (const lang of WS_LANGS) out.push({ path: worksheetsPath(lang), html: listPage(lang), updated: listUpdated });
+  for (const sheet of WORKSHEETS) out.push(...sheetPages(HERE, sheet));
+  return out;
+}
+
+/** 학습지 목록. 학습지가 늘면 카드가 는다. 카드마다 대상·시간·준비물 한 줄. */
+function listPage(lang) {
+  const L = LIST[lang];
+  return page({
+    lang,
+    title: `${L.title} | PRISM`,
+    h1: L.title,
+    desc: L.desc,
+    path: worksheetsPath(lang),
+    alternates: Object.fromEntries(WS_LANGS.map((l) => [l, worksheetsPath(l)])),
+    section: 'worksheets',
+    crumbs: [[UI[lang].home, homeOf(lang)]],
+    ld: [{
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: L.title,
+      description: L.desc,
+      inLanguage: lang,
+      url: ORIGIN + worksheetsPath(lang),
+      publisher: ORG,
+      hasPart: WORKSHEETS.map((s) => ({ '@type': 'LearningResource', name: s.text[lang].title, url: ORIGIN + wsPathOf(lang, s.slug) })),
+    }],
+    main: `      <header class="page-head">
+        <h1>${esc(L.title)}</h1>
+        <p class="lead">${esc(L.lead)}</p>
+      </header>
+      <ul class="card-list stack">${WORKSHEETS.map((s) => {
+        const w = s.text[lang];
+        return `
+        <li class="card">
+          <h2><a href="${wsPathOf(lang, s.slug)}">${esc(w.title)}</a></h2>
+          <p>${esc(w.subtitle)}</p>
+          <p class="card__meta">${esc(w.meta)}</p>
+        </li>`;
+      }).join('')}
+      </ul>`,
+  });
+}
+
+/** 학습지 하나의 페이지들(언어마다 학습지와 정답지). */
+function sheetPages(HERE, sheet) {
+  const { slug, updated, boards: BOARDS } = sheet;
+  const DIR = `/worksheets/${slug}`;
+  const A = resolve(HERE, 'worksheets', slug, 'assets');
   const board = JSON.parse(readFileSync(resolve(A, 'boards.json'), 'utf8'));
-  checkAgainstEngine(board);
+  checkAgainstEngine(slug, BOARDS, board);
 
   const svgOf = (name) =>
     readFileSync(resolve(A, name), 'utf8')
       .replace(/<\?xml[^>]*>\s*/, '')
       .replace(/<title>[^<]*<\/title>/, '');
   const qr = readFileSync(resolve(A, 'qr-play.svg'), 'utf8');
-  const hasArt = Object.fromEntries(ART.map((a) => [a, existsSync(resolve(A, `${a}.webp`))]));
+  const hasArt = (name) => existsSync(resolve(A, `${name}.webp`));
 
   /*
     기호 설명 아이콘. 손으로 다시 그리지 않고 실제 판 그림의 한 칸을 viewBox로 잘라 쓴다.
@@ -66,14 +130,9 @@ export function worksheetPages(HERE) {
     const y = 5 + (Number(row) - 1) * size;
     return `<svg class="ico" viewBox="${x} ${y} ${size} ${size}" aria-hidden="true">${inner}</svg>`;
   };
-  const ICON = {
-    source: cell(3, 'puzzle', 'A', 5),
-    white: cell(49, 'puzzle', 'C', 1),
-    mirror: cell(3, 'puzzle', 'C', 3),
-    splitter: cell(22, 'puzzle', 'D', 3),
-    prism: cell(49, 'puzzle', 'D', 5),
-    crystal: cell(3, 'puzzle', 'A', 1),
-  };
+  const ICON = Object.fromEntries(
+    Object.entries(sheet.legendCells).map(([k, [id, col, row]]) => [k, cell(id, 'puzzle', col, row)]),
+  );
   const GLYPH = {
     r: '<svg class="glyph" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1 9.2 8.6H.8Z"/></svg>',
     g: '<svg class="glyph" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 1.5h7v7h-7z"/></svg>',
@@ -101,55 +160,17 @@ export function worksheetPages(HERE) {
 
   const out = [];
   for (const lang of WS_LANGS) {
-    const w = WS[lang];
-    out.push({ path: worksheetsPath(lang), html: listPage(lang), updated: WS_UPDATED });
-    out.push({ path: wsPathOf(lang), html: sheetPage(lang, w, false), updated: WS_UPDATED });
+    const w = sheet.text[lang];
+    out.push({ path: wsPathOf(lang, slug), html: sheetPage(lang, w, false), updated });
     // 정답지는 검색에서 뺀다(사용자 결정 2026-11-10: 학생이 검색으로 답을 찾지 않게). 교사는 학습지의 링크로 들어간다.
-    out.push({ path: wsPathOf(lang, true), html: sheetPage(lang, w, true), updated: WS_UPDATED, noindex: true });
+    out.push({ path: wsPathOf(lang, slug, true), html: sheetPage(lang, w, true), updated, noindex: true });
   }
   return out;
 
-  /** 학습지 목록. 학습지가 늘면 카드가 는다. 카드마다 대상·시간·준비물 한 줄. */
-  function listPage(lang) {
-    const w = WS[lang];
-    const L = w.list;
-    return page({
-      lang,
-      title: `${L.title} | PRISM`,
-      h1: L.title,
-      desc: L.desc,
-      path: worksheetsPath(lang),
-      alternates: Object.fromEntries(WS_LANGS.map((l) => [l, worksheetsPath(l)])),
-      section: 'worksheets',
-      crumbs: [[UI[lang].home, homeOf(lang)]],
-      ld: [{
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: L.title,
-        description: L.desc,
-        inLanguage: lang,
-        url: ORIGIN + worksheetsPath(lang),
-        publisher: ORG,
-        hasPart: [{ '@type': 'LearningResource', name: w.title, url: ORIGIN + wsPathOf(lang) }],
-      }],
-      main: `      <header class="page-head">
-        <h1>${esc(L.title)}</h1>
-        <p class="lead">${esc(L.lead)}</p>
-      </header>
-      <ul class="card-list stack">
-        <li class="card">
-          <h2><a href="${wsPathOf(lang)}">${esc(w.title)}</a></h2>
-          <p>${esc(w.subtitle)}</p>
-          <p class="card__meta">${esc(L.meta)}</p>
-        </li>
-      </ul>`,
-    });
-  }
-
   function sheetPage(lang, w, answers) {
-    const path = wsPathOf(lang, answers);
-    const pdf = `${DIR}/${WS_PDF[lang].sheet}`;
-    const pdfA = `${DIR}/${WS_PDF[lang].answers}`;
+    const path = wsPathOf(lang, slug, answers);
+    const pdf = `${DIR}/${wsPdf(slug, lang)}`;
+    const pdfA = `${DIR}/${wsPdf(slug, lang, true)}`;
     const h1 = answers ? `${w.title}: ${w.answersTitle}` : w.pageTitle;
 
     const ld = {
@@ -159,7 +180,7 @@ export function worksheetPages(HERE) {
       description: w.desc,
       inLanguage: lang,
       url: ORIGIN + path,
-      dateModified: WS_UPDATED,
+      dateModified: updated,
       learningResourceType: answers ? 'answer key' : 'worksheet',
       educationalLevel: lang === 'ko' ? '초등 5~6학년, 중학교' : 'Ages 10 to 14',
       teaches: w.concepts.map((c) => c.h),
@@ -174,10 +195,10 @@ export function worksheetPages(HERE) {
         contentUrl: ORIGIN + (answers ? pdfA : pdf),
         encodingFormat: 'application/pdf',
       },
-      ...(hasArt.header ? { image: `${ORIGIN}${DIR}/assets/header.webp` } : {}),
+      ...(hasArt('header') ? { image: `${ORIGIN}${DIR}/assets/header.webp` } : {}),
     };
     const crumbs = [[UI[lang].home, homeOf(lang)], [UI[lang].worksheets, worksheetsPath(lang)]];
-    if (answers) crumbs.push([w.title, wsPathOf(lang)]);
+    if (answers) crumbs.push([w.title, wsPathOf(lang, slug)]);
 
     const screenHead = `      <header class="page page-head screen-only">
         <h1>${esc(h1)}</h1>
@@ -187,7 +208,7 @@ ${answers ? '' : `        <div class="prose">${w.intro.map((p) => `<p>${gl(p)}</
           <button class="button button--secondary" type="button" onclick="window.print()">${esc(w.print)}</button>
         </p>
         <ul class="cluster">
-          <li><a href="${wsPathOf(lang, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a></li>
+          <li><a href="${wsPathOf(lang, slug, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a></li>
           <li><a href="${prefix(lang)}/optics/">${esc(w.guideLink)}</a></li>
           <li><a href="${licenseDeed(lang)}" rel="license">CC BY-NC 4.0</a></li>
         </ul>
@@ -201,11 +222,11 @@ ${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습
       h1,
       desc: w.desc,
       path,
-      alternates: Object.fromEntries(WS_LANGS.map((l) => [l, wsPathOf(l, answers)])),
+      alternates: Object.fromEntries(WS_LANGS.map((l) => [l, wsPathOf(l, slug, answers)])),
       section: 'worksheets',
       crumbs,
       ld: [ld],
-      image: hasArt.header ? `${DIR}/assets/header.webp` : undefined,
+      image: hasArt('header') ? `${DIR}/assets/header.webp` : undefined,
       noindex: answers,
       extraCss: ['sheet'],
       mainClass: 'sheets',
@@ -231,7 +252,7 @@ ${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습
   function sheetHead(w, kicker, title, sub, withArt) {
     return `
         <header class="sheet-head">
-          ${withArt && hasArt.header ? `<img class="head-art" src="${DIR}/assets/header.webp" alt="" />` : ''}
+          ${withArt && hasArt('header') ? `<img class="head-art" src="${DIR}/assets/header.webp" alt="" />` : ''}
           <div class="head-row">
             <div>
               <p class="kicker">${esc(kicker)}</p>
@@ -276,7 +297,7 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
 
   function backSheet(w) {
     const blocks = w.concepts.map((c, i) => {
-      const art = hasArt[`ch${i + 1}`] ? `<img class="c-art" src="${DIR}/assets/ch${i + 1}.webp" alt="" />` : '';
+      const art = hasArt(`ch${i + 1}`) ? `<img class="c-art" src="${DIR}/assets/ch${i + 1}.webp" alt="" />` : '';
       const lines = (n) => `<div class="lines">${'<i></i>'.repeat(n)}</div>`;
       const extra = c.preview
         ? `<div class="preview"><strong>${esc(c.preview.h)}</strong> ${esc(c.preview.body)}</div>`
@@ -363,13 +384,13 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
  * 문구의 탭 목록이 엔진이 만든 boards.json과 같은지. 문구를 고치다 정답이 어긋나면
  * 학습지는 조용히 틀린 답을 가르친다. 그러기 전에 빌드를 멈춘다.
  */
-function checkAgainstEngine(board) {
+function checkAgainstEngine(slug, BOARDS, board) {
   for (const b of BOARDS) {
     const lv = board.levels.find((l) => l.id === b.id);
-    if (!lv) throw new Error(`학습지: boards.json에 ${b.id}번 판이 없다`);
+    if (!lv) throw new Error(`학습지 ${slug}: boards.json에 ${b.id}번 판이 없다`);
     const engine = Object.fromEntries(lv.rotate.map((r) => [r.cell, r.taps]));
     const mine = JSON.stringify(Object.entries(b.taps).sort());
     const theirs = JSON.stringify(Object.entries(engine).sort());
-    if (mine !== theirs) throw new Error(`학습지 ${b.id}번 판: 문구 ${mine} ≠ 엔진 ${theirs}`);
+    if (mine !== theirs) throw new Error(`학습지 ${slug} ${b.id}번 판: 문구 ${mine} ≠ 엔진 ${theirs}`);
   }
 }

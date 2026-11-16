@@ -1,0 +1,316 @@
+{
+ "date": "2026-11-16",
+ "boards": [
+  {
+   "difficulty": "easy",
+   "chapter": 2,
+   "chapterName": {
+    "en": "Split",
+    "ko": "분열"
+   },
+   "par": 5,
+   "grid": {
+    "cols": 5,
+    "rows": 5
+   },
+   "level": {
+    "id": 202611161,
+    "chapter": 2,
+    "w": 5,
+    "h": 5,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 4,
+      "y": 0,
+      "rot": 2,
+      "color": 1
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 1,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 2,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 2,
+      "y": 2,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 0,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 4,
+      "rot": 0,
+      "color": 1
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 2,
+      "rot": 0,
+      "color": 1
+     },
+     {
+      "type": "crystal",
+      "x": 1,
+      "y": 0,
+      "rot": 0,
+      "color": 1
+     }
+    ],
+    "par": 5
+   }
+  },
+  {
+   "difficulty": "normal",
+   "chapter": 4,
+   "chapterName": {
+    "en": "Mix",
+    "ko": "혼합"
+   },
+   "par": 5,
+   "grid": {
+    "cols": 6,
+    "rows": 6
+   },
+   "level": {
+    "id": 202611162,
+    "chapter": 4,
+    "w": 6,
+    "h": 6,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 2,
+      "y": 5,
+      "rot": 0,
+      "color": 2
+     },
+     {
+      "type": "emitter",
+      "x": 0,
+      "y": 0,
+      "rot": 2,
+      "color": 4
+     },
+     {
+      "type": "mirror",
+      "x": 0,
+      "y": 4,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 2,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 3,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 3,
+      "y": 1,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 5,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 0,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 5,
+      "y": 0,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 5,
+      "y": 4,
+      "rot": 0,
+      "color": 6
+     },
+     {
+      "type": "crystal",
+      "x": 5,
+      "y": 1,
+      "rot": 0,
+      "color": 2
+     },
+     {
+      "type": "crystal",
+      "x": 4,
+      "y": 1,
+      "rot": 0,
+      "color": 2
+     }
+    ],
+    "par": 5
+   }
+  },
+  {
+   "difficulty": "hard",
+   "chapter": 6,
+   "chapterName": {
+    "en": "Converge",
+    "ko": "수렴"
+   },
+   "par": 9,
+   "grid": {
+    "cols": 7,
+    "rows": 7
+   },
+   "level": {
+    "id": 202611163,
+    "chapter": 6,
+    "w": 7,
+    "h": 7,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 3,
+      "y": 6,
+      "rot": 0,
+      "color": 7
+     },
+     {
+      "type": "emitter",
+      "x": 6,
+      "y": 4,
+      "rot": 3,
+      "color": 4
+     },
+     {
+      "type": "mirror",
+      "x": 1,
+      "y": 4,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 2,
+      "y": 4,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "prism",
+      "x": 3,
+      "y": 4,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 4,
+      "y": 4,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 1,
+      "y": 5,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 5,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "filter",
+      "x": 5,
+      "y": 5,
+      "rot": 0,
+      "color": 1
+     },
+     {
+      "type": "crystal",
+      "x": 2,
+      "y": 5,
+      "rot": 0,
+      "color": 5
+     },
+     {
+      "type": "crystal",
+      "x": 1,
+      "y": 6,
+      "rot": 0,
+      "color": 5
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 5,
+      "rot": 0,
+      "color": 5
+     }
+    ],
+    "par": 9
+   }
+  }
+ ]
+}

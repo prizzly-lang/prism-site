@@ -55,6 +55,7 @@ export const UI = {
     home: 'PRISM',
     learn: '배우기',
     worksheets: '학습지',
+    daily: '오늘의 퍼즐',
     play: '해 보기',
     app: '앱',
     footerSite: 'PRISM',
@@ -82,6 +83,7 @@ export const UI = {
     home: 'PRISM',
     learn: 'Learn',
     worksheets: 'Worksheets',
+    daily: 'Daily puzzle',
     play: 'Play',
     app: 'App',
     footerSite: 'PRISM',
@@ -109,6 +111,7 @@ export const UI = {
     home: 'PRISM',
     learn: '学ぶ',
     worksheets: '学習プリント',
+    daily: '今日のパズル',
     play: '遊んでみる',
     app: 'アプリ',
     footerSite: 'PRISM',
@@ -136,6 +139,7 @@ export const UI = {
     home: 'PRISM',
     learn: '学习',
     worksheets: '学习单',
+    daily: '每日谜题',
     play: '试玩',
     app: '应用',
     footerSite: 'PRISM',
@@ -178,11 +182,12 @@ export const learnPath = (l, slug) => `${prefix(l)}/learn/${slug ? `${slug}/` : 
 export const worksheetsPath = (l, slug) => `${prefix(l)}/worksheets/${slug ? `${slug}/` : ''}`;
 export const docPath = (l, slug) => `${prefix(l)}/${slug}.html`;
 export const aboutPath = (l) => `${prefix(l)}/about/`;
+export const dailyPath = (l, date) => `${prefix(l)}/daily/${date ? `${date}/` : ''}`;
 
 /**
  * 주 메뉴. 모든 페이지에서 같은 순서다(WCAG 3.2.3). `key`는 페이지가 넘기는 `section`과
  * 맞춰 현재 섹션을 표시한다. 개념·학습지가 없는 언어의 「배우기」는 그 언어의 교사용 안내
- * 글(일곱 챕터 원리)로 보낸다. 「오늘의 퍼즐」은 /daily/가 생기는 날 여기에 더한다.
+ * 글(일곱 챕터 원리)로 보낸다. 「오늘의 퍼즐」(/daily/)도 한국어·영어에만 있다.
  */
 export function navItems(lang) {
   const u = UI[lang];
@@ -190,6 +195,7 @@ export function navItems(lang) {
   return [
     { key: 'learn', name: u.learn, href: hasLearn ? learnPath(lang) : `${prefix(lang)}/optics/` },
     ...(hasLearn ? [{ key: 'worksheets', name: u.worksheets, href: worksheetsPath(lang) }] : []),
+    ...(hasLearn ? [{ key: 'daily', name: u.daily, href: dailyPath(lang) }] : []),
     { key: 'play', name: u.play, href: '/play/' },
     { key: 'app', name: u.app, href: homeOf(lang) },
   ];

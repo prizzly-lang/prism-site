@@ -1,9 +1,11 @@
 /**
- * 인쇄용 학습지 「빛의 길 찾기」의 문구. 그리는 쪽은 `worksheet-page.mjs`.
+ * 학습지 「빛의 길 찾기」(`/worksheets/path-of-light/`)의 판과 한·영 문구. 그리는 쪽은
+ * `worksheet-page.mjs`(학습지 하나의 모양은 그 파일 첫 주석).
  *
  * ## 판
  * 판 그림·정답 그림·탭 목록은 prism 저장소의 `tools/make-worksheet-boards.ts`가
- * 게임 엔진으로 만들어 `worksheet/assets/`로 넘긴다(`--site ../prism-site`). 정답은
+ * 게임 엔진으로 만들어 `worksheets/path-of-light/assets/`로 넘긴다
+ * (`--sheet path-of-light --site ../prism-site`). 정답은
  * 엔진이 푼 결과이고, 그 도구가 정답이 하나뿐인지와 탭 수가 par와 같은지 확인한다.
  * 아래 `boards`의 문구(몇 번 돌리는지, 어느 칸인지)는 그 boards.json과 같아야 한다.
  * `worksheet-page.mjs`가 빌드할 때 대조하고 어긋나면 멈춘다.
@@ -26,24 +28,19 @@
  */
 
 /** 정답과 맞춰 볼 사실. worksheet-page.mjs가 boards.json과 대조한다. */
-export const BOARDS = [
+const BOARDS = [
   { id: 3, chapter: 1, taps: { A3: 1, C5: 1 } },
   { id: 22, chapter: 2, taps: { A4: 1, C4: 1, D4: 1 } },
   { id: 49, chapter: 3, taps: { D4: 1, D5: 1 } },
   { id: 92, chapter: 4, taps: { D3: 1, F4: 1 } },
 ];
 
-export const WS = {
+const TEXT = {
   ko: {
     pageTitle: '빛의 길 찾기: 인쇄용 광학 학습지 (반사·프리즘·빛의 합성)',
     navLabel: '인쇄용 학습지: 빛의 길 찾기',
     desc: '광학 퍼즐 게임 PRISM의 판 네 개로 만든 무료 인쇄용 학습지입니다. 거울의 반사, 반투명 거울, 프리즘, 빛의 합성을 연필로 풀어 봅니다. 흑백 인쇄용이고 정답지가 따로 있습니다. 초등 5~6학년 「빛의 성질」, 중학교 「빛과 파동」 단원과 함께 쓸 수 있습니다.',
-    list: {
-      title: '인쇄용 광학 학습지',
-      desc: '광학 퍼즐 게임 PRISM의 판으로 만든 무료 인쇄용 학습지 모음입니다. 반사, 반투명 거울, 프리즘, 빛의 합성을 연필로 풀어 봅니다. 흑백 인쇄용이고 정답지가 따로 있습니다.',
-      lead: '교실과 가정에서 바로 인쇄해 쓰는 A4 학습지입니다. 흑백으로 인쇄해도 풀 수 있고, 교사용 정답지가 따로 있습니다.',
-      meta: '초등 5~6학년 · 중학교 · A4 2쪽 + 정답지 1쪽 · 준비물: 연필',
-    },
+    meta: '초등 5~6학년 · 중학교 · A4 2쪽 + 정답지 1쪽 · 준비물: 연필',
     intro: [
       'A4 두 장(앞뒤)짜리 학습지와 교사용 정답지 한 장입니다. 앞면에서는 PRISM 게임의 판 네 개를 연필로 풀고, 뒷면에서는 그 판에 숨은 빛의 성질을 질문으로 짚습니다.',
       '흑백으로 인쇄해도 풀 수 있습니다. 빛의 색은 도형으로도 표시되어 있습니다(빨강 △, 초록 □, 파랑 ○).',
@@ -160,12 +157,7 @@ export const WS = {
     pageTitle: 'Path of Light: a printable optics worksheet',
     navLabel: 'Printable worksheet: Path of Light',
     desc: 'A free printable optics worksheet built from four PRISM puzzle boards: reflection, beam splitters, prisms and color mixing. Black and white, for ages 10 to 14.',
-    list: {
-      title: 'Printable optics worksheets',
-      desc: 'Free printable worksheets built from PRISM puzzle boards: reflection, half-silvered mirrors, prisms and color mixing. Made for black-and-white printing.',
-      lead: 'A4 worksheets to print for the classroom or at home. They work in black and white, and each has a separate answer key for teachers.',
-      meta: 'Ages 10 to 14 · 2 A4 pages + 1-page answer key · You need: a pencil',
-    },
+    meta: 'Ages 10 to 14 · 2 A4 pages + 1-page answer key · You need: a pencil',
     intro: [
       'Two A4 pages (front and back) for students, plus a one-page answer key for teachers. On the front, students solve four boards from the PRISM game with a pencil; on the back, short questions draw out the physics hidden in those boards.',
       'It works on a black and white printer: every color of light is also marked with a shape (red △, green □, blue ○).',
@@ -276,4 +268,21 @@ export const WS = {
       '4. Yellow, magenta, cyan, white. Yellow and blue light make white, because yellow light already contains red and green.',
     ],
   },
+};
+
+export default {
+  slug: 'path-of-light',
+  /** 마지막으로 고친 날. sitemap lastmod와 JSON-LD dateModified. 문구·판을 고치면 같이 고친다. */
+  updated: '2026-11-26',
+  boards: BOARDS,
+  /** 기호 설명 아이콘을 잘라 올 판 칸: [판 번호, 열, 행]. */
+  legendCells: {
+    source: [3, 'A', 5],
+    white: [49, 'C', 1],
+    mirror: [3, 'C', 3],
+    splitter: [22, 'D', 3],
+    prism: [49, 'D', 5],
+    crystal: [3, 'A', 1],
+  },
+  text: TEXT,
 };

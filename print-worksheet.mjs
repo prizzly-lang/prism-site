@@ -16,7 +16,7 @@ import { existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { WS_LANGS, WS_SLUG, wsPathOf, WS_PDF } from './worksheet-page.mjs';
+import { WORKSHEETS, WS_LANGS, wsPathOf, wsPdf } from './worksheet-page.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TYPES = {
@@ -60,11 +60,19 @@ const print = (url, out) =>
     p.on('exit', (c) => (c === 0 && existsSync(out) ? ok() : fail(new Error(`${url} 인쇄 실패(${c})`))));
   });
 
-for (const lang of WS_LANGS) {
-  for (const answers of [false, true]) {
-    const out = resolve(HERE, 'worksheets', WS_SLUG, WS_PDF[lang][answers ? 'answers' : 'sheet']);
-    await print(base + wsPathOf(lang, answers), out);
-    console.log(`✅ ${out}`);
+/*
+  `node print-worksheet.mjs <slug>…`이면 그 학습지만, 없으면 전부. 날마다 하나씩 늘리므로
+  새 학습지만 찍을 수 있어야 한다.
+*/
+const only = process.argv.slice(2);
+for (const s of only) if (!WORKSHEETS.some((w) => w.slug === s)) throw new Error(`그런 학습지가 없다: ${s}`);
+for (const { slug } of WORKSHEETS.filter((w) => !only.length || only.includes(w.slug))) {
+  for (const lang of WS_LANGS) {
+    for (const answers of [false, true]) {
+      const out = resolve(HERE, 'worksheets', slug, wsPdf(slug, lang, answers));
+      await print(base + wsPathOf(lang, slug, answers), out);
+      console.log(`✅ ${out}`);
+    }
   }
 }
 server.close();

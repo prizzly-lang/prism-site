@@ -10,8 +10,7 @@ import { ORIGIN, ORG, APP_ID, UI, CONCEPTS, LEARN_LANGS, esc, homeOf, learnPath,
 import { page } from './ui/page.mjs';
 import { blocks, disclosure } from './ui/content.mjs';
 import { sideNav, pager } from './ui/nav.mjs';
-import { wsPathOf } from './worksheet-page.mjs';
-import { WS } from './worksheet-content.mjs';
+import { wsPathOf, worksheetOf } from './worksheet-page.mjs';
 import reflection from './learn/reflection.mjs';
 
 /** 개념 페이지. 하나 더할 때 여기에 import 한 줄과 항목 하나. 순서는 site.mjs의 CONCEPTS가 정한다. */
@@ -108,7 +107,7 @@ function conceptPage(lang, c) {
   const t = T[lang];
   const x = c.text[lang];
   const path = learnPath(lang, c.slug);
-  const ws = c.worksheet ? WS[lang] : null;
+  const ws = c.worksheet ? worksheetOf(c.worksheet).text[lang] : null;
 
   const ld = {
     '@context': 'https://schema.org',
@@ -170,7 +169,7 @@ ${blocks(x.body)}
           <ul>${x.differs.map((d) => `<li>${d}</li>`).join('')}</ul>
           <h2>${esc(t.nextH)}</h2>
           <ul>
-            ${ws ? `<li>${esc(t.worksheet)}: <a href="${wsPathOf(lang)}">${esc(ws.title)}</a></li>` : ''}
+            ${ws ? `<li>${esc(t.worksheet)}: <a href="${wsPathOf(lang, c.worksheet)}">${esc(ws.title)}</a></li>` : ''}
             <li><a href="/play/">${esc(t.play)}</a></li>
           </ul>
         </div>
