@@ -29,7 +29,7 @@ export const ORG = {
   sameAs: ['https://apps.apple.com/developer/id1655290007', 'https://play.google.com/store/apps/developer?id=Adriven+Corp.'],
 };
 
-/** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다**(AEO.md). */
+/** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다**(prism 저장소 docs/SITE-AEO.md). */
 export const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
 export const LANG_NAME = { ko: '한국어', en: 'English', ja: '日本語', 'zh-Hans': '简体中文' };
 const OG_LOCALE = { ko: 'ko_KR', en: 'en_US', ja: 'ja_JP', 'zh-Hans': 'zh_CN' };

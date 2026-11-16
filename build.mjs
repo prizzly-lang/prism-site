@@ -18,7 +18,7 @@
  *   daily-page.mjs + daily/  오늘의 빛 퍼즐(재료는 prism 저장소 tools/make-daily.ts·daily-site.ts)
  *   pages/                개인정보·지원(4개 언어), 에이드리븐 소개, 404, 디자인 견본
  *
- * AEO/GEO(자세한 근거는 AEO.md): 언어마다 독립된 문서, 실제로 있는 언어끼리만 hreflang,
+ * AEO/GEO(자세한 근거는 prism 저장소 docs/SITE-AEO.md): 언어마다 독립된 문서, 실제로 있는 언어끼리만 hreflang,
  * 페이지마다 JSON-LD(앱 MobileApplication·FAQPage·VideoObject, 사이트 WebSite, 글 Article,
  * 개념 DefinedTerm, 학습지 LearningResource, 경로 BreadcrumbList).
  */
@@ -59,7 +59,7 @@ const SITE_UPDATED = '2026-11-26';
   모두 iOS 시뮬레이터에서 앱을 실제로 돌려 녹화한다(prism 저장소 docs/PREVIEW.md의
   「사이트용 영상」). 자동화·헤드리스 브라우저로는 찍지 않는다.
   `requestAnimationFrame`이 그런 환경에서 제대로 안 돌아 애니메이션이 얼어붙은
-  채로 찍히기 때문이다(자세한 경위는 `prism-site/TODO.md` 참고).
+  채로 찍히기 때문이다(자세한 경위는 prism 저장소 `docs/SITE-TODO.md` 참고).
 */
 // 영상 길이(초, 반올림). 영상을 바꾸면 ffprobe로 다시 재서 고친다.
 const VIDEO_SEC = { ko: 27, en: 25, ja: 27, 'zh-Hans': 27 };
