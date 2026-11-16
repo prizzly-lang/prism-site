@@ -371,7 +371,8 @@ function homePage(lang) {
       '@id': APP_ID,
       name: 'PRISM',
       sameAs: ['https://apps.apple.com/app/id6803019903', PLAYSTORE],
-      alternateName: t.title,
+      // 두 스토어에 올라간 이름을 첫째로 둔다. 이름이 같은 다른 「Prism」 앱과 구별하는 단서다.
+      alternateName: ['PRISM: Light Puzzle', t.title],
       description: t.desc,
       url: ORIGIN + path,
       inLanguage: lang,
