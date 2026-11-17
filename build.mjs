@@ -14,7 +14,8 @@
  *   build.mjs             앱 소개 첫 화면(아래 L)과 모든 페이지 출력, sitemap·robots·llms, 검사
  *   article-page.mjs + articles/          글
  *   learn-page.mjs + learn/               개념(배우기)
- *   worksheet-page.mjs + worksheets/<slug>.mjs   학습지
+ *   worksheet-page.mjs + worksheets/<slug>.mjs   학습지(PDF는 print-worksheet.mjs, 발행 전 검사는
+ *                         check-worksheets.mjs와 tools/pdf-gray.swift)
  *   daily-page.mjs + daily/  오늘의 빛 퍼즐(재료는 prism 저장소 tools/make-daily.ts·daily-site.ts)
  *   pages/                개인정보·지원(4개 언어), 에이드리븐 소개, 404, 디자인 견본
  *
