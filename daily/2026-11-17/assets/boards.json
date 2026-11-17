@@ -1,0 +1,282 @@
+{
+ "date": "2026-11-17",
+ "boards": [
+  {
+   "difficulty": "easy",
+   "chapter": 1,
+   "chapterName": {
+    "en": "Reflect",
+    "ko": "반사"
+   },
+   "par": 2,
+   "grid": {
+    "cols": 5,
+    "rows": 5
+   },
+   "level": {
+    "id": 202611171,
+    "chapter": 1,
+    "w": 5,
+    "h": 5,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 0,
+      "y": 1,
+      "rot": 1,
+      "color": 1
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 1,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 0,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 2,
+      "y": 0,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 2,
+      "y": 4,
+      "rot": 0,
+      "color": 1
+     }
+    ],
+    "par": 2
+   }
+  },
+  {
+   "difficulty": "normal",
+   "chapter": 3,
+   "chapterName": {
+    "en": "Disperse",
+    "ko": "분산"
+   },
+   "par": 6,
+   "grid": {
+    "cols": 6,
+    "rows": 6
+   },
+   "level": {
+    "id": 202611172,
+    "chapter": 3,
+    "w": 6,
+    "h": 6,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 1,
+      "y": 0,
+      "rot": 2,
+      "color": 7
+     },
+     {
+      "type": "prism",
+      "x": 1,
+      "y": 3,
+      "rot": 3,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 3,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 1,
+      "y": 5,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 5,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 5,
+      "rot": 0,
+      "color": 1
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 3,
+      "rot": 0,
+      "color": 4
+     },
+     {
+      "type": "crystal",
+      "x": 5,
+      "y": 5,
+      "rot": 0,
+      "color": 2
+     },
+     {
+      "type": "crystal",
+      "x": 3,
+      "y": 5,
+      "rot": 0,
+      "color": 2
+     }
+    ],
+    "par": 6
+   }
+  },
+  {
+   "difficulty": "hard",
+   "chapter": 7,
+   "chapterName": {
+    "en": "Polarize",
+    "ko": "편광"
+   },
+   "par": 10,
+   "grid": {
+    "cols": 7,
+    "rows": 7
+   },
+   "level": {
+    "id": 202611173,
+    "chapter": 7,
+    "w": 7,
+    "h": 7,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 0,
+      "y": 5,
+      "rot": 1,
+      "color": 1,
+      "pol": 2
+     },
+     {
+      "type": "emitter",
+      "x": 6,
+      "y": 3,
+      "rot": 3,
+      "color": 2
+     },
+     {
+      "type": "splitter",
+      "x": 3,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 5,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 4,
+      "y": 6,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "polarizer",
+      "x": 2,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 6,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 0,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 5,
+      "y": 0,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "polarizer",
+      "x": 3,
+      "y": 4,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 5,
+      "y": 5,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 3,
+      "y": 1,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "polarizer",
+      "x": 4,
+      "y": 0,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 6,
+      "y": 5,
+      "rot": 0,
+      "color": 2
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 3,
+      "rot": 0,
+      "color": 3
+     },
+     {
+      "type": "crystal",
+      "x": 6,
+      "y": 1,
+      "rot": 0,
+      "color": 3
+     }
+    ],
+    "par": 10
+   }
+  }
+ ]
+}
