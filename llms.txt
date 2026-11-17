@@ -25,6 +25,8 @@
 
 ## 학습지 / Printable worksheets
 
+- [거울로 빛 보내기: 빛의 반사 기초 학습지 (인쇄용)](https://prism.adriven.co/worksheets/reflection-basics/): 빛의 반사를 처음 배우는 학생을 위한 무료 인쇄용 학습지입니다. 에이드리븐의 광학 퍼즐 게임 PRISM 1챕터의 판 네 개에서 거울을 돌려 빛을 결정까지 보내고, 빛이 곧게 나아가다 거울에서 꺾이는 모습을 연필로 그려 봅니다. 흑백 인쇄용, 정답지 포함.
+- [Steering Light with Mirrors: a printable reflection worksheet for beginners](https://prism.adriven.co/en/worksheets/reflection-basics/): A free printable worksheet for a first lesson on reflection. Students turn mirrors on four boards from chapter 1 of PRISM, a light puzzle by A Driven, and draw how light travels straight, then turns. Black and white, with an answer key.
 - [빛의 길 찾기: 인쇄용 광학 학습지 (반사·프리즘·빛의 합성)](https://prism.adriven.co/worksheets/path-of-light/): 광학 퍼즐 게임 PRISM의 판 네 개로 만든 무료 인쇄용 학습지입니다. 거울의 반사, 반투명 거울, 프리즘, 빛의 합성을 연필로 풀어 봅니다. 흑백 인쇄용이고 정답지가 따로 있습니다. 초등 5~6학년 「빛의 성질」, 중학교 「빛과 파동」 단원과 함께 쓸 수 있습니다.
 - [Path of Light: a printable optics worksheet](https://prism.adriven.co/en/worksheets/path-of-light/): A free printable optics worksheet built from four PRISM puzzle boards: reflection, beam splitters, prisms and color mixing. Black and white, for ages 10 to 14.
 

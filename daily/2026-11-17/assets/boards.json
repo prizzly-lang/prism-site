@@ -56,7 +56,19 @@
      }
     ],
     "par": 2
-   }
+   },
+   "solution": [
+    {
+     "cell": "E1",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "E2",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   },
   {
    "difficulty": "normal",
@@ -141,7 +153,29 @@
      }
     ],
     "par": 6
-   }
+   },
+   "solution": [
+    {
+     "cell": "B4",
+     "piece": "prism",
+     "taps": 3
+    },
+    {
+     "cell": "D4",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "F4",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "B6",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   },
   {
    "difficulty": "hard",
@@ -276,7 +310,59 @@
      }
     ],
     "par": 10
-   }
+   },
+   "solution": [
+    {
+     "cell": "D1",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "E1",
+     "piece": "polarizer",
+     "taps": 1
+    },
+    {
+     "cell": "F1",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "D2",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "C4",
+     "piece": "polarizer",
+     "taps": 1
+    },
+    {
+     "cell": "D4",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "E6",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "F6",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "D7",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "E7",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   }
  ]
 }

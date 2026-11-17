@@ -2,7 +2,8 @@
  * 인쇄용 학습지 목록과 학습지 페이지를 그린다. 학습지 하나 = 주제 하나 = 주소 하나
  * (prism 저장소 docs/WORKSHEETS.md). 학습지마다 `worksheets/<slug>.mjs` 하나:
  *   slug, updated, boards([{ id, chapter, taps: { 칸: 횟수 } }], 빌드가 엔진과 대조),
- *   legendCells(기호 아이콘을 잘라 올 판 칸), text.{ko,en}(문구)
+ *   legendCells(기호 아이콘을 잘라 올 판 칸. 적은 것만 기호 설명에 나온다), text.{ko,en}(문구),
+ *   colors(나오는 빛의 색. 없으면 흰 빛·빨강·초록·파랑 모두), learn(이어지는 개념 페이지 slug)
  * 판 그림과 boards.json은 `worksheets/<slug>/assets/`(prism 저장소의
  * `make-worksheet-boards.ts --sheet <slug> --site`가 넘긴다). 삽화(header, ch1…)는 같은 폴더의
  * webp이고 없으면 그 자리를 비운다. 새 학습지는 아래 WORKSHEETS에 import 한 줄.
@@ -24,12 +25,13 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import pathOfLight from './worksheets/path-of-light.mjs';
+import reflectionBasics from './worksheets/reflection-basics.mjs';
 import { harumathHref } from './crosslinks.mjs';
-import { ORIGIN, ORG, APP_ID, UI, LEARN_LANGS, esc, plain, homeOf, worksheetsPath, prefix } from './site.mjs';
+import { ORIGIN, ORG, APP_ID, UI, LEARN_LANGS, esc, plain, homeOf, worksheetsPath, learnPath, prefix } from './site.mjs';
 import { page } from './ui/page.mjs';
 
 /** 학습지. 목록 페이지가 이 순서로 카드를 늘어놓는다(새 것이 앞). */
-export const WORKSHEETS = [pathOfLight];
+export const WORKSHEETS = [reflectionBasics, pathOfLight];
 export const worksheetOf = (slug) => WORKSHEETS.find((w) => w.slug === slug);
 export const WS_LANGS = LEARN_LANGS;
 export const wsPathOf = (l, slug, answers = false) => `${worksheetsPath(l, slug)}${answers ? 'answers/' : ''}`;
@@ -158,6 +160,9 @@ function sheetPages(HERE, sheet) {
     b: beam('0.01 1.5', 0.9, 'round'),
   };
 
+  /** 이 학습지에 나오는 빛. 안 나오는 색을 기호 설명에 두면 학생이 판에서 그 색을 찾는다. */
+  const COLORS = sheet.colors ?? ['white', 'r', 'g', 'b'];
+
   const out = [];
   for (const lang of WS_LANGS) {
     const w = sheet.text[lang];
@@ -182,7 +187,7 @@ function sheetPages(HERE, sheet) {
       url: ORIGIN + path,
       dateModified: updated,
       learningResourceType: answers ? 'answer key' : 'worksheet',
-      educationalLevel: lang === 'ko' ? '초등 5~6학년, 중학교' : 'Ages 10 to 14',
+      educationalLevel: w.level ?? (lang === 'ko' ? '초등 5~6학년, 중학교' : 'Ages 10 to 14'),
       teaches: w.concepts.map((c) => c.h),
       isAccessibleForFree: true,
       license: LICENSE,
@@ -209,7 +214,7 @@ ${answers ? '' : `        <div class="prose">${w.intro.map((p) => `<p>${gl(p)}</
         </p>
         <ul class="cluster">
           <li><a href="${wsPathOf(lang, slug, !answers)}">${esc(answers ? w.worksheetLink : w.answersLink)}</a></li>
-          <li><a href="${prefix(lang)}/optics/">${esc(w.guideLink)}</a></li>
+${sheet.learn && w.learnLink ? `          <li><a href="${learnPath(lang, sheet.learn)}">${esc(w.learnLink)}</a></li>\n` : ''}          <li><a href="${prefix(lang)}/optics/">${esc(w.guideLink)}</a></li>
           <li><a href="${licenseDeed(lang)}" rel="license">CC BY-NC 4.0</a></li>
         </ul>
 ${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습은 <a href="${harumathHref('worksheet')}">하루연산</a>에서 할 수 있습니다. 에이드리븐이 만든 초등 연산 문제지 서비스로, 종이로도 태블릿으로도 풉니다.</p>\n` : ''}      </header>`;
@@ -239,14 +244,9 @@ ${lang === 'ko' ? `        <p class="callout callout--note">매일 연산 연습
     const item = (ico, label) => `<li>${ico}<span>${esc(label)}</span></li>`;
     return `
           <ul class="legend">
-            ${item(ICON.source, g.source)}
-            ${item(ICON.white, g.white)}
-            ${item(ICON.mirror, g.mirror)}
-            ${item(ICON.splitter, g.splitter)}
-            ${item(ICON.prism, g.prism)}
-            ${item(ICON.crystal, g.crystal)}
+            ${Object.keys(sheet.legendCells).map((k) => item(ICON[k], g[k])).join('\n            ')}
           </ul>
-          <p class="glyphs"><span>${GLYPH.r}${esc(g.r)}</span><span>${GLYPH.g}${esc(g.g)}</span><span>${GLYPH.b}${esc(g.b)}</span></p>`;
+          <p class="glyphs">${COLORS.filter((c) => c !== 'white').map((c) => `<span>${GLYPH[c]}${esc(g[c])}</span>`).join('')}</p>`;
   }
 
   function sheetHead(w, kicker, title, sub, withArt) {
@@ -297,7 +297,7 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
 
   function backSheet(w) {
     const blocks = w.concepts.map((c, i) => {
-      const art = hasArt(`ch${i + 1}`) ? `<img class="c-art" src="${DIR}/assets/ch${i + 1}.webp" alt="" />` : '';
+      const art = hasArt(`ch${i + 1}`) ? `<img class="c-art${c.artTall ? ' c-art--tall' : ''}" src="${DIR}/assets/ch${i + 1}.webp" alt="" />` : '';
       const lines = (n) => `<div class="lines">${'<i></i>'.repeat(n)}</div>`;
       const extra = c.preview
         ? `<div class="preview"><strong>${esc(c.preview.h)}</strong> ${esc(c.preview.body)}</div>`
@@ -306,7 +306,7 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
         ? `<p class="blanks">${c.blanks.map((b) => `<span>${esc(b)} <i></i></span>`).join('')}</p>`
         : '';
       const table = c.table
-        ? `<table class="mix">${c.table.map(([a]) => `<tr><th>${esc(a)}</th><td>=</td><td class="blank"></td></tr>`).join('')}</table>`
+        ? `<table class="mix">${c.table.map(([a]) => `<tr><th>${esc(a)}</th><td>${esc(c.sign ?? '=')}</td><td class="blank"></td></tr>`).join('')}</table>`
         : '';
       return `
           <article class="concept">
@@ -361,10 +361,7 @@ ${sheetHead(w, w.kicker, w.title, w.subtitle, true)}
             <div class="beam-legend">
               <p><strong>${esc(w.beamLegendH)}</strong></p>
               <ul>
-                <li>${BEAM.white}${esc(g.white)}</li>
-                <li>${BEAM.r}${GLYPH.r}${esc(g.r)}</li>
-                <li>${BEAM.g}${GLYPH.g}${esc(g.g)}</li>
-                <li>${BEAM.b}${GLYPH.b}${esc(g.b)}</li>
+                ${COLORS.map((c) => `<li>${BEAM[c]}${GLYPH[c] ?? ''}${esc(g[c])}</li>`).join('\n                ')}
                 <li><span class="badge">1</span>${esc(g.tap)}</li>
               </ul>
             </div>

@@ -289,6 +289,10 @@
     display: block;
     margin-bottom: 2.4mm;
   }
+  /* 그림 속 작은 표시(각도 호 같은 것)를 읽어야 하는 문항은 그림을 키운다. */
+  .sheet .c-art--tall {
+    height: 52mm;
+  }
   .sheet .concept h3 {
     font-family: var(--serif);
     font-size: 13.2pt;

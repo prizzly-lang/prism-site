@@ -1,0 +1,311 @@
+{
+  "coordinates": "Columns A, B, C... left to right; rows 1, 2, 3... top to bottom. Letters and numbers are printed on the board edges.",
+  "glyphs": {
+    "R": "triangle",
+    "G": "square",
+    "B": "circle"
+  },
+  "sourceMarker": "Colored source: white box with its glyphs. White source: solid black box with all three glyphs knocked out in white.",
+  "beamStyles": {
+    "white": "solid line",
+    "R": "long dashes (triangle tag)",
+    "G": "dash-dot line (square tag)",
+    "B": "dots (circle tag)",
+    "overlap": "two components on the same cell edge are drawn as parallel lines"
+  },
+  "tapBadge": "Answer key: a black circle with a number next to a piece = how many times to tap it.",
+  "levels": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 4,
+        "rows": 4
+      },
+      "par": 1,
+      "why": {
+        "en": "The smallest board in the game: one beam, two mirrors, one tap. Students see that a tap changes which way a mirror sends the light.",
+        "ko": "게임에서 가장 작은 판. 빛 하나, 거울 둘, 한 번 돌리기. 거울을 돌리면 빛이 가는 쪽이 바뀐다는 것만 본다."
+      },
+      "rotate": [
+        {
+          "cell": "C4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "C2",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "A4",
+          "facing": "right",
+          "name": {
+            "en": "blue",
+            "ko": "파랑"
+          },
+          "components": [
+            "B"
+          ],
+          "glyphs": [
+            "circle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "A2",
+          "needs": {
+            "name": {
+              "en": "blue",
+              "ko": "파랑"
+            },
+            "components": [
+              "B"
+            ],
+            "glyphs": [
+              "circle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "1-puzzle.svg",
+        "answer": "1-answer.svg"
+      }
+    },
+    {
+      "id": 2,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "Two mirrors, both wrong: the light has to turn twice, so students chain two reflections.",
+        "ko": "거울 둘이 모두 틀리게 놓여 있다. 빛이 두 번 꺾여야 해서 반사 두 번을 이어 생각한다."
+      },
+      "rotate": [
+        {
+          "cell": "D2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "D5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "A5",
+          "facing": "right",
+          "name": {
+            "en": "blue",
+            "ko": "파랑"
+          },
+          "components": [
+            "B"
+          ],
+          "glyphs": [
+            "circle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "A2",
+          "needs": {
+            "name": {
+              "en": "blue",
+              "ko": "파랑"
+            },
+            "components": [
+              "B"
+            ],
+            "glyphs": [
+              "circle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "2-puzzle.svg",
+        "answer": "2-answer.svg"
+      }
+    },
+    {
+      "id": 4,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "Three mirrors and two taps: all three are on the path but one is already right, so students trace the path before turning anything.",
+        "ko": "거울 셋, 두 번 돌리기. 셋 모두 빛의 길에 있지만 하나는 이미 맞게 놓여 있어서, 돌리기 전에 빛의 길을 먼저 따라가게 된다."
+      },
+      "rotate": [
+        {
+          "cell": "A4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "C4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "A3",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "E3",
+          "facing": "left",
+          "name": {
+            "en": "blue",
+            "ko": "파랑"
+          },
+          "components": [
+            "B"
+          ],
+          "glyphs": [
+            "circle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "C5",
+          "needs": {
+            "name": {
+              "en": "blue",
+              "ko": "파랑"
+            },
+            "components": [
+              "B"
+            ],
+            "glyphs": [
+              "circle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "4-puzzle.svg",
+        "answer": "4-answer.svg"
+      }
+    },
+    {
+      "id": 5,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "Three mirrors and two taps; the solved path crosses itself in an empty cell (C3), which shows that beams pass through each other.",
+        "ko": "거울 셋, 두 번 돌리기. 풀린 길이 빈칸(C3)에서 자기 자신을 가로질러서, 빛줄기가 서로 지나쳐 간다는 것을 보여 준다."
+      },
+      "rotate": [
+        {
+          "cell": "D3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "D5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "C5",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "A3",
+          "facing": "right",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "C1",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "5-puzzle.svg",
+        "answer": "5-answer.svg"
+      }
+    }
+  ]
+}
