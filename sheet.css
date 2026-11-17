@@ -1,0 +1,522 @@
+/*
+  인쇄용 학습지 장(A4). 학습지 페이지에서만 사이트 CSS 뒤에 붙는다. 모든 규칙을 `.sheet` 안으로
+  묶어 사이트 컴포넌트와 이름이 겹쳐도 새지 않게 한다(예전에는 .board·.legend·.glyph가 두
+  CSS에서 다른 뜻이었다).
+
+  인쇄 바탕은 흰색이다. 종이색(#f3efe6)은 흑백 프린터에서 옅은 회색 망점으로 깔려 연필 자국을
+  흐린다. 화면에서만 종이색 책상 위에 흰 장을 놓는다. 잉크는 순수한 검정 가까이(--sheet-*).
+
+  화면이 A4보다 좁으면 장을 **줄이지 않는다.** 예전에는 zoom으로 화면 폭에 맞췄는데, 그게
+  브라우저 확대를 상쇄해 300%에서도 글자가 1.6배에 머물렀다(WCAG 1.4.4). 이제 좁은 화면에서는
+  장이 한 줄짜리 HTML로 흘러내리고 확대도 그대로 먹는다. 인쇄와 PDF는 A4 그대로다.
+*/
+
+@layer sheet {
+  .sheets {
+    padding: var(--s-2) var(--s-2) var(--s-5);
+  }
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto 18px;
+    padding: 12mm 13mm 10mm;
+    background: var(--sheet);
+    color: var(--sheet-ink);
+    border: 1px solid var(--sheet-rule-soft);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 9.6pt;
+    line-height: 1.5;
+    word-break: keep-all;
+    position: relative;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet p,
+  .sheet li,
+  .sheet dd {
+    color: inherit;
+  }
+  .sheet h2,
+  .sheet h3 {
+    margin: 0;
+    font-weight: 400;
+  }
+  .sheet .num {
+    display: inline-grid;
+    place-items: center;
+    width: 1.55em;
+    height: 1.55em;
+    margin-right: 0.45em;
+    border: 1.2px solid var(--sheet-ink);
+    border-radius: 50%;
+    font: 600 0.82em/1 var(--sans);
+    vertical-align: 0.12em;
+  }
+  .sheet .tag {
+    display: inline-block;
+    margin-left: 0.4em;
+    padding: 0.05em 0.5em 0.1em;
+    border: 0.8px solid var(--sheet-ink);
+    border-radius: 999px;
+    font: 600 7.4pt/1.3 var(--sans);
+    letter-spacing: 0.02em;
+    vertical-align: 0.15em;
+  }
+
+  /* 머리. 삽화(Vertex Gemini)는 자르지 않고 통째로 보인다. */
+  .sheet .head-art {
+    display: block;
+    width: 100%;
+    height: 30mm;
+    margin: -3mm 0 2mm;
+    object-fit: contain;
+  }
+  .sheet .head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8mm;
+  }
+  .sheet .kicker {
+    margin: 0;
+    font: 600 7.6pt/1 var(--sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sheet-ink-dim);
+  }
+  .sheet .sheet-title {
+    font-family: var(--serif);
+    font-size: 27pt;
+    line-height: 1.12;
+    margin: 1.6mm 0 1mm;
+  }
+  .sheet .sheet-sub {
+    margin: 0;
+    color: var(--sheet-ink-dim);
+    font-size: 9.2pt;
+  }
+  .sheet .fields {
+    margin: 0;
+    display: grid;
+    gap: 2.4mm;
+    min-width: 58mm;
+  }
+  .sheet .fields div {
+    display: grid;
+    grid-template-columns: 13mm 1fr;
+    align-items: end;
+  }
+  .sheet .fields dt {
+    font-size: 8pt;
+    color: var(--sheet-ink-dim);
+  }
+  .sheet .fields dd {
+    margin: 0;
+    border-bottom: 0.8px solid var(--sheet-ink);
+    height: 5.2mm;
+  }
+
+  /* 푸는 방법 + 기호 */
+  .sheet .rules {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 6mm;
+    margin: 4.5mm 0 4mm;
+    padding: 3.2mm 4mm;
+    border-top: 1.2px solid var(--sheet-ink);
+    border-bottom: 0.6px solid var(--sheet-rule);
+  }
+  .sheet .rules h3 {
+    font: 600 8.4pt/1.2 var(--sans);
+    letter-spacing: 0.06em;
+    margin-bottom: 1.4mm;
+  }
+  .sheet .rules ol {
+    margin: 0;
+    padding-left: 4.4mm;
+    font-size: 8.8pt;
+    line-height: 1.45;
+  }
+  .sheet .rules li + li {
+    margin-top: 0.6mm;
+  }
+  .sheet .task {
+    margin: 1.8mm 0 0;
+    font-weight: 600;
+    font-size: 8.8pt;
+  }
+  .sheet .legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2mm 3mm;
+    font-size: 8.4pt;
+  }
+  .sheet .legend li {
+    display: flex;
+    align-items: center;
+    gap: 1.8mm;
+  }
+  .sheet .ico {
+    width: 8.4mm;
+    height: 8.4mm;
+    flex: none;
+    border: 0.4px solid var(--sheet-rule-soft);
+  }
+  .sheet .glyphs {
+    margin: 2.2mm 0 0;
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+    font-size: 8.4pt;
+  }
+  .sheet .glyphs span {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2mm;
+  }
+  .sheet .glyph {
+    width: 3.2mm;
+    height: 3.2mm;
+    fill: var(--sheet-black);
+    flex: none;
+  }
+  .glyph.inline {
+    width: 0.78em;
+    height: 0.78em;
+    vertical-align: -0.06em;
+    margin: 0 0.06em;
+    fill: currentColor;
+  }
+
+  /* 판 2×2 */
+  .sheet .boards {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4mm 7mm;
+    min-height: 0;
+  }
+  .sheet .board-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .sheet .board-card h3 {
+    font-family: var(--serif);
+    font-size: 13.2pt;
+    line-height: 1.2;
+  }
+  .sheet .goal {
+    margin: 1mm 0 1.4mm;
+    font-size: 8.8pt;
+    line-height: 1.4;
+  }
+  .sheet .board {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .sheet .board svg {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+  }
+  .sheet .hint {
+    margin: 0.6mm 0 0;
+    font-size: 8pt;
+    color: var(--sheet-ink-dim);
+  }
+  .sheet .write {
+    display: flex;
+    gap: 2mm;
+    align-items: flex-end;
+    margin: 1.6mm 0 0;
+    font-size: 8.4pt;
+  }
+  .sheet .write i {
+    flex: 1;
+    border-bottom: 0.8px solid var(--sheet-ink);
+    height: 4.6mm;
+  }
+  .sheet .sheet-foot,
+  .sheet .page-no {
+    font-size: 7.6pt;
+    color: var(--sheet-ink-dim);
+  }
+  .sheet .sheet-foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3mm;
+    padding-top: 2mm;
+    border-top: 0.6px solid var(--sheet-rule);
+  }
+
+  /* 뒷면 */
+  .sheet .back-title {
+    font-family: var(--serif);
+    font-size: 19pt;
+    padding-bottom: 2.4mm;
+    border-bottom: 1.2px solid var(--sheet-ink);
+  }
+  .sheet .concepts {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0 7mm;
+    min-height: 0;
+  }
+  .sheet .concept {
+    display: flex;
+    flex-direction: column;
+    padding: 3.6mm 0 2mm;
+    min-height: 0;
+  }
+  .sheet .concept:nth-child(-n + 2) {
+    border-bottom: 0.6px solid var(--sheet-rule);
+  }
+  .sheet .c-art {
+    width: 100%;
+    height: 31mm;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 2.4mm;
+  }
+  .sheet .concept h3 {
+    font-family: var(--serif);
+    font-size: 13.2pt;
+    margin-bottom: 1mm;
+  }
+  .sheet .concept p {
+    margin: 0 0 1.2mm;
+    font-size: 8.9pt;
+  }
+  .sheet .concept .q {
+    font-weight: 600;
+    margin-top: 1.6mm;
+  }
+  .sheet .preview {
+    margin: 1.4mm 0;
+    padding: 1.8mm 2.6mm;
+    border-left: 2px solid var(--sheet-ink);
+    background: var(--sheet-tint);
+    font-size: 8.3pt;
+    line-height: 1.45;
+  }
+  .sheet .lines i {
+    display: block;
+    height: 6.4mm;
+    border-bottom: 0.7px solid var(--sheet-rule);
+  }
+  .sheet .blanks {
+    display: flex;
+    gap: 5mm;
+    margin-top: 2mm;
+  }
+  .sheet .blanks span {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.6mm;
+    flex: 1;
+    font-weight: 600;
+  }
+  .sheet .blanks span i {
+    min-width: 12mm;
+  }
+  .sheet .blanks i {
+    flex: 1;
+    border-bottom: 0.8px solid var(--sheet-ink);
+    height: 6mm;
+  }
+  .sheet .mix {
+    border-collapse: collapse;
+    margin: 1.6mm 0 0.6mm;
+    font-size: 8.9pt;
+  }
+  .sheet .mix th {
+    text-align: left;
+    font-weight: 400;
+    padding: 0.8mm 2mm 0.8mm 0;
+    white-space: nowrap;
+  }
+  .sheet .mix td {
+    padding: 0.8mm 1.6mm;
+  }
+  .sheet .mix .blank {
+    width: 34mm;
+    border-bottom: 0.8px solid var(--sheet-ink);
+  }
+  .sheet .back-foot {
+    display: grid;
+    grid-template-columns: 22mm 1fr auto;
+    gap: 4mm;
+    align-items: center;
+    margin-top: 3mm;
+    padding-top: 3mm;
+    border-top: 1.2px solid var(--sheet-ink);
+  }
+  .sheet .back-foot p {
+    margin: 0 0 0.8mm;
+    font-size: 8.4pt;
+  }
+  .sheet .back-foot .small {
+    font-size: 7.4pt;
+    color: var(--sheet-ink-dim);
+  }
+  .sheet .qr svg {
+    width: 22mm;
+    height: 22mm;
+    display: block;
+  }
+  .sheet .url {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* 정답지 */
+  .sheet .beam-legend {
+    font-size: 8pt;
+  }
+  .sheet .beam-legend p {
+    margin: 0 0 1mm;
+  }
+  .sheet .beam-legend ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.8mm 5mm;
+  }
+  .sheet .beam-legend li {
+    display: flex;
+    align-items: center;
+    gap: 1.4mm;
+  }
+  .sheet .beam {
+    width: 11mm;
+    height: 2.2mm;
+  }
+  .sheet .badge {
+    display: inline-grid;
+    place-items: center;
+    width: 3.6mm;
+    height: 3.6mm;
+    border-radius: 50%;
+    background: var(--sheet-black);
+    color: var(--sheet);
+    font: 600 6.6pt/1 var(--sans);
+  }
+  .sheet-answers .boards {
+    margin-top: 5mm;
+  }
+  .sheet .answer .taps {
+    margin: 1.4mm 0 0.4mm;
+    font-size: 8.8pt;
+  }
+  .sheet .answer .path {
+    margin: 0;
+    font-size: 8.2pt;
+    line-height: 1.45;
+    color: var(--sheet-ink-dim);
+  }
+  .sheet .concept-answers {
+    margin-top: 4mm;
+    padding-top: 2.6mm;
+    border-top: 1.2px solid var(--sheet-ink);
+  }
+  .sheet .concept-answers h3 {
+    font: 600 8.6pt/1.2 var(--sans);
+    letter-spacing: 0.06em;
+    margin-bottom: 1.2mm;
+  }
+  .sheet .concept-answers ol {
+    margin: 0;
+    padding-left: 4.6mm;
+    font-size: 8.8pt;
+    line-height: 1.5;
+  }
+
+  /*
+    A4보다 좁은 화면: 장이 흘러내린다. 고정 크기를 풀고 칸을 한 줄로 쌓는다. 글자 단위가
+    pt라 브라우저 확대가 그대로 먹는다.
+  */
+  @media screen and (max-width: 220mm) {
+    .sheets {
+      padding-inline: 0;
+    }
+    .sheet {
+      width: auto;
+      height: auto;
+      overflow: visible;
+      padding: var(--s-3) var(--s-2);
+      border-inline: 0;
+      font-size: 11pt;
+    }
+    .sheet .head-row,
+    .sheet .back-foot {
+      display: block;
+    }
+    .sheet .fields {
+      margin-top: var(--s-2);
+      min-width: 0;
+    }
+    .sheet .rules,
+    .sheet .boards,
+    .sheet .concepts {
+      display: block;
+    }
+    .sheet .legend-box {
+      margin-top: var(--s-2);
+    }
+    .sheet .board-card,
+    .sheet .concept {
+      padding-block: var(--s-3);
+      border-bottom: 0.6px solid var(--sheet-rule);
+    }
+    .sheet .board svg {
+      height: auto;
+      width: 100%;
+      max-width: 22rem;
+    }
+    .sheet .c-art {
+      height: auto;
+      max-height: 40mm;
+    }
+    .sheet .qr {
+      margin-bottom: var(--s-2);
+    }
+  }
+}
+
+/* ── 인쇄 ─────────────────────────────────────────────────── */
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  @layer sheet {
+    html,
+    body {
+      background: var(--sheet);
+    }
+    .sheets {
+      padding: 0;
+    }
+    .sheet {
+      margin: 0;
+      border: 0;
+      break-after: page;
+    }
+    .sheet:last-child {
+      break-after: auto;
+    }
+  }
+}

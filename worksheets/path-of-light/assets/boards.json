@@ -1,0 +1,414 @@
+{
+  "coordinates": "Columns A, B, C... left to right; rows 1, 2, 3... top to bottom. Letters and numbers are printed on the board edges.",
+  "glyphs": {
+    "R": "triangle",
+    "G": "square",
+    "B": "circle"
+  },
+  "sourceMarker": "Colored source: white box with its glyphs. White source: solid black box with all three glyphs knocked out in white.",
+  "beamStyles": {
+    "white": "solid line",
+    "R": "long dashes (triangle tag)",
+    "G": "dash-dot line (square tag)",
+    "B": "dots (circle tag)",
+    "overlap": "two components on the same cell edge are drawn as parallel lines"
+  },
+  "tapBadge": "Answer key: a black circle with a number next to a piece = how many times to tap it.",
+  "levels": [
+    {
+      "id": 3,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "One blue beam, three mirrors, two taps: the path turns three times and one mirror is already right, so students learn that not every piece needs turning.",
+        "ko": "파란 빛 하나, 거울 셋, 두 번 돌리기. 빛이 세 번 꺾이고 거울 하나는 이미 맞아 있어서, 모든 조각을 돌려야 하는 게 아니라는 걸 배운다."
+      },
+      "rotate": [
+        {
+          "cell": "A3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "C5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "C3",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "A5",
+          "facing": "right",
+          "name": {
+            "en": "blue",
+            "ko": "파랑"
+          },
+          "components": [
+            "B"
+          ],
+          "glyphs": [
+            "circle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "A1",
+          "needs": {
+            "name": {
+              "en": "blue",
+              "ko": "파랑"
+            },
+            "components": [
+              "B"
+            ],
+            "glyphs": [
+              "circle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "3-puzzle.svg",
+        "answer": "3-answer.svg"
+      }
+    },
+    {
+      "id": 22,
+      "chapter": 2,
+      "chapterName": {
+        "en": "Split",
+        "ko": "분열"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 3,
+      "why": {
+        "en": "One red beam feeds three crystals through two stacked beam splitters; neither splitter can be replaced by a mirror, so the splitting idea is the whole puzzle.",
+        "ko": "빨간 빛 하나가 반투명 거울 두 개를 거쳐 결정 셋에 닿는다. 어느 반투명 거울도 거울로 바꾸면 풀리지 않아서, 빛이 둘로 나뉜다는 생각이 곧 퍼즐이다."
+      },
+      "rotate": [
+        {
+          "cell": "A4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "C4",
+          "piece": "splitter",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "D4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "D3",
+          "piece": "splitter"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "D1",
+          "facing": "down",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "E3",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        },
+        {
+          "cell": "A5",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        },
+        {
+          "cell": "C2",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "22-puzzle.svg",
+        "answer": "22-answer.svg"
+      }
+    },
+    {
+      "id": 49,
+      "chapter": 3,
+      "chapterName": {
+        "en": "Disperse",
+        "ko": "분산"
+      },
+      "grid": {
+        "cols": 6,
+        "rows": 6
+      },
+      "par": 2,
+      "why": {
+        "en": "A white beam enters a prism and leaves as red, green and blue in three directions; two taps, only three movable pieces, and the blue ray visibly leaves the board.",
+        "ko": "흰빛이 프리즘을 지나 빨강·초록·파랑으로 세 방향에 갈라진다. 두 번 돌리기, 움직이는 조각 셋, 파랑은 판 밖으로 나가는 것까지 보인다."
+      },
+      "rotate": [
+        {
+          "cell": "D4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "D5",
+          "piece": "prism",
+          "taps": 1,
+          "from": "apex up",
+          "to": "apex right"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "C5",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "C1",
+          "facing": "down",
+          "name": {
+            "en": "white",
+            "ko": "흰빛"
+          },
+          "components": [
+            "R",
+            "G",
+            "B"
+          ],
+          "glyphs": [
+            "triangle",
+            "square",
+            "circle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "F5",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        },
+        {
+          "cell": "F4",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "49-puzzle.svg",
+        "answer": "49-answer.svg"
+      }
+    },
+    {
+      "id": 92,
+      "chapter": 4,
+      "chapterName": {
+        "en": "Mix",
+        "ko": "혼합"
+      },
+      "grid": {
+        "cols": 6,
+        "rows": 6
+      },
+      "par": 2,
+      "why": {
+        "en": "A green beam and a blue beam must meet on one cyan crystal (square + circle) while a splitter also sends green to a green crystal; two taps.",
+        "ko": "초록 빛과 파란 빛이 시안 결정(사각형+원) 하나에서 만나야 하고, 반투명 거울이 초록을 초록 결정에도 보낸다. 두 번 돌리기."
+      },
+      "rotate": [
+        {
+          "cell": "D3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "F4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "E4",
+          "piece": "mirror"
+        },
+        {
+          "cell": "D1",
+          "piece": "splitter"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "E6",
+          "facing": "up",
+          "name": {
+            "en": "blue",
+            "ko": "파랑"
+          },
+          "components": [
+            "B"
+          ],
+          "glyphs": [
+            "circle"
+          ]
+        },
+        {
+          "cell": "F1",
+          "facing": "left",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "F3",
+          "needs": {
+            "name": {
+              "en": "cyan",
+              "ko": "시안"
+            },
+            "components": [
+              "G",
+              "B"
+            ],
+            "glyphs": [
+              "square",
+              "circle"
+            ]
+          }
+        },
+        {
+          "cell": "A1",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "92-puzzle.svg",
+        "answer": "92-answer.svg"
+      }
+    }
+  ]
+}

@@ -1,92 +1,74 @@
 /**
- * 언어별 페이지 생성기.
+ * 사이트 생성기. `node build.mjs`
  *
- * 페이지를 언어마다 손으로 관리하면 **반드시 어긋난다.** 한국어에만 문단을
- * 하나 고치고 나머지 셋을 잊는 날이 오고, 그 어긋남은 화면에 아무 표시도
- * 나지 않는다. 그래서 내용은 아래 `L` 한 곳에만 두고 HTML은 전부 여기서
- * 만든다 — **언어를 늘리는 일이 항목 하나를 더하는 일**이 되어야 한다.
+ * 페이지를 언어마다 손으로 관리하면 **반드시 어긋난다.** 한국어에만 문단을 하나 고치고
+ * 나머지 셋을 잊는 날이 오고, 그 어긋남은 화면에 아무 표시도 나지 않는다. 그래서 내용은
+ * 데이터 파일에 두고 HTML은 전부 여기서 만든다.
  *
- * AEO/GEO 관점에서 이 파일이 하는 일(자세한 근거는 AEO.md):
+ * 파일 지도(SITE-UX-PLAN.md 4절)
+ *   site.mjs              사이트 구조: 언어, 주 메뉴, 개념 순서, 패밀리 사이트, 화면 글자
+ *   ui/page.mjs           모든 페이지의 틀(<head>, 머리말, 바닥글)
+ *   ui/nav.mjs            브레드크럼, 개념 사이드바, 이전·다음
+ *   ui/content.mjs        본문 블록, 스토어 버튼, 접기
+ *   css/*.css             디자인 시스템(tokens → base → layout → components, sheet). 여기서 묶는다
+ *   build.mjs             앱 소개 첫 화면(아래 L)과 모든 페이지 출력, sitemap·robots·llms, 검사
+ *   article-page.mjs + articles/          글
+ *   learn-page.mjs + learn/               개념(배우기)
+ *   worksheet-page.mjs + worksheets/<slug>.mjs   학습지(PDF는 print-worksheet.mjs, 발행 전 검사는
+ *                         check-worksheets.mjs와 tools/pdf-gray.swift)
+ *   daily-page.mjs + daily/  오늘의 빛 퍼즐(재료는 prism 저장소 tools/make-daily.ts·daily-site.ts)
+ *   pages/                개인정보·지원(4개 언어), 에이드리븐 소개, 404, 디자인 견본
  *
- *  1. 언어마다 **독립된 문서**를 만든다. 지금까지는 한 페이지에 한국어와
- *     영어를 쌓고 `lang="ko"` 하나로 묶어뒀는데, 그러면 스크린 리더가 영어를
- *     한국어 발음으로 읽고 답변 엔진은 어느 언어 문서인지 판단하지 못한다.
- *  2. `hreflang` 상호 링크 + `x-default`.
- *  3. JSON-LD 세 덩어리 — 앱(`MobileApplication`), 자주 묻는 질문
- *     (`FAQPage`), 영상(`VideoObject`). 답변 엔진이 "무엇이고 얼마이고
- *     어디서 받나"를 추측하지 않아도 되게 한다.
- *
- * 실행: `node build.mjs`
+ * AEO/GEO(자세한 근거는 prism 저장소 docs/SITE-AEO.md): 언어마다 독립된 문서, 실제로 있는 언어끼리만 hreflang,
+ * 페이지마다 JSON-LD(앱 MobileApplication·FAQPage·VideoObject, 사이트 WebSite, 글 Article,
+ * 개념 DefinedTerm, 학습지 LearningResource, 경로 BreadcrumbList).
  */
 
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import {
-  ARTICLES,
-  articlesIn,
-  articlePathOf,
-  articlePage,
-  articleSitemapEntries,
-  articleLlmsSection,
-} from './article-page.mjs';
+import { ORIGIN, APPSTORE, PLAYSTORE, APP_ID, ORG, LANGS, LANG_NAME, esc, plain, homeOf, learnPath, worksheetsPath, aboutPath } from './site.mjs';
+import { ARTICLES, articlesIn, articlePathOf } from './articles/index.mjs';
+import { articlePage, articleSitemap, articleLlmsSection } from './article-page.mjs';
+import { WS_LANGS, WORKSHEETS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
+import { learnPages, LEARN } from './learn-page.mjs';
+import { dailyPages } from './daily-page.mjs';
+import { docPages } from './pages/doc-page.mjs';
+import { aboutPages } from './pages/about.mjs';
+import { notFoundPage } from './pages/not-found.mjs';
+import { designPage } from './pages/design.mjs';
+import { page } from './ui/page.mjs';
+import { storeLinks, disclosure } from './ui/content.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const ORIGIN = 'https://prism.adriven.co';
-const APPSTORE = 'https://apps.apple.com/kr/app/id6803019903';
-const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriven.prism';
-/** 스토어에 실제로 올라간 버전. JSON-LD가 이 값을 그대로 쓴다 — 버전을 올릴 때 잊지 않도록 한 곳에 둔다. */
-const VERSION = '1.5';
+
+/** 스토어에 실제로 올라간 버전. JSON-LD가 이 값을 그대로 쓴다. 버전을 올릴 때 잊지 않도록 한 곳에 둔다. */
+const VERSION = '1.6';
 
 /**
- * 랜딩 페이지 내용을 마지막으로 고친 날. sitemap의 lastmod가 이 값을 쓴다.
+ * 앱 소개 첫 화면 내용을 마지막으로 고친 날. sitemap의 lastmod가 이 값을 쓴다.
  *
  * 예전에는 빌드한 날을 모든 주소에 찍었다. Bing은 lastmod를 재수집 신호로 쓰는데,
  * 고치지 않은 페이지까지 매번 「오늘 바뀜」이라고 하면 그 값을 믿지 않게 된다.
- * 문구를 고칠 때 이 날짜도 같이 고친다.
+ * 문구를 고칠 때 이 날짜도 같이 고친다. 다른 페이지는 각자 자기 날짜를 갖는다.
  */
-const SITE_UPDATED = '2026-11-12';
+const SITE_UPDATED = '2026-11-26';
 
 /*
-  이 앱과 회사를 가리키는 고유 식별자(@id).
-
-  「Prism」이라는 빛 퍼즐 앱이 여럿이라 답변 엔진이 섞는다(2026-11-09 측정에서 일본어
-  AI 개요가 실제로 다른 앱과 섞었다). 페이지마다 같은 @id를 쓰고 sameAs로 두 스토어
-  페이지를 묶으면 「이 PRISM = 이 App Store 앱 = 이 Play 앱」이 기계에 명시된다.
-  회사도 이름만 두지 않고 회사 사이트와 한국어 이름까지 적는다(ChatGPT는 「에이드리븐」으로
-  불렀다).
+  영상은 앱 UI가 그대로 찍혀 있어 **언어별**이다. 1.6(종이와 잉크)부터는 네 언어
+  모두 iOS 시뮬레이터에서 앱을 실제로 돌려 녹화한다(prism 저장소 docs/PREVIEW.md의
+  「사이트용 영상」). 자동화·헤드리스 브라우저로는 찍지 않는다.
+  `requestAnimationFrame`이 그런 환경에서 제대로 안 돌아 애니메이션이 얼어붙은
+  채로 찍히기 때문이다(자세한 경위는 prism 저장소 `docs/SITE-TODO.md` 참고).
 */
-const APP_ID = `${ORIGIN}/#app`;
-const ORG = {
-  '@type': 'Organization',
-  '@id': 'https://adriven.co/#org',
-  name: 'A Driven Inc.',
-  alternateName: ['A Driven', 'Adriven', '에이드리븐'],
-  url: 'https://adriven.co/',
-};
-
-/** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다** — AEO.md 참고. */
-const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
-
-/** 언어별 경로. 기본 언어는 루트에 둔다. */
-const pathOf = (l) => (l === 'ko' ? '/' : `/${l}/`);
-const urlOf = (l) => ORIGIN + pathOf(l);
-
-/*
-  영상은 앱 UI가 그대로 찍혀 있어 **언어별**이다. 네 언어 모두 실제
-  기기(Android, adb screenrecord)로 녹화했다 — 자동화·헤드리스 브라우저는
-  쓰지 않는다. `requestAnimationFrame`이 그런 환경에서 제대로 안 돌아
-  애니메이션이 얼어붙은 채로 찍히기 때문이다(자세한 경위는
-  `prism-site/TODO.md` 참고).
-*/
-const videoOf = (l) => l;
+// 영상 길이(초, 반올림). 영상을 바꾸면 ffprobe로 다시 재서 고친다.
+const VIDEO_SEC = { ko: 27, en: 25, ja: 27, 'zh-Hans': 27 };
 
 const L = {
   ko: {
-    dir: 'ltr',
     title: 'PRISM: 빛의 퍼즐 · 빛을 접어 결정을 밝힌다',
-    desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고 없음, 인앱결제 없음, 완전 오프라인.',
+    desc: '탭하면 빛이 꺾입니다. 규칙이 하나뿐인 미니멀 퍼즐. 300레벨, 정답은 모두 하나. 광고도 구독도 없이 한 번 결제로 전부.',
     /*
       「접어」다. 「꺾어」가 아니다.
 
@@ -96,10 +78,13 @@ const L = {
       한다. 한때 여기만 「꺾어」로 바꿨다가 되돌렸다.
     */
     tagline: '빛을 접어 결정을 밝힌다',
+    what: 'iPhone·iPad·Android용 빛 퍼즐 게임입니다. iPhone·iPad에서는 무료로 받아 1챕터를 해 보고 한 번 결제로 전부 열고, Android에서는 한 번 결제로 받습니다.',
+    videoPlay: '영상 재생',
+    videoPause: '영상 일시정지',
+    heroAlt: '흰 빛이 프리즘을 지나 빨강과 초록으로 갈라져 결정 두 개를 켠 판',
     cta: 'App Store에서 받기',
     ctaAndroid: 'Google Play에서 받기',
     ctaDemo: '먼저 14판 해보기',
-    langName: '한국어',
     ruleH: '규칙은 하나입니다',
     lead: '탭하면 조각이 90° 돌고, 빛은 그 즉시 새로운 길을 찾습니다. 모든 결정에 정확히 요구된 색을 동시에 비추면 그 판은 풀립니다. 그것뿐이고, 설명서는 없습니다. 레벨이 규칙을 가르칩니다.',
     videoH: '30초면 무슨 게임인지 압니다',
@@ -109,16 +94,15 @@ const L = {
       '<strong>300개</strong> 퍼즐, 일곱 개의 챕터',
       '모든 퍼즐의 <strong>정답은 하나뿐</strong>입니다',
       '표시되는 최소 탭 수는 <strong>전수 탐색으로 증명한</strong> 실제 최솟값입니다',
-      '광고 없음 · 인앱결제 없음 · 회원가입 없음',
-      '네트워크를 쓰지 않습니다. 완전 오프라인',
+      '광고 없음 · 구독 없음 · 회원가입 없음',
+      '결제할 때 말고는 네트워크를 쓰지 않습니다',
     ],
     stats: [
       ['300', '퍼즐'],
       ['7', '챕터'],
       ['1', '판마다 정답'],
-      ['0', '광고 · 결제 · 가입'],
+      ['0', '광고 · 구독 · 가입'],
     ],
-    badges: ['광고 없음', '인앱결제 없음', '회원가입 없음', '완전 오프라인'],
     chaptersH: '일곱 개의 챕터',
     chaptersLead: '레벨이 순서대로 광학을 가르칩니다. 새 조각은 챕터가 시작될 때 하나씩만 들어옵니다.',
     chapters: [
@@ -145,28 +129,27 @@ const L = {
     langsP: '한국어, English, 日本語, 简体中文을 지원합니다. 기기 언어를 따르거나 설정에서 직접 고를 수 있습니다.',
     faqH: '자주 묻는 것',
     faq: [
-      ['광고가 정말 없나요?', '없습니다. 인앱결제도, 회원가입도, 로그인도 없습니다. 한 번 결제하면 300개 퍼즐 전부가 처음부터 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다.'],
-      ['인터넷 없이 되나요?', '됩니다. 네트워크를 아예 쓰지 않는 완전 오프라인 게임입니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다.'],
+      ["광고가 정말 없나요?", "없습니다. 구독도, 회원가입도, 로그인도 없습니다. iPhone·iPad에서는 무료로 받아 1챕터 14판을 해 보고, 한 번 결제하면 나머지 286판이 전부 열립니다. Android에서는 한 번 결제로 받으면 300판이 처음부터 전부 열려 있습니다. 광고 없는 퍼즐 게임을 찾고 계셨다면 그것이 이 앱을 만든 이유입니다."],
+      ["인터넷 없이 되나요?", "됩니다. 결제할 때 말고는 네트워크를 쓰지 않습니다. 비행기 안에서도, 지하철에서도, 신호가 없는 곳에서도 그대로 동작합니다. 진행 상황은 이 기기 안에만 저장되고 어디로도 전송되지 않습니다."],
       ['색약인데 할 수 있나요?', '할 수 있습니다. 모든 결정에 요구하는 색이 도형으로 함께 새겨져 있어(빨강은 삼각형, 초록은 사각형, 파랑은 원) 색을 전혀 보지 못해도 300판 전부를 풀 수 있습니다.'],
       ['몇 판이고 얼마나 어렵나요?', '일곱 챕터에 300판입니다. 모든 판에 정답이 하나뿐이라 운으로 풀리지 않고, 막히면 반드시 이유가 있습니다. 표시되는 최소 탭 수는 전수 탐색으로 증명한 실제 최솟값입니다.'],
-      ['안드로이드 버전이 있나요?', '있습니다. iOS와 Android 모두에서 같은 가격, 같은 300판으로 받으실 수 있습니다.'],
+      ["안드로이드 버전이 있나요?", "있습니다. 같은 300판이고, 어느 쪽이든 한 번만 결제하면 됩니다. iOS는 무료로 받아 앱 안에서 열고, Android는 받을 때 결제합니다."],
       ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
       ['수업에 쓸 수 있나요?', '쓸 수 있습니다. 일곱 챕터가 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 하나씩 다루고, 챕터를 시작할 때 실제 물리와 게임이 단순화한 점을 카드로 설명합니다. 챕터별 원리와 학생에게 던질 질문을 정리한 교사용 안내 글이 이 사이트에 있습니다.'],
     ],
-    privacy: '개인정보 처리방침',
-    support: '지원 · 문의',
-    otherLangs: '다른 언어',
   },
 
   en: {
-    dir: 'ltr',
-    title: 'PRISM: Light Puzzle · Bend beams. Wake the crystals.',
-    desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.',
-    tagline: 'Bend beams. Wake the crystals.',
+    title: 'PRISM: Light Puzzle · Bend light. Wake the crystals.',
+    desc: 'Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no subscription, one purchase for everything.',
+    tagline: 'Bend light. Wake the crystals.',
+    what: 'A light puzzle game for iPhone, iPad and Android. On iPhone and iPad it is free to download with chapter 1, and one purchase opens the rest; on Android you buy it once.',
+    videoPlay: 'Play video',
+    videoPause: 'Pause video',
+    heroAlt: 'A solved board: white light splits in a prism into red and green and lights two crystals',
     cta: 'Get it on the App Store',
     ctaAndroid: 'Get it on Google Play',
     ctaDemo: 'Try 14 levels first',
-    langName: 'English',
     ruleH: 'There is only one rule',
     lead: 'Tap a piece and it turns 90°; the light finds a new path instantly. Light every crystal with exactly the color it asks for, all at once, and the board is solved. That is the only rule, and there is no manual. The levels teach it.',
     videoH: 'Thirty seconds and you know the game',
@@ -176,16 +159,15 @@ const L = {
       '<strong>300</strong> puzzles across seven chapters',
       'Every puzzle has <strong>exactly one solution</strong>',
       'The par shown is the <strong>true minimum</strong>, found by exhaustive search',
-      'No ads · no in-app purchases · no sign-up',
-      'No networking at all. Fully offline',
+      'No ads · no subscription · no sign-up',
+      'No networking except to make a purchase',
     ],
     stats: [
       ['300', 'puzzles'],
       ['7', 'chapters'],
       ['1', 'solution each'],
-      ['0', 'ads · IAP · sign-ups'],
+      ['0', 'ads · subscriptions · sign-ups'],
     ],
-    badges: ['No ads', 'No in-app purchases', 'No sign-up', 'Fully offline'],
     chaptersH: 'Seven chapters',
     chaptersLead: 'The levels teach optics in order. Each chapter introduces exactly one new piece.',
     chapters: [
@@ -212,28 +194,27 @@ const L = {
     langsP: 'Korean, English, Japanese and Simplified Chinese. Follows your device language, or pick one in Settings.',
     faqH: 'Questions people ask',
     faq: [
-      ['Are there really no ads?', 'None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists.'],
-      ['Does it work without internet?', 'Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere.'],
+      ["Are there really no ads?", "None. No subscription, no sign-up, no sign-in. On iPhone and iPad it is free to download: play chapter 1 (14 levels), and one purchase opens the other 286. On Android you pay once when you get it, and all 300 are open from the start. If you were looking for a puzzle game with no ads, that is why this one exists."],
+      ["Does it work without internet?", "Yes. It only goes online to make a purchase. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere."],
       ['Can I play if I am colorblind?', 'Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 300 puzzles can be finished without distinguishing color at all.'],
       ['How many levels, and how hard?', 'Seven chapters, 300 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search.'],
-      ['Is there an Android version?', 'Yes. It is available on both iOS and Android, same price, same 300 puzzles.'],
+      ["Is there an Android version?", "Yes. Same 300 puzzles, and either way you pay only once: on iOS it is free to download and unlocked in the app, on Android you pay when you get it."],
       ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
       ['Can I use it to teach?', 'Yes. The seven chapters cover reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization, and each opens with a card on the real physics and what the game simplifies. A teacher\'s guide on this site lists every chapter\'s principle with a question to ask students.'],
     ],
-    privacy: 'Privacy Policy',
-    support: 'Support',
-    otherLangs: 'Other languages',
   },
 
   ja: {
-    dir: 'ltr',
     title: 'PRISM：光のパズル｜光を折り、結晶を灯す',
-    desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告なし、アプリ内課金なし、完全オフライン。',
+    desc: 'タップすると光が曲がります。ルールがひとつだけのミニマルなパズル。300レベル、答えはすべてひとつ。広告もサブスクもなく、一度の購入ですべて。',
     tagline: '光を折り、結晶を灯す',
+    what: 'iPhone・iPad・Android向けの光のパズルゲームです。iPhone・iPadでは無料でダウンロードしてチャプター1を遊べ、一度の購入ですべて開きます。Androidでは一度購入してダウンロードします。',
+    videoPlay: '動画を再生',
+    videoPause: '動画を一時停止',
+    heroAlt: '白い光がプリズムで赤と緑に分かれ、二つの結晶を灯した盤面',
     cta: 'App Store で入手',
     ctaAndroid: 'Google Play で入手',
     ctaDemo: 'まず14面を試す',
-    langName: '日本語',
     ruleH: 'ルールはひとつだけ',
     lead: 'ピースをタップすると90°回り、光はその場で新しい道を見つけます。すべての結晶に求められた色をちょうど同時に当てると、その盤面はクリアです。ルールはそれだけで、説明書はありません。レベルが教えてくれます。',
     videoH: '30秒でどんなゲームかわかります',
@@ -243,8 +224,8 @@ const L = {
       '<strong>300</strong>のパズル、7つのチャプター',
       'すべてのパズルに<strong>答えはひとつだけ</strong>',
       '表示される最小タップ数は<strong>全探索で証明した</strong>本当の最小値です',
-      '広告なし · アプリ内課金なし · 会員登録なし',
-      'ネットワークを一切使いません。完全オフライン',
+      '広告なし · サブスクなし · 会員登録なし',
+      '購入するとき以外はネットワークを使いません',
     ],
     stats: [
       ['300', 'パズル'],
@@ -252,7 +233,6 @@ const L = {
       ['1', '盤面ごとの答え'],
       ['0', '広告 · 課金 · 登録'],
     ],
-    badges: ['広告なし', 'アプリ内課金なし', '会員登録なし', '完全オフライン'],
     chaptersH: '7つのチャプター',
     chaptersLead: 'レベルが順に光のしくみを教えます。新しいピースはチャプターごとにひとつずつ増えます。',
     chapters: [
@@ -279,28 +259,27 @@ const L = {
     langsP: '한국어、English、日本語、简体中文に対応しています。端末の言語に従うか、設定で直接選べます。',
     faqH: 'よくある質問',
     faq: [
-      ['本当に広告はありませんか？', 'ありません。アプリ内課金も、会員登録も、ログインもありません。一度購入すれば300のパズルすべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。'],
-      ['インターネットなしで遊べますか？', '遊べます。ネットワークを一切使わない完全オフラインのゲームです。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。'],
+      ["本当に広告はありませんか？", "ありません。サブスクも、会員登録も、ログインもありません。iPhone・iPadでは無料でダウンロードしてチャプター1の14面を遊べ、一度購入すれば残りの286面がすべて開きます。Androidでは一度購入してダウンロードすれば、300面すべてが最初から開いています。広告のないパズルゲームを探していたなら、それがこのアプリを作った理由です。"],
+      ["インターネットなしで遊べますか？", "遊べます。購入するとき以外はネットワークを使いません。飛行機の中でも、地下鉄でも、電波のない場所でもそのまま動きます。進行状況はこの端末の中だけに保存され、どこにも送信されません。"],
       ['色覚に特性がありますが遊べますか？', '遊べます。すべての結晶に求める色が図形としても刻まれているので（赤は三角、緑は四角、青は円）、色がまったく見えなくても300面すべてを解けます。'],
       ['何面あって、どのくらい難しいですか？', '7チャプターに300面です。すべての面に答えがひとつだけなので運では解けず、詰まったときは必ず理由があります。表示される最小タップ数は全探索で証明した本当の最小値です。'],
-      ['Android版はありますか？', 'あります。iOS・Android どちらでも同じ価格、同じ300面で遊べます。'],
+      ["Android版はありますか？", "あります。同じ300面で、どちらも購入は一度だけです。iOSは無料でダウンロードしてアプリ内で開き、Androidはダウンロードするときに購入します。"],
       ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
       ['授業で使えますか？', '使えます。7つの章が反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光をひとつずつ扱い、章の始めに本物の物理とゲームが単純化した点をカードで説明します。章ごとの原理と生徒への問いをまとめた先生向けのガイドがこのサイトにあります。'],
     ],
-    privacy: 'プライバシーポリシー',
-    support: 'サポート・お問い合わせ',
-    otherLangs: '他の言語',
   },
 
   'zh-Hans': {
-    dir: 'ltr',
     title: 'PRISM：光线解谜｜折转光线，点亮结晶',
-    desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。',
+    desc: '点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有订阅，一次购买解锁全部。',
     tagline: '折转光线，点亮结晶',
+    what: '适用于 iPhone、iPad 和 Android 的光线解谜游戏。在 iPhone 和 iPad 上可免费下载并试玩第 1 章，一次购买即可解锁全部；在 Android 上下载时付费一次。',
+    videoPlay: '播放视频',
+    videoPause: '暂停视频',
+    heroAlt: '白光经过棱镜分成红色和绿色，点亮两颗晶体的棋盘',
     cta: '在 App Store 获取',
     ctaAndroid: '在 Google Play 获取',
     ctaDemo: '先试玩 14 关',
-    langName: '简体中文',
     ruleH: '只有一条规则',
     lead: '点击元件，它会转 90 度，光立刻找到新的路径。让每个结晶都恰好收到它要求的颜色，同时点亮，这一关就解开了。规则只有这一条，也没有说明书——关卡自己会教你。',
     videoH: '三十秒就知道这是什么游戏',
@@ -310,16 +289,15 @@ const L = {
       '<strong>300</strong> 个谜题，七个章节',
       '每个谜题<strong>只有一个答案</strong>',
       '显示的最少点击次数是<strong>穷举验证过</strong>的真实最小值',
-      '没有广告 · 没有内购 · 无需注册',
-      '完全不联网。彻底离线',
+      '没有广告 · 没有订阅 · 无需注册',
+      '除了购买时，不使用网络',
     ],
     stats: [
       ['300', '谜题'],
       ['7', '章节'],
       ['1', '每关唯一解'],
-      ['0', '广告 · 内购 · 注册'],
+      ['0', '广告 · 订阅 · 注册'],
     ],
-    badges: ['没有广告', '没有内购', '无需注册', '完全离线'],
     chaptersH: '七个章节',
     chaptersLead: '关卡会按顺序教你光的原理。每个章节只引入一种新元件。',
     chapters: [
@@ -346,136 +324,81 @@ const L = {
     langsP: '支持 한국어、English、日本語、简体中文。跟随设备语言，也可以在设置里直接选择。',
     faqH: '常见问题',
     faq: [
-      ['真的没有广告吗？', '没有。也没有内购、注册和登录。一次购买，300 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。'],
-      ['没有网络能玩吗？', '能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。'],
+      ["真的没有广告吗？", "没有。也没有订阅、注册和登录。在 iPhone 和 iPad 上可以免费下载，先玩第 1 章的 14 关，一次购买即可解锁其余 286 关。在 Android 上下载时付费一次，300 关从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。"],
+      ["没有网络能玩吗？", "能。除了购买时，它不使用网络。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。"],
       ['我有色觉障碍，能玩吗？', '能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。'],
       ['一共多少关？难吗？', '七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。'],
-      ['有 Android 版本吗？', '有。iOS 和 Android 上都能获取，价格相同，同样 300 关。'],
+      ["有 Android 版本吗？", "有。同样的 300 关，两边都只需付费一次：iOS 免费下载、在应用内解锁，Android 在下载时付费。"],
       ['占多大空间？', '不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。'],
       ['能用来上课吗？', '能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。'],
     ],
-    privacy: '隐私政策',
-    support: '支持与联系',
-    otherLangs: '其他语言',
   },
 };
 
-const esc = (s) =>
-  String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-
-/** 태그가 들어 있는 문자열에서 JSON-LD에 넣을 평문을 뽑는다. */
-const plain = (s) => String(s).replace(/<[^>]+>/g, '');
-
+/** 도형 범례. 색은 CSS(glyph--r 등)가 토큰으로 칠한다. 앱의 palette.ts와 같은 색이다. */
 const GLYPH_SVG = [
-  '<polygon points="10,3 18,17 2,17" fill="#ff2d55" />',
-  '<rect x="3" y="3" width="14" height="14" rx="2" fill="#32ff9a" />',
-  '<circle cx="10" cy="10" r="7.5" fill="#2d8cff" />',
+  '<svg class="glyph glyph--r" viewBox="0 0 20 20" aria-hidden="true"><polygon points="10,3 18,17 2,17" /></svg>',
+  '<svg class="glyph glyph--g" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" /></svg>',
+  '<svg class="glyph glyph--b" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" /></svg>',
 ];
-
-/*
-  히어로의 분광 그림.
-
-  여기 있던 것은 112px짜리 앱 아이콘이었다. 아이콘은 App Store에서 이미 보고
-  오는 그림이라 페이지에서 한 번 더 보여줄 이유가 없고, 무엇보다 **제품 이름의
-  뜻을 설명하지 않는다.** 흰 빛 하나가 프리즘을 지나 빨강·초록·파랑으로
-  갈라지는 것이 PRISM이라는 이름이자 3챕터의 내용이다. 그걸 그린다.
-
-  이미지 파일이 아니라 인라인 SVG인 이유: 앱이 "이미지 파일이 한 장도 없다"를
-  주장하는데 사이트가 PNG로 빛을 그리면 말과 물건이 어긋난다. 여기도 코드로
-  그린다. 요청도 한 번 줄어든다.
-
-  색은 palette.ts와 같은 값이다.
-*/
-/*
-  섹션 구분선.
-
-  가운데가 밝고 양끝으로 사라지는 1px 선에 결정 하나를 얹었다. 밑줄 하나로
-  끊던 자리를 "빛이 지나가다 결정을 만난다"로 바꾼 것이고, 페이지를 위에서
-  아래로 읽는 동안 같은 사건이 여섯 번 반복된다.
-
-  스크롤해서 화면에 들어올 때 켜진다. **JS가 없으면 처음부터 켜져 있다** —
-  `.js`가 붙은 뒤에만 어두워지므로, 스크립트가 막힌 방문자에게 빈 선이
-  남지 않는다. 움직임을 줄이라고 설정한 방문자에게는 트랜지션이 통째로
-  꺼진다(파일 아래 prefers-reduced-motion 규칙).
-*/
-const BEAM = '<div class="beam" aria-hidden="true"><i></i></div>';
 
 /** 챕터 번호. 스토어 설명도 로마자를 쓴다. */
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
-const SPECTRUM_SVG = `<svg class="spectrum" viewBox="0 0 640 280" aria-hidden="true" focusable="false">
-        <defs>
-          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="7" />
-          </filter>
-        </defs>
-        <g filter="url(#glow)" opacity="0.55">
-          <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="7" fill="none" />
-          <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="7" fill="none" />
-          <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="7" fill="none" />
-          <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="7" fill="none" />
-        </g>
-        <path d="M24 206 L266 136" stroke="#ffffff" stroke-width="2" fill="none" />
-        <path d="M266 136 L330 128" stroke="#ffffff" stroke-width="1.4" opacity="0.5" fill="none" />
-        <path d="M330 128 L616 66" stroke="#ff2d55" stroke-width="2" fill="none" />
-        <path d="M330 128 L616 124" stroke="#32ff9a" stroke-width="2" fill="none" />
-        <path d="M330 128 L616 182" stroke="#2d8cff" stroke-width="2" fill="none" />
-        <path d="M300 52 L358 196 L242 196 Z" stroke="rgba(255,255,255,0.5)" stroke-width="2"
-              stroke-linejoin="round" fill="rgba(255,255,255,0.03)" />
-      </svg>`;
-
-function page(lang) {
+/**
+ * 앱 소개(지금의 첫 화면). 12월 초 허브 전환 때 `/app/`으로 옮긴다(SITE-UX-PLAN 2절).
+ *
+ * JSON-LD: 답변 엔진이 인용할 때 필요한 것은 정해져 있다. 무엇인지, 어느 플랫폼인지,
+ * 얼마인지, 누가 만들었는지, 어디서 받는지. `aggregateRating`은 넣지 않는다(리뷰가 쌓이기
+ * 전에 넣으면 거짓이다).
+ */
+function homePage(lang) {
   const t = L[lang];
-  const up = lang === 'ko' ? '' : '../';
-  const vid = videoOf(lang);
-
-  /*
-    JSON-LD. 답변 엔진이 인용할 때 필요한 것은 정해져 있다 — 무엇인지,
-    어느 플랫폼인지, 얼마인지, 누가 만들었는지, 어디서 받는지. 다섯 가지를
-    추측하게 두면 인용되지 않거나 틀리게 인용된다.
-
-    `aggregateRating`은 **넣지 않는다.** 리뷰가 쌓이기 전에 넣으면 거짓이다.
-  */
+  const path = homeOf(lang);
   const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${ORIGIN}/#website`,
+      name: 'PRISM',
+      alternateName: 'PRISM by A Driven',
+      url: `${ORIGIN}/`,
+      inLanguage: LANGS,
+      publisher: ORG,
+    },
     {
       '@context': 'https://schema.org',
       '@type': 'MobileApplication',
       '@id': APP_ID,
       name: 'PRISM',
       sameAs: ['https://apps.apple.com/app/id6803019903', PLAYSTORE],
-      // 제목을 잘라 'PRISM'을 다시 만들던 자리다. `name`과 같은 값이라 아무것도
-      // 보태지 않았고, 구분자를 바꾸면 조용히 깨지는 코드였다. 언어별 제목을
-      // 그대로 넣는다. 답변 엔진이 그 언어로 이 앱을 부르는 이름이 이것이다.
-      alternateName: t.title,
+      // 두 스토어에 올라간 이름을 첫째로 둔다. 이름이 같은 다른 「Prism」 앱과 구별하는 단서다.
+      alternateName: ['PRISM: Light Puzzle', t.title],
       description: t.desc,
-      url: urlOf(lang),
+      url: ORIGIN + path,
       inLanguage: lang,
       applicationCategory: 'GameApplication',
       applicationSubCategory: 'PuzzleGame',
-      operatingSystem: 'iOS 15.0 or later, Android 7.0 or later',
+      operatingSystem: 'iOS 16.0 or later, Android 7.0 or later',
       downloadUrl: [APPSTORE, PLAYSTORE],
       installUrl: [APPSTORE, PLAYSTORE],
       fileSize: '5MB',
       softwareVersion: VERSION,
-      availableOnDevice: ['iPhone', 'iPad'],
+      availableOnDevice: ['iPhone', 'iPad', 'Android'],
       countriesSupported: 'Worldwide',
-      offers: {
-        '@type': 'Offer',
-        price: '3900',
-        priceCurrency: 'KRW',
-        availability: 'https://schema.org/InStock',
-        url: APPSTORE,
-      },
+      /*
+        1.6부터 두 스토어의 값이 다르다. iOS는 무료로 받고 앱 안에서 한 번 결제하고,
+        Android는 받을 때 한 번 결제한다(Android가 유료에 머무는 이유는 prism 저장소
+        docs/ROADMAP-1.6.md). 하나로 뭉치면 어느 쪽에는 거짓이 된다.
+      */
+      offers: [
+        { '@type': 'Offer', price: '0', priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: APPSTORE },
+        { '@type': 'Offer', price: '3900', priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: PLAYSTORE },
+      ],
       author: ORG,
       publisher: ORG,
-      screenshot: [
-        `${ORIGIN}/img/board-prism.png`,
-        `${ORIGIN}/img/board-rule.png`,
-        `${ORIGIN}/img/board-mixing.png`,
-      ],
+      screenshot: [`${ORIGIN}/img/board-prism.png`, `${ORIGIN}/img/board-rule.png`, `${ORIGIN}/img/board-mixing.png`],
       featureList: t.facts.map(plain),
-      // 이 앱이 팔리는 이유 자체다. 구조화해두면 "광고 없는 유료 퍼즐" 질의에 걸린다.
-      isAccessibleForFree: false,
       accessibilityFeature: ['highContrastDisplay', 'largePrint', 'reducedMotion'],
       accessibilityHazard: ['noFlashingHazard', 'noMotionSimulationHazard', 'noSoundHazard'],
     },
@@ -483,302 +406,174 @@ function page(lang) {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       inLanguage: lang,
-      mainEntity: t.faq.map(([q, a]) => ({
-        '@type': 'Question',
-        name: q,
-        acceptedAnswer: { '@type': 'Answer', text: a },
-      })),
+      mainEntity: t.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
     },
     {
       '@context': 'https://schema.org',
       '@type': 'VideoObject',
       name: t.videoH,
       description: t.videoCap,
-      thumbnailUrl: `${ORIGIN}/media/preview-${vid}.jpg`,
-      contentUrl: `${ORIGIN}/media/preview-${vid}.mp4`,
-      uploadDate: '2026-09-11',
-      duration: 'PT22S',
-      inLanguage: vid,
+      thumbnailUrl: `${ORIGIN}/media/preview-${lang}.jpg`,
+      contentUrl: `${ORIGIN}/media/preview-${lang}.mp4`,
+      uploadDate: '2026-10-27',
+      duration: `PT${VIDEO_SEC[lang]}S`,
+      inLanguage: lang,
     },
   ];
 
-  const alternates = LANGS.map(
-    (l) => `    <link rel="alternate" hreflang="${l}" href="${urlOf(l)}" />`,
-  ).join('\n');
-
-  const otherLangLinks = LANGS.filter((l) => l !== lang)
-    .map((l) => `<a href="${ORIGIN}${pathOf(l)}" hreflang="${l}" lang="${l}">${L[l].langName}</a>`)
-    .join('\n          ');
-
-  return `<!doctype html>
-<html lang="${lang}" dir="${t.dir}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${esc(t.title)}</title>
-    <meta name="description" content="${esc(t.desc)}" />
-    <meta name="theme-color" content="#06070C" />${lang === 'ko' ? '\n    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />' : ''}
-    <link rel="canonical" href="${urlOf(lang)}" />
-${alternates}
-    <link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
-    <meta property="og:title" content="${esc(t.title)}" />
-    <meta property="og:description" content="${esc(t.desc)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="${lang.replace('-', '_')}" />
-    <meta property="og:url" content="${urlOf(lang)}" />
-    <meta property="og:image" content="${ORIGIN}/img/board-prism.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="${up}style.css" />
-    <link rel="icon" href="${up}icon.svg" type="image/svg+xml" />
-    <script type="application/ld+json">
-${JSON.stringify(ld, null, 2)}
-    </script>
-  </head>
-  <body>
-    <main>
-      <!--
-        언어 전환은 **맨 위**에 둔다. 자기 언어가 아닌 페이지에 떨어진 사람이
-        가장 먼저 찾는 것이고, 그 사람은 페이지를 읽지 못하므로 끝까지
-        스크롤하지 않는다. 아래에 두면 없는 것과 같다.
-      -->
-      <nav class="langs" aria-label="${esc(t.otherLangs)}">
-        ${otherLangLinks}
-      </nav>
-
-      <header class="hero">
-        ${SPECTRUM_SVG}
+  return page({
+    lang,
+    title: t.title,
+    desc: t.desc,
+    path,
+    alternates: Object.fromEntries(LANGS.map((l) => [l, homeOf(l)])),
+    section: 'app',
+    ld,
+    headExtra: lang === 'ko' ? '\n    <meta name="naver-site-verification" content="f0f2912db3453f625329e38789dbbe62ee563db2" />' : '',
+    main: `      <header class="hero">
+        <img class="hero__board" src="/img/board-prism.png" alt="${esc(t.heroAlt)}" width="720" height="720" />
         <h1>PRISM</h1>
         <p class="tagline">${esc(t.tagline)}</p>
-        <div class="cta-row">
-          <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
-          <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
-        </div>
+        <p class="hero__what">${esc(t.what)}</p>
+        ${storeLinks(lang)}
         <!--
-          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다.
-
-          **스토어 버튼 아래**에 둔다. 두 자리 모두 그렇다. 살 사람의 길이
-          언제나 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만
-          필요하다. 글씨도 버튼이 아니라 밑줄 링크다.
+          체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다. 스토어 버튼 아래에
+          밑줄 링크로 둔다. 살 사람의 길이 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만 필요하다.
         -->
-        <p class="cta-demo"><a href="${ORIGIN}/play/">${esc(t.ctaDemo)}</a></p>
-
-        <!--
-          숫자 넷으로 제품 전체를 말한다. 300판, 7챕터, 판마다 정답 하나,
-          그리고 0(광고·결제·가입). 답변 엔진이 인용할 때 필요한 것도
-          문장이 아니라 이 숫자들이다.
-        -->
+        <p class="hero__demo"><a href="/play/">${esc(t.ctaDemo)}</a></p>
+        <!-- 숫자 넷으로 제품 전체를 말한다. 답변 엔진이 인용할 때 집는 것도 이 숫자들이다. -->
         <ul class="stats">
 ${t.stats.map(([v, k]) => `          <li><b>${esc(v)}</b><span>${esc(k)}</span></li>`).join('\n')}
         </ul>
       </header>
 
-      ${BEAM}
+      <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>${esc(t.videoH)}</h2>
-        <video
-          class="preview"
-          src="${up}media/preview-${vid}.mp4"
-          poster="${up}media/preview-${vid}.jpg"
-          width="540"
-          height="818"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
-        <p class="cap">${esc(t.videoCap)}</p>
+        <!--
+          영상: 소리 없이 저절로 돌지만 멈출 수 있어야 한다(WCAG 2.2.2). 「동작 줄이기」를 켠
+          방문자에게는 저절로 틀지 않는다. 스크립트가 없으면 기본 컨트롤을 그대로 보인다.
+        -->
+        <figure class="video-preview">
+          <video src="/media/preview-${lang}.mp4" poster="/media/preview-${lang}.jpg" width="540" height="818" muted loop playsinline preload="metadata" controls></video>
+          <button class="video-preview__toggle" type="button" hidden data-play="${esc(t.videoPlay)}" data-pause="${esc(t.videoPause)}"></button>
+          <figcaption>${esc(t.videoCap)}</figcaption>
+        </figure>
+        <script>
+          (function () {
+            var f = document.currentScript.previousElementSibling;
+            var v = f.querySelector('video');
+            var b = f.querySelector('button');
+            var label = function () { b.textContent = v.paused ? b.dataset.play : b.dataset.pause; };
+            v.removeAttribute('controls');
+            b.hidden = false;
+            b.onclick = function () { v.paused ? v.play() : v.pause(); };
+            v.onplay = v.onpause = label;
+            label();
+            if (!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(label);
+          })();
+        </script>
       </section>
 
-      <section>
+      <section class="section">
         <h2>${esc(t.ruleH)}</h2>
         <p class="lead">${esc(t.lead)}</p>
-
-        <figure>
-          <img class="board" src="${up}img/board-rule.png" alt="${esc(t.ruleCap)}"
-               width="720" height="720" loading="lazy" />
+        <figure class="board-figure">
+          <img src="/img/board-rule.png" alt="${esc(t.ruleCap)}" width="720" height="720" loading="lazy" />
           <figcaption>${esc(t.ruleCap)}</figcaption>
         </figure>
-
         <ul class="facts">
 ${t.facts.map((f) => `          <li>${f}</li>`).join('\n')}
         </ul>
       </section>
 
-      ${BEAM}
+      <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>${esc(t.chaptersH)}</h2>
         <p>${esc(t.chaptersLead)}</p>
-        <!--
-          카드 왼쪽 띠가 그 챕터에서 배우는 것이다. 반사는 흰 한 줄,
-          분산은 빨강·초록·파랑 세 칸, 혼합은 빨강에서 노랑을 지나 초록으로,
-          수렴은 전부, 편광은 편광판 살처럼 끊긴 줄무늬. 장식이 아니라 목록의 내용을 한 번 더 말한다.
-        -->
         <ol class="chapters">
-${t.chapters
-  .map(
-    ([n, d], i) => `          <li class="chapter chapter-${i + 1}">
-            <span class="ch-num">${ROMAN[i]}</span>
-            <strong>${esc(n)}</strong>
-            <span class="ch-desc">${esc(d)}</span>
-          </li>`,
-  )
-  .join('\n')}
+${t.chapters.map(([n, d], i) => `          <li class="chapter chapter--${i + 1}"><span class="chapter__num">${ROMAN[i]}</span><strong class="chapter__name">${esc(n)}</strong><span class="chapter__desc">${esc(d)}</span></li>`).join('\n')}
         </ol>
       </section>
 
-      ${BEAM}
+      <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>${esc(t.opticsH)}</h2>
         <p>${esc(t.opticsP)}</p>
       </section>
 
-      <section>
+      <section class="section">
         <h2>${esc(t.a11yH)}</h2>
         <p>${esc(t.a11yP)}</p>
-
-        <ul class="legend">
-${t.glyphs
-  .map(
-    ([color, shape], i) => `          <li>
-            <svg class="glyph" viewBox="0 0 20 20" aria-hidden="true">${GLYPH_SVG[i]}</svg>
-            ${esc(color)} = ${esc(shape)}
-          </li>`,
-  )
-  .join('\n')}
+        <ul class="shape-legend">
+${t.glyphs.map(([color, shape], i) => `          <li>${GLYPH_SVG[i]}${esc(color)} = ${esc(shape)}</li>`).join('\n')}
         </ul>
-
-        <figure>
-          <img class="board" src="${up}img/board-mixing.png" alt="${esc(t.mixCap)}"
-               width="720" height="720" loading="lazy" />
+        <figure class="board-figure">
+          <img src="/img/board-mixing.png" alt="${esc(t.mixCap)}" width="720" height="720" loading="lazy" />
           <figcaption>${esc(t.mixCap)}</figcaption>
         </figure>
-
         <ul class="facts">
 ${t.a11yMore.map((f) => `          <li>${esc(f)}</li>`).join('\n')}
         </ul>
       </section>
 
-      <section>
+      <section class="section">
         <h2>${esc(t.langsH)}</h2>
         <p>${esc(t.langsP)}</p>
       </section>
 
-      ${BEAM}
+      <hr class="rule" />
 
-      <section>
+      <section class="section">
         <h2>${esc(t.faqH)}</h2>
-        <!--
-          접어 둔다. 여섯 문답을 펼쳐 두면 페이지 끝이 글 벽이 되고, 여기까지
-          내려온 사람은 이미 살지 말지를 정한 뒤다. 답은 DOM에 그대로 있으므로
-          FAQPage JSON-LD와도, 답변 엔진과도 어긋나지 않는다. 첫 문답만 열어
-          둬서 무엇이 접혀 있는지 보이게 한다.
-        -->
-        <div class="faq">
-${t.faq
-  .map(
-    ([q, a], i) => `          <details class="qa"${i === 0 ? ' open' : ''}>
-            <summary>${esc(q)}</summary>
-            <p>${esc(a)}</p>
-          </details>`,
-  )
-  .join('\n')}
-        </div>
+        <!-- 접어 둔다. 첫 문답만 열어 무엇이 접혀 있는지 보이게 한다. 답은 DOM에 그대로 있다. -->
+        <div>${t.faq.map(([q, a], i) => disclosure(q, esc(a), i === 0)).join('')}</div>
       </section>
 
       <section class="closer">
-        <p class="closer-line">${esc(t.tagline)}</p>
-        <div class="cta-row">
-          <a class="cta cta-lg" href="${APPSTORE}">${esc(t.cta)}</a>
-          <a class="cta cta-lg" href="${PLAYSTORE}">${esc(t.ctaAndroid)}</a>
-        </div>
-        <ul class="badges">
-${t.badges.map((b) => `          <li>${esc(b)}</li>`).join('\n')}
-        </ul>
-      </section>
-
-      <nav class="links">
-${articlesIn(lang).map((a) => `        <a href="${articlePathOf(a, lang)}">${esc(a.text[lang].title)}</a>
-`).join('')}        <a href="${up}privacy.html">${esc(t.privacy)}</a>
-        <a href="${up}support.html">${esc(t.support)}</a>
-      </nav>
-
-      <footer>
-        <p>© 2026 A Driven Inc. <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
-      </footer>
-    </main>
-    <!--
-      구분선의 결정을 스크롤에 맞춰 켠다.
-
-      먼저 <html>에 .js를 붙인다. 어둡게 두는 규칙이 .js 안에만 있으므로,
-      스크립트가 실행되지 않으면 결정은 처음부터 켜진 채다. 순서가 반대면
-      JS를 막아 둔 방문자에게 빈 선만 남는다.
-
-      IntersectionObserver가 없는 브라우저에서는 전부 켠다. 폴리필을 얹을
-      만한 일이 아니다.
-    -->
-    <script>
-      document.documentElement.classList.add('js');
-      (function () {
-        var beams = document.querySelectorAll('.beam');
-        if (!('IntersectionObserver' in window)) {
-          for (var i = 0; i < beams.length; i++) beams[i].classList.add('lit');
-          return;
-        }
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (!e.isIntersecting) return;
-              e.target.classList.add('lit');
-              io.unobserve(e.target);
-            });
-          },
-          { rootMargin: '0px 0px -18% 0px' },
-        );
-        beams.forEach(function (b) {
-          io.observe(b);
-        });
-      })();
-    </script>
-  </body>
-</html>
-`;
+        <p class="closer__line">${esc(t.tagline)}</p>
+        ${storeLinks(lang, 'store-links--lg')}
+      </section>`,
+  });
 }
 
 // ── 출력 ─────────────────────────────────────────────────────────
 
-for (const lang of LANGS) {
-  const dir = lang === 'ko' ? HERE : resolve(HERE, lang);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(resolve(dir, 'index.html'), page(lang), 'utf8');
-}
+/** 생성한 페이지: { path, html, updated, sitemap(어느 묶음, 없으면 넣지 않음) } */
+const PAGES = [
+  ...LANGS.map((l) => ({ path: homeOf(l), html: homePage(l), updated: SITE_UPDATED, sitemap: 'core' })),
+  ...ARTICLES.flatMap((a) => a.langs.map((l) => ({ path: articlePathOf(a, l), html: articlePage(a, l), updated: a.updated, sitemap: 'core' }))),
+  ...aboutPages().map((p) => ({ ...p, sitemap: 'core' })),
+  ...docPages().map((p) => ({ ...p, sitemap: 'core' })),
+  ...learnPages().map((p) => ({ ...p, sitemap: 'learn' })),
+  ...worksheetPages(HERE).map((p) => ({ ...p, sitemap: p.noindex ? undefined : 'worksheets' })),
+  ...dailyPages(HERE).map((p) => ({ ...p, sitemap: p.noindex ? undefined : 'daily' })),
+  { path: '/404.html', html: notFoundPage() },
+  { path: '/design/', html: designPage() },
+];
 
-for (const art of ARTICLES) {
-  for (const lang of art.langs) {
-    const dir = resolve(HERE, articlePathOf(art, lang).slice(1));
-    mkdirSync(dir, { recursive: true });
-    writeFileSync(
-      resolve(dir, 'index.html'),
-      articlePage(art, lang, { esc, L, ORIGIN, urlOf, ORG, APP_ID }),
-      'utf8',
-    );
-  }
+const fileOf = (path) => resolve(HERE, path.slice(1), path.endsWith('/') ? 'index.html' : '');
+for (const { path, html } of PAGES) {
+  const f = fileOf(path);
+  mkdirSync(dirname(f), { recursive: true });
+  writeFileSync(f, html, 'utf8');
 }
 
 /*
-  robots.txt — **전부 허용한다.**
+  CSS. 손으로 쓰는 것은 css/의 층별 파일이고, 브라우저가 받는 것은 묶은 두 장이다
+  (/site.css 모든 페이지, /sheet.css 학습지만). @import는 요청을 직렬로 늘려 첫 화면을 늦춘다.
+*/
+const css = (names) => names.map((n) => readFileSync(resolve(HERE, 'css', `${n}.css`), 'utf8')).join('\n');
+writeFileSync(resolve(HERE, 'site.css'), css(['tokens', 'base', 'layout', 'components']), 'utf8');
+writeFileSync(resolve(HERE, 'sheet.css'), css(['sheet']), 'utf8');
 
-  2026년의 일반적 조언은 학습 크롤러(GPTBot·CCBot·Google-Extended)를 막고
-  검색·응답용만 허용하라는 것이다. 그건 지킬 콘텐츠 자산이 있는 퍼블리셔의
-  논리다. 이 사이트는 앱을 팔기 위한 랜딩 페이지이고, 학습 데이터에 들어가는
-  것조차 이득이다 — "광고 없는 오프라인 퍼즐"을 묻는 사람에게 모델이 PRISM을
-  떠올리는 것이 우리가 원하는 결과다.
-
-  없는 것과 허용하는 것은 다르다. 명시하면 의도가 기록되고, 정책이 바뀔 때
-  고칠 자리가 생긴다.
+/*
+  robots.txt: **전부 허용한다.** 2026년의 일반적 조언은 학습 크롤러를 막으라는 것인데, 그건
+  지킬 콘텐츠 자산이 있는 퍼블리셔의 논리다. 이 사이트는 빛을 배우는 곳이고 앱을 알리는
+  곳이라 학습 데이터에 들어가는 것조차 이득이다. 명시하면 의도가 기록된다.
 */
 writeFileSync(
   resolve(HERE, 'robots.txt'),
@@ -791,82 +586,128 @@ Sitemap: ${ORIGIN}/sitemap.xml
   'utf8',
 );
 
-const urlEntry = (l) => `  <url>
-    <loc>${urlOf(l)}</loc>
-    <lastmod>${SITE_UPDATED}</lastmod>
-${LANGS.map((a) => `    <xhtml:link rel="alternate" hreflang="${a}" href="${urlOf(a)}" />`).join('\n')}
-    <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf('en')}" />
-  </url>`;
-
 /*
-  `/play/`는 이 스크립트가 만들지 않는다. prism 저장소의 `npm run demo` 결과를
-  통째로 복사해 둔 폴더다. 그래도 사이트맵에는 **반드시 넣는다** — 13일 동안
-  빠져 있었고 그동안 구글 색인에도 없었다. 사이트에서 전환을 만드는 유일한
-  페이지가 검색에 없는 상태였다.
+  sitemap. `/sitemap.xml`은 이미 Search Console·Bing에 제출된 이름이라 그대로 두고 index로
+  바꾼다. 아래에 묶음별 파일. hreflang은 HTML <link>에만 둔다(Google: sitemap과 같은 효과,
+  두 곳에 두면 두 곳을 맞춰야 한다). lastmod는 페이지마다 자기 수정일이다.
 
-  언어 대체(hreflang)를 달지 않는 이유: 체험판은 경로가 하나이고 앱이 기기
-  언어를 따라간다. privacy·support와 같은 처지다.
+  `/play/`는 이 스크립트가 만들지 않는다(prism 저장소 `npm run demo`의 결과를 복사한 폴더).
+  그래도 반드시 넣는다: 13일 동안 빠져 있었고 그동안 구글 색인에도 없었다.
 */
+const SITEMAPS = {
+  core: [...PAGES.filter((p) => p.sitemap === 'core').map((p) => [p.path, p.updated]), ['/play/', SITE_UPDATED]],
+  learn: PAGES.filter((p) => p.sitemap === 'learn').map((p) => [p.path, p.updated]),
+  worksheets: PAGES.filter((p) => p.sitemap === 'worksheets').map((p) => [p.path, p.updated]),
+  daily: PAGES.filter((p) => p.sitemap === 'daily').map((p) => [p.path, p.updated]),
+};
+for (const [name, urls] of Object.entries(SITEMAPS)) {
+  writeFileSync(
+    resolve(HERE, `sitemap-${name}.xml`),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(([p, d]) => `  <url><loc>${ORIGIN}${p}</loc><lastmod>${d}</lastmod></url>`).join('\n')}
+</urlset>
+`,
+    'utf8',
+  );
+}
 writeFileSync(
   resolve(HERE, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${LANGS.map(urlEntry).join('\n')}
-${articleSitemapEntries({ ORIGIN })}
-  <url><loc>${ORIGIN}/play/</loc></url>
-  <url><loc>${ORIGIN}/privacy.html</loc></url>
-  <url><loc>${ORIGIN}/support.html</loc></url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${Object.entries(SITEMAPS).map(([name, urls]) => `  <sitemap><loc>${ORIGIN}/sitemap-${name}.xml</loc><lastmod>${urls.map(([, d]) => d).sort().at(-1)}</lastmod></sitemap>`).join('\n')}
+</sitemapindex>
 `,
   'utf8',
 );
 
 /*
-  llms.txt — 접근 제어가 아니라 **길 안내**다.
-
-  표준으로 확정되지 않았고 벤더 지원도 고르지 않지만, 파일 하나에 몇 줄이라
-  비용이 거의 없다. Anthropic이 공식 문서에 올려둔 것이 지금으로선 가장 강한
-  신호다. robots.txt와 혼동하지 않는다 — 저쪽은 접근, 이쪽은 안내다.
+  llms.txt: 접근 제어가 아니라 **길 안내**다. 표준으로 확정되지 않았지만 파일 하나에 몇
+  줄이라 비용이 거의 없다.
 */
 writeFileSync(
   resolve(HERE, 'llms.txt'),
   `# PRISM
 
-> 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 300판, 모든 판의
-> 정답은 하나뿐. 광고·인앱결제·회원가입·네트워크가 전부 없는 유료 단품 앱.
-> A tap-to-rotate light puzzle for iOS and Android. 300 boards, each with
-> exactly one solution. No ads, no in-app purchases, no sign-up, no
-> networking. Paid once, ₩3,900.
+> 빛을 배우는 곳과, 탭 한 번으로 빛을 접어 결정을 밝히는 iOS·Android 퍼즐 게임. 게임은 300판,
+> 모든 판의 정답은 하나뿐. 광고·구독·회원가입이 없고, 한 번 결제로 전부 열린다. iOS는 무료로
+> 받아 1챕터 14판을 해 보고 앱 안에서 열고, Android는 받을 때 결제한다.
+> A place to learn about light, and a tap-to-rotate light puzzle game for iOS and Android.
+> 300 boards, each with exactly one solution. No ads, no subscription, no sign-up; one
+> purchase opens everything. Free to download on iOS with chapter 1 (14 levels) free and a
+> one-time unlock in the app; a one-time purchase on Android.
 
 ## 사실 / Facts
 
 - 개발사 / Publisher: A Driven Inc. (에이드리븐, https://adriven.co/). 이름이 같은 다른 「Prism」 퍼즐 앱과 다른 앱이다 / not the same as other puzzle apps named Prism
-- 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+ / iOS 15.0+ and Android 7.0+
+- 플랫폼 / Platform: iOS 16.0+ (iPhone, iPad), Android 7.0+
 - 스토어 / Stores: [App Store](${APPSTORE}), [Google Play](${PLAYSTORE})
-- 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
-- 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB,
-  no image files, everything drawn in code
+- 가격 / Price: iOS 무료 다운로드 + 잠금해제 ₩3,900, Android ₩3,900(대한민국 기준, 지역별 파생) / iOS free download with a KRW 3,900 unlock, Android KRW 3,900
+- 용량 / Size: 5MB 미만. 이미지 파일이 없고 전부 코드로 그린다 / under 5MB, no image files, everything drawn in code
 - 언어 / Languages: 한국어, English, 日本語, 简体中文
-- 접근성 / Accessibility: 색을 보지 못해도 전부 플레이 가능(결정마다 도형 표시),
-  글자 크기 3단계, 「동작 줄이기」 지원 / fully playable without color vision
+- 접근성 / Accessibility: 색을 보지 못해도 전부 플레이 가능(결정마다 도형 표시), 글자 크기 3단계, 「동작 줄이기」 지원 / fully playable without color vision
 
-## 페이지 / Pages
+## 배우기 / Learn
 
-${LANGS.map((l) => `- [${L[l].langName}](${urlOf(l)}): ${L[l].desc}`).join('\n')}
-- [개인정보 처리방침 / Privacy](${ORIGIN}/privacy.html)
-- [지원 / Support](${ORIGIN}/support.html)
-- [체험판 / Playable demo](${ORIGIN}/play/): 1챕터 14판을 설치 없이 브라우저에서 / chapter 1, 14 levels, playable in the browser
+${LEARN.flatMap((c) => WS_LANGS.map((l) => `- [${c.text[l].title}](${ORIGIN}${learnPath(l, c.slug)}): ${c.text[l].definition}`)).join('\n')}
+
+## 학습지 / Printable worksheets
+
+${WORKSHEETS.flatMap((s) => WS_LANGS.map((l) => `- [${s.text[l].pageTitle}](${ORIGIN}${wsPathOf(l, s.slug)}): ${s.text[l].desc}`)).join('\n')}
+
+## 앱 소개 / The app
+
+${LANGS.map((l) => `- [${LANG_NAME[l]}](${ORIGIN}${homeOf(l)}): ${L[l].desc}`).join('\n')}
 
 ## 글 / Writing
 
-${articleLlmsSection({ ORIGIN })}
+${articleLlmsSection()}
+
+## Optional
+
+- [오늘의 빛 퍼즐 / Daily light puzzle](${ORIGIN}/daily/): 매일 새 세 판, 다음 날 정답 / three new boards a day, answers the next day
+- [체험판 / Playable demo](${ORIGIN}/play/): 1챕터 14판을 설치 없이 브라우저에서 / chapter 1, 14 levels, playable in the browser
+- [에이드리븐 / About A Driven](${ORIGIN}${aboutPath('ko')})
+- [개인정보 처리방침 / Privacy](${ORIGIN}/privacy.html), [지원 / Support](${ORIGIN}/support.html)
 `,
   'utf8',
 );
 
-console.log(`생성 완료`);
-console.log(`  페이지 ${LANGS.length}개: ${LANGS.map(pathOf).join(', ')}`);
-const articlePaths = ARTICLES.flatMap((a) => a.langs.map((l) => articlePathOf(a, l)));
-console.log(`  글 ${articlePaths.length}개: ${articlePaths.join(', ')}`);
-console.log(`  robots.txt · sitemap.xml · llms.txt`);
+console.log(`생성 완료: 페이지 ${PAGES.length}장`);
+for (const name of Object.keys(SITEMAPS)) console.log(`  sitemap-${name}.xml ${SITEMAPS[name].length}개`);
+
+// ── 검사 ─────────────────────────────────────────────────────────
+
+/*
+  색 코드는 css/tokens.css에만 있어야 한다. 컴포넌트가 색을 직접 쓰기 시작하면 「색은 빛에만」과
+  1.7 다크 모드(의미 토큰만 갈아 끼우기)가 같이 무너진다.
+*/
+for (const f of readdirSync(resolve(HERE, 'css'))) {
+  if (f === 'tokens.css') continue;
+  const text = readFileSync(resolve(HERE, 'css', f), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const hex = text.match(/#[0-9a-fA-F]{3,8}\b/g);
+  if (hex) {
+    console.error(`\ncss/${f}에 색 코드가 있다: ${[...new Set(hex)].join(' ')}. css/tokens.css의 토큰을 써라.`);
+    process.exitCode = 1;
+  }
+}
+
+/*
+  한글 글꼴은 이 사이트에 나오는 글자만 잘라 넣었다(fonts/, prism 저장소의
+  `npm run fonts -- --site ../prism-site`). 문구를 고쳐 새 글자가 생겼는데 글꼴을 다시
+  만들지 않으면 그 글자만 시스템 글꼴로 섞여 나온다. 깨지지 않아서 눈으로는 잘 안 보인다.
+*/
+{
+  const cov = JSON.parse(readFileSync(resolve(HERE, 'fonts/coverage.json'), 'utf8')).hangul;
+  const missing = new Set();
+  for (const { html } of PAGES) {
+    for (const ch of html.replace(/<!--[\s\S]*?-->/g, '')) if (/[가-힣]/.test(ch) && !cov.includes(ch)) missing.add(ch);
+  }
+  if (missing.size > 0) {
+    console.error(
+      `\n글꼴에 없는 한글 ${missing.size}자: ${[...missing].join('')}\n` +
+        `prism 저장소에서 npm run fonts -- --site ../prism-site 를 돌려라.`,
+    );
+    process.exitCode = 1;
+  }
+}

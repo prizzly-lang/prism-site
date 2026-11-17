@@ -1,0 +1,169 @@
+/*
+  기본: 요소 자체의 모양. 클래스 없이 쓴 HTML이 이미 읽을 만해야 한다(GOV.UK 방식).
+*/
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--t-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :lang(ko) body {
+    word-break: keep-all;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+  }
+
+  h1 {
+    font-size: var(--t-h1);
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-size: var(--t-h2);
+  }
+
+  h3 {
+    font-size: var(--t-h3);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  p,
+  li,
+  dd {
+    color: var(--ink-dim);
+  }
+
+  strong,
+  b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /*
+    한글·일본어·중국어 글꼴에는 이탤릭이 없다. 브라우저가 글자를 기울여 가짜 이탤릭을 만들면
+    획이 찌그러진다. 강조는 굵기로 한다.
+  */
+  :lang(ko) em,
+  :lang(ja) em,
+  :lang(zh-Hans) em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
+  }
+
+  /*
+    링크: 잉크 글자에 밑줄. 색으로 링크를 알리지 않는다. 밑줄 색은 종이 대비 3:1 이상
+    (--line). 예전 --hair 밑줄(1.58:1)은 전자칠판에서 사라졌다.
+  */
+  a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--duration) ease;
+  }
+
+  a:hover {
+    text-decoration-color: var(--ink);
+    text-decoration-thickness: 2px;
+  }
+
+  /* 포커스 링은 모든 곳에서 같다. 잉크 2px, 3px 띄움. */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* 건너뛰기 링크가 옮겨 주는 자리. 클릭으로는 포커스 링을 그리지 않는다. */
+  main:focus {
+    outline: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  pre,
+  code {
+    font-family: var(--mono);
+  }
+
+  hr {
+    height: 0;
+    border: 0;
+    border-top: 1px solid var(--hair);
+  }
+
+  /* 움직임을 줄이라고 설정한 방문자에게는 전환·애니메이션을 걸지 않는다. 영상 자동재생은 JS가 끈다. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0s;
+      animation-duration: 0s;
+      animation-iteration-count: 1;
+    }
+  }
+
+  /* 인쇄: 화면용 틀은 빼고 본문만. 링크 밑줄은 남긴다. */
+  @media print {
+    body {
+      font-size: 11pt;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration-color: var(--ink);
+    }
+    h2,
+    h3 {
+      break-after: avoid;
+    }
+    figure,
+    table,
+    img {
+      break-inside: avoid;
+    }
+  }
+}

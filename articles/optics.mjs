@@ -1,7 +1,7 @@
 /**
  * 교사·부모용 글: 일곱 챕터가 각각 어떤 광학 원리를 다루는가.
  *
- * 왜 쓰는가: 2026-11-09 측정(TODO.md 3절)에서 「optics puzzle game for students」,
+ * 왜 쓰는가: 2026-11-09 측정(prism 저장소 docs/SITE-TODO.md 3절)에서 「optics puzzle game for students」,
  * 「광원리 배우는 퍼즐 게임」 같은 질문에 답변 엔진이 PC 게임·웹 시뮬레이터·보드게임만
  * 들었다. 이름을 넣고 물으면 ChatGPT가 PRISM의 챕터를 개념별로 정확히 나열하고 「학생에게
  * 흥미로운 이유」까지 붙이는데, 이름 없이는 떠올리지 않는다. 그 질문에 걸릴 설명 글이
@@ -30,9 +30,13 @@ const S = (s) => `<strong>${s}</strong>`;
 /** 앱의 DIVERGENCE는 강조를 **로 적는다. 여기서는 <strong>으로 바꾼다. */
 const bold = (s) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-/** 한 챕터 = 제목 + 실제 + 게임 + (덧붙임) + 질문. 블록 순서를 네 언어가 공유한다. */
+/**
+ * 한 챕터 = 제목 + 원리 카드 사진 + 실제 + 게임 + (덧붙임) + 질문. 블록 순서를 네 언어가
+ * 공유한다. 사진 자리(`card`)는 아래 `withCards`가 그 언어·그 챕터의 이미지로 바꾼다.
+ */
 const chapter = (h, real, gameLabel, game, extra, qLabel, q, a) => [
   ['h2', h],
+  ['card', h],
   ['p', real],
   ['p', `${S(gameLabel)} ${game}`],
   ...(extra ? [['p', extra]] : []),
@@ -76,7 +80,6 @@ const TEXT = {
     title: '퍼즐로 배우는 빛: PRISM 일곱 챕터 수업 안내',
     desc: 'A Driven의 빛 퍼즐 게임 PRISM은 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 챕터마다 하나씩 다룹니다. 챕터별 원리와 실제 예, 생각해 볼 질문, 게임이 실제 광학을 어디서 단순화했는지를 교사와 부모를 위해 정리했습니다.',
     lead: `PRISM은 A Driven이 만든 iOS·Android 빛 퍼즐입니다. 조각을 탭해 돌려 빛의 길을 바꾸고, 모든 결정에 요구된 색을 정확히 비추면 판이 풀립니다. ${S('일곱 챕터는 각각 실제 광학 원리 하나를 들여오고,')} 챕터에 처음 들어갈 때 그 원리를 설명하는 카드가 뜹니다. 이 글은 그 카드 일곱 장을 한곳에 모으고, 수업에서 던져 볼 질문을 붙였습니다.`,
-    backHome: '← PRISM 소개로',
     dateLabel: '2026년 11월 12일',
     body: [
       ['h2', '한눈에 보기'],
@@ -178,6 +181,7 @@ const TEXT = {
         'ul',
         [
           `1챕터 14판은 설치 없이 <a href="/play/">브라우저 체험판</a>으로 해 볼 수 있습니다. 수업 전에 미리 보기 좋습니다.`,
+          `1~4챕터의 판 네 개로 만든 <a href="/worksheets/path-of-light/">인쇄용 학습지 「빛의 길 찾기」</a>가 있습니다. 흑백으로 인쇄해도 풀리고, 정답지가 따로 있습니다.`,
           '광고와 회원가입이 없습니다. 플레이하는 동안 인터넷이 필요 없습니다.',
           '색을 구별하기 어려워도 전부 풀 수 있습니다. 결정마다 색을 나타내는 도형이 새겨져 있습니다(빨강은 삼각형, 초록은 사각형, 파랑은 원. 노란 결정에는 삼각형과 사각형이 함께).',
           '글자 크기를 세 단계로 바꿀 수 있고, 기기의 「동작 줄이기」 설정을 따릅니다.',
@@ -190,9 +194,8 @@ const TEXT = {
 
   en: {
     title: 'Teaching light with a puzzle game: the seven chapters of PRISM',
-    desc: 'PRISM, a light puzzle game by A Driven, introduces one optics principle per chapter: reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization. A chapter-by-chapter guide for teachers and parents, with real-world examples, questions to ask, and where the game simplifies real optics.',
+    desc: "A teacher's guide to PRISM, the light puzzle game by A Driven: reflection, beam splitting, dispersion, color mixing, filters, spectroscopy and polarization.",
     lead: `PRISM is a light puzzle for iOS and Android by A Driven. Tap a piece to turn it, change where the light goes, and a board is solved when every crystal receives exactly the color it asks for. ${S('Each of the seven chapters brings in one real optics principle,')} and a card explaining it appears the first time you enter that chapter. This page collects all seven cards in one place and adds a question to ask in class for each.`,
-    backHome: '← About PRISM',
     dateLabel: '12 November 2026',
     body: [
       ['h2', 'At a glance'],
@@ -294,6 +297,7 @@ const TEXT = {
         'ul',
         [
           `Chapter 1 (14 levels) is playable in the browser with nothing to install: <a href="/play/">try the demo</a>. Handy for a look before class.`,
+          `A <a href="/en/worksheets/path-of-light/">printable worksheet, Path of Light</a>, uses four boards from chapters 1 to 4. It works in black and white and has a separate answer key.`,
           'No ads and no sign-up. No internet connection is needed while playing.',
           'Fully playable without telling colors apart. Every crystal carries a shape for each color it needs (red is a triangle, green a square, blue a circle; a yellow crystal shows a triangle and a square).',
           'Three text sizes, and the game follows the device\'s Reduce Motion setting.',
@@ -308,7 +312,6 @@ const TEXT = {
     title: 'パズルで学ぶ光のしくみ：PRISMの7つの章と本物の光学',
     desc: 'A Drivenの光のパズルゲームPRISMは、反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光を章ごとにひとつずつ扱います。章ごとの原理と身近な例、考えてみる問い、ゲームが本物の光学をどこで単純化したかを、先生と保護者向けにまとめました。',
     lead: `PRISMは、A Drivenが作ったiOS・Android向けの光のパズルです。ピースをタップして回し、光の道すじを変えて、すべての結晶に求められた色をぴったり当てると盤面クリアです。${S('7つの章はそれぞれ本物の光学の原理をひとつずつ取り入れていて、')}その章に初めて入るとき、原理を説明するカードが表示されます。このページはその7枚のカードを1か所に集め、授業で投げかけられる問いを添えました。`,
-    backHome: '← PRISMの紹介へ',
     dateLabel: '2026年11月12日',
     body: [
       ['h2', 'ひと目でわかる一覧'],
@@ -424,7 +427,6 @@ const TEXT = {
     title: '用解谜游戏学光学：PRISM 的七个章节与真实的光',
     desc: 'A Driven 出品的光线解谜游戏 PRISM，每章讲一个光学原理：反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振。本文按章节整理了原理、生活中的例子、可以提给学生的问题，以及游戏在哪些地方简化了真实的光学，供老师和家长参考。',
     lead: `PRISM 是 A Driven 为 iOS 和 Android 制作的光线解谜游戏。点一下元件让它旋转，改变光的路径；当每颗结晶都恰好收到它要求的颜色时，这一关就过了。${S('七个章节各引入一个真实的光学原理，')}第一次进入某一章时，会弹出一张讲解该原理的卡片。本文把这七张卡片集中到一起，并为每一章配了一个可以在课堂上提出的问题。`,
-    backHome: '← 返回 PRISM 介绍',
     dateLabel: '2026年11月12日',
     body: [
       ['h2', '一览'],
@@ -536,6 +538,43 @@ const TEXT = {
     ],
   },
 };
+
+/*
+  원리 카드 사진(img/optics/<언어>-ch<번호>.webp).
+
+  1.6 앱에서 카드만 잘라 찍었다: prism 저장소 v1.6을 vite dev로 띄워 `?capture=1`로 열고,
+  `/src/game/i18n.ts`의 setLang과 `/src/ui/screens.ts`의 opticsCard(챕터)를 브라우저에서
+  불러 #ui에 끼운 뒤 `.optics-card` 요소만 Playwright로 찍는다(2배 밀도, 680px 폭).
+  Windows에는 Hiragino·PingFang이 없어 일본어는 Yu Gothic·Yu Mincho, 중국어는 Microsoft
+  YaHei·SimSun으로 찍었다. 앱의 카드 문구(src/game/optics.ts)를 고치면 다시 찍는다.
+
+  사진을 넣는 이유: 「PRISM」이라는 이름을 단 우리 그림이 우리 도메인에 있어야 답변 엔진이
+  다른 「Prism」 게임의 그림을 붙이지 않는다(2026-11-09 ChatGPT가 다른 게임 화면을 붙였다).
+
+  치수는 위 파일들의 실제 크기다. 다시 찍으면 같이 고친다(레이아웃이 밀리지 않게 하는 값).
+*/
+const CARD_H = {
+  ko: [1084, 960, 1052, 1052, 1004, 1052, 1096],
+  en: [1084, 1052, 1052, 1144, 1052, 1188, 1144],
+  ja: [1188, 1060, 1108, 1060, 1108, 1152, 1152],
+  'zh-Hans': [1040, 960, 1008, 1008, 1008, 1052, 1008],
+};
+const CARD_ALT = {
+  ko: (h) => `PRISM 앱의 「${h}」 원리 카드. 탭 전과 탭 후의 판, 실제 물리와 게임 규칙 설명`,
+  en: (h) => `The PRISM app's ${h} principle card: the board before and after a tap, the real physics, and the game rule`,
+  ja: (h) => `PRISMアプリの「${h}」の原理カード。タップ前とタップ後の盤面、本物の物理とゲームのルール`,
+  'zh-Hans': (h) => `PRISM 应用的「${h}」原理卡片：点击前后的盘面、真实的物理和游戏规则`,
+};
+for (const [lang, t] of Object.entries(TEXT)) {
+  let n = 0;
+  t.body = t.body.map(([kind, v]) => {
+    if (kind !== 'card') return [kind, v];
+    n += 1;
+    // 제목은 「1장 반사」, 「Chapter 1: Reflection」 꼴이다. 알트에는 원리 이름만 쓴다.
+    const name = v.replace(/^(\d+장 |Chapter \d+: |\d+章 |第 \d+ 章 )/, '');
+    return ['img', { src: `/img/optics/${lang}-ch${n}.webp`, alt: CARD_ALT[lang](name), w: 680, h: CARD_H[lang][n - 1] }];
+  });
+}
 
 /** 질문 형태의 답변 엔진 질의(「학생용 광학 게임」)에 맞춰 교육 자료임을 밝힌다. */
 const TEACHES = {
