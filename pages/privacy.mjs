@@ -10,6 +10,8 @@
  * 블록: ['h2', 글] ['p', HTML] ['ul', [HTML…]]. HTML은 이 파일에서만 오므로 이스케이프하지 않는다.
  */
 
+import { ANALYTICS } from '../site.mjs';
+
 export default {
   slug: 'privacy',
   updated: '2026-11-26',
@@ -45,7 +47,9 @@ export default {
         ['p', '이 정보는 iOS에서는 표준 앱 저장 공간(UserDefaults)에, Android에서는 앱 전용 저장 공간(SharedPreferences)에 보관되며, 어디로도 전송되지 않습니다. 앱을 삭제하면 함께 삭제됩니다. 이 정보가 iCloud 백업이나 Android 기기 백업에 포함될 수 있으나, 그것은 Apple과 Google의 기기 백업 기능이며 PRISM이 데이터를 전송하는 것이 아닙니다.'],
         ['h2', '웹 체험판과 이 웹사이트'],
         ['p', '브라우저 체험판(prism.adriven.co/play/)은 위와 같은 진행 상황과 설정을 브라우저 저장소(localStorage)에 그 브라우저 안에만 저장합니다. 서버로 보내지 않으며, 브라우저의 사이트 데이터를 지우면 함께 지워집니다.'],
-        ['p', '이 웹사이트와 체험판에는 분석·광고 스크립트와 쿠키가 없습니다. 웹사이트는 GitHub Pages(GitHub, Inc.)로 제공되며, GitHub은 서비스 운영과 보안을 위해 접속한 IP 주소 같은 기술 기록을 처리할 수 있습니다(GitHub 개인정보 처리방침에 따름). PRISM과 에이드리븐은 이 기록을 받지 않습니다.'],
+        ['p', ANALYTICS
+          ? '이 웹사이트와 체험판은 방문 수를 세기 위해 Cloudflare Web Analytics(Cloudflare, Inc.)를 씁니다. 쿠키나 브라우저 저장소를 쓰지 않고, 개인을 식별하거나 다른 사이트에 걸쳐 따라다니지 않습니다. 전송되는 것은 본 페이지 주소, 들어온 주소(리퍼러), 브라우저와 기기 종류, 페이지가 열리는 데 걸린 시간이고, 국가는 접속 정보로 추정합니다. Cloudflare는 IP 주소나 브라우저 정보로 개인을 식별하지 않는다고 밝히고 있습니다(Cloudflare 개인정보 처리방침에 따름). 에이드리븐은 페이지별·경로별 합계만 봅니다. 광고 스크립트는 없습니다. 웹사이트는 GitHub Pages(GitHub, Inc.)로 제공되며, GitHub은 서비스 운영과 보안을 위해 접속한 IP 주소 같은 기술 기록을 처리할 수 있습니다(GitHub 개인정보 처리방침에 따름). PRISM과 에이드리븐은 이 기록을 받지 않습니다.'
+          : '이 웹사이트와 체험판에는 분석·광고 스크립트와 쿠키가 없습니다. 웹사이트는 GitHub Pages(GitHub, Inc.)로 제공되며, GitHub은 서비스 운영과 보안을 위해 접속한 IP 주소 같은 기술 기록을 처리할 수 있습니다(GitHub 개인정보 처리방침에 따름). PRISM과 에이드리븐은 이 기록을 받지 않습니다.'],
         ['h2', '제3자 제공'],
         ['p', '제공할 정보가 없으므로, 제3자에게 제공하는 정보도 없습니다. PRISM에는 데이터를 수집하는 제3자 SDK가 없습니다. 결제를 위해 Apple StoreKit을 부르는 오픈소스 플러그인(@capgo/native-purchases)을 쓰며, 이 플러그인은 따로 네트워크 통신을 하지 않습니다.'],
         ['h2', '결제'],
@@ -93,7 +97,9 @@ export default {
         ['p', 'This is kept in the standard app storage on your device (UserDefaults on iOS, SharedPreferences on Android) and is never transmitted anywhere. Deleting the app deletes it. It may be included in iCloud or Android device backups; those are Apple\'s and Google\'s backup features, not a transfer by PRISM.'],
         ['h2', 'The web demo and this website'],
         ['p', 'The browser demo (prism.adriven.co/play/) keeps the same progress and settings in your browser\'s storage (localStorage), in that browser only. It is never sent to a server, and clearing the browser\'s site data removes it.'],
-        ['p', 'This website and the demo have no analytics or advertising scripts and no cookies. The website is served by GitHub Pages (GitHub, Inc.), which may process technical logs such as visitors\' IP addresses to operate and secure the service, under GitHub\'s privacy statement. PRISM and A Driven do not receive these logs.'],
+        ['p', ANALYTICS
+          ? 'This website and the demo use Cloudflare Web Analytics (Cloudflare, Inc.) to count visits. It uses no cookies or browser storage, does not identify you and does not follow you across other sites. What is sent is the page address, the address you came from (referrer), your browser and device type and how long the page took to load; the country is estimated from the connection. Cloudflare states that it does not identify individuals by IP address or browser details, under Cloudflare\'s privacy policy. A Driven sees only totals by page and by source. There are no advertising scripts. The website is served by GitHub Pages (GitHub, Inc.), which may process technical logs such as visitors\' IP addresses to operate and secure the service, under GitHub\'s privacy statement. PRISM and A Driven do not receive these logs.'
+          : 'This website and the demo have no analytics or advertising scripts and no cookies. The website is served by GitHub Pages (GitHub, Inc.), which may process technical logs such as visitors\' IP addresses to operate and secure the service, under GitHub\'s privacy statement. PRISM and A Driven do not receive these logs.'],
         ['h2', 'Third parties'],
         ['p', 'There is no data to share, so nothing is shared with third parties. PRISM has no third-party SDK that collects data. It uses an open-source plugin (@capgo/native-purchases) that calls Apple StoreKit for purchases and makes no network requests of its own.'],
         ['h2', 'Payment'],
@@ -141,7 +147,9 @@ export default {
         ['p', 'これらの情報は、iOSでは標準のアプリ保存領域（UserDefaults）に、Androidではアプリ専用の保存領域（SharedPreferences）に保管され、どこにも送信されません。アプリを削除すると一緒に削除されます。これらの情報がiCloudバックアップやAndroid端末のバックアップに含まれることがありますが、それはAppleとGoogleによる端末のバックアップ機能であり、PRISMがデータを送信するものではありません。'],
         ['h2', 'Web体験版とこのウェブサイト'],
         ['p', 'ブラウザ体験版（prism.adriven.co/play/）は、上記と同じ進行状況と設定を、ブラウザの保存領域（localStorage）にそのブラウザの中だけで保存します。サーバーには送信せず、ブラウザのサイトデータを消去すると一緒に消去されます。'],
-        ['p', 'このウェブサイトと体験版には、分析・広告用のスクリプトやCookieはありません。ウェブサイトはGitHub Pages（GitHub, Inc.）で提供されており、GitHubはサービスの運営とセキュリティのために、アクセス元のIPアドレスなどの技術的な記録を処理することがあります（GitHubのプライバシーポリシーに基づきます）。PRISMおよびA Drivenがこれらの記録を受け取ることはありません。'],
+        ['p', ANALYTICS
+          ? 'このウェブサイトと体験版では、訪問数を数えるためにCloudflare Web Analytics（Cloudflare, Inc.）を使っています。Cookieやブラウザの保存領域は使わず、個人を特定したり、ほかのサイトをまたいで追跡したりしません。送信されるのは、表示したページのアドレス、移動元のアドレス（リファラー）、ブラウザと端末の種類、ページの表示にかかった時間で、国は接続情報から推定します。CloudflareはIPアドレスやブラウザの情報で個人を特定しないと説明しています（Cloudflareのプライバシーポリシーに基づきます）。A Drivenが見るのはページ別・経路別の合計だけです。広告用のスクリプトはありません。ウェブサイトはGitHub Pages（GitHub, Inc.）で提供されており、GitHubはサービスの運営とセキュリティのために、アクセス元のIPアドレスなどの技術的な記録を処理することがあります（GitHubのプライバシーポリシーに基づきます）。PRISMおよびA Drivenがこれらの記録を受け取ることはありません。'
+          : 'このウェブサイトと体験版には、分析・広告用のスクリプトやCookieはありません。ウェブサイトはGitHub Pages（GitHub, Inc.）で提供されており、GitHubはサービスの運営とセキュリティのために、アクセス元のIPアドレスなどの技術的な記録を処理することがあります（GitHubのプライバシーポリシーに基づきます）。PRISMおよびA Drivenがこれらの記録を受け取ることはありません。'],
         ['h2', '第三者への提供'],
         ['p', '提供する情報がないため、第三者に提供する情報もありません。PRISMには、データを収集するサードパーティSDKは含まれていません。購入のためにApple StoreKitを呼び出すオープンソースのプラグイン（@capgo/native-purchases）を使用していますが、このプラグインが独自に通信を行うことはありません。'],
         ['h2', 'お支払い'],
@@ -189,7 +197,9 @@ export default {
         ['p', '这些信息在 iOS 上保存在标准应用存储空间（UserDefaults）中，在 Android 上保存在应用专用存储空间（SharedPreferences）中，不会传输到任何地方。删除应用时会一并删除。这些信息可能会包含在 iCloud 备份或 Android 设备备份中，但这属于 Apple 和 Google 的设备备份功能，并非 PRISM 传输数据。'],
         ['h2', '网页试玩版与本网站'],
         ['p', '浏览器试玩版（prism.adriven.co/play/）会将上述相同的进度和设置保存在浏览器存储（localStorage）中，且仅限于该浏览器内。这些数据不会发送到服务器，清除浏览器的网站数据后会一并删除。'],
-        ['p', '本网站和试玩版不含任何分析或广告脚本，也不使用 Cookie。本网站由 GitHub Pages（GitHub, Inc.）提供，GitHub 可能会为运营服务和保障安全而处理访问者 IP 地址等技术日志（依据 GitHub 的隐私声明）。PRISM 和 A Driven 不会接收这些日志。'],
+        ['p', ANALYTICS
+          ? '本网站和试玩版使用 Cloudflare Web Analytics（Cloudflare, Inc.）统计访问量。它不使用 Cookie 或浏览器存储，不识别个人身份，也不会跨网站追踪您。发送的内容包括所浏览页面的地址、来源地址（referrer）、浏览器和设备类型以及页面加载所用的时间；国家/地区根据连接信息推断。Cloudflare 表示不会通过 IP 地址或浏览器信息识别个人（依据 Cloudflare 的隐私政策）。A Driven 只查看按页面和来源汇总的数字。本网站不含广告脚本。本网站由 GitHub Pages（GitHub, Inc.）提供，GitHub 可能会为运营服务和保障安全而处理访问者 IP 地址等技术日志（依据 GitHub 的隐私声明）。PRISM 和 A Driven 不会接收这些日志。'
+          : '本网站和试玩版不含任何分析或广告脚本，也不使用 Cookie。本网站由 GitHub Pages（GitHub, Inc.）提供，GitHub 可能会为运营服务和保障安全而处理访问者 IP 地址等技术日志（依据 GitHub 的隐私声明）。PRISM 和 A Driven 不会接收这些日志。'],
         ['h2', '向第三方提供'],
         ['p', '由于没有可提供的信息，因此也不会向第三方提供任何信息。PRISM 不含任何收集数据的第三方 SDK。为完成购买，应用使用了一个调用 Apple StoreKit 的开源插件（@capgo/native-purchases），该插件本身不进行任何网络通信。'],
         ['h2', '付款'],

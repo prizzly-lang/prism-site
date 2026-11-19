@@ -9,8 +9,8 @@
  */
 
 import {
-  ORIGIN, APPSTORE, PLAYSTORE, EMAIL, LANGS, LANG_NAME, UI, esc, homeOf, ogLocale,
-  navItems, docPath, aboutPath, FAMILY, familyName, familyNameLang, familyHref, COMPANY, COMPANY_UI,
+  ORIGIN, EMAIL, LANGS, LANG_NAME, UI, esc, homeOf, ogLocale,
+  appStoreHref, playHref, cfBeacon, navItems, docPath, aboutPath, FAMILY, familyName, familyNameLang, familyHref, COMPANY, COMPANY_UI,
 } from '../site.mjs';
 import { articlesIn, articlePathOf } from '../articles/index.mjs';
 import { breadcrumbs } from './nav.mjs';
@@ -69,7 +69,8 @@ ${siteHeader(lang, section, alternates, path)}
 ` : ''}${crumbs.length ? breadcrumbs(lang, crumbs) : ''}    <main id="main" class="${o.mainClass ?? 'page'}" tabindex="-1">
 ${main}
     </main>
-${chrome ? siteFooter(lang) : ''}  </body>
+${chrome ? siteFooter(lang) : ''}${cfBeacon() ? `    ${cfBeacon()}
+` : ''}  </body>
 </html>
 `;
 }
@@ -121,7 +122,7 @@ export function siteFooter(lang) {
   const link = (href, name) => `<li><a href="${href}">${esc(name)}</a></li>`;
   const site = [
     ...navItems(lang).filter((n) => n.key !== 'app').map((n) => link(n.href, n.name)),
-    `<li><a href="${APPSTORE}">${esc(u.appStore)}</a> · <a href="${PLAYSTORE}">${esc(u.googlePlay)}</a></li>`,
+    `<li><a href="${appStoreHref(lang, 'footer')}">${esc(u.appStore)}</a> · <a href="${playHref(lang, 'footer')}">${esc(u.googlePlay)}</a></li>`,
   ];
   const reading = articlesIn(lang).map((a) => link(articlePathOf(a, lang), a.text[lang].navTitle ?? a.text[lang].title));
   const company = [link(aboutPath(lang), u.about), link(docPath(lang, 'support'), u.support), link(docPath(lang, 'privacy'), u.privacy)];

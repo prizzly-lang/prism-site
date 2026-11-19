@@ -28,7 +28,7 @@ import { mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { ORIGIN, APPSTORE, PLAYSTORE, APP_ID, ORG, LANGS, LANG_NAME, esc, plain, homeOf, learnPath, worksheetsPath, aboutPath } from './site.mjs';
+import { ORIGIN, APPSTORE, PLAYSTORE, APP_ID, ORG, LANGS, LANG_NAME, esc, plain, homeOf, learnPath, worksheetsPath, aboutPath, ANALYTICS, cfBeacon } from './site.mjs';
 import { ARTICLES, articlesIn, articlePathOf } from './articles/index.mjs';
 import { articlePage, articleSitemap, articleLlmsSection } from './article-page.mjs';
 import { WS_LANGS, WORKSHEETS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
@@ -435,7 +435,7 @@ function homePage(lang) {
         <h1>PRISM</h1>
         <p class="tagline">${esc(t.tagline)}</p>
         <p class="hero__what">${esc(t.what)}</p>
-        ${storeLinks(lang)}
+        ${storeLinks(lang, '', 'home-top')}
         <!--
           체험판 링크. 설치도 결제도 없이 브라우저에서 바로 돌아간다. 스토어 버튼 아래에
           밑줄 링크로 둔다. 살 사람의 길이 먼저 보여야 하고, 체험판은 그 길을 지나친 사람에게만 필요하다.
@@ -535,7 +535,7 @@ ${t.a11yMore.map((f) => `          <li>${esc(f)}</li>`).join('\n')}
 
       <section class="closer">
         <p class="closer__line">${esc(t.tagline)}</p>
-        ${storeLinks(lang, 'store-links--lg')}
+        ${storeLinks(lang, 'store-links--lg', 'home-end')}
       </section>`,
   });
 }
@@ -585,6 +585,19 @@ Sitemap: ${ORIGIN}/sitemap.xml
 `,
   'utf8',
 );
+
+/*
+  `/play/`는 prism 저장소 `npm run demo`의 결과를 복사한 폴더라 이 스크립트가 그리지 않는다.
+  방문 분석 스크립트만 여기서 끼워 넣는다(site.mjs ANALYTICS). 체험판을 다시 복사해도
+  빌드가 다시 넣고, 토큰을 비우면 빼낸다.
+*/
+{
+  const f = resolve(HERE, 'play/index.html');
+  const before = readFileSync(f, 'utf8');
+  let html = before.replace(/\n[ \t]*<script defer src="https:\/\/static\.cloudflareinsights\.com\/[^\n]*<\/script>/, '');
+  if (ANALYTICS) html = html.replace('</body>', `    ${cfBeacon()}\n  </body>`);
+  if (html !== before) writeFileSync(f, html);
+}
 
 /*
   sitemap. `/sitemap.xml`은 이미 Search Console·Bing에 제출된 이름이라 그대로 두고 index로

@@ -11,6 +11,32 @@ export const PLAYSTORE = 'https://play.google.com/store/apps/details?id=co.adriv
 export const EMAIL = 'prism@adriven.co';
 
 /*
+  방문 분석: Cloudflare Web Analytics (2026-11-19 사용자 결정. 그 전에는 분석을 넣지 않았다).
+
+  쿠키·브라우저 저장소를 쓰지 않고 개인을 식별하지 않는 집계 분석이다. 페이지별 방문 수,
+  들어온 경로(리퍼러), 국가, 기기를 본다. 토큰은 페이지 소스에 그대로 보이는 공개값이라
+  비밀이 아니다. **비어 있으면 스크립트를 넣지 않고**, 개인정보 처리방침도 「분석 없음」
+  문장을 그대로 쓴다(`pages/privacy.mjs`가 ANALYTICS를 본다). 토큰 하나로 둘이 함께 바뀐다.
+  토큰은 Cloudflare 대시보드 → Analytics & Logs → Web Analytics → Add a site → prism.adriven.co.
+*/
+export const CF_BEACON_TOKEN = '';
+export const ANALYTICS = CF_BEACON_TOKEN !== '';
+export const cfBeacon = () => (ANALYTICS
+  ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${CF_BEACON_TOKEN}"}'></script>`
+  : '');
+
+/*
+  스토어 버튼의 추적값. 분석 스크립트는 스토어로 나가는 클릭을 세지 못하므로(Cloudflare Web
+  Analytics에는 이벤트가 없다), 버튼마다 자리를 붙여 스토어 콘솔에서 갈라 본다.
+  App Store는 ASC 「캠페인」(ct, 40자까지), Play는 획득 보고서의 UTM. `pt`는 에이드리븐
+  제공자 토큰(prism 저장소 docs/MARKETING.md 「링크 추적값」). JSON-LD의 주소는 깨끗하게 둔다.
+*/
+const siteCampaign = (lang, place) => `site-${lang.toLowerCase()}-${place}`;
+export const appStoreHref = (lang, place) => `${APPSTORE}?pt=125735609&ct=${siteCampaign(lang, place)}&mt=8`;
+export const playHref = (lang, place) =>
+  `${PLAYSTORE}&referrer=${encodeURIComponent(`utm_source=site&utm_medium=web&utm_campaign=${siteCampaign(lang, place)}`)}`;
+
+/*
   이 앱과 회사를 가리키는 고유 식별자(@id).
 
   「Prism」이라는 빛 퍼즐 앱이 여럿이라 답변 엔진이 섞는다(2026-11-09 측정에서 일본어

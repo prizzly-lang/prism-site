@@ -6,7 +6,7 @@
  * 이스케이프하지 않는다. 글자 값(h2·h3·pre·table·alt)은 이스케이프한다.
  */
 
-import { APPSTORE, PLAYSTORE, UI, esc } from '../site.mjs';
+import { UI, esc, appStoreHref, playHref } from '../site.mjs';
 
 const I = '        ';
 
@@ -36,10 +36,11 @@ export const blocks = (list) => list.map(([kind, value]) => BLOCK[kind](value)).
 /**
  * 스토어 버튼 둘. 칠한 버튼은 하나(App Store), 둘째는 테두리만. 앱 소개 페이지에서만 쓴다:
  * 학습 페이지에 스토어 버튼을 직접 두면 광고처럼 읽힌다(SITE-UX-PLAN 5절).
+ * place는 스토어 콘솔에서 이 버튼을 가르는 이름(site.mjs의 appStoreHref).
  */
-export const storeLinks = (lang, cls = '') => `<p class="store-links${cls ? ` ${cls}` : ''}">
-          <a class="button" href="${APPSTORE}">${esc(UI[lang].getIos)}</a>
-          <a class="button button--secondary" href="${PLAYSTORE}">${esc(UI[lang].getAndroid)}</a>
+export const storeLinks = (lang, cls = '', place = 'page') => `<p class="store-links${cls ? ` ${cls}` : ''}">
+          <a class="button" href="${appStoreHref(lang, place)}">${esc(UI[lang].getIos)}</a>
+          <a class="button button--secondary" href="${playHref(lang, place)}">${esc(UI[lang].getAndroid)}</a>
         </p>`;
 
 /** 문답 하나를 접기로. 답은 접혀 있어도 DOM에 있어 FAQPage·답변 엔진과 어긋나지 않는다. */
