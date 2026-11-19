@@ -19,10 +19,10 @@ export const EMAIL = 'prism@adriven.co';
   문장을 그대로 쓴다(`pages/privacy.mjs`가 ANALYTICS를 본다). 토큰 하나로 둘이 함께 바뀐다.
   토큰은 Cloudflare 대시보드 → Analytics & Logs → Web Analytics → Add a site → prism.adriven.co.
 */
-export const CF_BEACON_TOKEN = '';
+export const CF_BEACON_TOKEN = 'a1ce7305b8ce452eaedd3ed8ee44f568';
 export const ANALYTICS = CF_BEACON_TOKEN !== '';
 export const cfBeacon = () => (ANALYTICS
-  ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${CF_BEACON_TOKEN}"}'></script>`
+  ? `<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${CF_BEACON_TOKEN}"}'></script>`
   : '');
 
 /*

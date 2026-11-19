@@ -102,7 +102,7 @@
         <p>これらの情報は、iOSでは標準のアプリ保存領域（UserDefaults）に、Androidではアプリ専用の保存領域（SharedPreferences）に保管され、どこにも送信されません。アプリを削除すると一緒に削除されます。これらの情報がiCloudバックアップやAndroid端末のバックアップに含まれることがありますが、それはAppleとGoogleによる端末のバックアップ機能であり、PRISMがデータを送信するものではありません。</p>
         <h2>Web体験版とこのウェブサイト</h2>
         <p>ブラウザ体験版（prism.adriven.co/play/）は、上記と同じ進行状況と設定を、ブラウザの保存領域（localStorage）にそのブラウザの中だけで保存します。サーバーには送信せず、ブラウザのサイトデータを消去すると一緒に消去されます。</p>
-        <p>このウェブサイトと体験版には、分析・広告用のスクリプトやCookieはありません。ウェブサイトはGitHub Pages（GitHub, Inc.）で提供されており、GitHubはサービスの運営とセキュリティのために、アクセス元のIPアドレスなどの技術的な記録を処理することがあります（GitHubのプライバシーポリシーに基づきます）。PRISMおよびA Drivenがこれらの記録を受け取ることはありません。</p>
+        <p>このウェブサイトと体験版では、訪問数を数えるためにCloudflare Web Analytics（Cloudflare, Inc.）を使っています。Cookieやブラウザの保存領域は使わず、個人を特定したり、ほかのサイトをまたいで追跡したりしません。送信されるのは、表示したページのアドレス、移動元のアドレス（リファラー）、ブラウザと端末の種類、ページの表示にかかった時間で、国は接続情報から推定します。CloudflareはIPアドレスやブラウザの情報で個人を特定しないと説明しています（Cloudflareのプライバシーポリシーに基づきます）。A Drivenが見るのはページ別・経路別の合計だけです。広告用のスクリプトはありません。ウェブサイトはGitHub Pages（GitHub, Inc.）で提供されており、GitHubはサービスの運営とセキュリティのために、アクセス元のIPアドレスなどの技術的な記録を処理することがあります（GitHubのプライバシーポリシーに基づきます）。PRISMおよびA Drivenがこれらの記録を受け取ることはありません。</p>
         <h2>第三者への提供</h2>
         <p>提供する情報がないため、第三者に提供する情報もありません。PRISMには、データを収集するサードパーティSDKは含まれていません。購入のためにApple StoreKitを呼び出すオープンソースのプラグイン（@capgo/native-purchases）を使用していますが、このプラグインが独自に通信を行うことはありません。</p>
         <h2>お支払い</h2>
@@ -147,5 +147,6 @@
         <p class="site-footer__legal">© 2026 A Driven Inc. All rights reserved. · PRISM <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </div>
     </footer>
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a1ce7305b8ce452eaedd3ed8ee44f568"}'></script>
   </body>
 </html>

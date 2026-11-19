@@ -594,7 +594,7 @@ Sitemap: ${ORIGIN}/sitemap.xml
 {
   const f = resolve(HERE, 'play/index.html');
   const before = readFileSync(f, 'utf8');
-  let html = before.replace(/\n[ \t]*<script defer src="https:\/\/static\.cloudflareinsights\.com\/[^\n]*<\/script>/, '');
+  let html = before.replace(/\n[ \t]*<script [^>]*src="https:\/\/static\.cloudflareinsights\.com\/[^\n]*<\/script>/, '');
   if (ANALYTICS) html = html.replace('</body>', `    ${cfBeacon()}\n  </body>`);
   if (html !== before) writeFileSync(f, html);
 }

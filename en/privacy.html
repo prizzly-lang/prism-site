@@ -104,7 +104,7 @@
         <p>This is kept in the standard app storage on your device (UserDefaults on iOS, SharedPreferences on Android) and is never transmitted anywhere. Deleting the app deletes it. It may be included in iCloud or Android device backups; those are Apple's and Google's backup features, not a transfer by PRISM.</p>
         <h2>The web demo and this website</h2>
         <p>The browser demo (prism.adriven.co/play/) keeps the same progress and settings in your browser's storage (localStorage), in that browser only. It is never sent to a server, and clearing the browser's site data removes it.</p>
-        <p>This website and the demo have no analytics or advertising scripts and no cookies. The website is served by GitHub Pages (GitHub, Inc.), which may process technical logs such as visitors' IP addresses to operate and secure the service, under GitHub's privacy statement. PRISM and A Driven do not receive these logs.</p>
+        <p>This website and the demo use Cloudflare Web Analytics (Cloudflare, Inc.) to count visits. It uses no cookies or browser storage, does not identify you and does not follow you across other sites. What is sent is the page address, the address you came from (referrer), your browser and device type and how long the page took to load; the country is estimated from the connection. Cloudflare states that it does not identify individuals by IP address or browser details, under Cloudflare's privacy policy. A Driven sees only totals by page and by source. There are no advertising scripts. The website is served by GitHub Pages (GitHub, Inc.), which may process technical logs such as visitors' IP addresses to operate and secure the service, under GitHub's privacy statement. PRISM and A Driven do not receive these logs.</p>
         <h2>Third parties</h2>
         <p>There is no data to share, so nothing is shared with third parties. PRISM has no third-party SDK that collects data. It uses an open-source plugin (@capgo/native-purchases) that calls Apple StoreKit for purchases and makes no network requests of its own.</p>
         <h2>Payment</h2>
@@ -149,5 +149,6 @@
         <p class="site-footer__legal">© 2026 A Driven Inc. All rights reserved. · PRISM <a href="mailto:prism@adriven.co">prism@adriven.co</a></p>
       </div>
     </footer>
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a1ce7305b8ce452eaedd3ed8ee44f568"}'></script>
   </body>
 </html>
