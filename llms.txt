@@ -20,6 +20,8 @@
 
 - [빛의 반사](https://prism.adriven.co/learn/reflection/): 빛의 반사는 나아가던 빛이 거울 같은 물체의 표면에 부딪혀 방향을 바꾸어 되돌아 나오는 현상으로, 매끄러운 면에서는 입사각과 반사각이 같습니다.
 - [Reflection of light](https://prism.adriven.co/en/learn/reflection/): Reflection of light happens when light hits a surface, such as a mirror, and bounces back off it in a new direction; on a smooth surface the angle of reflection equals the angle of incidence.
+- [반투명 거울(빔 스플리터)](https://prism.adriven.co/learn/beam-splitter/): 반투명 거울(빔 스플리터)은 들어온 빛의 일부는 통과시키고 일부는 반사해서, 빛 한 줄기를 두 줄기로 나누는 광학 부품입니다.
+- [Beam splitters (half-silvered mirrors)](https://prism.adriven.co/en/learn/beam-splitter/): A beam splitter, also called a half-silvered mirror, is an optical part that lets part of the light that hits it pass through and reflects part of it, turning one beam into two.
 
 ## 학습지 / Printable worksheets
 

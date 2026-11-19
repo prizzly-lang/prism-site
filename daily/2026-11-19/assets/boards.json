@@ -1,0 +1,267 @@
+{
+ "date": "2026-11-19",
+ "boards": [
+  {
+   "difficulty": "easy",
+   "chapter": 1,
+   "chapterName": {
+    "en": "Reflect",
+    "ko": "반사"
+   },
+   "par": 2,
+   "grid": {
+    "cols": 5,
+    "rows": 5
+   },
+   "level": {
+    "id": 202611191,
+    "chapter": 1,
+    "w": 5,
+    "h": 5,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 4,
+      "y": 0,
+      "rot": 3,
+      "color": 1
+     },
+     {
+      "type": "mirror",
+      "x": 0,
+      "y": 0,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 0,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 3,
+      "y": 1,
+      "rot": 0,
+      "color": 1
+     }
+    ],
+    "par": 2
+   }
+  },
+  {
+   "difficulty": "normal",
+   "chapter": 3,
+   "chapterName": {
+    "en": "Disperse",
+    "ko": "분산"
+   },
+   "par": 5,
+   "grid": {
+    "cols": 6,
+    "rows": 6
+   },
+   "level": {
+    "id": 202611192,
+    "chapter": 3,
+    "w": 6,
+    "h": 6,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 2,
+      "y": 0,
+      "rot": 2,
+      "color": 7
+     },
+     {
+      "type": "mirror",
+      "x": 2,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "prism",
+      "x": 0,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 0,
+      "y": 4,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 1,
+      "y": 4,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 0,
+      "rot": 0,
+      "color": 4
+     },
+     {
+      "type": "crystal",
+      "x": 1,
+      "y": 5,
+      "rot": 0,
+      "color": 2
+     }
+    ],
+    "par": 5
+   }
+  },
+  {
+   "difficulty": "hard",
+   "chapter": 6,
+   "chapterName": {
+    "en": "Converge",
+    "ko": "수렴"
+   },
+   "par": 8,
+   "grid": {
+    "cols": 7,
+    "rows": 7
+   },
+   "level": {
+    "id": 202611193,
+    "chapter": 6,
+    "w": 7,
+    "h": 7,
+    "pieces": [
+     {
+      "type": "emitter",
+      "x": 5,
+      "y": 0,
+      "rot": 2,
+      "color": 7
+     },
+     {
+      "type": "emitter",
+      "x": 6,
+      "y": 6,
+      "rot": 3,
+      "color": 2
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 6,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 5,
+      "y": 2,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 5,
+      "y": 4,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "splitter",
+      "x": 5,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 3,
+      "y": 3,
+      "rot": 1,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 1,
+      "y": 6,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "prism",
+      "x": 3,
+      "y": 4,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "mirror",
+      "x": 1,
+      "y": 3,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "filter",
+      "x": 0,
+      "y": 4,
+      "rot": 0,
+      "color": 4
+     },
+     {
+      "type": "wall",
+      "x": 1,
+      "y": 2,
+      "rot": 0,
+      "color": 0
+     },
+     {
+      "type": "crystal",
+      "x": 6,
+      "y": 2,
+      "rot": 0,
+      "color": 7
+     },
+     {
+      "type": "crystal",
+      "x": 0,
+      "y": 3,
+      "rot": 0,
+      "color": 1
+     },
+     {
+      "type": "crystal",
+      "x": 6,
+      "y": 4,
+      "rot": 0,
+      "color": 2
+     },
+     {
+      "type": "crystal",
+      "x": 6,
+      "y": 3,
+      "rot": 0,
+      "color": 2
+     }
+    ],
+    "par": 8
+   }
+  }
+ ]
+}
