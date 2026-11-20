@@ -26,12 +26,13 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import pathOfLight from './worksheets/path-of-light.mjs';
 import reflectionBasics from './worksheets/reflection-basics.mjs';
+import reflectionTwoMirrors from './worksheets/reflection-two-mirrors.mjs';
 import { harumathHref } from './crosslinks.mjs';
 import { ORIGIN, ORG, APP_ID, UI, LEARN_LANGS, esc, plain, homeOf, worksheetsPath, learnPath, prefix } from './site.mjs';
 import { page } from './ui/page.mjs';
 
 /** 학습지. 목록 페이지가 이 순서로 카드를 늘어놓는다(새 것이 앞). */
-export const WORKSHEETS = [reflectionBasics, pathOfLight];
+export const WORKSHEETS = [reflectionTwoMirrors, reflectionBasics, pathOfLight];
 export const worksheetOf = (slug) => WORKSHEETS.find((w) => w.slug === slug);
 export const WS_LANGS = LEARN_LANGS;
 export const wsPathOf = (l, slug, answers = false) => `${worksheetsPath(l, slug)}${answers ? 'answers/' : ''}`;

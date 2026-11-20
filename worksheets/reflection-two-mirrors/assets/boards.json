@@ -1,0 +1,360 @@
+{
+  "coordinates": "Columns A, B, C... left to right; rows 1, 2, 3... top to bottom. Letters and numbers are printed on the board edges.",
+  "glyphs": {
+    "R": "triangle",
+    "G": "square",
+    "B": "circle"
+  },
+  "sourceMarker": "Colored source: white box with its glyphs. White source: solid black box with all three glyphs knocked out in white.",
+  "beamStyles": {
+    "white": "solid line",
+    "R": "long dashes (triangle tag)",
+    "G": "dash-dot line (square tag)",
+    "B": "dots (circle tag)",
+    "overlap": "two components on the same cell edge are drawn as parallel lines"
+  },
+  "tapBadge": "Answer key: a black circle with a number next to a piece = how many times to tap it.",
+  "levels": [
+    {
+      "id": 6,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "Four mirrors, two taps, four bends. The last two mirrors (D2, D3) lean the same way, so the light leaves heading the way it came in, one row lower: a periscope.",
+        "ko": "거울 넷, 두 번 돌리기, 네 번 꺾임. 마지막 두 거울(D2, D3)이 같은 쪽으로 기울어 있어 빛이 들어온 방향 그대로 한 줄 아래로 나간다. 잠망경 배치다."
+      },
+      "rotate": [
+        {
+          "cell": "D2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "B5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "B2",
+          "piece": "mirror"
+        },
+        {
+          "cell": "D3",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "E5",
+          "facing": "left",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "E3",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "6-puzzle.svg",
+        "answer": "6-answer.svg"
+      }
+    },
+    {
+      "id": 7,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "The first board with two sources and two crystals. One crystal is lit from the start, so students sort out which beam still needs work.",
+        "ko": "광원 둘, 결정 둘이 처음 나오는 판. 결정 하나는 처음부터 켜져 있어서 어느 빛줄기를 손봐야 하는지 가려내게 된다."
+      },
+      "rotate": [
+        {
+          "cell": "C4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "E4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "C2",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "A2",
+          "facing": "right",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        },
+        {
+          "cell": "E1",
+          "facing": "down",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "C1",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        },
+        {
+          "cell": "C5",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "7-puzzle.svg",
+        "answer": "7-answer.svg"
+      }
+    },
+    {
+      "id": 8,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 3,
+      "why": {
+        "en": "Three mirrors, all wrong. Two mirrors leaning opposite ways (B2, A2) send the light back the way it came, and it crosses its own path at B4.",
+        "ko": "거울 셋이 모두 틀리게 놓여 있다. 서로 다른 쪽으로 기운 두 거울(B2, A2)이 빛을 왔던 쪽으로 돌려보내고, 빛은 B4에서 자기 길을 가로지른다."
+      },
+      "rotate": [
+        {
+          "cell": "A2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "B2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "A4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "B5",
+          "facing": "up",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "E4",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "8-puzzle.svg",
+        "answer": "8-answer.svg"
+      }
+    },
+    {
+      "id": 9,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 3,
+      "why": {
+        "en": "The crystal sits right behind the first mirror, but a mirror does not let light through: the beam goes down the board and comes back up by way of two mirrors leaning opposite ways (D5, E5).",
+        "ko": "결정이 첫 거울 바로 뒤에 있지만 거울은 빛을 통과시키지 않는다. 빛은 판 아래까지 내려갔다가 서로 다른 쪽으로 기운 두 거울(D5, E5)을 거쳐 다시 올라온다."
+      },
+      "rotate": [
+        {
+          "cell": "D1",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "D5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "E5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "A1",
+          "facing": "right",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "E1",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "9-puzzle.svg",
+        "answer": "9-answer.svg"
+      }
+    }
+  ]
+}
