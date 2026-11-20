@@ -13,9 +13,10 @@ import { sideNav, pager } from './ui/nav.mjs';
 import { wsPathOf, worksheetOf } from './worksheet-page.mjs';
 import reflection from './learn/reflection.mjs';
 import beamSplitter from './learn/beam-splitter.mjs';
+import dispersion from './learn/dispersion.mjs';
 
 /** 개념 페이지. 하나 더할 때 여기에 import 한 줄과 항목 하나. 순서는 site.mjs의 CONCEPTS가 정한다. */
-export const LEARN = [reflection, beamSplitter];
+export const LEARN = [reflection, beamSplitter, dispersion];
 const AVAILABLE = LEARN.map((c) => c.slug);
 
 const T = {

@@ -22,6 +22,8 @@
 - [Reflection of light](https://prism.adriven.co/en/learn/reflection/): Reflection of light happens when light hits a surface, such as a mirror, and bounces back off it in a new direction; on a smooth surface the angle of reflection equals the angle of incidence.
 - [반투명 거울(빔 스플리터)](https://prism.adriven.co/learn/beam-splitter/): 반투명 거울(빔 스플리터)은 들어온 빛의 일부는 통과시키고 일부는 반사해서, 빛 한 줄기를 두 줄기로 나누는 광학 부품입니다.
 - [Beam splitters (half-silvered mirrors)](https://prism.adriven.co/en/learn/beam-splitter/): A beam splitter, also called a half-silvered mirror, is an optical part that lets part of the light that hits it pass through and reflects part of it, turning one beam into two.
+- [빛의 분산](https://prism.adriven.co/learn/dispersion/): 빛의 분산은 파장(색)에 따라 물질 속에서 빛의 굴절 정도가 달라서, 흰 빛이 프리즘 같은 물체를 지나며 여러 색으로 갈라지는 현상입니다.
+- [Dispersion of light](https://prism.adriven.co/en/learn/dispersion/): Dispersion of light is the spreading of white light into its colors, because the amount that a material bends light depends on the wavelength (color), so a prism or a drop of water separates the colors.
 
 ## 학습지 / Printable worksheets
 
