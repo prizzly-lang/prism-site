@@ -63,7 +63,24 @@
      }
     ],
     "par": 3
-   }
+   },
+   "solution": [
+    {
+     "cell": "D1",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "D3",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "B5",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   },
   {
    "difficulty": "normal",
@@ -134,7 +151,29 @@
      }
     ],
     "par": 6
-   }
+   },
+   "solution": [
+    {
+     "cell": "D2",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "C4",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "D4",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "C5",
+     "piece": "prism",
+     "taps": 3
+    }
+   ]
   },
   {
    "difficulty": "hard",
@@ -233,7 +272,39 @@
      }
     ],
     "par": 6
-   }
+   },
+   "solution": [
+    {
+     "cell": "C3",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "E3",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "C4",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "E4",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "C6",
+     "piece": "prism",
+     "taps": 1
+    },
+    {
+     "cell": "E6",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   }
  ]
 }
