@@ -6,18 +6,22 @@
  * 학습 페이지에는 스토어 버튼을 직접 두지 않고 「해 보기」(체험판)로 보낸다.
  */
 
-import { ORIGIN, ORG, APP_ID, UI, CONCEPTS, LEARN_LANGS, esc, homeOf, learnPath, prefix } from './site.mjs';
+import { ORIGIN, ORG, APP_ID, UI, CONCEPTS, CONCEPT_LANGS, esc, homeOf, learnPath, prefix } from './site.mjs';
 import { page } from './ui/page.mjs';
 import { blocks, disclosure } from './ui/content.mjs';
 import { sideNav, pager } from './ui/nav.mjs';
-import { wsPathOf, worksheetOf } from './worksheet-page.mjs';
+import { wsPathOf, worksheetOf, WS_LANGS } from './worksheet-page.mjs';
 import reflection from './learn/reflection.mjs';
 import beamSplitter from './learn/beam-splitter.mjs';
 import dispersion from './learn/dispersion.mjs';
 
 /** 개념 페이지. 하나 더할 때 여기에 import 한 줄과 항목 하나. 순서는 site.mjs의 CONCEPTS가 정한다. */
 export const LEARN = [reflection, beamSplitter, dispersion];
-const AVAILABLE = LEARN.map((c) => c.slug);
+/** 그 언어로 쓴 개념만. 일본어·중국어는 개념마다 따로 연다(site.mjs CONCEPT_LANGS). */
+const learnIn = (lang) => LEARN.filter((c) => c.langs.includes(lang));
+const availableIn = (lang) => learnIn(lang).map((c) => c.slug);
+/** 개념 페이지가 하나라도 있는 언어. 목록 페이지도 이 언어들에만 만든다. */
+export const LEARN_PAGE_LANGS = CONCEPT_LANGS.filter((l) => learnIn(l).length);
 
 const T = {
   ko: {
@@ -52,24 +56,58 @@ const T = {
     worksheet: 'Printable worksheet',
     play: 'Play chapter 1 of PRISM in your browser',
   },
+  ja: {
+    indexTitle: '光を学ぶ',
+    indexDesc: '光の反射から偏光まで、光の性質を小さな実験と光のパズルゲームPRISMで学びます。小学校高学年から中学生と先生のための光学のページです。',
+    indexLead: '光の性質をひとつずつ、家や教室でできる小さな実験とあわせて説明します。順番はゲームPRISMの7つの章と同じです。日本語のページは順に増やしていきます。',
+    soon: '準備中',
+    guide: '7つの項目をまとめて見るなら：先生向けの案内',
+    level: '対象',
+    minutes: '時間',
+    materials: '用意するもの',
+    curriculum: '学習指導要領',
+    checkH: '確認問題',
+    differsH: 'ゲームと実際の光はここが違います',
+    nextH: '続けてやってみる',
+    worksheet: '印刷用ワークシート',
+    play: 'ブラウザでPRISMの第1章を遊ぶ',
+  },
+  'zh-Hans': {
+    indexTitle: '学习光',
+    indexDesc: '从光的反射到偏振，用小实验和光线解谜游戏 PRISM 学习光的性质。面向小学高年级、初中生和教师的光学页面。',
+    indexLead: '一次讲一种光的性质，每页配一个在家或教室就能做的小实验。顺序与游戏 PRISM 的七个章节相同。中文页面会陆续增加。',
+    soon: '准备中',
+    guide: '一次浏览全部七个概念：教师指南',
+    level: '适合',
+    minutes: '时间',
+    materials: '准备',
+    curriculum: '课程标准',
+    checkH: '检查一下',
+    differsH: '游戏和真实的光在这些地方不同',
+    nextH: '接着试试',
+    worksheet: '打印版学习单',
+    play: '在浏览器里玩 PRISM 第 1 章',
+  },
 };
 
 export function learnPages() {
   const out = [];
-  for (const lang of LEARN_LANGS) {
-    out.push({ path: learnPath(lang), html: indexPage(lang), updated: latest() });
-    for (const c of LEARN) out.push({ path: learnPath(lang, c.slug), html: conceptPage(lang, c), updated: c.updated });
+  for (const lang of LEARN_PAGE_LANGS) {
+    out.push({ path: learnPath(lang), html: indexPage(lang), updated: latest(lang) });
+    for (const c of learnIn(lang)) out.push({ path: learnPath(lang, c.slug), html: conceptPage(lang, c), updated: c.updated });
   }
   return out;
 }
 
-const latest = () => LEARN.map((c) => c.updated).sort().at(-1);
-const alternatesOf = (slug) => Object.fromEntries(LEARN_LANGS.map((l) => [l, learnPath(l, slug)]));
+const latest = (lang) => learnIn(lang).map((c) => c.updated).sort().at(-1);
+const alternatesOf = (slug) => Object.fromEntries(
+  LEARN_PAGE_LANGS.filter((l) => !slug || availableIn(l).includes(slug)).map((l) => [l, learnPath(l, slug)]),
+);
 
 function indexPage(lang) {
   const t = T[lang];
   const items = CONCEPTS.map((c, i) => {
-    const data = LEARN.find((l) => l.slug === c.slug);
+    const data = learnIn(lang).find((l) => l.slug === c.slug);
     if (!data) {
       return `        <li class="card card--muted"><h2>${i + 1}. ${esc(c[lang])}</h2><p class="card__meta">${esc(t.soon)}</p></li>`;
     }
@@ -92,7 +130,7 @@ function indexPage(lang) {
       inLanguage: lang,
       url: ORIGIN + learnPath(lang),
       publisher: ORG,
-      hasPart: LEARN.map((c) => ({ '@type': 'Article', headline: c.text[lang].title, url: ORIGIN + learnPath(lang, c.slug) })),
+      hasPart: learnIn(lang).map((c) => ({ '@type': 'Article', headline: c.text[lang].title, url: ORIGIN + learnPath(lang, c.slug) })),
     }],
     main: `      <header class="page-head">
         <h1>${esc(t.indexTitle)}</h1>
@@ -109,7 +147,7 @@ function conceptPage(lang, c) {
   const t = T[lang];
   const x = c.text[lang];
   const path = learnPath(lang, c.slug);
-  const ws = c.worksheet ? worksheetOf(c.worksheet).text[lang] : null;
+  const ws = c.worksheet && WS_LANGS.includes(lang) ? worksheetOf(c.worksheet).text[lang] : null;
 
   const ld = {
     '@context': 'https://schema.org',
@@ -149,7 +187,7 @@ function conceptPage(lang, c) {
     ld: [ld],
     mainClass: 'with-sidebar',
     main: `      <div>
-        ${sideNav(lang, c.slug, AVAILABLE)}
+        ${sideNav(lang, c.slug, availableIn(lang))}
         <script>
           /* 좁은 화면에서는 개념 목록을 접어 본문이 먼저 보이게 한다. 스크립트가 없으면 펼친 채다. */
           if (matchMedia('(max-width: 49.99rem)').matches) document.currentScript.previousElementSibling.open = false;
@@ -175,7 +213,7 @@ ${blocks(x.body)}
             <li><a href="/play/">${esc(t.play)}</a></li>
           </ul>
         </div>
-        ${pager(lang, c.slug, AVAILABLE)}
+        ${pager(lang, c.slug, availableIn(lang))}
       </article>`,
   });
 }

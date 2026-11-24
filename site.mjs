@@ -192,17 +192,24 @@ export const UI = {
  * 게임 챕터 이름은 각 페이지의 부제로 내린다. `learn/<slug>.mjs`가 있는 것만 링크가 된다.
  */
 export const CONCEPTS = [
-  { slug: 'reflection', ko: '빛의 반사', en: 'Reflection of light' },
-  { slug: 'beam-splitter', ko: '반투명 거울', en: 'Beam splitters' },
-  { slug: 'dispersion', ko: '빛의 분산', en: 'Dispersion of light' },
-  { slug: 'light-mixing', ko: '빛의 합성', en: 'Mixing colored light' },
-  { slug: 'color-filters', ko: '색 필터', en: 'Color filters' },
-  { slug: 'spectroscopy', ko: '분광', en: 'Spectroscopy' },
-  { slug: 'polarization', ko: '편광', en: 'Polarization' },
+  { slug: 'reflection', ko: '빛의 반사', en: 'Reflection of light', ja: '光の反射', 'zh-Hans': '光的反射' },
+  { slug: 'beam-splitter', ko: '반투명 거울', en: 'Beam splitters', ja: 'ハーフミラー', 'zh-Hans': '半透镜' },
+  { slug: 'dispersion', ko: '빛의 분산', en: 'Dispersion of light', ja: '光の分散', 'zh-Hans': '光的色散' },
+  { slug: 'light-mixing', ko: '빛의 합성', en: 'Mixing colored light', ja: '光の混色', 'zh-Hans': '色光的混合' },
+  { slug: 'color-filters', ko: '색 필터', en: 'Color filters', ja: '色フィルター', 'zh-Hans': '滤色片' },
+  { slug: 'spectroscopy', ko: '분광', en: 'Spectroscopy', ja: '分光', 'zh-Hans': '分光' },
+  { slug: 'polarization', ko: '편광', en: 'Polarization', ja: '偏光', 'zh-Hans': '偏振' },
 ];
 
 /** 개념·학습지 섹션이 있는 언어. 일본어·중국어는 교사 수요를 본 뒤 더한다(WORKSHEETS.md). */
 export const LEARN_LANGS = ['ko', 'en'];
+
+/**
+ * 개념 페이지(`/learn/`)가 있는 언어. 학습지·오늘의 퍼즐은 아직 LEARN_LANGS(한·영)뿐이다.
+ * 일본어·중국어는 2026-11-24 AI 답변 기록에서 「光の反射 わかりやすく」「光的反射 简单解释」에 우리 페이지가
+ * 없어서 개념 페이지부터 연다. 개념마다 `learn/<slug>.mjs`의 `langs`에 있는 언어만 만든다.
+ */
+export const CONCEPT_LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
 
 export const learnPath = (l, slug) => `${prefix(l)}/learn/${slug ? `${slug}/` : ''}`;
 export const worksheetsPath = (l, slug) => `${prefix(l)}/worksheets/${slug ? `${slug}/` : ''}`;
@@ -219,7 +226,7 @@ export function navItems(lang) {
   const u = UI[lang];
   const hasLearn = LEARN_LANGS.includes(lang);
   return [
-    { key: 'learn', name: u.learn, href: hasLearn ? learnPath(lang) : `${prefix(lang)}/optics/` },
+    { key: 'learn', name: u.learn, href: CONCEPT_LANGS.includes(lang) ? learnPath(lang) : `${prefix(lang)}/optics/` },
     ...(hasLearn ? [{ key: 'worksheets', name: u.worksheets, href: worksheetsPath(lang) }] : []),
     ...(hasLearn ? [{ key: 'daily', name: u.daily, href: dailyPath(lang) }] : []),
     { key: 'play', name: u.play, href: '/play/' },

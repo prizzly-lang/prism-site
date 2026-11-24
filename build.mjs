@@ -664,7 +664,7 @@ writeFileSync(
 
 ## 배우기 / Learn
 
-${LEARN.flatMap((c) => WS_LANGS.map((l) => `- [${c.text[l].title}](${ORIGIN}${learnPath(l, c.slug)}): ${c.text[l].definition}`)).join('\n')}
+${LEARN.flatMap((c) => c.langs.map((l) => `- [${c.text[l].title}](${ORIGIN}${learnPath(l, c.slug)}): ${c.text[l].definition}`)).join('\n')}
 
 ## 학습지 / Printable worksheets
 

@@ -20,6 +20,8 @@
 
 - [빛의 반사](https://prism.adriven.co/learn/reflection/): 빛의 반사는 나아가던 빛이 거울 같은 물체의 표면에 부딪혀 방향을 바꾸어 되돌아 나오는 현상으로, 매끄러운 면에서는 입사각과 반사각이 같습니다.
 - [Reflection of light](https://prism.adriven.co/en/learn/reflection/): Reflection of light happens when light hits a surface, such as a mirror, and bounces back off it in a new direction; on a smooth surface the angle of reflection equals the angle of incidence.
+- [光の反射](https://prism.adriven.co/ja/learn/reflection/): 光の反射とは、まっすぐ進んできた光が鏡などの物の表面に当たって、向きを変えてはね返る現象で、なめらかな面では入射角と反射角が等しくなります。
+- [光的反射](https://prism.adriven.co/zh-Hans/learn/reflection/): 光的反射是指沿直线传播的光照到镜子等物体表面时改变方向、返回原来介质的现象；在光滑的表面上，反射角等于入射角。
 - [반투명 거울(빔 스플리터)](https://prism.adriven.co/learn/beam-splitter/): 반투명 거울(빔 스플리터)은 들어온 빛의 일부는 통과시키고 일부는 반사해서, 빛 한 줄기를 두 줄기로 나누는 광학 부품입니다.
 - [Beam splitters (half-silvered mirrors)](https://prism.adriven.co/en/learn/beam-splitter/): A beam splitter, also called a half-silvered mirror, is an optical part that lets part of the light that hits it pass through and reflects part of it, turning one beam into two.
 - [빛의 분산](https://prism.adriven.co/learn/dispersion/): 빛의 분산은 파장(색)에 따라 물질 속에서 빛의 굴절 정도가 달라서, 흰 빛이 프리즘 같은 물체를 지나며 여러 색으로 갈라지는 현상입니다.
@@ -47,6 +49,8 @@
 - [Teaching light with a puzzle game: the seven chapters of PRISM](https://prism.adriven.co/en/optics/): A teacher's guide to PRISM, the light puzzle game by A Driven: reflection, beam splitting, dispersion, color mixing, filters, spectroscopy and polarization.
 - [パズルで学ぶ光のしくみ：PRISMの7つの章と本物の光学](https://prism.adriven.co/ja/optics/): A Drivenの光のパズルゲームPRISMは、反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光を章ごとにひとつずつ扱います。章ごとの原理と身近な例、考えてみる問い、ゲームが本物の光学をどこで単純化したかを、先生と保護者向けにまとめました。
 - [用解谜游戏学光学：PRISM 的七个章节与真实的光](https://prism.adriven.co/zh-Hans/optics/): A Driven 出品的光线解谜游戏 PRISM，每章讲一个光学原理：反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振。本文按章节整理了原理、生活中的例子、可以提给学生的问题，以及游戏在哪些地方简化了真实的光学，供老师和家长参考。
+- [게임으로 빛의 반사 가르치기: 20분 수업안](https://prism.adriven.co/teach-reflection/): 손거울 실험 5분, 빛 퍼즐 게임으로 반사 방향 예측하기 8분, 그림으로 정리 5분, 확인 2분. 초등 5~6학년과 중학교 1학년이 쓸 수 있는 빛의 반사 수업안입니다. 준비물과 발문, 흔한 오개념까지 담았습니다.
+- [How to teach reflection of light with a game: a 20-minute lesson plan](https://prism.adriven.co/en/teach-reflection/): A 20-minute lesson on reflection of light for ages 9 to 12: a 5-minute mirror and flashlight demo, 8 minutes predicting reflected beams in a free browser puzzle game, 5 minutes drawing ray paths, and a 2-minute exit question. Materials, questions to ask and common misconceptions included.
 - [퍼즐 판을 손으로 만들지 않았습니다](https://prism.adriven.co/proven-unique/): PRISM의 레벨은 정답에서 거꾸로 생성됩니다. 판마다 정답이 정확히 하나뿐임을 전수 탐색으로 증명한 뒤에만 출하하고, 표시되는 최소 탭 수도 너비 우선 탐색으로 구한 실제 최솟값입니다.
 - [I did not hand-build the puzzle levels](https://prism.adriven.co/en/proven-unique/): PRISM's levels are generated backwards from the solved state. A board ships only after brute force proves it has exactly one solution.
 - [Lazors·God of Light 같은 게임: 빛을 반사시키는 퍼즐 게임 8가지](https://prism.adriven.co/light-beam-games/): Lazors, God of Light처럼 거울과 프리즘으로 빛을 보내는 퍼즐 게임을 모았습니다. 기기, 규칙, 어떤 사람에게 맞는지를 표로 비교합니다. 이 글은 PRISM을 만든 에이드리븐이 썼습니다.
