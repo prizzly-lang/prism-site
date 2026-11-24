@@ -5,8 +5,9 @@
 
 import optics from './optics.mjs';
 import levels from './proven-unique.mjs';
+import beamGames from './light-beam-games.mjs';
 import { prefix } from '../site.mjs';
 
-export const ARTICLES = [optics, levels];
+export const ARTICLES = [optics, levels, beamGames];
 export const articlesIn = (lang) => ARTICLES.filter((a) => a.langs.includes(lang));
 export const articlePathOf = (art, l) => `${prefix(l)}/${art.slug}/`;

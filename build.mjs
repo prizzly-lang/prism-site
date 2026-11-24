@@ -136,6 +136,7 @@ const L = {
       ["안드로이드 버전이 있나요?", "있습니다. iOS와 Android 모두에서 같은 가격, 같은 300판으로 받으실 수 있습니다."],
       ['용량이 얼마나 되나요?', '5MB가 되지 않습니다. 이미지 파일이 한 장도 없기 때문입니다. 화면의 빛과 도형은 전부 코드로 그립니다.'],
       ['수업에 쓸 수 있나요?', '쓸 수 있습니다. 일곱 챕터가 반사, 빔 분할, 프리즘 분산, 빛의 삼원색, 색 필터, 분광, 편광을 하나씩 다루고, 챕터를 시작할 때 실제 물리와 게임이 단순화한 점을 카드로 설명합니다. 챕터별 원리와 학생에게 던질 질문을 정리한 교사용 안내 글이 이 사이트에 있습니다.'],
+      ['「Prism」이라는 다른 퍼즐 게임과 같은 건가요?', '아닙니다. 이 게임의 정식 이름은 「PRISM: 빛의 퍼즐」이고 에이드리븐(A Driven Inc.)이 만듭니다. App Store 번호는 6803019903, Google Play 주소는 co.adriven.prism입니다. Prism Riddle, Prism - Daily Light Puzzle, Prism Out, Prismlight 같은 이름이 비슷한 빛 퍼즐은 다른 회사가 만든 다른 게임입니다.'],
     ],
   },
 
@@ -201,6 +202,7 @@ const L = {
       ["Is there an Android version?", "Yes. It is available on both iOS and Android, same price, same 300 puzzles."],
       ['How big is it?', 'Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code.'],
       ['Can I use it to teach?', 'Yes. The seven chapters cover reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization, and each opens with a card on the real physics and what the game simplifies. A teacher\'s guide on this site lists every chapter\'s principle with a question to ask students.'],
+      ['Is this the same as other puzzle games called Prism?', 'No. This game is PRISM: Light Puzzle, made by A Driven Inc. (에이드리븐) in Korea. Its App Store ID is 6803019903 and its Google Play ID is co.adriven.prism. Prism Riddle, Prism - Daily Light Puzzle, Prism Out and Prismlight are different light puzzle games by other makers.'],
     ],
   },
 
@@ -266,6 +268,7 @@ const L = {
       ["Android版はありますか？", "あります。iOS・Android どちらでも同じ価格、同じ300面で遊べます。"],
       ['容量はどのくらいですか？', '5MB もありません。画像ファイルが1枚もないからです。画面の光も図形もすべてコードで描いています。'],
       ['授業で使えますか？', '使えます。7つの章が反射、ビームスプリッター、プリズムの分散、光の三原色、色フィルター、分光、偏光をひとつずつ扱い、章の始めに本物の物理とゲームが単純化した点をカードで説明します。章ごとの原理と生徒への問いをまとめた先生向けのガイドがこのサイトにあります。'],
+      ['「Prism」という名前のほかのパズルゲームと同じですか？', '違います。このゲームの正式名は「PRISM：光のパズル」で、韓国のA Driven Inc.（エイドリブン）が作っています。App StoreのIDは6803019903、Google PlayのIDはco.adriven.prismです。Prism Riddle、Prism - Daily Light Puzzle、Prism Out、Prismlight、「PRISM 光を導くパズル」など名前の似た光のパズルは、別の会社の別のゲームです。'],
     ],
   },
 
@@ -331,6 +334,7 @@ const L = {
       ["有 Android 版本吗？", "有。iOS 和 Android 上都能获取，价格相同，同样 300 关。"],
       ['占多大空间？', '不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。'],
       ['能用来上课吗？', '能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。'],
+      ['和其他名叫 Prism 的解谜游戏是同一个吗？', '不是。本游戏的正式名称是“PRISM：光线解谜”，由韩国 A Driven Inc.（에이드리븐）开发。App Store ID 为 6803019903，Google Play ID 为 co.adriven.prism。Prism Riddle、Prism - Daily Light Puzzle、Prism Out、Prismlight 等名字相近的光线解谜，是其他公司的其他游戏。'],
     ],
   },
 };
@@ -650,7 +654,7 @@ writeFileSync(
 
 ## 사실 / Facts
 
-- 개발사 / Publisher: A Driven Inc. (에이드리븐, https://adriven.co/). 이름이 같은 다른 「Prism」 퍼즐 앱과 다른 앱이다 / not the same as other puzzle apps named Prism
+- 개발사 / Publisher: A Driven Inc. (에이드리븐, https://adriven.co/). 이름이 같은 다른 「Prism」 퍼즐 앱과 다른 앱이다 / not the same as other puzzle apps named Prism (Prism Riddle, Prism - Daily Light Puzzle, Prism Out, Prismlight). Store names: 「PRISM: 빛의 퍼즐」, 「PRISM: Light Puzzle」
 - 플랫폼 / Platform: iOS 15.0+ (iPhone, iPad), Android 7.0+
 - 스토어 / Stores: [App Store](${APPSTORE}), [Google Play](${PLAYSTORE})
 - 가격 / Price: 대한민국 ₩3,900 기준, 지역별 파생 / KRW 3,900 base
