@@ -1,0 +1,417 @@
+{
+  "coordinates": "Columns A, B, C... left to right; rows 1, 2, 3... top to bottom. Letters and numbers are printed on the board edges.",
+  "glyphs": {
+    "R": "triangle",
+    "G": "square",
+    "B": "circle"
+  },
+  "sourceMarker": "Colored source: white box with its glyphs. White source: solid black box with all three glyphs knocked out in white.",
+  "beamStyles": {
+    "white": "solid line",
+    "R": "long dashes (triangle tag)",
+    "G": "dash-dot line (square tag)",
+    "B": "dots (circle tag)",
+    "overlap": "two components on the same cell edge are drawn as parallel lines"
+  },
+  "tapBadge": "Answer key: a black circle with a number next to a piece = how many times to tap it.",
+  "levels": [
+    {
+      "id": 10,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 3,
+      "why": {
+        "en": "Two sources, three mirrors, all three start out wrong: students find that every mirror needs its one turn.",
+        "ko": "광원 둘, 거울 셋이 모두 틀리게 놓여 있다. 거울마다 한 번씩 돌려야 한다는 것을 알게 된다."
+      },
+      "rotate": [
+        {
+          "cell": "B3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "C3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "D3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "B5",
+          "facing": "up",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        },
+        {
+          "cell": "C1",
+          "facing": "down",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "D5",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        },
+        {
+          "cell": "A3",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "10-puzzle.svg",
+        "answer": "10-answer.svg"
+      }
+    },
+    {
+      "id": 12,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 3,
+      "why": {
+        "en": "Two green beams cross in the empty cell C2 and carry on unchanged; three taps.",
+        "ko": "초록 빛 두 줄기가 빈칸 C2에서 가로지른 뒤 그대로 간다. 세 번 돌리기."
+      },
+      "rotate": [
+        {
+          "cell": "D2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "C3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "D4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "A2",
+          "facing": "right",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        },
+        {
+          "cell": "C1",
+          "facing": "down",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "E4",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        },
+        {
+          "cell": "B3",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "12-puzzle.svg",
+        "answer": "12-answer.svg"
+      }
+    },
+    {
+      "id": 13,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 4,
+      "why": {
+        "en": "The crystal sits above the source in the same column, but the path goes round a square through four mirrors, all turned once.",
+        "ko": "결정이 광원과 같은 세로줄 위에 있지만 길은 거울 넷을 거쳐 네모로 돈다. 네 거울을 모두 한 번씩 돌린다."
+      },
+      "rotate": [
+        {
+          "cell": "B2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "D2",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "B3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "D3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "D5",
+          "facing": "up",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "D1",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "13-puzzle.svg",
+        "answer": "13-answer.svg"
+      }
+    },
+    {
+      "id": 14,
+      "chapter": 1,
+      "chapterName": {
+        "en": "Reflect",
+        "ko": "반사"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 4,
+      "why": {
+        "en": "Four taps; the beam from the source at E1 ends at the source at C1, so only the C1 source can light the crystal.",
+        "ko": "네 번 돌리기. E1 광원의 빛은 C1 광원에서 끝나서 결정을 밝히는 것은 C1 광원뿐이다."
+      },
+      "rotate": [
+        {
+          "cell": "B3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "C3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        },
+        {
+          "cell": "A4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "B4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [],
+      "sources": [
+        {
+          "cell": "E1",
+          "facing": "left",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        },
+        {
+          "cell": "C1",
+          "facing": "down",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "A1",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "14-puzzle.svg",
+        "answer": "14-answer.svg"
+      }
+    }
+  ]
+}
