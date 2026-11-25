@@ -26,6 +26,8 @@
 - [Beam splitters (half-silvered mirrors)](https://prism.adriven.co/en/learn/beam-splitter/): A beam splitter, also called a half-silvered mirror, is an optical part that lets part of the light that hits it pass through and reflects part of it, turning one beam into two.
 - [빛의 분산](https://prism.adriven.co/learn/dispersion/): 빛의 분산은 파장(색)에 따라 물질 속에서 빛의 굴절 정도가 달라서, 흰 빛이 프리즘 같은 물체를 지나며 여러 색으로 갈라지는 현상입니다.
 - [Dispersion of light](https://prism.adriven.co/en/learn/dispersion/): Dispersion of light is the spreading of white light into its colors, because the amount that a material bends light depends on the wavelength (color), so a prism or a drop of water separates the colors.
+- [빛의 합성](https://prism.adriven.co/learn/light-mixing/): 빛의 합성은 서로 다른 색의 빛을 겹쳐 새로운 색으로 보이게 하는 것으로, 빨강·초록·파랑 빛 가운데 두 가지를 겹치면 노랑·마젠타·시안이 되고 셋을 모두 겹치면 흰빛에 가깝게 보입니다.
+- [Mixing colored light](https://prism.adriven.co/en/learn/light-mixing/): Mixing colored light means overlapping lights of different colors so the eye sees a new color: overlapping two of red, green and blue light makes yellow, magenta or cyan, and all three together look white.
 
 ## 학습지 / Printable worksheets
 
