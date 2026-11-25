@@ -36,8 +36,8 @@ export default {
   slug: 'reflection',
   order: 1,
   chapter: 1,
-  date: '2026-11-26',
-  updated: '2026-11-26',
+  date: '2026-11-17',
+  updated: '2026-11-25',
   langs: ['ko', 'en', 'ja', 'zh-Hans'],
   worksheet: 'path-of-light',
   text: {
