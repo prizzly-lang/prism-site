@@ -55,7 +55,7 @@ export function articlePage(art, lang) {
     main: `      <article>
         <header class="page-head">
           <h1>${esc(a.title)}</h1>
-          <p class="page-head__date"><time datetime="${art.date}">${esc(a.dateLabel)}</time></p>
+          <p class="page-head__date"><time datetime="${art.date}">${esc(a.dateLabel)}</time> · ${esc(ORG.name)}</p>
 ${a.update ? `          <p class="page-head__update">${esc(a.update)}</p>\n` : ''}          <p class="lead">${a.lead}</p>
         </header>
         <div class="prose">

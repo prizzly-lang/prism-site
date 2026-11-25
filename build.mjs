@@ -28,7 +28,7 @@ import { mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { ORIGIN, APPSTORE, PLAYSTORE, APP_ID, ORG, LANGS, LANG_NAME, esc, plain, homeOf, learnPath, worksheetsPath, aboutPath, ANALYTICS, cfBeacon } from './site.mjs';
+import { ORIGIN, APPSTORE, PLAYSTORE, APP_ID, ORG, updatedLine, LANGS, LANG_NAME, esc, plain, homeOf, learnPath, worksheetsPath, aboutPath, ANALYTICS, cfBeacon } from './site.mjs';
 import { ARTICLES, articlesIn, articlePathOf } from './articles/index.mjs';
 import { articlePage, articleSitemap, articleLlmsSection } from './article-page.mjs';
 import { WS_LANGS, WORKSHEETS, wsPathOf, worksheetPages } from './worksheet-page.mjs';
@@ -356,6 +356,18 @@ const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
  * 얼마인지, 누가 만들었는지, 어디서 받는지. `aggregateRating`은 넣지 않는다(리뷰가 쌓이기
  * 전에 넣으면 거짓이다).
  */
+/*
+  첫 화면 meta description 앞머리. 「빛 퍼즐 게임」이라는 말과 무엇을 하는 게임인지를 가격과 떼어
+  둔다. 뒤에 붙는 L[lang].desc는 1.6 출시일에 가격 문구가 바뀌므로(8f4d460 되돌리기) 그 줄을
+  건드리지 않으려고 따로 둔다. 2026-11-25 외부 진단: 72자, 핵심 말 없음.
+*/
+const DESC_LEAD = {
+  ko: '빛 퍼즐 게임 PRISM: 거울과 프리즘으로 빛을 꺾어 모든 목표를 밝힙니다.',
+  en: 'PRISM, a light puzzle game.',
+  ja: '光のパズルゲームPRISM：鏡とプリズムで光を曲げ、すべての目標を照らします。',
+  'zh-Hans': '光线解谜游戏 PRISM：用镜子和棱镜让光拐弯，点亮所有目标。',
+};
+
 function homePage(lang) {
   const t = L[lang];
   const path = homeOf(lang);
@@ -428,7 +440,7 @@ function homePage(lang) {
   return page({
     lang,
     title: t.title,
-    desc: t.desc,
+    desc: `${DESC_LEAD[lang]} ${t.desc}`,
     path,
     alternates: Object.fromEntries(LANGS.map((l) => [l, homeOf(l)])),
     section: 'app',
@@ -540,6 +552,7 @@ ${t.a11yMore.map((f) => `          <li>${esc(f)}</li>`).join('\n')}
       <section class="closer">
         <p class="closer__line">${esc(t.tagline)}</p>
         ${storeLinks(lang, 'store-links--lg', 'home-end')}
+        ${updatedLine(lang, SITE_UPDATED)}
       </section>`,
   });
 }

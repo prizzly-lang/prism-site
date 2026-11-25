@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PRISM: Light Puzzle · Bend light. Wake the crystals.</title>
-    <meta name="description" content="Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline." />
+    <meta name="description" content="PRISM, a light puzzle game. Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline." />
+    <meta name="author" content="A Driven Inc." />
     <meta name="theme-color" content="#F3EFE6" />
     <link rel="canonical" href="https://prism.adriven.co/en/" />
     <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
@@ -13,7 +14,7 @@
     <link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
     <link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
     <meta property="og:title" content="PRISM: Light Puzzle · Bend light. Wake the crystals." />
-    <meta property="og:description" content="Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline." />
+    <meta property="og:description" content="PRISM, a light puzzle game. Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://prism.adriven.co/en/" />
@@ -24,21 +25,10 @@
     <link rel="stylesheet" href="/site.css" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://prism.adriven.co/#website",
-    "name": "PRISM",
-    "alternateName": "PRISM by A Driven",
-    "url": "https://prism.adriven.co/",
-    "inLanguage": [
-      "ko",
-      "en",
-      "ja",
-      "zh-Hans"
-    ],
-    "publisher": {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
       "@type": "Organization",
       "@id": "https://adriven.co/#org",
       "name": "A Driven Inc.",
@@ -51,196 +41,238 @@
       "sameAs": [
         "https://apps.apple.com/developer/id1655290007",
         "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://prism.adriven.co/img/logo-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "prism@adriven.co",
+        "availableLanguage": [
+          "ko",
+          "en",
+          "ja",
+          "zh-Hans"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://prism.adriven.co/#website",
+      "name": "PRISM",
+      "alternateName": "PRISM by A Driven",
+      "url": "https://prism.adriven.co/",
+      "inLanguage": [
+        "ko",
+        "en",
+        "ja",
+        "zh-Hans"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://prism.adriven.co/#app",
+      "name": "PRISM",
+      "sameAs": [
+        "https://apps.apple.com/app/id6803019903",
+        "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      ],
+      "alternateName": [
+        "PRISM: Light Puzzle",
+        "PRISM: Light Puzzle · Bend light. Wake the crystals."
+      ],
+      "description": "Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.",
+      "url": "https://prism.adriven.co/en/",
+      "inLanguage": "en",
+      "applicationCategory": "GameApplication",
+      "applicationSubCategory": "PuzzleGame",
+      "operatingSystem": "iOS 15.0 or later, Android 7.0 or later",
+      "downloadUrl": [
+        "https://apps.apple.com/kr/app/id6803019903",
+        "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      ],
+      "installUrl": [
+        "https://apps.apple.com/kr/app/id6803019903",
+        "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      ],
+      "fileSize": "5MB",
+      "softwareVersion": "1.5",
+      "availableOnDevice": [
+        "iPhone",
+        "iPad",
+        "Android"
+      ],
+      "countriesSupported": "Worldwide",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "3900",
+          "priceCurrency": "KRW",
+          "availability": "https://schema.org/InStock",
+          "url": "https://apps.apple.com/kr/app/id6803019903"
+        },
+        {
+          "@type": "Offer",
+          "price": "3900",
+          "priceCurrency": "KRW",
+          "availability": "https://schema.org/InStock",
+          "url": "https://play.google.com/store/apps/details?id=co.adriven.prism"
+        }
+      ],
+      "author": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "screenshot": [
+        "https://prism.adriven.co/img/board-prism.png",
+        "https://prism.adriven.co/img/board-rule.png",
+        "https://prism.adriven.co/img/board-mixing.png"
+      ],
+      "featureList": [
+        "300 puzzles across seven chapters",
+        "Every puzzle has exactly one solution",
+        "The par shown is the true minimum, found by exhaustive search",
+        "No ads · no in-app purchases · no sign-up",
+        "No networking at all. Fully offline"
+      ],
+      "accessibilityFeature": [
+        "highContrastDisplay",
+        "largePrint",
+        "reducedMotion"
+      ],
+      "accessibilityHazard": [
+        "noFlashingHazard",
+        "noMotionSimulationHazard",
+        "noSoundHazard"
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are there really no ads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work without internet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I play if I am colorblind?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 300 puzzles can be finished without distinguishing color at all."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many levels, and how hard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seven chapters, 300 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there an Android version?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is available on both iOS and Android, same price, same 300 puzzles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How big is it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use it to teach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The seven chapters cover reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization, and each opens with a card on the real physics and what the game simplifies. A teacher's guide on this site lists every chapter's principle with a question to ask students."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this the same as other puzzle games called Prism?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This game is PRISM: Light Puzzle, made by A Driven Inc. (에이드리븐) in Korea. Its App Store ID is 6803019903 and its Google Play ID is co.adriven.prism. Prism Riddle, Prism - Daily Light Puzzle, Prism Out and Prismlight are different light puzzle games by other makers."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Thirty seconds and you know the game",
+      "description": "Real gameplay. No sound.",
+      "thumbnailUrl": "https://prism.adriven.co/media/preview-en.jpg",
+      "contentUrl": "https://prism.adriven.co/media/preview-en.mp4",
+      "uploadDate": "2026-10-27",
+      "duration": "PT25S",
+      "inLanguage": "en"
     }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "@id": "https://prism.adriven.co/#app",
-    "name": "PRISM",
-    "sameAs": [
-      "https://apps.apple.com/app/id6803019903",
-      "https://play.google.com/store/apps/details?id=co.adriven.prism"
-    ],
-    "alternateName": [
-      "PRISM: Light Puzzle",
-      "PRISM: Light Puzzle · Bend light. Wake the crystals."
-    ],
-    "description": "Tap and the light bends. A minimal puzzle with exactly one rule. 300 levels, one solution each. No ads, no in-app purchases, fully offline.",
-    "url": "https://prism.adriven.co/en/",
-    "inLanguage": "en",
-    "applicationCategory": "GameApplication",
-    "applicationSubCategory": "PuzzleGame",
-    "operatingSystem": "iOS 15.0 or later, Android 7.0 or later",
-    "downloadUrl": [
-      "https://apps.apple.com/kr/app/id6803019903",
-      "https://play.google.com/store/apps/details?id=co.adriven.prism"
-    ],
-    "installUrl": [
-      "https://apps.apple.com/kr/app/id6803019903",
-      "https://play.google.com/store/apps/details?id=co.adriven.prism"
-    ],
-    "fileSize": "5MB",
-    "softwareVersion": "1.5",
-    "availableOnDevice": [
-      "iPhone",
-      "iPad",
-      "Android"
-    ],
-    "countriesSupported": "Worldwide",
-    "offers": [
-      {
-        "@type": "Offer",
-        "price": "3900",
-        "priceCurrency": "KRW",
-        "availability": "https://schema.org/InStock",
-        "url": "https://apps.apple.com/kr/app/id6803019903"
-      },
-      {
-        "@type": "Offer",
-        "price": "3900",
-        "priceCurrency": "KRW",
-        "availability": "https://schema.org/InStock",
-        "url": "https://play.google.com/store/apps/details?id=co.adriven.prism"
-      }
-    ],
-    "author": {
-      "@type": "Organization",
-      "@id": "https://adriven.co/#org",
-      "name": "A Driven Inc.",
-      "alternateName": [
-        "A Driven",
-        "Adriven",
-        "에이드리븐"
-      ],
-      "url": "https://adriven.co/",
-      "sameAs": [
-        "https://apps.apple.com/developer/id1655290007",
-        "https://play.google.com/store/apps/developer?id=Adriven+Corp."
-      ]
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": "https://adriven.co/#org",
-      "name": "A Driven Inc.",
-      "alternateName": [
-        "A Driven",
-        "Adriven",
-        "에이드리븐"
-      ],
-      "url": "https://adriven.co/",
-      "sameAs": [
-        "https://apps.apple.com/developer/id1655290007",
-        "https://play.google.com/store/apps/developer?id=Adriven+Corp."
-      ]
-    },
-    "screenshot": [
-      "https://prism.adriven.co/img/board-prism.png",
-      "https://prism.adriven.co/img/board-rule.png",
-      "https://prism.adriven.co/img/board-mixing.png"
-    ],
-    "featureList": [
-      "300 puzzles across seven chapters",
-      "Every puzzle has exactly one solution",
-      "The par shown is the true minimum, found by exhaustive search",
-      "No ads · no in-app purchases · no sign-up",
-      "No networking at all. Fully offline"
-    ],
-    "accessibilityFeature": [
-      "highContrastDisplay",
-      "largePrint",
-      "reducedMotion"
-    ],
-    "accessibilityHazard": [
-      "noFlashingHazard",
-      "noMotionSimulationHazard",
-      "noSoundHazard"
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "inLanguage": "en",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Are there really no ads?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "None. No in-app purchases, no sign-up, no sign-in. One purchase opens all 300 puzzles from the start. If you were looking for a puzzle game with no ads, that is why this one exists."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does it work without internet?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. It does no networking at all, so it is fully offline. It works on a plane, underground, anywhere with no signal. Your progress is stored only on this device and is never sent anywhere."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I play if I am colorblind?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Every crystal carries its required color as a shape as well (red is a triangle, green a square, blue a circle), so all 300 puzzles can be finished without distinguishing color at all."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How many levels, and how hard?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Seven chapters, 300 boards. Every board has exactly one solution, so nothing is solved by luck, and if you are stuck there is always a reason. The par shown is the true minimum, proven by exhaustive search."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is there an Android version?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. It is available on both iOS and Android, same price, same 300 puzzles."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How big is it?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Under 5 MB. There is not a single image file in the app. Every beam and shape is drawn in code."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use it to teach?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. The seven chapters cover reflection, beam splitting, dispersion, additive color mixing, color filters, spectroscopy and polarization, and each opens with a card on the real physics and what the game simplifies. A teacher's guide on this site lists every chapter's principle with a question to ask students."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is this the same as other puzzle games called Prism?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. This game is PRISM: Light Puzzle, made by A Driven Inc. (에이드리븐) in Korea. Its App Store ID is 6803019903 and its Google Play ID is co.adriven.prism. Prism Riddle, Prism - Daily Light Puzzle, Prism Out and Prismlight are different light puzzle games by other makers."
-        }
-      }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": "Thirty seconds and you know the game",
-    "description": "Real gameplay. No sound.",
-    "thumbnailUrl": "https://prism.adriven.co/media/preview-en.jpg",
-    "contentUrl": "https://prism.adriven.co/media/preview-en.mp4",
-    "uploadDate": "2026-10-27",
-    "duration": "PT25S",
-    "inLanguage": "en"
-  }
-]
+  ]
+}
     </script>
   </head>
   <body>
@@ -390,6 +422,7 @@
           <a class="button" href="https://apps.apple.com/kr/app/id6803019903?pt=125735609&ct=site-en-home-end&mt=8">Get it on the App Store</a>
           <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism&referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Dsite-en-home-end">Get it on Google Play</a>
         </p>
+        <p class="page-head__date">Last updated <time datetime="2026-11-26">November 26, 2026</time> · A Driven Inc.</p>
       </section>
     </main>
     <footer class="site-footer">

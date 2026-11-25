@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PRISM：光线解谜｜折转光线，点亮结晶</title>
-    <meta name="description" content="点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。" />
+    <meta name="description" content="光线解谜游戏 PRISM：用镜子和棱镜让光拐弯，点亮所有目标。 点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。" />
+    <meta name="author" content="A Driven Inc." />
     <meta name="theme-color" content="#F3EFE6" />
     <link rel="canonical" href="https://prism.adriven.co/zh-Hans/" />
     <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/" />
@@ -13,7 +14,7 @@
     <link rel="alternate" hreflang="zh-Hans" href="https://prism.adriven.co/zh-Hans/" />
     <link rel="alternate" hreflang="x-default" href="https://prism.adriven.co/en/" />
     <meta property="og:title" content="PRISM：光线解谜｜折转光线，点亮结晶" />
-    <meta property="og:description" content="点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。" />
+    <meta property="og:description" content="光线解谜游戏 PRISM：用镜子和棱镜让光拐弯，点亮所有目标。 点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:url" content="https://prism.adriven.co/zh-Hans/" />
@@ -24,21 +25,10 @@
     <link rel="stylesheet" href="/site.css" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://prism.adriven.co/#website",
-    "name": "PRISM",
-    "alternateName": "PRISM by A Driven",
-    "url": "https://prism.adriven.co/",
-    "inLanguage": [
-      "ko",
-      "en",
-      "ja",
-      "zh-Hans"
-    ],
-    "publisher": {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
       "@type": "Organization",
       "@id": "https://adriven.co/#org",
       "name": "A Driven Inc.",
@@ -51,196 +41,238 @@
       "sameAs": [
         "https://apps.apple.com/developer/id1655290007",
         "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://prism.adriven.co/img/logo-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "prism@adriven.co",
+        "availableLanguage": [
+          "ko",
+          "en",
+          "ja",
+          "zh-Hans"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://prism.adriven.co/#website",
+      "name": "PRISM",
+      "alternateName": "PRISM by A Driven",
+      "url": "https://prism.adriven.co/",
+      "inLanguage": [
+        "ko",
+        "en",
+        "ja",
+        "zh-Hans"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://prism.adriven.co/#app",
+      "name": "PRISM",
+      "sameAs": [
+        "https://apps.apple.com/app/id6803019903",
+        "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      ],
+      "alternateName": [
+        "PRISM: Light Puzzle",
+        "PRISM：光线解谜｜折转光线，点亮结晶"
+      ],
+      "description": "点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。",
+      "url": "https://prism.adriven.co/zh-Hans/",
+      "inLanguage": "zh-Hans",
+      "applicationCategory": "GameApplication",
+      "applicationSubCategory": "PuzzleGame",
+      "operatingSystem": "iOS 15.0 or later, Android 7.0 or later",
+      "downloadUrl": [
+        "https://apps.apple.com/kr/app/id6803019903",
+        "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      ],
+      "installUrl": [
+        "https://apps.apple.com/kr/app/id6803019903",
+        "https://play.google.com/store/apps/details?id=co.adriven.prism"
+      ],
+      "fileSize": "5MB",
+      "softwareVersion": "1.5",
+      "availableOnDevice": [
+        "iPhone",
+        "iPad",
+        "Android"
+      ],
+      "countriesSupported": "Worldwide",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "3900",
+          "priceCurrency": "KRW",
+          "availability": "https://schema.org/InStock",
+          "url": "https://apps.apple.com/kr/app/id6803019903"
+        },
+        {
+          "@type": "Offer",
+          "price": "3900",
+          "priceCurrency": "KRW",
+          "availability": "https://schema.org/InStock",
+          "url": "https://play.google.com/store/apps/details?id=co.adriven.prism"
+        }
+      ],
+      "author": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "screenshot": [
+        "https://prism.adriven.co/img/board-prism.png",
+        "https://prism.adriven.co/img/board-rule.png",
+        "https://prism.adriven.co/img/board-mixing.png"
+      ],
+      "featureList": [
+        "300 个谜题，七个章节",
+        "每个谜题只有一个答案",
+        "显示的最少点击次数是穷举验证过的真实最小值",
+        "没有广告 · 没有内购 · 无需注册",
+        "完全不联网。彻底离线"
+      ],
+      "accessibilityFeature": [
+        "highContrastDisplay",
+        "largePrint",
+        "reducedMotion"
+      ],
+      "accessibilityHazard": [
+        "noFlashingHazard",
+        "noMotionSimulationHazard",
+        "noSoundHazard"
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "zh-Hans",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "真的没有广告吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "没有。也没有内购、注册和登录。一次购买，300 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "没有网络能玩吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "我有色觉障碍，能玩吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "一共多少关？难吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "有 Android 版本吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "有。iOS 和 Android 上都能获取，价格相同，同样 300 关。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "占多大空间？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "能用来上课吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "和其他名叫 Prism 的解谜游戏是同一个吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不是。本游戏的正式名称是“PRISM：光线解谜”，由韩国 A Driven Inc.（에이드리븐）开发。App Store ID 为 6803019903，Google Play ID 为 co.adriven.prism。Prism Riddle、Prism - Daily Light Puzzle、Prism Out、Prismlight 等名字相近的光线解谜，是其他公司的其他游戏。"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "VideoObject",
+      "name": "三十秒就知道这是什么游戏",
+      "description": "真实的游戏画面。没有声音。",
+      "thumbnailUrl": "https://prism.adriven.co/media/preview-zh-Hans.jpg",
+      "contentUrl": "https://prism.adriven.co/media/preview-zh-Hans.mp4",
+      "uploadDate": "2026-10-27",
+      "duration": "PT27S",
+      "inLanguage": "zh-Hans"
     }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "@id": "https://prism.adriven.co/#app",
-    "name": "PRISM",
-    "sameAs": [
-      "https://apps.apple.com/app/id6803019903",
-      "https://play.google.com/store/apps/details?id=co.adriven.prism"
-    ],
-    "alternateName": [
-      "PRISM: Light Puzzle",
-      "PRISM：光线解谜｜折转光线，点亮结晶"
-    ],
-    "description": "点一下，光就会拐弯。只有一条规则的极简解谜。300 个关卡，每关只有一个答案。没有广告，没有内购，完全离线。",
-    "url": "https://prism.adriven.co/zh-Hans/",
-    "inLanguage": "zh-Hans",
-    "applicationCategory": "GameApplication",
-    "applicationSubCategory": "PuzzleGame",
-    "operatingSystem": "iOS 15.0 or later, Android 7.0 or later",
-    "downloadUrl": [
-      "https://apps.apple.com/kr/app/id6803019903",
-      "https://play.google.com/store/apps/details?id=co.adriven.prism"
-    ],
-    "installUrl": [
-      "https://apps.apple.com/kr/app/id6803019903",
-      "https://play.google.com/store/apps/details?id=co.adriven.prism"
-    ],
-    "fileSize": "5MB",
-    "softwareVersion": "1.5",
-    "availableOnDevice": [
-      "iPhone",
-      "iPad",
-      "Android"
-    ],
-    "countriesSupported": "Worldwide",
-    "offers": [
-      {
-        "@type": "Offer",
-        "price": "3900",
-        "priceCurrency": "KRW",
-        "availability": "https://schema.org/InStock",
-        "url": "https://apps.apple.com/kr/app/id6803019903"
-      },
-      {
-        "@type": "Offer",
-        "price": "3900",
-        "priceCurrency": "KRW",
-        "availability": "https://schema.org/InStock",
-        "url": "https://play.google.com/store/apps/details?id=co.adriven.prism"
-      }
-    ],
-    "author": {
-      "@type": "Organization",
-      "@id": "https://adriven.co/#org",
-      "name": "A Driven Inc.",
-      "alternateName": [
-        "A Driven",
-        "Adriven",
-        "에이드리븐"
-      ],
-      "url": "https://adriven.co/",
-      "sameAs": [
-        "https://apps.apple.com/developer/id1655290007",
-        "https://play.google.com/store/apps/developer?id=Adriven+Corp."
-      ]
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": "https://adriven.co/#org",
-      "name": "A Driven Inc.",
-      "alternateName": [
-        "A Driven",
-        "Adriven",
-        "에이드리븐"
-      ],
-      "url": "https://adriven.co/",
-      "sameAs": [
-        "https://apps.apple.com/developer/id1655290007",
-        "https://play.google.com/store/apps/developer?id=Adriven+Corp."
-      ]
-    },
-    "screenshot": [
-      "https://prism.adriven.co/img/board-prism.png",
-      "https://prism.adriven.co/img/board-rule.png",
-      "https://prism.adriven.co/img/board-mixing.png"
-    ],
-    "featureList": [
-      "300 个谜题，七个章节",
-      "每个谜题只有一个答案",
-      "显示的最少点击次数是穷举验证过的真实最小值",
-      "没有广告 · 没有内购 · 无需注册",
-      "完全不联网。彻底离线"
-    ],
-    "accessibilityFeature": [
-      "highContrastDisplay",
-      "largePrint",
-      "reducedMotion"
-    ],
-    "accessibilityHazard": [
-      "noFlashingHazard",
-      "noMotionSimulationHazard",
-      "noSoundHazard"
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "inLanguage": "zh-Hans",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "真的没有广告吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "没有。也没有内购、注册和登录。一次购买，300 个谜题从一开始就全部开放。如果你在找一款没有广告的解谜游戏，这就是它存在的理由。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "没有网络能玩吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "能。它完全不联网，是彻底离线的游戏。在飞机上、地铁里、没有信号的地方都照常运行。进度只保存在这台设备上，不会发送到任何地方。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "我有色觉障碍，能玩吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "能。每个结晶都把要求的颜色同时刻成了图形（红是三角形，绿是方形，蓝是圆形），即使完全看不到颜色，300 关也都能解开。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "一共多少关？难吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "七个章节，300 关。每关只有一个答案，所以不会靠运气解开；卡住的时候一定有原因。显示的最少点击次数是穷举验证过的真实最小值。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "有 Android 版本吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "有。iOS 和 Android 上都能获取，价格相同，同样 300 关。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "占多大空间？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "不到 5MB。因为应用里连一张图片文件都没有——画面上的光和图形全部由代码绘制。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "能用来上课吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "能。七个章节分别讲反射、分束器、棱镜色散、光的三原色、滤光片、光谱分析和偏振，每章开头都有一张卡片，说明真实的物理以及游戏做了哪些简化。本站有一篇面向老师的指南，整理了每章的原理和可以问学生的问题。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "和其他名叫 Prism 的解谜游戏是同一个吗？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "不是。本游戏的正式名称是“PRISM：光线解谜”，由韩国 A Driven Inc.（에이드리븐）开发。App Store ID 为 6803019903，Google Play ID 为 co.adriven.prism。Prism Riddle、Prism - Daily Light Puzzle、Prism Out、Prismlight 等名字相近的光线解谜，是其他公司的其他游戏。"
-        }
-      }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": "三十秒就知道这是什么游戏",
-    "description": "真实的游戏画面。没有声音。",
-    "thumbnailUrl": "https://prism.adriven.co/media/preview-zh-Hans.jpg",
-    "contentUrl": "https://prism.adriven.co/media/preview-zh-Hans.mp4",
-    "uploadDate": "2026-10-27",
-    "duration": "PT27S",
-    "inLanguage": "zh-Hans"
-  }
-]
+  ]
+}
     </script>
   </head>
   <body>
@@ -388,6 +420,7 @@
           <a class="button" href="https://apps.apple.com/kr/app/id6803019903?pt=125735609&ct=site-zh-hans-home-end&mt=8">在 App Store 获取</a>
           <a class="button button--secondary" href="https://play.google.com/store/apps/details?id=co.adriven.prism&referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Dsite-zh-hans-home-end">在 Google Play 获取</a>
         </p>
+        <p class="page-head__date">最后更新 <time datetime="2026-11-26">2026年11月26日</time> · A Driven Inc.</p>
       </section>
     </main>
     <footer class="site-footer">

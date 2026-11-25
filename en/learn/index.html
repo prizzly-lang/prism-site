@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Learn about light | PRISM</title>
     <meta name="description" content="Learn how light behaves, from reflection to polarization, with small experiments and the light puzzle game PRISM. For ages 10 to 14 and their teachers." />
+    <meta name="author" content="A Driven Inc." />
     <meta name="theme-color" content="#F3EFE6" />
     <link rel="canonical" href="https://prism.adriven.co/en/learn/" />
     <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/learn/" />
@@ -24,15 +25,10 @@
     <link rel="stylesheet" href="/site.css" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Learn about light",
-    "description": "Learn how light behaves, from reflection to polarization, with small experiments and the light puzzle game PRISM. For ages 10 to 14 and their teachers.",
-    "inLanguage": "en",
-    "url": "https://prism.adriven.co/en/learn/",
-    "publisher": {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
       "@type": "Organization",
       "@id": "https://adriven.co/#org",
       "name": "A Driven Inc.",
@@ -45,44 +41,82 @@
       "sameAs": [
         "https://apps.apple.com/developer/id1655290007",
         "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://prism.adriven.co/img/logo-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "prism@adriven.co",
+        "availableLanguage": [
+          "ko",
+          "en",
+          "ja",
+          "zh-Hans"
+        ]
+      }
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Learn about light",
+      "description": "Learn how light behaves, from reflection to polarization, with small experiments and the light puzzle game PRISM. For ages 10 to 14 and their teachers.",
+      "inLanguage": "en",
+      "url": "https://prism.adriven.co/en/learn/",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "hasPart": [
+        {
+          "@type": "Article",
+          "headline": "Reflection of light",
+          "url": "https://prism.adriven.co/en/learn/reflection/"
+        },
+        {
+          "@type": "Article",
+          "headline": "Beam splitters (half-silvered mirrors)",
+          "url": "https://prism.adriven.co/en/learn/beam-splitter/"
+        },
+        {
+          "@type": "Article",
+          "headline": "Dispersion of light",
+          "url": "https://prism.adriven.co/en/learn/dispersion/"
+        }
       ]
     },
-    "hasPart": [
-      {
-        "@type": "Article",
-        "headline": "Reflection of light",
-        "url": "https://prism.adriven.co/en/learn/reflection/"
-      },
-      {
-        "@type": "Article",
-        "headline": "Beam splitters (half-silvered mirrors)",
-        "url": "https://prism.adriven.co/en/learn/beam-splitter/"
-      },
-      {
-        "@type": "Article",
-        "headline": "Dispersion of light",
-        "url": "https://prism.adriven.co/en/learn/dispersion/"
-      }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "PRISM",
-        "item": "https://prism.adriven.co/en/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Learn about light"
-      }
-    ]
-  }
-]
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "PRISM",
+          "item": "https://prism.adriven.co/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learn about light"
+        }
+      ]
+    }
+  ]
+}
     </script>
   </head>
   <body>

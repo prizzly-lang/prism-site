@@ -6,7 +6,7 @@
  * 학습 페이지에는 스토어 버튼을 직접 두지 않고 「해 보기」(체험판)로 보낸다.
  */
 
-import { ORIGIN, ORG, APP_ID, UI, CONCEPTS, CONCEPT_LANGS, esc, homeOf, learnPath, prefix } from './site.mjs';
+import { ORIGIN, ORG, updatedLine, APP_ID, UI, CONCEPTS, CONCEPT_LANGS, esc, homeOf, learnPath, prefix } from './site.mjs';
 import { page } from './ui/page.mjs';
 import { blocks, disclosure } from './ui/content.mjs';
 import { sideNav, pager } from './ui/nav.mjs';
@@ -198,6 +198,7 @@ function conceptPage(lang, c) {
           <p class="page-head__kicker">${CONCEPTS.findIndex((k) => k.slug === c.slug) + 1} / ${CONCEPTS.length}</p>
           <h1>${esc(x.title)}</h1>
           <p class="page-head__sub">${esc(x.subtitle)}</p>
+          ${updatedLine(lang, c.updated)}
           <p class="definition">${esc(x.definition)}</p>
           <dl class="meta">${meta}</dl>
         </header>

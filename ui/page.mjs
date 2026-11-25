@@ -9,7 +9,7 @@
  */
 
 import {
-  ORIGIN, EMAIL, LANGS, LANG_NAME, UI, esc, homeOf, ogLocale,
+  ORIGIN, EMAIL, ORG, ORG_NODE, LANGS, LANG_NAME, UI, esc, homeOf, ogLocale,
   appStoreHref, playHref, cfBeacon, navItems, docPath, aboutPath, FAMILY, familyName, familyNameLang, familyHref, COMPANY, COMPANY_UI,
 } from '../site.mjs';
 import { articlesIn, articlePathOf } from '../articles/index.mjs';
@@ -44,6 +44,7 @@ export function page(o) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(desc)}" />
+    <meta name="author" content="${esc(ORG.name)}" />
     <meta name="theme-color" content="#F3EFE6" />${o.noindex ? '\n    <meta name="robots" content="noindex, follow" />' : ''}
     <link rel="canonical" href="${ORIGIN}${path}" />
 ${o.noindex ? '' : Object.entries(alternates)
@@ -59,10 +60,10 @@ ${o.noindex ? '' : Object.entries(alternates)
     <link rel="stylesheet" href="/fonts/fonts.css" />
     <link rel="stylesheet" href="/site.css" />
 ${(o.extraCss ?? []).map((c) => `    <link rel="stylesheet" href="/${c}.css" />\n`).join('')}    <link rel="icon" href="/icon.svg" type="image/svg+xml" />${o.headExtra ?? ''}
-${ld.length ? `    <script type="application/ld+json">
-${JSON.stringify(ld.length === 1 ? ld[0] : ld, null, 2)}
+    <script type="application/ld+json">
+${JSON.stringify(graphOf(ld), null, 2)}
     </script>
-` : ''}  </head>
+  </head>
   <body>
 ${chrome ? `    <a class="skip-link" href="#main">${esc(UI[lang].skip)}</a>
 ${siteHeader(lang, section, alternates, path)}
@@ -73,6 +74,16 @@ ${chrome ? siteFooter(lang) : ''}${cfBeacon() ? `    ${cfBeacon()}
 ` : ''}  </body>
 </html>
 `;
+}
+
+/**
+ * JSON-LD 한 덩어리. 예전에는 노드 배열을 그대로 냈는데, 단순한 파서는 맨 위가 배열이면
+ * @type을 못 찾는다(2026-11-25 외부 진단 도구가 FAQPage·Organization·BreadcrumbList를 전부
+ * 「없음」으로 읽었다). 그래서 흔히 쓰는 @graph 형태로 낸다. 회사 노드를 늘 맨 앞에 둔다.
+ */
+function graphOf(ld) {
+  const nodes = ld.map(({ '@context': _, ...n }) => n);
+  return { '@context': 'https://schema.org', '@graph': [ORG_NODE, ...nodes] };
 }
 
 /**

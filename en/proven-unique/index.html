@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>I did not hand-build the puzzle levels | PRISM</title>
     <meta name="description" content="PRISM's levels are generated backwards from the solved state. A board ships only after brute force proves it has exactly one solution." />
+    <meta name="author" content="A Driven Inc." />
     <meta name="theme-color" content="#F3EFE6" />
     <link rel="canonical" href="https://prism.adriven.co/en/proven-unique/" />
     <link rel="alternate" hreflang="ko" href="https://prism.adriven.co/proven-unique/" />
@@ -22,17 +23,10 @@
     <link rel="stylesheet" href="/site.css" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "I did not hand-build the puzzle levels",
-    "description": "PRISM's levels are generated backwards from the solved state. A board ships only after brute force proves it has exactly one solution.",
-    "inLanguage": "en",
-    "url": "https://prism.adriven.co/en/proven-unique/",
-    "datePublished": "2026-09-22",
-    "dateModified": "2026-11-12",
-    "author": {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
       "@type": "Organization",
       "@id": "https://adriven.co/#org",
       "name": "A Driven Inc.",
@@ -45,49 +39,89 @@
       "sameAs": [
         "https://apps.apple.com/developer/id1655290007",
         "https://play.google.com/store/apps/developer?id=Adriven+Corp."
-      ]
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": "https://adriven.co/#org",
-      "name": "A Driven Inc.",
-      "alternateName": [
-        "A Driven",
-        "Adriven",
-        "에이드리븐"
       ],
-      "url": "https://adriven.co/",
-      "sameAs": [
-        "https://apps.apple.com/developer/id1655290007",
-        "https://play.google.com/store/apps/developer?id=Adriven+Corp."
-      ]
-    },
-    "about": {
-      "@type": "MobileApplication",
-      "@id": "https://prism.adriven.co/#app",
-      "name": "PRISM",
-      "url": "https://prism.adriven.co/en/"
-    },
-    "isAccessibleForFree": true
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "PRISM",
-        "item": "https://prism.adriven.co/en/"
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://prism.adriven.co/img/logo-512.png",
+        "width": 512,
+        "height": 512
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "I did not hand-build the puzzle levels"
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "prism@adriven.co",
+        "availableLanguage": [
+          "ko",
+          "en",
+          "ja",
+          "zh-Hans"
+        ]
       }
-    ]
-  }
-]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "I did not hand-build the puzzle levels",
+      "description": "PRISM's levels are generated backwards from the solved state. A board ships only after brute force proves it has exactly one solution.",
+      "inLanguage": "en",
+      "url": "https://prism.adriven.co/en/proven-unique/",
+      "datePublished": "2026-09-22",
+      "dateModified": "2026-11-12",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://adriven.co/#org",
+        "name": "A Driven Inc.",
+        "alternateName": [
+          "A Driven",
+          "Adriven",
+          "에이드리븐"
+        ],
+        "url": "https://adriven.co/",
+        "sameAs": [
+          "https://apps.apple.com/developer/id1655290007",
+          "https://play.google.com/store/apps/developer?id=Adriven+Corp."
+        ]
+      },
+      "about": {
+        "@type": "MobileApplication",
+        "@id": "https://prism.adriven.co/#app",
+        "name": "PRISM",
+        "url": "https://prism.adriven.co/en/"
+      },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "PRISM",
+          "item": "https://prism.adriven.co/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "I did not hand-build the puzzle levels"
+        }
+      ]
+    }
+  ]
+}
     </script>
   </head>
   <body>
@@ -112,7 +146,7 @@
       <article>
         <header class="page-head">
           <h1>I did not hand-build the puzzle levels</h1>
-          <p class="page-head__date"><time datetime="2026-09-22">22 September 2026</time></p>
+          <p class="page-head__date"><time datetime="2026-09-22">22 September 2026</time> · A Driven Inc.</p>
           <p class="page-head__update">Update (12 November 2026): version 1.5 added a seventh chapter, Polarization, with 60 more levels, so there are now 300. They went through the same generator and the same checks. What follows is the record of building the first 240.</p>
           <p class="lead">The expensive part of making a puzzle game is not laying out the board. It is <strong>proving the board can be solved at all</strong>. At 240 levels that is not something a person can do. So I reversed the order.</p>
         </header>

@@ -55,6 +55,24 @@ export const ORG = {
   sameAs: ['https://apps.apple.com/developer/id1655290007', 'https://play.google.com/store/apps/developer?id=Adriven+Corp.'],
 };
 
+/** 모든 페이지의 @graph 맨 앞에 두는 회사 노드. 다른 노드는 같은 @id로 이것을 가리킨다. */
+export const ORG_NODE = {
+  ...ORG,
+  logo: { '@type': 'ImageObject', url: `${ORIGIN}/img/logo-512.png`, width: 512, height: 512 },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: EMAIL, availableLanguage: ['ko', 'en', 'ja', 'zh-Hans'] },
+};
+
+/** 화면에 보이는 「최종 수정」 날짜와 글쓴이. JSON-LD의 dateModified·author와 같은 값을 사람에게도 보인다. */
+const UPDATED_LABEL = { ko: '최종 수정', en: 'Last updated', ja: '最終更新', 'zh-Hans': '最后更新' };
+const fmtDate = (lang, d) => {
+  const [y, m, day] = d.split('-').map(Number);
+  if (lang === 'ko') return `${y}년 ${m}월 ${day}일`;
+  if (lang === 'en') return new Date(Date.UTC(y, m - 1, day)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+  return `${y}年${m}月${day}日`;
+};
+export const updatedLine = (lang, d) =>
+  `<p class="page-head__date">${UPDATED_LABEL[lang]} <time datetime="${d}">${fmtDate(lang, d)}</time> · ${ORG.name}</p>`;
+
 /** 앱이 지원하는 언어와 같다. **앱이 못 하는 언어로 사이트를 만들지 않는다**(prism 저장소 docs/SITE-AEO.md). */
 export const LANGS = ['ko', 'en', 'ja', 'zh-Hans'];
 export const LANG_NAME = { ko: '한국어', en: 'English', ja: '日本語', 'zh-Hans': '简体中文' };
