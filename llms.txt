@@ -31,6 +31,8 @@
 
 ## 학습지 / Printable worksheets
 
+- [빛을 둘로 나누기: 반투명 거울 학습지 (인쇄용)](https://prism.adriven.co/worksheets/beam-splitter-basics/): 반투명 거울이 빛 한 줄기를 둘로 나누는 것을 판 네 개에서 연필로 따라가 보는 무료 인쇄용 학습지입니다. 에이드리븐의 광학 퍼즐 게임 PRISM 2챕터 앞쪽 판들로, 갈라진 두 빛이 각각 어디로 가는지 그려 봅니다. 흑백 인쇄용, 정답지 포함.
+- [Splitting Light in Two: a printable beam splitter worksheet](https://prism.adriven.co/en/worksheets/beam-splitter-basics/): A free printable worksheet where students follow a beam of light as a beam splitter divides it into two, on four early chapter 2 boards of PRISM, a light puzzle by A Driven. Students draw where each of the two beams goes. Black and white, with an answer key.
 - [거울 판 도전하기: 빛의 반사 학습지 (인쇄용)](https://prism.adriven.co/worksheets/reflection-challenge/): 돌려야 할 거울이 셋에서 넷인 판 네 개에서 빛의 길을 연필로 그려 보는 무료 인쇄용 학습지입니다. 에이드리븐의 광학 퍼즐 게임 PRISM 1챕터 후반의 판들로, 최소 몇 번 돌리면 되는지 생각하고 결정에서 광원으로 길을 거꾸로 짚어 봅니다. 흑백 인쇄용, 정답지 포함.
 - [Mirror Board Challenge: a printable worksheet on reflection](https://prism.adriven.co/en/worksheets/reflection-challenge/): A free printable worksheet with four later boards from chapter 1 of PRISM, a light puzzle by A Driven. Students work out which three or four mirrors to turn, think about the fewest turns, and trace a beam backwards from the crystal to the source. Black and white, with an answer key.
 - [거울 두 장으로 빛 돌리기: 빛의 반사 학습지 (인쇄용)](https://prism.adriven.co/worksheets/reflection-two-mirrors/): 빛이 거울에 여러 번 반사되는 길을 연필로 그려 보는 무료 인쇄용 학습지입니다. 에이드리븐의 광학 퍼즐 게임 PRISM 1챕터의 판 네 개로, 나란한 거울 두 장이 잠망경처럼 빛을 옮기는 것과 서로 다른 쪽으로 기운 거울 두 장이 빛을 되돌려 보내는 것을 알아봅니다. 흑백 인쇄용, 정답지 포함.

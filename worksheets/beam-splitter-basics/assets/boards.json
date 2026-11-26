@@ -1,0 +1,388 @@
+{
+  "coordinates": "Columns A, B, C... left to right; rows 1, 2, 3... top to bottom. Letters and numbers are printed on the board edges.",
+  "glyphs": {
+    "R": "triangle",
+    "G": "square",
+    "B": "circle"
+  },
+  "sourceMarker": "Colored source: white box with its glyphs. White source: solid black box with all three glyphs knocked out in white.",
+  "beamStyles": {
+    "white": "solid line",
+    "R": "long dashes (triangle tag)",
+    "G": "dash-dot line (square tag)",
+    "B": "dots (circle tag)",
+    "overlap": "two components on the same cell edge are drawn as parallel lines"
+  },
+  "tapBadge": "Answer key: a black circle with a number next to a piece = how many times to tap it.",
+  "levels": [
+    {
+      "id": 15,
+      "chapter": 2,
+      "chapterName": {
+        "en": "Split",
+        "ko": "분열"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 1,
+      "why": {
+        "en": "One blue beam, one splitter: the splitter sends one beam to the first crystal and lets the other go on to a mirror that needs one tap for the second crystal.",
+        "ko": "파란 빛 하나와 반투명 거울 하나. 반투명 거울이 한 줄기는 첫 결정으로 보내고 다른 줄기는 거울로 보내, 거울 한 번 돌려 둘째 결정을 밝힌다."
+      },
+      "rotate": [
+        {
+          "cell": "D4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "D1",
+          "piece": "mirror"
+        },
+        {
+          "cell": "D3",
+          "piece": "splitter"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "A1",
+          "facing": "right",
+          "name": {
+            "en": "blue",
+            "ko": "파랑"
+          },
+          "components": [
+            "B"
+          ],
+          "glyphs": [
+            "circle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "E3",
+          "needs": {
+            "name": {
+              "en": "blue",
+              "ko": "파랑"
+            },
+            "components": [
+              "B"
+            ],
+            "glyphs": [
+              "circle"
+            ]
+          }
+        },
+        {
+          "cell": "E4",
+          "needs": {
+            "name": {
+              "en": "blue",
+              "ko": "파랑"
+            },
+            "components": [
+              "B"
+            ],
+            "glyphs": [
+              "circle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "15-puzzle.svg",
+        "answer": "15-answer.svg"
+      }
+    },
+    {
+      "id": 16,
+      "chapter": 2,
+      "chapterName": {
+        "en": "Split",
+        "ko": "분열"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 1,
+      "why": {
+        "en": "The two branches meet in an empty cell (C4) and cross without effect; one tap on the mirror below the splitter.",
+        "ko": "두 갈래가 빈칸 C4에서 가로지르지만 서로 영향이 없다. 반투명 거울 아래 거울만 한 번 돌린다."
+      },
+      "rotate": [
+        {
+          "cell": "A5",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "C5",
+          "piece": "mirror"
+        },
+        {
+          "cell": "A4",
+          "piece": "splitter"
+        },
+        {
+          "cell": "D4",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "A1",
+          "facing": "down",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "C1",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        },
+        {
+          "cell": "D1",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "16-puzzle.svg",
+        "answer": "16-answer.svg"
+      }
+    },
+    {
+      "id": 17,
+      "chapter": 2,
+      "chapterName": {
+        "en": "Split",
+        "ko": "분열"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 2,
+      "why": {
+        "en": "Before any tap only one crystal is lit; two taps send the bent branch up and the straight branch left, so both crystals light.",
+        "ko": "돌리기 전에는 결정 하나만 켜져 있고, 두 번 돌리면 꺾인 갈래는 위로, 곧은 갈래는 왼쪽으로 가서 두 결정이 모두 켜진다."
+      },
+      "rotate": [
+        {
+          "cell": "A3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "B4",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "B3",
+          "piece": "splitter"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "B1",
+          "facing": "down",
+          "name": {
+            "en": "green",
+            "ko": "초록"
+          },
+          "components": [
+            "G"
+          ],
+          "glyphs": [
+            "square"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "A4",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        },
+        {
+          "cell": "A2",
+          "needs": {
+            "name": {
+              "en": "green",
+              "ko": "초록"
+            },
+            "components": [
+              "G"
+            ],
+            "glyphs": [
+              "square"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "17-puzzle.svg",
+        "answer": "17-answer.svg"
+      }
+    },
+    {
+      "id": 18,
+      "chapter": 2,
+      "chapterName": {
+        "en": "Split",
+        "ko": "분열"
+      },
+      "grid": {
+        "cols": 5,
+        "rows": 5
+      },
+      "par": 3,
+      "why": {
+        "en": "Red beam, two splitters that must both be turned, and a beam that splits and leaves the board: not every branch has to light a crystal.",
+        "ko": "빨간 빛 하나, 둘 다 돌려야 하는 반투명 거울 둘. 갈라진 빛이 판 밖으로 나가기도 해서 모든 갈래가 결정에 닿을 필요는 없다는 것을 알게 된다."
+      },
+      "rotate": [
+        {
+          "cell": "B2",
+          "piece": "splitter",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "A3",
+          "piece": "mirror",
+          "taps": 1,
+          "from": "/",
+          "to": "\\"
+        },
+        {
+          "cell": "B4",
+          "piece": "splitter",
+          "taps": 1,
+          "from": "\\",
+          "to": "/"
+        }
+      ],
+      "leaveAlone": [
+        {
+          "cell": "A2",
+          "piece": "mirror"
+        }
+      ],
+      "sources": [
+        {
+          "cell": "E3",
+          "facing": "left",
+          "name": {
+            "en": "red",
+            "ko": "빨강"
+          },
+          "components": [
+            "R"
+          ],
+          "glyphs": [
+            "triangle"
+          ]
+        }
+      ],
+      "crystals": [
+        {
+          "cell": "A4",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        },
+        {
+          "cell": "B5",
+          "needs": {
+            "name": {
+              "en": "red",
+              "ko": "빨강"
+            },
+            "components": [
+              "R"
+            ],
+            "glyphs": [
+              "triangle"
+            ]
+          }
+        }
+      ],
+      "files": {
+        "puzzle": "18-puzzle.svg",
+        "answer": "18-answer.svg"
+      }
+    }
+  ]
+}
