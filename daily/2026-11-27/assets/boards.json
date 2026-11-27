@@ -70,7 +70,19 @@
      }
     ],
     "par": 2
-   }
+   },
+   "solution": [
+    {
+     "cell": "B2",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "A3",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   },
   {
    "difficulty": "normal",
@@ -148,7 +160,24 @@
      }
     ],
     "par": 5
-   }
+   },
+   "solution": [
+    {
+     "cell": "D1",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "D2",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "D4",
+     "piece": "prism",
+     "taps": 3
+    }
+   ]
   },
   {
    "difficulty": "hard",
@@ -247,7 +276,39 @@
      }
     ],
     "par": 8
-   }
+   },
+   "solution": [
+    {
+     "cell": "A2",
+     "piece": "prism",
+     "taps": 3
+    },
+    {
+     "cell": "B2",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "C2",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "A3",
+     "piece": "mirror",
+     "taps": 1
+    },
+    {
+     "cell": "B3",
+     "piece": "splitter",
+     "taps": 1
+    },
+    {
+     "cell": "D3",
+     "piece": "mirror",
+     "taps": 1
+    }
+   ]
   }
  ]
 }

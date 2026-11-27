@@ -15,9 +15,10 @@ import reflection from './learn/reflection.mjs';
 import beamSplitter from './learn/beam-splitter.mjs';
 import dispersion from './learn/dispersion.mjs';
 import lightMixing from './learn/light-mixing.mjs';
+import colorFilters from './learn/color-filters.mjs';
 
 /** 개념 페이지. 하나 더할 때 여기에 import 한 줄과 항목 하나. 순서는 site.mjs의 CONCEPTS가 정한다. */
-export const LEARN = [reflection, beamSplitter, dispersion, lightMixing];
+export const LEARN = [reflection, beamSplitter, dispersion, lightMixing, colorFilters];
 /** 그 언어로 쓴 개념만. 일본어·중국어는 개념마다 따로 연다(site.mjs CONCEPT_LANGS). */
 const learnIn = (lang) => LEARN.filter((c) => c.langs.includes(lang));
 const availableIn = (lang) => learnIn(lang).map((c) => c.slug);
